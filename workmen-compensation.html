@@ -1,53 +1,148 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workers' Compensation — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Workers' Compensation</h1>
-  <p>Claims handling and repricing for workers' comp and auto.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Workers' Compensation & Auto-Claim RCM — SamITHealth</title>
+  <meta name="description" content="Comprehensive workers' compensation and auto-claim RCM: eligibility, claims generation, repricing, denials, and analytics to protect revenue and speed recovery." />
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root{--accent:#0052cc;--muted:#6b7280;--bg:#f7fbff;--card:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f1724}
+    .container{max-width:1150px;margin:0 auto;padding:28px}
+    header{background:#fff;box-shadow:0 6px 20px rgba(11,23,39,0.04);position:sticky;top:0;z-index:40}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:26px}
+    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:34px;border-radius:14px;box-shadow:0 12px 30px rgba(11,23,39,0.04)}
+    h1{font-size:30px;margin:0 0 10px}
+    p.lead{color:var(--muted);font-size:16px;margin:0 0 16px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 8px;font-size:16px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    .right-card .card-body{padding:12px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
+    .service h3{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:22px;border-radius:12px;border:1px solid #eaf3ff}
+    .long-desc p{color:var(--muted);font-size:15px}
+    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
+    form input, form textarea, form select{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
+    label{font-weight:600;font-size:13px;color:#243044}
+    .testimonials{display:flex;gap:14px;margin-top:18px}
+    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:14px;border-radius:10px;flex:1;border:1px solid #eef6ff}
+    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
+    @media (max-width:980px){.hero,.two-column{grid-template-columns:1fr}.services{grid-template-columns:1fr}nav{padding:12px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Workers' Compensation & Auto-Claim RCM</h1>
+        <p class="lead">Specialized claim handling, repricing and denial prevention for workers' compensation and auto claims — protecting reimbursements while reducing administrative burden.</p>
+        <div class="features">
+          <div class="feature"><h4>Claims Intake & Eligibility</h4><p>Accurate capture of incident details, payer identification and eligibility verification to avoid preventable denials.</p></div>
+          <div class="feature"><h4>Encounter-Based Claim Generation</h4><p>Structured encounter processing to ensure services are translated into correct, auditable claims for WC and auto payers.</p></div>
+          <div class="feature"><h4>Repricing & Fee Schedule Management</h4><p>Expert repricing against state fee schedules and vendor agreements to maximize allowable reimbursement.</p></div>
+          <div class="feature"><h4>Denial Management & Appeals</h4><p>Root-cause analytics, targeted appeals and payer negotiation to recover revenue and prevent recurrence.</p></div>
+        </div>
+        <p style="margin-top:14px;color:var(--muted)">Our specialists understand jurisdictional rules, fee schedules and the nuances of injury-related billing — letting clinical teams focus on care while we protect revenue.</p>
+      </div>
+      <aside class="right-card card">
+        <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" alt="Claims specialist working on documents">
+        <div class="card-body">
+          <h3>Talk to a workers' comp specialist</h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:6px">Share a sample claim or a brief description of your challenges and we'll return a short analysis with recommended next steps.</p>
+        </div>
+      </aside>
+    </section>
+    <section class="services" aria-labelledby="servicesHeading">
+      <h2 id="servicesHeading" style="margin-top:28px">Core Workers' Comp & Auto-Claim Services</h2>
+      <div class="service"><h3>Incident Intake & Triage</h3><p>Structured intake and triage workflows that collect compensable details and assign workqueues for rapid processing.</p></div>
+      <div class="service"><h3>Claims Creation & Submission</h3><p>Accurate claim generation, X12 formats, and payer-specific routing to speed adjudication.</p></div>
+      <div class="service"><h3>Repricing, Auditing & Recovery</h3><p>Fee schedule repricing, audits for compliance and recovery workflows for underpaid claims.</p></div>
+    </section>
+    <section class="two-column">
+      <div>
+        <div class="long-desc card">
+          <h2>Why choose SamITHealth for workers' compensation RCM?</h2>
+          <p>Workers' compensation and auto claims live at the intersection of clinical care, regulatory rules and specialized payer practices. Mistakes are costly: delayed payments, underpayments and audit exposure can significantly impact cash flow. SamITHealth brings deep operational experience in injury-related billing, fee schedules and payer negotiations to help providers and clinics recover revenue while remaining compliant.</p>
+          <p>We begin with a rapid claim health-check that measures exposure areas: missed billable events, erroneous modifiers, incorrect fee schedule application, and common denial drivers. From there we deploy a tailored program that may include intake redesign, automated repricing against up-to-date state fee schedules, focused denial workstreams and an appeals engine that bundles cases for efficient submission.</p>
+          <p>Our teams are trained on jurisdictional rules and payer idiosyncrasies. We provide transparent metrics—claims accuracy, days to adjudication, denial rate and recovered dollars—so leadership can see clear ROI. For high-volume practices we implement batch-processing engines, EDI optimizations and reconciliation dashboards that reduce administrative overhead and free clinical teams to focus on patients.</p>
+          <p style="margin-top:8px">Request a complimentary claim health-check and receive an executive summary highlighting quick wins and a 90-day remediation plan.</p>
+        </div>
+        <div style="margin-top:16px" class="card">
+          <h3>Client outcomes</h3>
+          <ul>
+            <li>Reduced days-to-adjudication and improved cash flow</li>
+            <li>Higher fee-schedule capture and fewer underpayments</li>
+            <li>Lower denial rates through targeted prevention</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="card" id="contact">
+        <h3 style="margin-top:0">Request a claim health-check</h3>
+        <form onsubmit="return submitForm(event)">
+          <label for="name">Full name</label>
+          <input id="name" name="name" placeholder="Your name" required>
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" placeholder="you@clinic.org" required>
+          <label for="org">Organization</label>
+          <input id="org" name="org" placeholder="Organization / clinic">
+          <label for="payers">Typical payers / jurisdictions</label>
+          <input id="payers" name="payers" placeholder="e.g. State A, State B, private insurer">
+          <label for="message">Notes / sample claim</label>
+          <textarea id="message" name="message" rows="5" placeholder="Briefly describe volumes, common denials or attach a sample claim"></textarea>
+          <button class="cta" type="submit">Request health-check</button>
+        </form>
+      </aside>
+    </section>
+    <section style="margin-top:20px">
+      <h2>Success stories</h2>
+      <div class="testimonials">
+        <div class="testimonial"><strong>"Recovered underpayments worth six figures"</strong><p style="color:var(--muted)">"Their repricing and appeals work recovered material underpayments for our occupational health network." — CFO</p></div>
+        <div class="testimonial"><strong>"Reduced adjudication time"</strong><p style="color:var(--muted)">"Improved intake and claim routing cut our days-to-adjudication dramatically." — Operations Director</p></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+      </div>
     </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
-
-<script src="scripts.js"></script></body></html>
+  </footer>
+  <script>
+    function submitForm(e){
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent='Sending...';btn.disabled=true;
+      setTimeout(()=>{btn.textContent='Request health-check';btn.disabled=false;alert('Thanks — we received your request. A specialist will follow up shortly.');e.target.reset();},900);
+      return false;
+    }
+  </script>
+</body>
+</html>
