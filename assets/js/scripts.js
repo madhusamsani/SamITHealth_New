@@ -1,26 +1,23 @@
 
 document.addEventListener('scroll', () => {
-  document.querySelectorAll('.card').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+  document.querySelectorAll('.card').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-60) el.style.transform='translateY(0)';
   });
-  document.querySelectorAll('.counter').forEach(counter => {
-    const rect = counter.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 60 && !counter.classList.contains('counted')) {
+  document.querySelectorAll('.counter').forEach(counter=>{
+    if(counter.classList.contains('counted')) return;
+    const r=counter.getBoundingClientRect();
+    if(r.top < window.innerHeight - 60){
       counter.classList.add('counted');
-      let target = +counter.getAttribute('data-target');
+      const target = +counter.getAttribute('data-target');
       let count = 0;
-      const speed = 30;
-      const update = () => {
-        count += Math.ceil(target / 50);
-        if (count < target) {
-          counter.innerText = count + (target < 200 ? "%" : "+");
-          setTimeout(update, speed);
-        } else {
-          counter.innerText = target + (target < 200 ? "%" : "+");
-        }
+      const step = Math.ceil(target/60);
+      const tick = ()=>{
+        count += step;
+        if(count < target){ counter.innerText = count + (target>100?'+':'%'); setTimeout(tick,20); }
+        else{ counter.innerText = target + (target>100?'+':'%'); }
       };
-      update();
+      tick();
     }
   });
 });
