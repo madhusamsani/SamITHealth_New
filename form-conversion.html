@@ -1,53 +1,100 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Form Conversion — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Form Conversion</h1>
-  <p>CMS-1500 / UB-04 electronic form conversion services.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Form Conversion Services — SamITHealth</title>
+  <meta name="description" content="Professional CMS-1500 & UB-04 form conversion, clean claims capture, denial reduction and analytics for providers and payers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--accent:#0f62fe;--accent-2:#0b76d1;--radius:12px}
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;margin:0;background:var(--bg);color:#0f1724}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header.header{background:#fff;border-bottom:1px solid #e6eef9}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;color:var(--accent);font-size:20px}
+    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:48px 0}
+    .hero-card{background:linear-gradient(180deg,rgba(15,98,254,0.06),rgba(11,118,209,0.03));padding:36px;border-radius:var(--radius)}
+    h1{margin:0 0 10px;font-size:32px}
+    .lead{color:var(--muted);margin-bottom:18px}
+    .stat-row{display:flex;gap:18px;margin-top:18px}
+    .stat{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:110px}
+    .stat strong{display:block;font-size:18px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:18px}
+    .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 28px rgba(12,36,60,0.06)}
+    .card img{width:100%;border-radius:10px;margin-bottom:14px}
+    .section-title{margin:6px 0 12px;font-size:18px}
+    ul{padding-left:18px;color:var(--muted)}
+    .cta{background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+    form input, form textarea{width:100%;padding:12px;border:1px solid #e6eef9;border-radius:8px;margin-bottom:10px;font-size:14px}
+    .contact-form .contact-meta{font-size:13px;color:var(--muted);margin-bottom:12px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .testimonial{background:linear-gradient(180deg,#0b76d1, #0f62fe);color:#fff;padding:18px;border-radius:12px}
+    footer.footer{padding:24px 0;margin-top:30px;border-top:1px solid #e6eef9}
+    @media (max-width:900px){.hero{grid-template-columns:1fr;}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}.stat-row{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#benefits">Why Us</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
-    </div>
-  </div>
-</div>
+  </header>
 
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div>
+        <h1 id="hero-heading">Enterprise-grade Form Conversion — CMS-1500 &amp; UB-04</h1>
+        <p class="lead">Convert paper forms and legacy PDFs into clean, validated electronic claims that flow into your EHR / billing systems — faster, safer, and fully HIPAA-aligned.</p>
+        <div class="stat-row" role="list">
+          <div class="stat" role="listitem"><strong>99.8%</strong><span style="color:var(--muted)">Accuracy on data capture</span></div>
+          <div class="stat" role="listitem"><strong>30%</strong><span style="color:var(--muted)">Average reduction in denials</span></div>
+          <div class="stat" role="listitem"><strong>24h</strong><span style="color:var(--muted)">Initial turnaround for pilot</span></div>
+        </div>
 
-<script src="scripts.js"></script></body></html>
+        <div class="features" id="services">
+          <div class="feature">
+            <h4 style="margin:0 0 6px">Structured Data Extraction</h4>
+            <p style="margin:0;color:var(--muted)">OCR + rule-based validation to capture every required field, including conditional elements on UB-04 and CMS-1500.</p>
+          </div>
+          <div class="feature">
+            <h4 style="margin:0 0 6px">EHR & Clearinghouse Ready</h4>
+            <p style="margin:0;color:var(--muted)">We format claims to integrate with major clearinghouses, reducing rework and re-submissions.</p>
+          </div>
+          <div class="feature">
+            <h4 style="margin:0 0 6px">Denial Management</h4>
+            <p style="margin:0;color:var(--muted)">Analytics-driven follow-up to close gaps and reclaim revenue quickly.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-labelledby="contact">
+        <h3 id="contact" class="section-title">Request a free consultation</h3>
+        <p class="contact-meta">Tell us a little about your practice and goals. We'll propose a pilot and ROI estimate — no obligations.</p>
+        <form id="contactForm" novalidate>
+          <label for="name" class="sr-only">Name</label>
+          <input id="name" name="name" placeholder="Full name" required>
+          <label for="email" class="sr-only">Email</label>
+          <input id="email" name="email" type="email" placeholder="Work email" required>
+          <label for="org">Organization</label>
+          <input id="org" name="org" placeholder="Organization / Practice">
+          <label for="message">Brief description of needs</label>
+          <textarea id="message" name="message" rows="5" placeholder="Volume, current workflow, systems you use..."></textarea>
+        </form>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px">We never share your information. Responses within one business day.</p>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
