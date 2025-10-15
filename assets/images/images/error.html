@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Submission Failed - SamITHealth</title>
+<meta name="description" content="Submission failed — SamITHealth contact form.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+.center{max-width:800px;margin:0 auto;padding:40px 20px;}
+.card{background:white;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.08);padding:28px;}
+.btn-primary{background-color:#0284c7;color:white;padding:10px 16px;border-radius:8px;}
+.btn-secondary{border:1px solid #c7e7ff;color:#0369a1;padding:10px 16px;border-radius:8px;background:white;}
+.small{font-size:0.92rem;color:#475569;}
+</style>
+</head>
+<body class="bg-gray-50 text-slate-800">
+<header class="bg-white shadow">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="images/A_logo_for__SamITHealth__is_set_against_a_dark_11.png" alt="SamITHealth" style="height:44px" />
+      <span class="hidden sm:inline font-semibold">SamITHealth</span>
+    </a>
+  </div>
+</header>
+
+<main class="center">
+  <div class="card">
+    <div class="flex items-start gap-6">
+      <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" alt="Error" style="width:72px;height:72px;">
+      <div>
+        <h1 class="text-2xl font-bold text-sky-700">Oops — Something went wrong</h1>
+        <p class="small mt-2">We couldn't send your message due to a network or server error. Don't worry — your message has been saved locally so our team can retrieve it later.</p>
+
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a id="backToForm" href="contact.html" class="btn-primary">Return to Contact Form</a>
+          <button id="retryBtn" class="btn-secondary">Retry Submission</button>
+          <button id="downloadLeads" class="px-3 py-2 border rounded">Download Local Leads (JSON)</button>
+        </div>
+
+        <div id="localInfo" class="mt-4 small text-slate-600"></div>
+
+        <div class="mt-6 text-sm text-slate-500">
+          <strong>Admin tip:</strong> Guests saved locally are stored under <code>samit_leads</code> in browser localStorage. You can download them here and import to your CRM.
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="mt-12 text-center text-sm text-slate-500 pb-10">© 2025 SamITHealth</footer>
+
+<script>
+const retryBtn = document.getElementById('retryBtn');
+const downloadBtn = document.getElementById('downloadLeads');
+const localInfo = document.getElementById('localInfo');
+
+function getLeads() {
+  try {
+    return JSON.parse(localStorage.getItem('samit_leads') || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function updateLocalInfo() {
+  const leads = getLeads();
+  if (leads.length === 0) {
+    localInfo.textContent = 'No locally-saved leads found in this browser.';
+  } else {
+    localInfo.innerHTML = `Saved leads: <strong>${leads.length}</strong>. Oldest: <strong>${leads[0].date || 'unknown'}</strong>.`;
+  }
+}
+updateLocalInfo();
+
+downloadBtn.addEventListener('click', function() {
+  const leads = getLeads();
+  const blob = new Blob([JSON.stringify(leads, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'samit_leads.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+retryBtn.addEventListener('click', async function() {
+  const leads = getLeads();
+  if (!leads.length) {
+    alert('No saved leads to retry.');
+    return;
+  }
+
+  // Attempt to resend the last saved lead via Formspree endpoint used in contact.html
+  const endpoint = 'https://formspree.io/f/xblknjwz';
+  const last = leads[leads.length - 1];
+
+  const formData = new FormData();
+  formData.append('name', last.name || '');
+  formData.append('email', last.email || '');
+  formData.append('phone', last.phone || '');
+  formData.append('company', last.company || '');
+  formData.append('type', last.type || '');
+  formData.append('message', last.message || '');
+  formData.append('_subject', 'Retry: Contact Form Submission');
+  formData.append('_replyto', last.email || '');
+
+  try {
+    const res = await fetch(endpoint, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      // remove last lead and update UI
+      leads.pop();
+      localStorage.setItem('samit_leads', JSON.stringify(leads));
+      updateLocalInfo();
+      alert('Submission retried — that lead was sent successfully.');
+    } else {
+      const text = await res.text();
+      console.warn('Formspree responded with non-ok status:', res.status, text);
+      alert('Retry failed — server responded with an error.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Retry failed due to a network error. Please try again later.');
+  }
+});
+</script>
+</body>
+</html>
