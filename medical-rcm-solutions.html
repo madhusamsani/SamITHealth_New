@@ -1,53 +1,133 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Medical RCM Solutions — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Medical RCM Solutions</h1>
-  <p>Scalable revenue cycle management designed to reduce A/R days and increase collections.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medical RCM Solutions — SamITHealth</title>
+  <meta name="description" content="End-to-end revenue cycle management: eligibility, charge capture, denials, AR reduction, and analytics-driven revenue recovery for medical groups and hospitals.">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root{--accent:#0047b3;--muted:#6b7280;--bg:#f6f9fc;--card:#fff;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:24px}
+    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:36px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    h1{font-size:30px;margin:0 0 10px}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 6px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    .right-card .card-body{padding:12px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
+    .service h3{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:22px;border-radius:12px;border:1px solid #eaf3ff}
+    .long-desc p{color:var(--muted);font-size:15px}
+    .contact-panel{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.04)}
+    form input, form textarea{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
+    label{font-weight:600;font-size:13px;color:#243044}
+    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+      nav{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Medical Revenue Cycle Management — Faster Payments, Lower Denials</h1>
+        <p class="lead">End-to-end RCM services that reduce days in A/R, increase net collections, and provide transparent analytics so your organization can plan confidently.</p>
+        <div class="features">
+          <div class="feature"><h4>Eligibility & Benefit Verification</h4><p>Front-end controls to reduce claim rejections and avoid unexpected denials.</p></div>
+          <div class="feature"><h4>Charge Capture & Coding Accuracy</h4><p>Robust charge reconciliation and coding validation to ensure claims reflect delivered care.</p></div>
+          <div class="feature"><h4>Claims Submission & Follow-up</h4><p>Automated submission pipelines and prioritized AR workflows to accelerate adjudication.</p></div>
+          <div class="feature"><h4>Denial Management & Appeals</h4><p>Root-cause analysis and focused appeals that recover revenue and prevent recurring denials.</p></div>
+        </div>
+        <p style="margin-top:14px;color:var(--muted)">Looking for measurable RCM improvements? We deliver KPI-driven programs with executive dashboards and monthly financial reconciliations.</p>
+        <div style="margin-top:12px"><a class="cta" href="#contact">Contact our RCM team</a></div>
+      </div>
+      <aside class="right-card contact-panel" id="contact">
+        <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" alt="Revenue cycle team working on claims">
+        <div class="card-body">
+          <h3>Schedule a revenue snapshot</h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:6px">Share your AR aging, denial types or one-month sample and we'll provide a quick analysis with prioritized next steps.</p>
+          <form onsubmit="return submitForm(event)">
+            <label for="name">Full name</label>
+            <input id="name" name="name" placeholder="Your name">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" placeholder="you@health.org">
+            <label for="org">Organization</label>
+            <input id="org" name="org" placeholder="Organization name">
+            <label for="message">Notes / what's blocking revenue?</label>
+            <textarea id="message" name="message" rows="4" placeholder="E.g. high denials, slow claims"></textarea>
+            <button class="cta" type="submit">Request snapshot</button>
+          </form>
+        </div>
+      </aside>
+    </section>
+    <section class="services" aria-labelledby="servicesHeading">
+      <h2 id="servicesHeading" style="margin-top:28px">Core RCM Capabilities</h2>
+      <div class="service"><h3>Patient Access & Prior Auth</h3><p>Eligibility, benefits, and prior authorization workflows that reduce claim churn.</p></div>
+      <div class="service"><h3>Revenue Integrity</h3><p>Charge master reviews, coding audits, and DRG validation to protect revenue.</p></div>
+      <div class="service"><h3>AR Management & Reporting</h3><p>Collection strategies, out-of-network negotiation and executive KPI dashboards.</p></div>
+    </section>
+    <section class="long-desc">
+      <h2>Why choose SamITHealth for RCM</h2>
+      <p>Revenue cycle performance is a combination of process, people, and technology. SamITHealth brings proven operational playbooks, experienced RCM professionals, and analytics to uncover lost revenue and accelerate cash flow. We start with a diagnostic that looks at workflow handoffs, denial patterns, coding variances, and AR waterfall — then build a prioritized remediation plan designed to deliver measurable outcomes within 90 days.</p>
+      <p>Our programs are tailored to your size and operational maturity: focused remediation for episodic issues, hybrid support for partial outsourcing, or fully managed services for organizations seeking predictable cash flow and regulatory compliance. We emphasize measurable KPIs such as clean claim rate, days in AR, net collection rate, and denial rate. Monthly reconciliations and executive dashboards ensure transparency and continuous improvement.</p>
+      <p>Clients typically realize faster collections, lower denial rates and improved cash visibility. Whether you need help with a stubborn denial type, a remediation of coding issues, or a full RCM transformation, SamITHealth delivers a practical plan and a team that executes with discipline.</p>
+      <p style="margin-top:8px">Request a complimentary revenue snapshot and receive an executive summary with quick wins and a 90-day action plan tailored to your organization.</p>
+    </section>
+    <section style="margin-top:22px">
+      <h2>Client success stories</h2>
+      <div class="services" style="gap:12px">
+        <div class="service"><strong>"A/R days reduced by 24%"</strong><p style="color:var(--muted)">"Our partnership shortened cycle times and improved cash collections." — CFO, Regional Health System</p></div>
+        <div class="service"><strong>"Denials reduced significantly"</strong><p style="color:var(--muted)">"Targeted denial workstreams and appeals recovered material revenue." — Revenue Director</p></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+      </div>
     </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
-
-<script src="scripts.js"></script></body></html>
+  </footer>
+  <script>
+    function submitForm(e){
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent='Sending...';btn.disabled=true;
+      setTimeout(()=>{btn.textContent='Request snapshot';btn.disabled=false;alert('Thanks — we received your request. A specialist will follow up shortly.');e.target.reset();},900);
+      return false;
+    }
+  </script>
+</body>
+</html>
