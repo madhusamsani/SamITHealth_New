@@ -1,70 +1,201 @@
-
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SamITHealth — Payer Solutions | CMMI Level 5</title>
-<meta name="description" content="SamITHealth offers innovative, compliant, and analytics-driven payer solutions to enhance claim accuracy, audit readiness, and operational efficiency.">
-<link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payer Solutions — SamITHealth</title>
+  <meta name="description" content="SamITHealth Payer Solutions — analytics-driven, compliant payer services including MAO, claims management, repricing and form conversion."/>
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --muted:#56606b; --accent:#0066ff; --accent-2:#0047d1;
+      --max:1200px; --radius:12px; --shadow:0 14px 50px rgba(6,18,45,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:var(--bg); color:#07203b}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+    /* Header */
+    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text .title{font-weight:800;font-size:18px}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
+    .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .phone{font-weight:700;color:#0b2545}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;margin-top:22px}
+    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+    .hero-left h1{font-size:30px;margin:6px 0 12px;line-height:1.05}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .hero-visual{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Services grid */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .service-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
+    .service-card .img{height:160px;background-size:cover;background-position:center}
+    .service-card .body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .service-card h3{margin:0 0 8px;font-size:18px}
+    .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
+    .service-card .learn{margin-top:auto;padding-top:8px}
+    /* Metrics */
+    .metrics{display:flex;gap:12px;margin-top:22px;align-items:stretch}
+    .metric{background:#fff;padding:18px;border-radius:12px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
+    .metric .num{font-size:26px;font-weight:800;color:#07203b}
+    .metric .label{font-size:13px;color:var(--muted);margin-top:6px}
+    /* Case studies */
+    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+    .case-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .case-card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+    /* CTA banner */
+    .cta-banner{margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:28px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    .cta-banner .text{max-width:70%}
+    /* Footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    /* Responsive */
+    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .case-studies{grid-template-columns:1fr}}
+    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero{grid-template-columns:1fr 1fr}}
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo-mark">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">Payer Solutions & Operations</div>
+        </div>
+      </div>
 
-<header>
-  <div class="navbar">
-    <div class="logo">
-      <img src="assets/images/logo.png" alt="SamITHealth Logo">
-      <span>SamITHealth</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+      <nav class="nav" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html" class="active">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-ctas">
+        <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none">+1 (470) 339-6027</a></div>
+        <button class="btn-primary" onclick="location.href='contact.html'">Get a demo</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="payer-heading">
+        <div class="hero-left">
+          <div class="eyebrow">Payer Solutions</div>
+          <h1 id="payer-heading">Innovative, compliant & data‑driven payer operations</h1>
+          <p class="lead">Empowering payers and TPAs with analytics, automation, and process maturity (CMMI-aligned) to improve claim accuracy, reduce denials, and accelerate reimbursements.</p>
+
+          <div class="cta-row">
+            <button class="btn-primary" onclick="location.href='contact.html'">Talk to our experts</button>
+            <a class="ghost" href="contact.html">Request a pilot</a>
+          </div>
+
+          <div class="services" aria-label="Payer services overview">
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>MAO & Risk Adjustment</h3>
+                <p>Accurate HCC coding, risk score optimization and audit-ready workflows for Medicare Advantage and managed plans.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1558013551-d8153f8263db?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>Claims Management & TPA Support</h3>
+                <p>End-to-end claim lifecycle management, rule-based adjudication and third‑party administrator integration.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>Medical Review & Repricing</h3>
+                <p>Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>Workers' Comp & Auto Claims</h3>
+                <p>Specialized workflows, compliance controls and adjudication tailored for workers' compensation and auto insurance.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>Form Conversion & Interoperability</h3>
+                <p>Automated CMS-1500/UB-04 conversion, EDI mapping and system harmonization for cleaner feeds.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1200&auto=format&fit=crop')"></div>
+              <div class="body">
+                <h3>Analytics & AI</h3>
+                <p>Predictive analytics, denials root-cause and AI-assisted coding to continuously improve operations.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside style="width:420px">
+          <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1400&auto=format&fit=crop" alt="Payer analytics visualization">
+          </div>
+
+          <div class="metrics" style="margin-top:18px">
+            <div class="metric"><div class="num">98%</div><div class="label">Claim Accuracy</div></div>
+            <div class="metric"><div class="num">25%</div><div class="label">Faster Reimbursements</div></div>
+            <div class="metric"><div class="num">40%</div><div class="label">Denials Reduction</div></div>
+          </div>
+
+          <div class="case-studies" style="margin-top:18px">
+            <div class="case-card">
+              <img src="https://images.unsplash.com/photo-1542224566-3d1b4b3d0f8f?q=80&w=1400&auto=format&fit=crop" alt="case study">
+              <h4 style="margin-top:10px">Payer Platform Modernization</h4>
+              <p style="color:var(--muted);margin:6px 0 0">Modernized claims pipeline and EDI processing, reducing turnaround time and errors.</p>
+            </div>
+            <div class="case-card">
+              <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?q=80&w=1400&auto=format&fit=crop" alt="case study">
+              <h4 style="margin-top:10px">Risk Adjustment Program</h4>
+              <p style="color:var(--muted);margin:6px 0 0">Implemented HCC analytics workflow improving risk capture and auditability.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="cta-banner" aria-label="Call to action">
+        <div class="text">
+          <h2>Partner with SamITHealth — transform payer operations</h2>
+          <p style="margin-top:6px;color:var(--muted)">Talk to our payer experts about audits, pilots and managed services tailored to your needs.</p>
+        </div>
+        <div>
+          <button class="btn-primary" onclick="location.href='contact.html'">Talk to our experts</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2025 SamITHealth — Payer Solutions & Compliance</div>
+      <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
+    </footer>
   </div>
-</header>
-
-<section class="hero">
-  <h1>Innovative, Compliant & Data-Driven Payer Solutions</h1>
-  <p>Empowering payers and managed-care organizations with analytics, process excellence, and CMMI Level 5 governance.</p>
-  <a href="contact.html" class="cta">Partner with Us</a>
-</section>
-
-<section>
-  <h2 style="text-align:center;font-family:Poppins,sans-serif;color:#0A192F;margin-bottom:20px;">Our Expertise in Payer Services</h2>
-  <p style="max-width:900px;margin:auto;text-align:center;">SamITHealth delivers cutting-edge payer solutions that blend automation, analytics, and process maturity. Our CMMI Level 5 framework ensures regulatory compliance, operational efficiency, and faster reimbursements for insurers and payers worldwide.</p>
-  <div class="services">
-    <div class="card"><img src="assets/images/maoservice.jpg"><h3>MAO / Risk Adjustment</h3><p>Comprehensive risk adjustment and HCC coding services to ensure accurate reimbursements under Medicare Advantage and ACA plans.</p></div>
-    <div class="card"><img src="assets/images/workerscomp.jpg"><h3>Workers’ Compensation & Auto</h3><p>Optimized billing and claims review for workers’ compensation and auto insurance with compliance-ready workflows.</p></div>
-    <div class="card"><img src="assets/images/medicalreview.jpg"><h3>Medical Review & Repricing</h3><p>Advanced claim repricing, auditing, and medical review leveraging AI and analytics to ensure cost containment and fairness.</p></div>
-    <div class="card"><img src="assets/images/claims.jpg"><h3>Claims Management</h3><p>Comprehensive end-to-end claim processing and TPA support for faster turnaround and reduced denials.</p></div>
-    <div class="card"><img src="assets/images/formconversion.jpg"><h3>Form Conversion</h3><p>Automated CMS-1500 and UB-04 conversion ensuring data accuracy, standardization, and interoperability.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2 style="text-align:center;font-family:Poppins,sans-serif;color:#0A192F;margin-bottom:20px;">Client Success Metrics</h2>
-  <div class="metrics">
-    <div class="metric"><h2 class="counter" data-target="98">0</h2><p>Claim Accuracy</p></div>
-    <div class="metric"><h2 class="counter" data-target="25">0</h2><p>Faster Reimbursements</p></div>
-    <div class="metric"><h2 class="counter" data-target="40">0</h2><p>Reduction in Denials</p></div>
-    <div class="metric"><h2 class="counter" data-target="250">0</h2><p>Global Clients</p></div>
-  </div>
-</section>
-
-<section class="cta-banner">
-  <h2>Partner with SamITHealth — Transforming Payer Operations</h2>
-  <p style="margin-bottom:20px;">Let’s redefine payer success with precision, compliance, and innovation.</p>
-  <a href="contact.html" class="cta">Talk to Our Experts</a>
-</section>
-
-<footer>
-  © 2025 SamITHealth | CMMI Level 5 Certified | Healthcare IT & Payer Solutions Excellence
-</footer>
-
-<script src="assets/js/scripts.js"></script>
 </body>
 </html>
