@@ -1,53 +1,83 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FQHC Billing — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>FQHC Billing</h1>
-  <p>Billing specific to Federally Qualified Health Centers and community clinics.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FQHC Billing & Revenue Cycle — SamITHealth</title>
+  <meta name="description" content="SamITHealth FQHC billing: encounter-based claims, UDS-ready reporting, sliding fee scale management, denial prevention and revenue optimization for community clinics.">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root{--accent:#0b6efd;--muted:#6b7280;--bg:#f5f8fb;--card:#ffffff;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;box-shadow:0 4px 16px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    nav a{margin-left:20px;color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:26px}
+    .hero-card{background:linear-gradient(180deg,#ffffff, #fbfdff);padding:36px;border-radius:14px;box-shadow:0 12px 30px rgba(11,23,39,0.04)}
+    h1{font-size:30px;margin:0 0 10px}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 6px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    .right-card .card-body{padding:12px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
+    .service h3{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:20px;border-radius:12px;border:1px solid #eaf3ff}
+    .long-desc p{color:var(--muted);font-size:15px}
+    .testimonials{display:flex;gap:16px;margin-top:22px}
+    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:16px;border-radius:10px;flex:1;border:1px solid #eef6ff}
+    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+      nav{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>FQHC Billing & Revenue Cycle Management</h1>
+        <p class="lead">Specialized billing for Federally Qualified Health Centers, community health centers and behavioral health clinics — designed to maximize encounter capture, ensure UDS readiness and protect your net patient revenue.</p>
+      </div>
+      <aside class="right-card contact-panel">
+        <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" alt="Healthcare billing team at work">
+        <div class="card-body">
+          <h3>Speak with an FQHC Billing Specialist</h3>
+          <p style="color:var(--muted);font-size:14px;margin-top:6px">Our team understands HRSA rules, encounter submission, and how to structure workflows so you capture every reimbursable event.</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+      </div>
     </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
-
-<script src="scripts.js"></script></body></html>
+  </footer>
+</body>
+</html>
