@@ -1,0 +1,20 @@
+/* samithealth styles */
+:root{--accent:#0b6efd;--dark:#0b2447;--muted:#6b7280;--card:#ffffff}
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#f7fafc;color:#111}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.header{background:linear-gradient(90deg, rgba(11,38,71,1) 0%, rgba(11,102,237,1) 100%);color:white;padding:18px 0}
+.header .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:700;font-size:20px}
+.navlinks a{color:white;text-decoration:none;margin-left:14px;font-weight:600}
+.hero{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding:36px 0}
+.hero .left{flex:1;min-width:260px}
+.hero .right{flex:1;min-width:260px}
+.card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+.services li{margin:8px 0}
+.section-title{font-size:20px;color:var(--dark);margin:8px 0 12px}
+.footer{background:#0f1724;color:#cbd5e1;padding:20px;margin-top:24px}
+.contact-form input,.contact-form textarea{width:100%;padding:10px;margin:6px 0;border:1px solid #e6e9ef;border-radius:8px}
+.cta{display:inline-block;background:var(--accent);color:white;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700}
+@media(max-width:720px){.hero{flex-direction:column}}
