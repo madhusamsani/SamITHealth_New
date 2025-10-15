@@ -1,53 +1,164 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Medical Billing Services — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Medical Billing Services</h1>
-  <p>Complete medical coding and billing solutions for providers of all sizes.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1560264280-6fc2b1f48f65?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medical Billing Services — SamITHealth</title>
+  <meta name="description" content="Full-service medical billing: eligibility, coding, claim submission, denial management and RCM optimization for clinicians and practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--muted:#6b7280;--accent:#0f62fe;--radius:12px}
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;margin:0;background:var(--bg);color:#0f1724}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;border-bottom:1px solid #e6eef9}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
+    h1{font-size:32px;margin:0 0 10px}
+    .lead{color:var(--muted);margin-bottom:18px}
+    .stat-row{display:flex;gap:16px;margin-top:18px}
+    .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:110px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:18px}
+    .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 28px rgba(12,36,60,0.06)}
+    .card img{width:100%;border-radius:10px;margin-bottom:14px}
+    .section-title{margin:6px 0 12px;font-size:18px}
+    ul{padding-left:18px;color:var(--muted)}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    form input, form textarea, form select{width:100%;padding:12px;border:1px solid #e6eef9;border-radius:8px;margin-bottom:10px;font-size:14px}
+    .cta{background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+    .testimonial{background:linear-gradient(180deg,#0b76d1,#0f62fe);color:#fff;padding:18px;border-radius:12px}
+    footer{padding:24px 0;margin-top:32px;border-top:1px solid #e6eef9}
+    @media (max-width:900px){.hero{grid-template-columns:1fr;}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
-    </div>
-  </div>
-</div>
+  </header>
 
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div>
+        <h1 id="hero-heading">Medical Billing & Revenue Cycle Management</h1>
+        <p class="lead">Stress-tested billing services for practices of every size — from single-provider clinics to multi-specialty groups. We improve cashflow, reduce denials, and simplify administrative overhead.</p>
 
-<script src="scripts.js"></script></body></html>
+        <div class="stat-row" role="list">
+          <div class="stat" role="listitem"><strong>24%</strong><span style="color:var(--muted)">Average improvement in collections</span></div>
+          <div class="stat" role="listitem"><strong>40%</strong><span style="color:var(--muted)">Reduction in denials</span></div>
+          <div class="stat" role="listitem"><strong>48h</strong><span style="color:var(--muted)">Typical first-response time</span></div>
+        </div>
+
+        <div class="features" id="services">
+          <div class="feature"><strong>Eligibility & Benefits</strong><div style="color:var(--muted)">Real-time eligibility checks to avoid surprise denials and patient billing issues.</div></div>
+          <div class="feature"><strong>Coding & Charge Capture</strong><div style="color:var(--muted)">Certified coders and automated charge reconciliation to minimize missed charges.</div></div>
+          <div class="feature"><strong>Claim Scrubbing & Submission</strong><div style="color:var(--muted)">Payer-specific rules, scrubbers and clearinghouse integrations for higher first-pass acceptance.</div></div>
+        </div>
+      </div>
+
+      <aside class="card" aria-labelledby="contact">
+        <h3 id="contact" class="section-title">Request a practice review</h3>
+        <p class="contact-meta" style="color:var(--muted)">Share a few details about your practice and we’ll provide a complimentary revenue snapshot and recommended pilot.</p>
+        <form id="contactForm" novalidate>
+          <input id="name" name="name" placeholder="Full name" required>
+          <input id="email" name="email" type="email" placeholder="Work email" required>
+          <input id="practice" name="practice" placeholder="Practice / Organization">
+          <textarea id="message" name="message" rows="5" placeholder="Volume, EHR, current pain points..."></textarea>
+          <button class="cta" type="submit">Request review</button>
+        </form>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px">HIPAA-compliant communications. Typical reply within one business day.</p>
+      </aside>
+    </section>
+
+    <section style="margin-top:18px">
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1586773860417-4e9b5e2eb8f6?q=80&w=1400&auto=format&fit=crop" alt="Billing dashboard on laptop with medical forms">
+          <h3 class="section-title">How we deliver results</h3>
+          <p style="color:var(--muted)">Our approach combines automation, certified professionals, and continuous improvement. We start with discovery, run a pilot to quantify impact, then scale with integrations and dashboards that keep you informed.</p>
+
+          <h4 style="margin-top:12px">Engagement model</h4>
+          <ol style="color:var(--muted);margin-left:18px">
+            <li><strong>Discovery & KPI mapping:</strong> We analyze workflows, denial drivers, and revenue leakage.</li>
+            <li><strong>Pilot conversion:</strong> Sample accounts or claims processed to demonstrate measurable uplift.</li>
+            <li><strong>Integration & scale:</strong> Connect to EHR, clearinghouses and analytics platforms.</li>
+            <li><strong>Continuous optimization:</strong> Ongoing denial analytics and revenue integrity reviews.</li>
+          </ol>
+
+          <h4 style="margin-top:12px">Long description to attract clients</h4>
+          <p style="color:var(--muted)">Revenue cycle performance is the lifeblood of any healthcare provider. At SamITHealth we specialize in transforming billing operations into a predictable, high-performing engine. We bring together certified coding experts, automation that reduces manual errors, and payer-specific intelligence that improves first-pass acceptance. Our services are tailor-made for community practices, specialty clinics, and growing multi-site organizations who need both immediate wins and long-term stability.</p>
+
+          <p style="color:var(--muted)">When you work with us, you get a partner focused on measurable outcomes: faster cash collections, fewer appeals, and reduced administrative burden on your staff. From eligibility verification to appeals and denial prevention, we own the process and provide transparent reporting so your leadership can make data-driven decisions. Engage us for a pilot and we’ll return a clear ROI forecast and a recommended roadmap to maximize yield from your payer mix.</p>
+        </div>
+
+        <aside class="card">
+          <h3 class="section-title">Services & outcomes</h3>
+          <ul>
+            <li>Eligibility & benefits verification</li>
+            <li>Coding & charge reconciliation</li>
+            <li>Claim scrubbing & submission</li>
+            <li>Denial management & appeals</li>
+            <li>Patient billing & collections</li>
+            <li>Analytics & monthly reporting</li>
+          </ul>
+
+          <div style="margin-top:16px">
+            <h4 style="margin:0 0 8px">Client testimonial</h4>
+            <div class="testimonial">
+              <strong>"Switching to SamITHealth increased our net collections and freed our staff to focus on patient care."</strong>
+              <div style="font-size:13px;margin-top:8px">— Practice Manager, Multi-Specialty Clinic</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h4 style="margin:0 0 6px">Supporting imagery</h4>
+            <img src="https://images.unsplash.com/photo-1560264280-6fc2b1f48f65?q=80&w=900&auto=format&fit=crop" alt="Medical office staff collaborating" style="border-radius:8px">
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div style="color:var(--muted);font-size:13px">HIPAA-ready | SOC2-ready processes</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple demo form handling
+    document.getElementById('contactForm')?.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name || !email){
+        alert('Please provide name and email.');
+        return;
+      }
+      this.querySelector('.cta')?.setAttribute('disabled','');
+      this.querySelector('.cta').textContent = 'Sending...';
+      setTimeout(()=>{
+        alert('Thanks '+name+" — we've received your request. We'll contact you within one business day.");
+        this.reset();
+        this.querySelector('.cta')?.removeAttribute('disabled');
+        this.querySelector('.cta').textContent = 'Request review';
+      },900);
+    });
+  </script>
+</body>
+</html>
