@@ -1,53 +1,221 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claims Management — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Claims Management</h1>
-  <p>TPA, claims adjudication and subrogation support.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
-    </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<footer class="footer">
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Claims Management — SamITHealth</title>
+  <meta name="description" content="Claims Management services: TPA support, adjudication, denials resolution, subrogation and analytics."/>
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --muted:#56606b; --accent:#0066ff; --accent-2:#0047d1;
+      --max:1200px; --radius:12px; --shadow:0 14px 50px rgba(6,18,45,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#07203b}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+    /* Header */
+    .topbar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#fff,#f8fbff);padding:14px;border-radius:14px;box-shadow:0 8px 28px rgba(12,25,48,0.06)}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text .title{font-weight:800;font-size:18px}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
+    .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .phone{font-weight:700;color:#0b2545}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:22px}
+    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+    .hero-left h1{font-size:30px;margin:6px 0 12px;line-height:1.05}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .hero-visual{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);height:100%}
+    .hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Services grid */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .service-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
+    .service-card img{width:100%;height:160px;object-fit:cover}
+    .service-card .body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .service-card h3{margin:0 0 8px;font-size:18px}
+    .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
+    .service-card .learn{margin-top:auto;padding-top:8px}
+    /* Sidebar/contact */
+    .aside{background:linear-gradient(135deg,rgba(0,102,255,0.04),rgba(0,71,209,0.02));padding:18px;border-radius:12px;height:100%;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    label{display:block;font-size:13px;color:#253248;margin-bottom:6px}
+    input,textarea,select{width:100%;padding:12px;border-radius:8px;border:1px solid #e6e9ef;font-size:15px;box-sizing:border-box;background:#fff}
+    .actions{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .ghost{background:transparent;border:1px solid #e6e9ef;padding:10px 14px;border-radius:10px;cursor:pointer}
+    /* Metrics & case studies */
+    .metrics{display:flex;gap:12px;margin-top:18px}
+    .metric{background:#fff;padding:16px;border-radius:10px;flex:1;box-shadow:0 8px 24px rgba(6,18,45,0.06);text-align:center}
+    .metric .num{font-size:20px;font-weight:800}
+    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+    .case-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .case-card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    /* Footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    /* Responsive */
+    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .case-studies{grid-template-columns:1fr}}
+    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero-visual{display:none}}
+  </style>
+</head>
+<body>
   <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo-mark">SH</div>
+        <div class="brand-text"><div class="title">SamITHealth</div><div class="tag">Claims Management</div></div>
+      </div>
 
-<script src="scripts.js"></script></body></html>
+      <nav class="nav" role="navigation" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-ctas">
+        <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none">+1 (470) 339-6027</a></div>
+        <button class="btn-primary" onclick="location.href='contact.html'">Get a demo</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="claims-heading">
+        <div class="hero-left">
+          <div class="eyebrow">Claims Management</div>
+          <h1 id="claims-heading">End-to-end claims adjudication, TPA support & subrogation</h1>
+          <p class="lead">Reduce leakage, improve adjudication accuracy and accelerate reimbursements with SamITHealth's payer-grade claims operations and analytics.</p>
+
+          <div class="cta-row" style="margin-top:12px">
+            <button class="btn-primary" onclick="location.href='contact.html'">Request a consultation</button>
+            <a class="ghost" href="contact.html">Request a pilot</a>
+          </div>
+
+          <div class="services" aria-label="Claims service offerings">
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" alt="Eligibility verification">
+              <div class="body">
+                <h3>Eligibility Verification</h3>
+                <p>Automated and manual checks across payers to ensure eligibility and reduce rejected claims.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1581093588401-8c7f2b8e94a5?q=80&w=1200&auto=format&fit=crop" alt="Adjudication">
+              <div class="body">
+                <h3>Claim Adjudication & TPA Support</h3>
+                <p>Rule-based adjudication, TPA integrations and vendor management for high-throughput processing.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Denial management">
+              <div class="body">
+                <h3>Denial Management & Analytics</h3>
+                <p>Root-cause analysis, appeals workflows and automation to reduce recurring denials.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop" alt="Subrogation">
+              <div class="body">
+                <h3>Subrogation & Recoveries</h3>
+                <p>Identify recoverable claims and manage subrogation to reclaim payments efficiently.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="Form conversion">
+              <div class="body">
+                <h3>Form Conversion & EDI</h3>
+                <p>CMS-1500 / UB-04 conversion, X12 EDI mapping and clean feeds to downstream systems.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1558013551-d8153f8263db?q=80&w=1200&auto=format&fit=crop" alt="Analytics">
+              <div class="body">
+                <h3>Analytics & Reporting</h3>
+                <p>Custom dashboards, KPIs and predictive analytics to prioritize interventions and reduce leakage.</p>
+                <div class="learn"><a href="#">Learn more →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aside" aria-label="Contact and highlights">
+          <div style="font-weight:700">Quick highlights</div>
+          <p style="color:var(--muted);margin-top:8px">Operational playbooks, payer mappings and SLAs for enterprise claims operations.</p>
+
+          <div class="metrics" role="list">
+            <div class="metric"><div class="num">98%</div><div style="font-size:13px;color:var(--muted)">Claim accuracy</div></div>
+            <div class="metric"><div class="num">35%</div><div style="font-size:13px;color:var(--muted)">Denials reduction</div></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <h4>Case studies</h4>
+            <div class="case-studies">
+              <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1542224566-3d1b4b3d0f8f?q=80&w=1200&auto=format&fit=crop" alt="case study">
+                <h4 style="margin-top:10px">TPA Modernization</h4>
+                <p style="color:var(--muted);margin:6px 0 0">Modernized adjudication rules and reduced manual touchpoints by 60%.</p>
+              </div>
+
+              <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?q=80&w=1200&auto=format&fit=crop" alt="case study">
+                <h4 style="margin-top:10px">Denials Analytics</h4>
+                <p style="color:var(--muted);margin:6px 0 0">Implemented denial root-cause dashboards and automated appeals triage.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px">
+            <h4>Contact</h4>
+            <p style="color:var(--muted)">Request a demo or pilot program.</p>
+
+            <form action="https://formspree.io/f/xblknjwz" method="POST" onsubmit="handleSubmit(event)">
+              <input type="hidden" name="_subject" value="Claims Management Inquiry — SamITHealth">
+              <label for="cname">Name</label>
+              <input id="cname" name="name" type="text" placeholder="Full name" required>
+              <label for="cemail" style="margin-top:8px">Email</label>
+              <input id="cemail" name="email" type="email" placeholder="you@company.com" required>
+              <label for="cphone" style="margin-top:8px">Phone</label>
+              <input id="cphone" name="phone" type="tel" placeholder="+1 (555) 555-5555">
+              <div class="actions">
+                <button class="btn-primary" type="submit">Request demo</button>
+                <button type="button" class="ghost" onclick="location.href='mailto:info@samithealth.com'">Email us</button>
+              </div>
+              <div id="status" style="margin-top:10px;font-size:13px;color:var(--muted)"></div>
+            </form>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth — All rights reserved</div>
+        <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function handleSubmit(e){
+      var status = document.getElementById('status');
+      status.textContent = 'Sending…';
+      setTimeout(function(){ status.textContent = 'Thanks — we received your request. Our team will contact you within 1–2 business days.'; }, 900);
+    }
+  </script>
+</body>
+</html>
