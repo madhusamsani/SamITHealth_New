@@ -1,39 +1,203 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratory Services — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Laboratory Services</h1>
-  <p>Support for lab startups, management, regulatory compliance and software.</p>
-  <div class="grid">
-    <a class="card" href="lab-startup-services.html"><h3>Lab Startup Services</h3><p>From business plan to licensing.</p></a>
-    <a class="card" href="lab-management.html"><h3>Lab Management</h3><p>Operational management and staffing.</p></a>
-    <a class="card" href="lab-consulting.html"><h3>Lab Consulting</h3><p>Process optimization and regulatory guidance.</p></a>
-    <a class="card" href="instrument-services-supplies.html"><h3>Instrument Services & Supplies</h3></a>
-    <a class="card" href="rcm-auditing-consulting.html"><h3>RCM Auditing & Consulting</h3></a>
-    <a class="card" href="quality-regulatory-compliance-auditing.html"><h3>Quality & Regulatory Auditing</h3></a>
-    <a class="card" href="software-solutions.html"><h3>Software Solutions</h3></a>
-  </div>
-</div>
-
-<footer class="footer">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Laboratory Services — SamITHealth</title>
+  <meta name="description" content="SamITHealth Laboratory Services — lab startup, management, regulatory compliance, instrument services, RCM auditing and software solutions."/>
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --muted:#586674; --accent:#0066ff; --accent-2:#0047d1;
+      --max:1200px; --radius:12px; --shadow:0 12px 40px rgba(6,18,45,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:var(--bg); color:#07203b;}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+    /* Header */
+    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{line-height:1}
+    .brand-text .title{font-weight:800;font-size:18px}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
+    .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .phone{font-weight:700;color:#0b2545}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;margin-top:22px}
+    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+    .hero-left h1{font-size:32px;margin:6px 0 12px;line-height:1.04}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+    .decor-img{position:absolute;right:-30px;top:-30px;opacity:0.08;transform:rotate(-12deg);width:420px}
+    /* Services grid */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .service-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
+    .service-card img{width:100%;height:160px;object-fit:cover}
+    .service-card .body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .service-card h3{margin:0 0 8px;font-size:18px}
+    .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
+    .service-card .learn{margin-top:auto;padding-top:8px}
+    /* Case studies */
+    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+    .case-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .case-card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    /* Sidebar */
+    .aside{background:linear-gradient(135deg,rgba(0,102,255,0.04),rgba(0,71,209,0.02));padding:18px;border-radius:12px;height:100%;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    .aside h4{margin:0 0 8px}
+    .kpis{display:flex;gap:12px;margin-top:12px}
+    .kpis .item{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.05);flex:1;text-align:center}
+    .kpis .num{font-weight:800;font-size:18px}
+    /* Footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    /* Responsive */
+    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .case-studies{grid-template-columns:1fr}}
+    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero-left .decor-img{display:none}}
+  </style>
+</head>
+<body>
   <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo-mark">SH</div>
+        <div class="brand-text"><div class="title">SamITHealth</div><div class="tag">Healthcare IT & Operations</div></div>
+      </div>
+      <nav class="nav" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html" class="active">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-ctas">
+        <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none">+1 (470) 339-6027</a></div>
+        <button class="btn-primary" onclick="location.href='contact.html'">Get a demo</button>
+      </div>
+    </header>
 
-<script src="scripts.js"></script></body></html>
+    <main>
+      <section class="hero" aria-labelledby="lab-heading">
+        <div class="hero-left">
+          <div class="eyebrow">Laboratory Services</div>
+          <h1 id="lab-heading">Comprehensive laboratory services — from startup to scale</h1>
+          <p class="lead">We provide end-to-end support for laboratories: business strategy, licensing & compliance, operational management, instrument services and connected software — all tailored for clinical, diagnostic and specialty labs.</p>
+
+          <div class="cta-row">
+            <button class="btn-primary" onclick="location.href='contact.html'">Request a consultation</button>
+            <a class="ghost" href="contact.html">View contact options</a>
+          </div>
+
+          <img class="decor-img" src="https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop" alt="Laboratory visualization" aria-hidden="true">
+
+          <div class="services" aria-label="Laboratory service offerings">
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1580281657526-8e6f1b4f8d27?q=80&w=1200&auto=format&fit=crop" alt="Lab startup">
+              <div class="body">
+                <h3>Lab Startup Services</h3>
+                <p>Business planning, market analysis, licensing, site selection and inspection readiness to launch fast and compliant.</p>
+                <div class="learn"><a href="lab-startup-services.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1580281657526-8e6f1b4f8d27?q=80&w=1200&auto=format&fit=crop" alt="Lab management">
+              <div class="body">
+                <h3>Laboratory Management</h3>
+                <p>Operational management, staffing, SOPs and KPI-driven performance to improve throughput and quality.</p>
+                <div class="learn"><a href="lab-management.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1581093588401-8c7f2b8e94a5?q=80&w=1200&auto=format&fit=crop" alt="Regulatory">
+              <div class="body">
+                <h3>Quality & Regulatory Compliance</h3>
+                <p>CLIA, CAP, state licensing, documentation, and audit support to maintain continuous compliance.</p>
+                <div class="learn"><a href="quality-regulatory-compliance-auditing.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1581093588401-8c7f2b8e94a5?q=80&w=1200&auto=format&fit=crop" alt="Instruments">
+              <div class="body">
+                <h3>Instrument Services & Supplies</h3>
+                <p>Maintenance, calibration, vendor management, and consumables sourcing for uninterrupted operations.</p>
+                <div class="learn"><a href="instrument-services-supplies.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop" alt="RCM auditing">
+              <div class="body">
+                <h3>RCM Auditing & Consulting</h3>
+                <p>Review billing workflows, denials prevention, AR recovery and revenue integrity programs to maximize collections.</p>
+                <div class="learn"><a href="rcm-auditing-consulting.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1580281657526-8e6f1b4f8d27?q=80&w=1200&auto=format&fit=crop" alt="Software solutions">
+              <div class="body">
+                <h3>Software & Integration</h3>
+                <p>Custom integrations, LIMS selection, middleware, and analytics to connect lab workflows and EMR systems.</p>
+                <div class="learn"><a href="software-solutions.html">Learn more →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aside" aria-label="Laboratory highlights and contact">
+          <h4>Why choose SamITHealth</h4>
+          <p style="color:var(--muted)">Decades of combined experience across clinical labs, molecular diagnostics and enterprise RCM — we focus on measurable outcomes and regulatory certainty.</p>
+
+          <div class="kpis" role="list">
+            <div class="item"><div class="num">99.3%</div><div style="font-size:13px;color:var(--muted)">Claims clean rate</div></div>
+            <div class="item"><div class="num">27%</div><div style="font-size:13px;color:var(--muted)">AR days improvement</div></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <h4>Case studies</h4>
+            <div class="case-studies">
+              <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop" alt="case study image">
+                <h4 style="margin-top:10px">Regional Lab — Scale & Compliance</h4>
+                <p style="color:var(--muted);margin:6px 0 0">Supported licensing and staffing for a multi-site regional lab, enabling 3x throughput within 9 months.</p>
+              </div>
+
+              <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1581093588401-8c7f2b8e94a5?q=80&w=1200&auto=format&fit=crop" alt="case study image">
+                <h4 style="margin-top:10px">Diagnostic Startup — Go‑to‑Market</h4>
+                <p style="color:var(--muted);margin:6px 0 0">Advised on assay validation, regulatory submissions and LIMS selection for a diagnostic startup product launch.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px">
+            <h4>Get in touch</h4>
+            <p style="color:var(--muted)">Request a consultation or pilot. Our team will provide a tailored implementation plan and timeline.</p>
+            <button class="btn-primary" onclick="location.href='contact.html'">Request consultation</button>
+            <div style="margin-top:12px;font-size:14px;color:var(--muted)">
+              <strong>Contact</strong><br>
+              <a href="mailto:info@samithealth.com">info@samithealth.com</a><br>
+              <a href="tel:+14703396027">+1 (470) 339-6027</a>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth — All rights reserved</div>
+        <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
