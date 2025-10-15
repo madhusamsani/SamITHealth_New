@@ -62,6 +62,13 @@
     .bar{transform:translateY(20px);opacity:0;animation:pop .7s forwards}
     .bar:nth-child(1){animation-delay:.1s}.bar:nth-child(2){animation-delay:.18s}.bar:nth-child(3){animation-delay:.26s}.bar:nth-child(4){animation-delay:.34s}
     @keyframes pop{to{transform:none;opacity:1}}
+
+    /* Modal styles for Careers email form */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(3,8,18,0.5);display:none;align-items:center;justify-content:center;z-index:1200}
+    .modal{background:var(--card);border-radius:12px;padding:20px;max-width:680px;width:94%;box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+    .modal header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .modal .close{background:transparent;border:0;font-size:18px;cursor:pointer}
+    .file-note{font-size:13px;color:var(--muted);margin-top:6px}
   </style>
 </head>
 <body>
@@ -112,7 +119,7 @@
             <div style="font-size:13px;color:var(--muted)">Response within 1–2 business days</div>
           </div>
 
-          <form class="card" action="https://formspree.io/f/xblknjwz" method="POST" onsubmit="handleSubmit(event)">
+          <form class="card" action="https://formspree.io/f/xblknjwz" method="POST" onsubmit="handleSubmit(event)" enctype="multipart/form-data">
             <input type="hidden" name="_subject" value="Enterprise Contact — SamITHealth">
             <input type="hidden" name="_language" value="en">
             <input type="text" name="company" placeholder="Company / Organization" required aria-label="Company">
@@ -147,7 +154,7 @@
 
             <div class="actions">
               <button class="btn-primary" type="submit">Request demo & pricing</button>
-              <button type="button" class="btn-ghost" onclick="location.href='mailto:info@samithealth.com'">Email us</button>
+              <button type="button" class="btn-ghost" onclick="openCareersModal()">Email us</button>
             </div>
 
             <div id="status" style="margin-top:10px;font-size:13px;color:var(--muted)"></div>
@@ -184,21 +191,95 @@
 
     <footer>
       <div>© 2025 SamITHealth — Trusted healthcare operations & IT partners</div>
-      <div style="opacity:0.9">Careers: <a href="mailto:hr@dynamicithealthcare.com">hr@dynamicithealthcare.com</a></div>
+      <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
     </footer>
   </div>
 
+  <!-- Careers modal (email template via Formspree) -->
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <header>
+        <div style="font-weight:700">Careers — Apply / Send resume</div>
+        <button class="close" aria-label="Close" onclick="closeCareersModal()">✕</button>
+      </header>
+
+      <!-- This form posts to your Formspree endpoint and includes a resume upload field -->
+      <form action="https://formspree.io/f/xblknjwz" method="POST" enctype="multipart/form-data" onsubmit="handleCareersSubmit(event)">
+        <input type="hidden" name="_subject" value="Careers Application — SamITHealth">
+        <input type="hidden" name="_language" value="en">
+        <input type="hidden" name="department" value="Careers">
+
+        <div style="display:grid;gap:8px">
+          <label for="c_name">Full name</label>
+          <input id="c_name" name="name" type="text" placeholder="Your full name" required>
+
+          <label for="c_email">Email</label>
+          <input id="c_email" name="email" type="email" placeholder="you@company.com" required>
+
+          <label for="c_phone">Phone</label>
+          <input id="c_phone" name="phone" type="tel" placeholder="+1 (555) 555-5555">
+
+          <label for="role">Position you're applying for</label>
+          <input id="role" name="position" type="text" placeholder="e.g., Revenue Cycle Analyst">
+
+          <label for="cover">Brief introduction / cover note</label>
+          <textarea id="cover" name="cover" rows="4" placeholder="2–3 sentence summary of your experience"></textarea>
+
+          <label for="resume">Attach resume (PDF or DOC)</label>
+          <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx">
+
+          <div class="file-note">By submitting your resume you consent to our hiring review process. We will reach out if your profile is shortlisted.</div>
+
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+            <button class="btn-primary" type="submit">Send application</button>
+            <button type="button" class="btn-ghost" onclick="closeCareersModal()">Cancel</button>
+          </div>
+
+          <div id="careersStatus" style="margin-top:10px;font-size:13px;color:var(--muted)"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    // Simple UX for form: show feedback and let Formspree handle the POST
+    // Enterprise contact form UX
     function handleSubmit(e){
       var status = document.getElementById('status');
       status.textContent = 'Sending…';
-      // allow native submit; show success after a brief delay to improve perceived performance
       setTimeout(function(){
         status.textContent = 'Thanks — we received your request. Our enterprise team will reply within 1–2 business days.';
-        // Not auto-clearing input to let user keep what they wrote in case of email copy
       },900);
     }
+
+    // Careers modal controls
+    function openCareersModal(){
+      var m = document.getElementById('modal');
+      m.style.display = 'flex';
+      m.setAttribute('aria-hidden','false');
+      // focus first input for accessibility
+      setTimeout(function(){ document.getElementById('c_name').focus(); }, 80);
+    }
+    function closeCareersModal(){
+      var m = document.getElementById('modal');
+      m.style.display = 'none';
+      m.setAttribute('aria-hidden','true');
+    }
+
+    // Careers form submit UX
+    function handleCareersSubmit(e){
+      var status = document.getElementById('careersStatus');
+      status.textContent = 'Sending your application…';
+      // allow the browser to submit the form to Formspree; show confirmation after short delay
+      setTimeout(function(){
+        status.textContent = 'Application sent — thank you. We will contact you if shortlisted.';
+        // do not auto-close — keep visible so user sees confirmation
+      },900);
+    }
+
+    // close modal when pressing escape
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ closeCareersModal(); }
+    });
   </script>
 </body>
 </html>
