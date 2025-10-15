@@ -1,59 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Provider Services — SamITHealth</title>
+  <meta name="description" content="SamITHealth Provider Services — enterprise-grade RCM, clinical documentation, and billing solutions built on CMMI Level 5 processes."/>
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --muted:#586674; --accent:#0066ff; --accent-2:#0047d1;
+      --max:1200px; --radius:12px; --shadow:0 14px 50px rgba(6,18,45,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#07203b}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+    /* Header */
+    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text .title{font-weight:800;font-size:18px}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
+    .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .phone{font-weight:700;color:#0b2545}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:22px}
+    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+    .hero-left h1{font-size:30px;margin:6px 0 12px;line-height:1.04}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+    .hero-image{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Services grid */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .service-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
+    .service-card img{width:100%;height:160px;object-fit:cover}
+    .service-card .body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .service-card h3{margin:0 0 8px;font-size:18px}
+    .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
+    .service-card .learn{margin-top:auto;padding-top:8px}
+    /* Deep-dive sections */
+    .section{margin-top:28px}
+    .section h2{font-size:20px;margin-bottom:8px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+    .card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .card img{width:100%;height:200px;object-fit:cover;border-radius:8px}
+    /* Metrics */
+    .metrics{display:flex;gap:12px;margin-top:22px;align-items:stretch}
+    .metric{background:#fff;padding:18px;border-radius:12px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
+    .metric .num{font-size:28px;font-weight:800;color:#07203b}
+    .metric .label{font-size:13px;color:var(--muted);margin-top:6px}
+    /* CTA banner */
+    .cta-banner{margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:28px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    .cta-banner .text{max-width:70%}
+    /* Footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
+    /* Responsive */
+    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}.metrics{flex-direction:column}}
+    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero-image{display:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo-mark">SH</div>
+        <div class="brand-text"><div class="title">SamITHealth</div><div class="tag">Provider Services — CMMI Level 5</div></div>
+      </div>
 
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Provider Services — SamITHealth (CMMI Level 5)</title><meta name="description" content="SamITHealth Provider Services — enterprise-grade RCM, clinical documentation, and billing solutions built on CMMI Level 5 processes."><link rel="stylesheet" href="assets/css/styles.css"></head><body>
-<header><div class="navbar"><div class="logo"><img src="assets/images/logo.png" alt="SamITHealth Logo"><span>SamITHealth</span></div><nav class="nav-links"><a href="index.html">Home</a><a href="provider-services.html">Provider Services</a><a href="payer-solutions.html">Payer Solutions</a><a href="laboratory-services.html">Laboratory Services</a><a href="what-makes-us-unique.html">Why Us</a><a href="contact.html">Contact</a></nav></div></header>
+      <nav class="nav" role="navigation" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html" class="active">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-<section class="hero"><div class="container"><h1>Provider Services — Enterprise RCM & Clinical Documentation</h1><p>Delivering measurable outcomes with CMMI Level 5 process maturity. From billing to clinical documentation improvement, SamITHealth partners with providers to optimize revenue, reduce denials, and ensure regulatory compliance.</p><a class="cta" href="contact.html">Request a Consultation</a></div></section>
+      <div class="header-ctas">
+        <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none">+1 (470) 339-6027</a></div>
+        <button class="btn-primary" onclick="location.href='contact.html'">Get a demo</button>
+      </div>
+    </header>
 
-<section class="section">
-  <h2 style="font-family:Poppins,sans-serif;color:#0A192F;margin-bottom:14px">Our Provider Solutions</h2>
-  <p style="max-width:900px;margin-bottom:18px">Comprehensive, scalable solutions tailored for physician groups, hospitals, and community clinics. We combine domain expertise, automation, and audit-ready processes to maximize revenue and minimize risk.</p>
-  <div class="grid">
-    <div class="card"><img src="assets/images/provider.jpg" alt="Medical Billing"><h3>Medical Billing Services</h3><p>End-to-end billing operations: eligibility, claims submission, denial management, and payment posting. Optimized for accuracy and speed.</p></div>
-    <div class="card"><img src="assets/images/rcm.jpg" alt="RCM Solutions"><h3>Medical RCM Solutions</h3><p>Scalable revenue cycle management with analytics-driven workflows to reduce A/R days and improve cash flow.</p></div>
-    <div class="card"><img src="assets/images/fqhc.jpg" alt="FQHC Billing"><h3>FQHC Billing</h3><p>Specialized workflows and PPS optimization for Federally Qualified Health Centers and community clinics.</p></div>
-    <div class="card"><img src="assets/images/behavioral.jpg" alt="Behavioral Health Billing"><h3>Behavioral Health Billing</h3><p>Specialized coding and claim management for behavioral health providers to reduce denials and protect PHI.</p></div>
-    <div class="card"><img src="assets/images/specialty.jpg" alt="Specialty Coding"><h3>Specialty Medical Coding</h3><p>AHIMA/AAPC-certified coders for complex specialties including surgical, IVR, radiology, and home health.</p></div>
-    <div class="card"><img src="assets/images/cdi.jpg" alt="Clinical Documentation"><h3>Clinical Documentation Improvement</h3><p>CDI programs to strengthen documentation, ensure medical necessity and improve reimbursement outcomes.</p></div>
-    <div class="card"><img src="assets/images/hospital.jpg" alt="Hospital Billing"><h3>Hospital Billing</h3><p>Comprehensive inpatient and outpatient billing, DRG optimization, and DNFB reduction strategies.</p></div>
+    <main>
+      <section class="hero" aria-labelledby="provider-heading">
+        <div class="hero-left">
+          <div class="eyebrow">Provider Solutions</div>
+          <h1 id="provider-heading">Enterprise RCM, Clinical Documentation & Billing optimized for providers</h1>
+          <p class="lead">Delivering measurable outcomes with CMMI Level 5 process maturity. From billing to clinical documentation improvement, SamITHealth partners with providers to optimize revenue, reduce denials, and ensure regulatory compliance.</p>
+
+          <div class="cta-row" style="margin-top:14px">
+            <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
+            <a class="ghost" href="contact.html">Request a Pilot</a>
+          </div>
+
+          <div class="services" aria-label="Provider service offerings">
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1580281657526-8e6f1b4f8d27?q=80&w=1200&auto=format&fit=crop" alt="Medical Billing">
+              <div class="body">
+                <h3>Medical Billing Services</h3>
+                <p>End-to-end billing: eligibility, claims, denial management and payment posting with speed and accuracy.</p>
+                <div class="learn"><a href="medical-billing.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="RCM">
+              <div class="body">
+                <h3>Revenue Cycle Management</h3>
+                <p>Analytics-driven RCM to reduce A/R days, improve cash flow and deliver transparent reporting.</p>
+                <div class="learn"><a href="rcm-solutions.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop" alt="FQHC Billing">
+              <div class="body">
+                <h3>FQHC & Clinic Billing</h3>
+                <p>Specialized PPS and FQHC workflows, grant management and reporting tailored for community health centers.</p>
+                <div class="learn"><a href="fqhc-billing.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1581093588401-8c7f2b8e94a5?q=80&w=1200&auto=format&fit=crop" alt="Behavioral Health">
+              <div class="body">
+                <h3>Behavioral Health Billing</h3>
+                <p>Compliant workflows, specialized coding and PHI-safe processes for behavioral health providers.</p>
+                <div class="learn"><a href="behavioral-health.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop" alt="Specialty Coding">
+              <div class="body">
+                <h3>Specialty Coding</h3>
+                <p>AHIMA/AAPC-certified coders for complex specialties including surgical, radiology and home health.</p>
+                <div class="learn"><a href="specialty-coding.html">Learn more →</a></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981d?q=80&w=1200&auto=format&fit=crop" alt="CDI">
+              <div class="body">
+                <h3>Clinical Documentation Improvement</h3>
+                <p>CDI programs that strengthen documentation, validate medical necessity and improve reimbursement outcomes.</p>
+                <div class="learn"><a href="cdi.html">Learn more →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside style="width:420px">
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=1400&auto=format&fit=crop" alt="Provider services visualization">
+          </div>
+
+          <div class="metrics" style="margin-top:18px">
+            <div class="metric"><div class="num">98%</div><div class="label">Claim Accuracy</div></div>
+            <div class="metric"><div class="num">30%</div><div class="label">A/R Days Reduction</div></div>
+            <div class="metric"><div class="num">45%</div><div class="label">Denial Reduction</div></div>
+          </div>
+
+          <div class="section" style="margin-top:18px">
+            <h2>Clinical Documentation (CDI)</h2>
+            <div class="grid-2">
+              <div class="card">
+                <img src="https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop" alt="CDI workflow">
+                <h4 style="margin-top:10px">Documentation Review</h4>
+                <p style="color:var(--muted)">Concurrent and retrospective reviews to close clinical gaps and improve coding accuracy.</p>
+              </div>
+              <div class="card">
+                <img src="https://images.unsplash.com/photo-1524492412937-4961b7d9f5b2?q=80&w=1200&auto=format&fit=crop" alt="CDI training">
+                <h4 style="margin-top:10px">Training & Analytics</h4>
+                <p style="color:var(--muted)">Clinician and coder education with dashboards to track documentation performance.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <h2>Client Success Stories</h2>
+        <div class="case-studies grid-2">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1580281657526-8e6f1b4f8d27?q=80&w=1200&auto=format&fit=crop" alt="case study 1">
+            <h4 style="margin-top:10px">Regional Hospital — RCM Modernization</h4>
+            <p style="color:var(--muted)">Implemented automation and analytics that reduced DNFB by 40% and improved cash collections.</p>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="case study 2">
+            <h4 style="margin-top:10px">Multi‑specialty Group — CDI Program</h4>
+            <p style="color:var(--muted)">CDI program and training led to better documentation and an increase in appropriate reimbursement.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-banner" aria-label="Call to action">
+        <div class="text">
+          <h2>Ready to improve revenue integrity and patient care?</h2>
+          <p style="margin-top:6px;color:var(--muted)">Contact SamITHealth to schedule a discovery meeting and see how our CMMI Level 5 processes can transform your revenue cycle.</p>
+        </div>
+        <div>
+          <button class="btn-primary" onclick="location.href='contact.html'">Contact Our Experts</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth — Provider Services</div>
+        <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
+      </div>
+    </footer>
   </div>
-</section>
-
-<section class="section unique">
-  <h2>Why Providers Choose SamITHealth</h2>
-  <div class="grid" style="margin-top:18px">
-    <div class="item"><h3>Process Maturity</h3><p>Industry-leading CMMI Level 5 governance and continuous process improvement.</p></div>
-    <div class="item"><h3>Compliance & Security</h3><p>HIPAA and SOC 2 aligned practices, ensuring patient privacy and data security.</p></div>
-    <div class="item"><h3>Clinical Expertise</h3><p>Certified coders and CDI specialists with deep clinical understanding.</p></div>
-    <div class="item"><h3>Analytics & Automation</h3><p>Actionable dashboards and automation to accelerate revenue recovery.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2 style="font-family:Poppins,sans-serif;color:#0A192F;margin-bottom:14px">Clinical Documentation Improvement (CDI)</h2>
-  <p style="max-width:900px;margin-bottom:12px">Our CDI specialists review clinical notes to validate medical necessity and optimize coding accuracy. This reduces denials and positions providers for higher value-based reimbursements.</p>
-  <div class="grid">
-    <div class="card"><img src="assets/images/cdi-workflow.jpg" alt="CDI Workflow"><h3>Documentation Review</h3><p>Concurrent and retrospective documentation audits to close clinical gaps.</p></div>
-    <div class="card"><img src="assets/images/cdi-training.jpg" alt="CDI Training"><h3>Onsite & Remote Training</h3><p>Tailored clinician and coder education programs to improve documentation practices.</p></div>
-    <div class="card"><img src="assets/images/cdi-analytics.jpg" alt="CDI Analytics"><h3>CDI Analytics</h3><p>Dashboards and KPIs that track documentation quality and coding accuracy.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2 style="font-family:Poppins,sans-serif;color:#0A192F;margin-bottom:14px">Client Success Metrics</h2>
-  <div class="metrics">
-    <div class="metric"><h2 class="counter" data-target="98">0</h2><p>Claim Accuracy</p></div>
-    <div class="metric"><h2 class="counter" data-target="30">0</h2><p>Reduction in A/R Days</p></div>
-    <div class="metric"><h2 class="counter" data-target="45">0</h2><p>Denial Reduction</p></div>
-    <div class="metric"><h2 class="counter" data-target="200">0</h2><p>Providers Partnered</p></div>
-  </div>
-</section>
-
-<section class="cta-banner">
-  <h2>Ready to improve revenue integrity and patient care?</h2>
-  <p style="margin-bottom:18px">Contact SamITHealth to schedule a discovery meeting and see how our CMMI Level 5 processes can transform your revenue cycle.</p>
-  <a href="contact.html" class="cta">Contact Our Experts</a>
-</section>
-
-<footer><div style="max-width:1100px;margin:auto"><p>© 2025 SamITHealth. All rights reserved. | HIPAA | CMMI Level 5 | SOC 2</p></div></footer>
-
-<script src="assets/js/scripts.js"></script></body></html>
+</body>
+</html>
