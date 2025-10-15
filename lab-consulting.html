@@ -1,53 +1,136 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab Consulting — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Lab Consulting</h1>
-  <p>Consulting for workflows, revenue and quality.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1581093588401-7a7f6e6b1a96?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Laboratory Consulting — SamITHealth</title>
+  <meta name="description" content="Lab consulting for workflow optimization, revenue capture, compliance and lab operations modernization for clinical labs and reference labs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f5f8fb;--card:#ffffff;--muted:#64748b;--accent:#0f62fe;--radius:12px}
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;margin:0;background:var(--bg);color:#0b1220}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;border-bottom:1px solid #e6eef9}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding:44px 0}
+    h1{margin:0 0 10px;font-size:30px}
+    .lead{color:var(--muted);margin-bottom:14px}
+    .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 24px rgba(12,36,60,0.06)}
+    .stat-row{display:flex;gap:14px;margin-top:18px}
+    .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:100px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .section-title{margin:6px 0 12px;font-size:18px}
+    img.responsive{width:100%;border-radius:10px;margin-bottom:14px;display:block}
+    .testimonial{background:linear-gradient(180deg,#0b76d1,#0f62fe);color:#fff;padding:18px;border-radius:12px}
+    footer{padding:24px 0;margin-top:32px;border-top:1px solid #e6eef9}
+    ul{padding-left:18px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
-    </div>
-  </div>
-</div>
+  </header>
 
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div>
+        <h1 id="hero-heading">Laboratory Consulting & Revenue Optimization</h1>
+        <p class="lead">Specialized consulting for clinical and reference laboratories — from operational workflows and compliance to revenue capture and lab information system integration.</p>
 
-<script src="scripts.js"></script></body></html>
+        <div class="stat-row" role="list">
+          <div class="stat" role="listitem"><strong>20%</strong><span style="color:var(--muted)">Average improvement in charge capture</span></div>
+          <div class="stat" role="listitem"><strong>30%</strong><span style="color:var(--muted)">Faster turnaround for billing cycles</span></div>
+          <div class="stat" role="listitem"><strong>UDS/CLIA</strong><span style="color:var(--muted)">Compliance & audit readiness</span></div>
+        </div>
+
+        <div class="features" id="services">
+          <div class="feature">
+            <h4 style="margin:0 0 6px">Workflow & Operational Excellence</h4>
+            <p style="margin:0;color:var(--muted)">Specimen flow, accessioning, LIS optimization and staffing models to reduce errors and improve throughput.</p>
+          </div>
+          <div class="feature">
+            <h4 style="margin:0 0 6px">Revenue Capture & Billing</h4>
+            <p style="margin:0;color:var(--muted)">Accurate CPT/LOINC mapping, claim assembly, payer-specific rules and denial prevention focused on lab reimbursements.</p>
+          </div>
+          <div class="feature">
+            <h4 style="margin:0 0 6px">Compliance & Quality</h4>
+            <p style="margin:0;color:var(--muted)">CLIA readiness, proficiency testing guidance, and documentation to satisfy auditors and regulators.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:18px">
+      <div class="card">
+        <img class="responsive" src="https://images.unsplash.com/photo-1581093588401-7a7f6e6b1a96?q=80&w=1400&auto=format&fit=crop" alt="Laboratory technicians processing samples">
+        <h3 class="section-title">Comprehensive lab consulting services</h3>
+        <p style="color:var(--muted)">Laboratories operate at the intersection of clinical quality and complex revenue rules. Our consulting services are built to improve both sides of that equation. We diagnose operational bottlenecks, implement practical fixes, and ensure your billing engine captures the full value of every test performed.</p>
+
+        <h4 style="margin-top:12px">What we do (detailed)</h4>
+        <ul>
+          <li><strong>Accessioning & Specimen Flow:</strong> Reduce mislabels, improve TAT and automate accessioning where possible.</li>
+          <li><strong>CPT/LOINC Mapping:</strong> Correct code sets and crosswalks to avoid denials and underpayment.</li>
+          <li><strong>LIS Integration:</strong> Seamless data exchange between LIS, EHR and billing systems to eliminate manual steps.</li>
+          <li><strong>Billing & Claims Management:</strong> Payer-specific rules engines, claim scrubbing and appeals workflows tuned for laboratory payers.</li>
+          <li><strong>Quality & Compliance:</strong> CLIA-ready documentation, SOPs, and audit support to reduce regulatory risk.</li>
+          <li><strong>Analytics & Continuous Improvement:</strong> Dashboarding, root-cause denial analysis, and periodic performance reviews.</li>
+        </ul>
+
+        <h4 style="margin-top:12px">Long description to attract clients</h4>
+        <p style="color:var(--muted)">Clinical and reference laboratories are facing unprecedented demands: greater test volumes, evolving payer policies, shrinking margins, and heightened regulatory scrutiny. Every process inefficiency or coding mistake can lead to lost revenue and delayed patient care. SamITHealth offers a laboratory-focused consulting practice that blends deep domain knowledge (CPT/LOINC, CLIA regulations, LIS architectures) with hands-on operational improvements and revenue cycle discipline.</p>
+
+        <p style="color:var(--muted)">Our seasoned consultants work side-by-side with lab leadership to map specimen journeys, identify revenue leakage, and implement high-impact changes — from simple accessioning fixes to end-to-end LIS integrations. We prioritize measurable outcomes: increased charge capture, fewer payer denials, improved turnaround times, and demonstrable ROI. For labs with complex payer mixes, our billing specialists tune claim logic to handle test bundling, modifier rules, and payer-specific adjudication criteria.</p>
+
+        <p style="color:var(--muted)">Engage us for a focused pilot and we’ll deliver a clear remediation plan with estimated financial upside. Beyond technical fixes, we train your teams, document SOPs, and set up dashboards so improvements are sustainable. Whether you operate a hospital lab, reference lab, or point-of-care network, SamITHealth brings practical expertise that turns laboratory operations into a strategic asset rather than a cost center.</p>
+      </div>
+
+      <aside class="card" style="margin-top:18px">
+        <h3 class="section-title">Client outcomes & supporting services</h3>
+        <ul style="color:var(--muted)">
+          <li>Faster test-to-bill cycle times</li>
+          <li>Reduced denied claims and fewer appeals</li>
+          <li>CLIA and regulatory audit readiness</li>
+          <li>Improved LIS data fidelity and integrations</li>
+          <li>Dashboards for operational and financial KPIs</li>
+        </ul>
+
+        <div style="margin-top:16px">
+          <h4 style="margin:0 0 8px">Success story</h4>
+          <div class="testimonial">
+            <strong>"SamITHealth helped us recover over $250k in underpayments in the first six months while improving turnaround time by 18%."</strong>
+            <div style="font-size:13px;margin-top:8px">— Lab Director, Regional Reference Laboratory</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <h4 style="margin:0 0 6px">Supporting imagery</h4>
+          <img class="responsive" src="https://images.unsplash.com/photo-1584504194537-3c7f42c4b5c8?q=80&w=900&auto=format&fit=crop" alt="Laboratory instruments and testing" style="border-radius:8px">
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div style="color:var(--muted);font-size:13px">HIPAA-ready | CLIA-aware processes</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
