@@ -1,53 +1,88 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Specialty Medical Coding — SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Specialty Medical Coding</h1>
-  <p>Certified coding for DRG, ICD-10, CPT and specialty areas.</p>
-  <div class="grid" style="margin-top:12px">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" style="width:100%;border-radius:8px" alt="">
-      <h3 class="section-title">What we offer</h3>
-      <ul>
-        <li>Eligibility Verification</li>
-        <li>Charge Capture & Claim Generation</li>
-        <li>Claim Submission & Follow-up</li>
-        <li>Denial Management & Analytics</li>
-      </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Specialty Medical Coding — SamITHealth</title>
+  <meta name="description" content="Specialty medical coding services: certified coders, DRG/ICD-10/CPT expertise, denial prevention, and revenue protection for specialty practices and hospitals.">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root{--accent:#0066cc;--muted:#6b7280;--bg:#f7fbff;--card:#ffffff;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;margin-top:22px}
+    .hero-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:32px;border-radius:12px;box-shadow:0 8px 26px rgba(2,6,23,0.04)}
+    h1{font-size:28px;margin:0 0 8px}
+    .lead{color:var(--muted);font-size:15px;margin:0 0 14px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:10px 16px;border-radius:9px;border:none;font-weight:700;text-decoration:none}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+    .feature{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 6px;font-size:15px}
+    .feature p{margin:0;color:var(--muted);font-size:13px}
+    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    .right-card .card-body{padding:12px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .service{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .service h3{margin:0 0 6px;font-size:16px}
+    .service p{margin:0;color:var(--muted);font-size:13px}
+    .long-desc{margin-top:20px;background:linear-gradient(180deg,#fff,#fcfeff);padding:18px;border-radius:10px;border:1px solid #eaf3ff}
+    .long-desc p{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    form input,form textarea{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
+    label{font-weight:600;font-size:13px;color:#243044}
+    footer{margin-top:34px;padding:22px 0;color:var(--muted);font-size:13px}
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{padding:12px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <div class="card contact-form">
-      <h3 class="section-title">Get a consultation</h3>
-      <form id="contactForm">
-        <input placeholder="Your name" required>
-        <input placeholder="Email" type="email" required>
-        <textarea placeholder="Tell us about your needs" rows="6"></textarea>
-        <button class="cta" type="submit">Request callback</button>
-      </form>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Specialty Medical Coding — Accurate. Compliant. Specialized.</h1>
+        <p class="lead">Certified specialty coders for cardiology, oncology, radiology, pathology, behavioral health and other complex clinical domains — improving reimbursement and reducing audit risk.</p>
+      </div>
+      <aside class="right-card card">
+        <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" alt="Clinicians reviewing charts">
+        <div class="card-body">
+          <h3>Request a coding review</h3>
+          <p style="color:var(--muted);font-size:13px;margin-top:6px">Upload a sample chart or describe the specialty area and we'll provide a short assessment of coding opportunities and risk.</p>
+          <a class="cta" href="#contact">Get started</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+      </div>
     </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
-    </div>
-  </div>
-</footer>
-
-<script src="scripts.js"></script></body></html>
+  </footer>
+</body>
+</html>

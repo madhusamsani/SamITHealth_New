@@ -1,35 +1,125 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Why SamITHealth</title><link rel="stylesheet" href="styles.css"></head><body>
-<header class="header">
-  <div class="container nav">
-    <div class="brand">SamITHealth</div>
-    <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="provider-services.html">Provider Services</a>
-      <a href="payer-solutions.html">Payer Solutions</a>
-      <a href="laboratory-services.html">Laboratory Services</a>
-      <a href="what-makes-us-unique.html">Why Us</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="container">
-  <h1>What Makes Us Unique</h1>
-  <ul>
-    <li>20+ years of combined experience in healthcare RCM</li>
-    <li>Certified coders and HIPAA / SOC2 compliant processes</li>
-    <li>Flexible engagement models (project, FTE, hybrid)</li>
-    <li>Focus on quality, automation and measurable ROI</li>
-  </ul>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
-      <div>© 2025 SamITHealth. All rights reserved.</div>
-      <div>Powered by SamITHealth Solutions</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Why SamITHealth — What Makes Us Unique</title>
+  <meta name="description" content="Why SamITHealth: deep RCM expertise, certified teams, automation-first, HIPAA & SOC2 practices, flexible engagement models and measurable ROI for providers and payers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--muted:#6b7280;--accent:#0f62fe;--accent-2:#0b76d1;--radius:12px}
+    *{box-sizing:border-box}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;margin:0;background:var(--bg);color:#0f1724}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{background:#fff;border-bottom:1px solid #e6eef9}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--accent);font-size:20px}
+    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    h1{font-size:30px;margin:18px 0}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center}
+    .lead{color:var(--muted);margin-bottom:12px}
+    .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(12,36,60,0.06)}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+    .feature{padding:14px;border-radius:10px;border:1px solid #eef6ff;background:linear-gradient(180deg,#fff,#fbfdff)}
+    .stat-row{display:flex;gap:12px;margin-top:12px}
+    .stat{padding:12px;border-radius:10px;background:#fff;border:1px solid #eef6ff}
+    img.responsive{width:100%;border-radius:10px;display:block}
+    .long-desc{color:var(--muted);line-height:1.6}
+    footer{padding:24px 0;margin-top:28px;border-top:1px solid #e6eef9}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr}}</style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">SamITHealth</div>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="laboratory-services.html">Laboratory Services</a>
+        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-  </div>
-</footer>
+  </header>
 
-<script src="scripts.js"></script></body></html>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>What makes SamITHealth unique</h1>
+        <p class="lead">We combine deep domain experience, automation-first engineering, and pragmatic operations to deliver measurable revenue and operational outcomes for providers, labs and payers.</p>
+
+        <div class="features">
+          <div class="feature">
+            <h3 style="margin:0 0 6px">Domain Expertise</h3>
+            <p class="long-desc">20+ years of combined experience across RCM, coding, LIS integrations and payer operations. Our teams include certified coders, clinicians, data engineers and revenue integrity analysts who understand the interplay between clinical workflows and revenue outcomes.</p>
+          </div>
+
+          <div class="feature">
+            <h3 style="margin:0 0 6px">Automation + Human-in-the-loop</h3>
+            <p class="long-desc">We build automation (OCR, claim scrubbers, denial classifiers) to eliminate routine work, while keeping specialized human review where accuracy and defensibility matter. This hybrid approach reduces cost and improves first-pass acceptance rates.</p>
+          </div>
+
+          <div class="feature">
+            <h3 style="margin:0 0 6px">Compliance & Security</h3>
+            <p class="long-desc">HIPAA-first engineering, SOC2-ready processes, and secure data handling are embedded into every engagement. We provide secure intake channels, role-based access and audit trails for all review and recovery work.</p>
+          </div>
+
+          <div class="feature">
+            <h3 style="margin:0 0 6px">Flexible Engagements</h3>
+            <p class="long-desc">Project-based pilots, managed services, or embedded FTE models — we adapt to your operational needs and governance while delivering predictable SLAs and ROI reporting.</p>
+          </div>
+        </div>
+
+        <div class="stat-row" style="margin-top:16px">
+          <div class="stat"><strong>99%+</strong><div style="color:var(--muted)">Data capture accuracy (where applicable)</div></div>
+          <div class="stat"><strong>30%+</strong><div style="color:var(--muted)">Typical denials reduction</div></div>
+          <div class="stat"><strong>3–6 months</strong><div style="color:var(--muted)">Common ROI payback window</div></div>
+        </div>
+
+        <h2 style="margin-top:22px">Long description — why clients pick us</h2>
+        <p class="long-desc">Healthcare organizations operate in an environment of competing pressures: rising costs, complex payer rules, staffing constraints, and tighter margins. Too often operational teams react to denials, manual tasks and ad-hoc fixes rather than preventing leakage in the first place. SamITHealth approaches these challenges differently: we link clinical, operational and financial data to produce prioritized, defensible actions that move the needle.</p>
+
+        <p class="long-desc">Our engagements begin with a rapid discovery to establish the measurable opportunity: whether that’s underpayments recoverable through repricing, systemic denial drivers, or missed charges due to poor integrations. We deliver a pilot that proves impact — combining analytics, sample-based clinical/coding review, and automated repricing where appropriate. Post-pilot, our playbooks and integrations make improvements operational: denial playbooks are codified, claim scrubbing rules are deployed, and dashboards provide leadership with the KPIs they need to govern performance.</p>
+
+        <p class="long-desc">We are fanatical about defensibility. Whether recovering funds with payers or training clinical teams to document differently, our work is documented and auditable. That reduces friction with payers and shortens recovery cycles. Finally, we tailor our delivery to your culture — some clients want an embedded team that becomes an extension of operations; others prefer short, high-impact pilots that address a single pain point. Either way, our focus is the same: measurable, sustainable financial improvement and operational simplicity.</p>
+      </div>
+
+      <aside style="max-width:360px">
+        <div class="card">
+          <img class="responsive" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Team collaborating on strategy and data analysis">
+          <h3 class="section-title">Quick facts</h3>
+          <ul style="color:var(--muted)">
+            <li>Certified coders and clinical reviewers</li>
+            <li>HIPAA & SOC2-aligned practices</li>
+            <li>Embedded automation with human QA</li>
+            <li>Transparent ROI and reporting</li>
+          </ul>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <img class="responsive" src="https://images.unsplash.com/photo-1581091870626-3c5f4b8d1d1c?q=80&w=800&auto=format&fit=crop" alt="Analytics dashboard showing revenue metrics" style="margin-bottom:8px">
+          <h3 class="section-title">Client testimonial</h3>
+          <div style="color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px;border-radius:8px">
+            <strong>"SamITHealth delivered a pilot that recovered six-figures and gave us a road map to prevent reoccurrence."</strong>
+            <div style="font-size:13px;margin-top:8px">— Director Revenue Integrity</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>© 2025 SamITHealth. All rights reserved.</div>
+        <div style="color:var(--muted);font-size:13px">HIPAA-ready | SOC2-ready processes</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
