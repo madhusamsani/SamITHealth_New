@@ -13,6 +13,7 @@
       --card:#f8fafc;
       --max-width:1100px;
       --radius:12px;
+      --panel-bg:#f0eefc;
       font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
     *{box-sizing:border-box}
@@ -28,7 +29,7 @@
     .hero h1{font-size:36px;margin:0 0 12px}
     .hero p{color:rgba(255,255,255,0.9);margin:0 0 20px;max-width:70%}
 
-    .long-desc{padding:28px;background:#fbfdff;border-radius:14px;margin-bottom:20px}
+    .long-desc{padding:28px;background:var(--panel-bg);border-radius:14px;margin-bottom:20px;box-shadow:0 4px 20px rgba(11,37,69,0.08)}
 
     main{padding:48px 0}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -54,17 +55,6 @@
   </style>
 </head>
 <body>
-    <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav class="navlinks" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="provider-services.html">Provider Services</a>
-        <a href="laboratory-services.html">Laboratory Services</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
   <header>
     <div class="topbar container">
       <div class="brand">
