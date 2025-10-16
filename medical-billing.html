@@ -21,7 +21,8 @@
     h1{font-size:32px;margin:0 0 10px}
     .lead{color:var(--muted);margin-bottom:18px}
     .stat-row{display:flex;gap:16px;margin-top:18px}
-    .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:110px}
+    .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:110px;display:flex;flex-direction:column;align-items:flex-start}
+    .stat strong{font-size:1.4em;}
     .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:18px}
     .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 28px rgba(12,36,60,0.06)}
     .card img{width:100%;border-radius:10px;margin-bottom:14px}
@@ -34,6 +35,14 @@
     .testimonial{background:linear-gradient(180deg,#0b76d1,#0f62fe);color:#fff;padding:18px;border-radius:12px}
     footer{padding:24px 0;margin-top:32px;border-top:1px solid #e6eef9}
     @media (max-width:900px){.hero{grid-template-columns:1fr;}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){
+      .container{padding:14px;}
+      .nav{flex-direction:column;gap:8px;}
+      .features{grid-template-columns:1fr;}
+      .hero{padding:24px 0;}
+      .grid{gap:12px;}
+      .card{padding:14px;}
+    }
   </style>
 </head>
 <body>
@@ -56,15 +65,33 @@
         <p class="lead">Stress-tested billing services for practices of every size — from single-provider clinics to multi-specialty groups. We improve cashflow, reduce denials, and simplify administrative overhead.</p>
 
         <div class="stat-row" role="list">
-          <div class="stat" role="listitem"><strong>24%</strong><span style="color:var(--muted)">Average improvement in collections</span></div>
-          <div class="stat" role="listitem"><strong>40%</strong><span style="color:var(--muted)">Reduction in denials</span></div>
-          <div class="stat" role="listitem"><strong>48h</strong><span style="color:var(--muted)">Typical first-response time</span></div>
+          <div class="stat" role="listitem">
+            <strong>24%</strong>
+            <span style="color:var(--muted);margin-top:3px;">Average improvement in collections</span>
+          </div>
+          <div class="stat" role="listitem">
+            <strong>40%</strong>
+            <span style="color:var(--muted);margin-top:3px;">Reduction in denials</span>
+          </div>
+          <div class="stat" role="listitem">
+            <strong>48h</strong>
+            <span style="color:var(--muted);margin-top:3px;">Typical first-response time</span>
+          </div>
         </div>
 
         <div class="features" id="services">
-          <div class="feature"><strong>Eligibility & Benefits</strong><div style="color:var(--muted)">Real-time eligibility checks to avoid surprise denials and patient billing issues.</div></div>
-          <div class="feature"><strong>Coding & Charge Capture</strong><div style="color:var(--muted)">Certified coders and automated charge reconciliation to minimize missed charges.</div></div>
-          <div class="feature"><strong>Claim Scrubbing & Submission</strong><div style="color:var(--muted)">Payer-specific rules, scrubbers and clearinghouse integrations for higher first-pass acceptance.</div></div>
+          <div class="feature">
+            <strong>Eligibility & Benefits</strong>
+            <div style="color:var(--muted)">Real-time eligibility checks to avoid surprise denials and patient billing issues.</div>
+          </div>
+          <div class="feature">
+            <strong>Coding & Charge Capture</strong>
+            <div style="color:var(--muted)">Certified coders and automated charge reconciliation to minimize missed charges.</div>
+          </div>
+          <div class="feature">
+            <strong>Claim Scrubbing & Submission</strong>
+            <div style="color:var(--muted)">Payer-specific rules, scrubbers and clearinghouse integrations for higher first-pass acceptance.</div>
+          </div>
         </div>
       </div>
 
