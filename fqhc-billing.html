@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--brand:#0b7a75;--accent:#0f62fe;--glass:rgba(255,255,255,0.6);--radius:12px
+      --bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--brand:#0b7a75;--accent:#0f62fe;--radius:12px
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:#0f1724}
+    html,body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:#0f1724}
     .container{max-width:1100px;margin:0 auto;padding:28px}
     header{background:#fff;border-bottom:1px solid #e6eef9}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -22,33 +22,23 @@
     .brand .title{font-weight:700;color:var(--brand);font-size:18px}
     nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:var(--brand)}
-
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
     h1{font-size:28px;margin:0 0 8px}
     .lead{color:var(--muted);margin-bottom:14px;line-height:1.45}
     .stat-row{display:flex;gap:12px;margin-top:14px}
     .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:120px}
     .stat strong{font-size:1.2em;display:block}
-
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
     .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-
     .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:18px}
     .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 28px rgba(12,36,60,0.06)}
     .section-title{margin:6px 0 12px;font-size:18px}
     ul{padding-left:18px;color:var(--muted)}
-
-    .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .metrics-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
     .metric{background:linear-gradient(180deg,#fff,#fbfffe);padding:16px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
-
     footer{padding:24px 0;margin-top:32px;border-top:1px solid #e6eef9}
     footer .meta{color:var(--muted);font-size:13px}
-
     .btn{background:var(--brand);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block}
-    .btn-alt{background:#fff;color:var(--brand);border:1px solid #e6eef9;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
-
-    @media(max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}}
-    @media(max-width:600px){.container{padding:16px}.features{grid-template-columns:1fr}.metric{padding:12px}}
+    form input,form textarea{width:100%;padding:10px;border:1px solid #e6eef9;border-radius:8px;margin-bottom:8px;font-size:14px}
   </style>
 </head>
 <body>
@@ -71,122 +61,68 @@
     </div>
   </header>
 
-  <main class="container" id="main">
-    <section class="hero" aria-labelledby="hero-heading">
+  <main class="container">
+    <section class="hero">
       <div>
-        <h1 id="hero-heading">Enterprise-grade FQHC Billing & RCM</h1>
-        <p class="lead">SamITHealth delivers a configurable, compliance-first revenue cycle management platform tailored for Federally Qualified Health Centers and community clinics. Our approach blends automation, payer intelligence, and certified billing teams to reduce denials, accelerate collections, and preserve clinical focus.</p>
-
-        <div class="stat-row" role="list">
-          <div class="stat" role="listitem"><strong>24%</strong><span style="color:var(--muted);font-size:13px">Avg improvement in collections</span></div>
-          <div class="stat" role="listitem"><strong>40%</strong><span style="color:var(--muted);font-size:13px">Reduction in denials</span></div>
-          <div class="stat" role="listitem"><strong>48h</strong><span style="color:var(--muted);font-size:13px">Typical first-response time</span></div>
-        </div>
-
-        <div class="features" aria-hidden>
-          <div class="feature"><strong>Eligibility & Benefits</strong><div style="color:var(--muted);margin-top:8px">Real-time checks to avoid coverage surprises and front-end denials.</div></div>
-          <div class="feature"><strong>Coding & Charge Capture</strong><div style="color:var(--muted);margin-top:8px">Certified coders, automated reconciliation and encoder validations.</div></div>
-          <div class="feature"><strong>Claim Scrub & Submission</strong><div style="color:var(--muted);margin-top:8px">Payer rules engine, clearinghouse integrations, and batch/real-time submission workflows.</div></div>
-        </div>
-
-        <div style="margin-top:18px">
-          <a class="btn" href="#contact">Request a Practice Review</a>
-          <a class="btn-alt" href="#services" style="margin-left:10px">View Services</a>
+        <h1>Enterprise-grade FQHC Billing & RCM</h1>
+        <p class="lead">SamITHealth delivers configurable, compliance-first revenue cycle management for Federally Qualified Health Centers and community clinics. We integrate automation, payer intelligence, and certified billing teams to reduce denials and accelerate reimbursements.</p>
+        <div class="stat-row">
+          <div class="stat"><strong>24%</strong><span style="color:var(--muted)">Improvement in collections</span></div>
+          <div class="stat"><strong>40%</strong><span style="color:var(--muted)">Reduction in denials</span></div>
+          <div class="stat"><strong>48h</strong><span style="color:var(--muted)">Avg first-response time</span></div>
         </div>
       </div>
-
-      <aside class="card" aria-labelledby="contact">
-        <h3 id="contact" class="section-title">Request a practice review</h3>
-        <p style="color:var(--muted)">Share a few details and we’ll deliver a complimentary revenue snapshot and recommended pilot plan.</p>
-        <form id="contactForm" novalidate>
-          <label class="sr-only" for="name">Full name</label>
-          <input id="name" name="name" placeholder="Full name" required>
-          <label class="sr-only" for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="Work email" required>
-          <input id="practice" name="practice" placeholder="Practice / Organization">
-          <textarea id="message" name="message" rows="4" placeholder="Volume, EHR, current pain points..."></textarea>
-          <div style="display:flex;gap:10px;margin-top:8px">
-            <button class="btn" type="submit">Request review</button>
-            <a class="btn-alt" href="#services">Request Pilot</a>
-          </div>
-        </form>
-        <p style="font-size:13px;color:var(--muted);margin-top:12px">HIPAA-compliant communications. Typical reply within one business day.</p>
-      </aside>
     </section>
 
-    <section id="services" style="margin-top:8px">
+    <section id="services">
       <div class="grid">
         <div class="card">
-          <img src="assets/images/HealthCareITAI.png" alt="Billing dashboard on laptop with medical forms" onerror="this.style.display='none'">
+          <img src="assets/images/HealthCareITAI.png" alt="Billing dashboard" onerror="this.style.display='none'">
           <h3 class="section-title">How we deliver results</h3>
-          <p style="color:var(--muted)">We combine technology, process and people to deliver measurable revenue lift. Starting with discovery and KPI mapping, we run a targeted pilot, integrate with your systems, and move into continuous optimization driven by analytics.</p>
-
-          <h4 style="margin-top:12px">Engagement model</h4>
-          <ol style="color:var(--muted);margin-left:18px">
-            <li><strong>Discovery & KPI mapping:</strong> Workflow analysis and denial root-cause identification.</li>
-            <li><strong>Pilot:</strong> Proof-of-value using representative accounts or claims.</li>
-            <li><strong>Integration & Scale:</strong> EHR adapters, clearinghouse connectivity, and analytics pipeline.</li>
-            <li><strong>Optimization:</strong> Denial tuning, appeals management, and revenue integrity sprints.</li>
+          <p style="color:var(--muted)">We integrate technology, process, and expertise to deliver measurable revenue lift — from discovery to pilot to scalable optimization. Each engagement includes KPI mapping, EHR integration, and performance analytics.</p>
+          <h4 style="margin-top:12px">Engagement Model</h4>
+          <ol style="color:var(--muted)">
+            <li><strong>Discovery:</strong> Analyze workflows, denials, and leakage.</li>
+            <li><strong>Pilot:</strong> Prove measurable improvement via sample claims.</li>
+            <li><strong>Integration & Scale:</strong> EHR adapters and analytics pipelines.</li>
+            <li><strong>Continuous Optimization:</strong> Denial tuning and revenue integrity.</li>
           </ol>
-
-          <h4 style="margin-top:12px">Long description</h4>
-          <p style="color:var(--muted)">Revenue cycle performance is mission-critical. SamITHealth transforms billing operations into a predictable, high-performing engine using certified coding experts, an automated rules engine, and payer-specific intelligence that improves first-pass acceptance. Our solutions are tailored to community clinics and multi-site organizations that need both immediate wins and sustainable improvements.</p>
-
         </div>
 
         <aside class="card">
-          <h3 class="section-title">Services & outcomes</h3>
-          <ul>
-            <li>Eligibility & benefits verification</li>
-            <li>Coding & charge reconciliation</li>
-            <li>Claim scrubbing & submission (837/835/ERA)</li>
-            <li>Denial management & appeals</li>
-            <li>Patient billing & collections</li>
-            <li>Analytics & monthly reporting</li>
-          </ul>
-
-          <div style="margin-top:16px">
-            <h4 style="margin:0 0 8px">Client testimonial</h4>
-            <div style="background:linear-gradient(180deg,#0b76d1,#0f62fe);color:#fff;padding:14px;border-radius:10px">
-              <strong>"Switching to SamITHealth increased our net collections and freed our staff to focus on patients."</strong>
-              <div style="font-size:13px;margin-top:8px">— Practice Manager, Multi-Specialty Clinic</div>
-            </div>
-          </div>
-
-          <div style="margin-top:16px">
-            <h4 style="margin:0 0 6px">Supporting imagery</h4>
-            <img src="https://images.unsplash.com/photo-1560264280-6fc2b1f48f65?q=80&w=900&auto=format&fit=crop" alt="Medical office staff collaborating" style="border-radius:8px;max-width:100%">
-          </div>
+          <h3 class="section-title">Contact Sales</h3>
+          <p style="color:var(--muted)">Get in touch for a customized pilot, quote, or partnership discussion. We'll respond within one business day.</p>
+          <form action="https://formspree.io/f/yourFormID" method="POST">
+            <input type="text" name="name" placeholder="Full name" required>
+            <input type="email" name="email" placeholder="Business email" required>
+            <input type="text" name="organization" placeholder="Organization / Practice">
+            <textarea name="message" rows="4" placeholder="Tell us about your billing needs..."></textarea>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+          <p style="font-size:13px;color:var(--muted)">Powered by Formspree — secure email notifications for inquiries.</p>
         </aside>
       </div>
 
-      <!-- At-a-glance Metrics / Claim Status / Dashboard Snapshot -->
-      <div class="metrics-row" aria-hidden>
+      <div class="metrics-row">
         <div class="metric">
-          <h4 style="margin:0 0 8px">At-a-glance Metrics</h4>
-          <div style="font-size:18px;font-weight:700">22% Avg Denial Reduction</div>
-          <div style="color:var(--muted);margin-top:6px">Target: 18 Days in A/R • 99.99% Uptime</div>
-        </div>
-
-        <div class="metric">
-          <h4 style="margin:0 0 8px">Claim Status</h4>
-          <svg viewBox="0 0 120 120" width="100%" height="140" aria-hidden>
+          <h4>Claim Status</h4>
+          <svg viewBox="0 0 120 120" width="100%" height="140">
             <circle cx="60" cy="60" r="44" fill="#eef6f5" />
             <path d="M60 16 A44 44 0 0 1 98 60 L60 60 Z" fill="#0f62fe"/>
             <path d="M98 60 A44 44 0 0 1 74 98 L60 60 Z" fill="#0ea5a3"/>
             <path d="M74 98 A44 44 0 0 1 28 84 L60 60 Z" fill="#06b6d4"/>
             <path d="M28 84 A44 44 0 0 1 60 16 L60 60 Z" fill="#c4f0ec"/>
           </svg>
-          <div style="display:flex;justify-content:space-between;margin-top:8px;color:var(--muted);font-size:13px">
-            <div><strong style="color:#0f62fe">Paid</strong><div>45%</div></div>
-            <div><strong style="color:#0ea5a3">Pending</strong><div>30%</div></div>
-            <div><strong style="color:#06b6d4">Denied</strong><div>15%</div></div>
-            <div><strong style="color:#c4f0ec">In Review</strong><div>10%</div></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+            <div><strong style="color:#0f62fe">Paid</strong>45%</div>
+            <div><strong style="color:#0ea5a3">Pending</strong>30%</div>
+            <div><strong style="color:#06b6d4">Denied</strong>15%</div>
+            <div><strong style="color:#c4f0ec">In Review</strong>10%</div>
           </div>
         </div>
 
         <div class="metric">
-          <h4 style="margin:0 0 8px">Dashboard Snapshot</h4>
+          <h4>Dashboard Snapshot</h4>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
               <div style="font-weight:700">Revenue Trend</div>
@@ -194,13 +130,12 @@
             </div>
             <div style="font-size:20px;font-weight:700">$1.2M</div>
           </div>
-          <svg viewBox="0 0 240 60" width="100%" height="60" style="margin-top:12px;">
+          <svg viewBox="0 0 240 60" width="100%" height="60" style="margin-top:12px">
             <polyline fill="none" stroke="#0f62fe" stroke-width="3" points="0,50 30,36 60,44 90,26 120,30 150,18 180,28 210,12 240,20" />
           </svg>
-          <div style="margin-top:10px;color:var(--muted);font-size:13px">Quick actions: <a href="#contact" style="color:var(--brand);text-decoration:none">Schedule demo</a> • <a href="#services" style="color:var(--brand);text-decoration:none">View services</a></div>
+          <p style="color:var(--muted);font-size:13px;margin-top:8px">Schedule demo or explore analytics integration.</p>
         </div>
       </div>
-
     </section>
   </main>
 
@@ -208,39 +143,9 @@
     <div class="container">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div class="meta">HIPAA-ready | SOC2-aligned processes • <a href="https://healthcareitai.com/index.html" target="_blank" rel="noopener" style="color:var(--brand);text-decoration:none">Healthcare ITAI</a></div>
+        <div class="meta">HIPAA-ready | SOC2-aligned • <a href="https://healthcareitai.com/index.html" target="_blank" style="color:var(--brand)">Healthcare ITAI</a></div>
       </div>
     </div>
   </footer>
-
-  <script>
-    // Lightweight contact form demo handling — replace with real endpoint in production
-    document.getElementById('contactForm')?.addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      if(!name || !email){
-        alert('Please provide name and email.');
-        return;
-      }
-      const btn = this.querySelector('button[type="submit"]');
-      btn.setAttribute('disabled','');
-      btn.textContent = 'Sending...';
-      setTimeout(()=>{
-        alert('Thanks '+name+' — we\'ve received your request. Our team will contact you within one business day.');
-        this.reset();
-        btn.removeAttribute('disabled');
-        btn.textContent = 'Request review';
-      },900);
-    });
-
-    // Accessibility: simple skip link focus handling (if needed)
-    (function(){
-      const hash = location.hash;
-      if(hash && document.querySelector(hash)){
-        document.querySelector(hash).focus();
-      }
-    })();
-  </script>
 </body>
 </html>
