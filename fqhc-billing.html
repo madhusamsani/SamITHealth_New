@@ -1,83 +1,287 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>FQHC Billing & Revenue Cycle — SamITHealth</title>
-  <meta name="description" content="SamITHealth FQHC billing: encounter-based claims, UDS-ready reporting, sliding fee scale management, denial prevention and revenue optimization for community clinics.">
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SamITHealth — FQHC Billing</title>
+  <meta name="description" content="SamITHealth FQHC Billing — comprehensive, compliant billing solution for Federally Qualified Health Centers (FQHCs)." />
   <style>
-    :root{--accent:#0b6efd;--muted:#6b7280;--bg:#f5f8fb;--card:#ffffff;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{background:#fff;box-shadow:0 4px 16px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    nav a{margin-left:20px;color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:26px}
-    .hero-card{background:linear-gradient(180deg,#ffffff, #fbfdff);padding:36px;border-radius:14px;box-shadow:0 12px 30px rgba(11,23,39,0.04)}
-    h1{font-size:30px;margin:0 0 10px}
-    .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    .feature h4{margin:0 0 6px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
-    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
-    .right-card .card-body{padding:12px}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    .service h3{margin:0 0 8px}
-    .service p{margin:0;color:var(--muted);font-size:14px}
-    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:20px;border-radius:12px;border:1px solid #eaf3ff}
-    .long-desc p{color:var(--muted);font-size:15px}
-    .testimonials{display:flex;gap:16px;margin-top:22px}
-    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:16px;border-radius:10px;flex:1;border:1px solid #eef6ff}
-    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr}
-      nav{padding:12px}
-    }
+    :root{--bg:#f6f8fa;--card:#ffffff;--brand:#0b7a75;--accent:#0ea5a3;--muted:#6b7280;--glass:rgba(255,255,255,0.6);}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:var(--bg);color:#0f172a}
+    .container{max-width:1100px;margin:40px auto;padding:28px}
+    header{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:28px;margin:0}
+    h2{font-size:20px;margin:0 0 10px}
+    .lead{color:var(--muted);max-width:760px}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    .hero-card{display:flex;flex-direction:column;gap:12px}
+    .hero-visual{width:100%;height:220px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#fff,#f3faf9);display:flex;align-items:center;justify-content:center}
+    .cta-row{display:flex;gap:12px;margin-top:10px}
+    .btn{background:var(--brand);color:white;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+    .btn-outline{border:1px solid rgba(11,122,117,0.12);background:transparent;color:var(--brand)}
+
+    .section{margin-top:18px}
+    ul.features{padding-left:18px;color:#0f172a}
+    ul.features li{margin-bottom:10px}
+
+    .stats{display:flex;gap:12px;margin-top:12px}
+    .stat{flex:1;background:linear-gradient(180deg,#fff,#fbfffe);padding:16px;border-radius:10px;text-align:center}
+    .stat strong{display:block;font-size:20px}
+    .muted{color:var(--muted)}
+
+    /* architecture */
+    .arch{display:flex;flex-direction:column;gap:14px}
+    .diagram{background:linear-gradient(180deg,#ffffff,#f8fffe);padding:14px;border-radius:10px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media(max-width:980px){.grid{grid-template-columns:1fr} .hero-visual{height:180px}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="provider-services.html">Provider Services</a>
-        <a href="payer-solutions.html">Payer Solutions</a>
-        <a href="what-makes-us-unique.html">Why Us</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <h1>FQHC Billing & Revenue Cycle Management</h1>
-        <p class="lead">Specialized billing for Federally Qualified Health Centers, community health centers and behavioral health clinics — designed to maximize encounter capture, ensure UDS readiness and protect your net patient revenue.</p>
-      </div>
-      <aside class="right-card contact-panel">
-        <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" alt="Healthcare billing team at work">
-        <div class="card-body">
-          <h3>Speak with an FQHC Billing Specialist</h3>
-          <p style="color:var(--muted);font-size:14px;margin-top:6px">Our team understands HRSA rules, encounter submission, and how to structure workflows so you capture every reimbursable event.</p>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="mark">S</div>
+        <div>
+          <div style="font-weight:700;color:var(--brand)">SamITHealth</div>
+          <div class="muted" style="font-size:13px">FQHC Billing — Corporate Overview</div>
         </div>
-      </aside>
-    </section>
-  </main>
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
       </div>
-    </div>
-  </footer>
+    </header>
+
+    <main class="grid">
+      <section>
+        <article class="card hero-card">
+          <div>
+            <h1>FQHC Billing — Comprehensive Billing Solution for Community Health Centers</h1>
+            <p class="lead">SamITHealth's FQHC Billing is a purpose-built, end-to-end revenue cycle management (RCM) platform designed for Federally Qualified Health Centers (FQHCs) and community clinics. It streamlines claim submission, automates payment posting, integrates with EHRs and clearinghouses, and provides executive dashboards to drive faster reimbursements and full regulatory compliance.</p>
+          </div>
+
+          <div class="hero-visual" aria-hidden>
+            <!-- Inline illustrative dashboard (SVG) -->
+            <svg width="100%" height="100%" viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet">
+              <rect x="12" y="12" width="576" height="216" rx="10" fill="#fff" stroke="#eef6f5" />
+              <g transform="translate(36,34)">
+                <rect width="340" height="36" rx="6" fill="#f3faf9" />
+                <text x="12" y="24" fill="#0b7a75" font-size="14" font-family="sans-serif">Claim Performance — Last 30 Days</text>
+                <g transform="translate(0,60)">
+                  <rect x="0" y="0" width="500" height="10" rx="5" fill="#eef6f5" />
+                  <rect x="0" y="-22" width="160" height="22" rx="6" fill="#0b7a75" opacity="0.14"/>
+                  <rect x="170" y="-22" width="120" height="22" rx="6" fill="#0ea5a3" opacity="0.12"/>
+                  <rect x="300" y="-22" width="80" height="22" rx="6" fill="#06b6d4" opacity="0.10"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn" href="#contact">Request Demo</a>
+            <a class="btn-outline" href="#architecture">View Architecture</a>
+          </div>
+        </article>
+
+        <article class="card section">
+          <h2>Executive Summary</h2>
+          <p class="muted">SamITHealth FQHC Billing centralizes billing operations for community health centers to improve cash flow, reduce denials, and maintain strict regulatory compliance. Through automation, configurable payor rules, and deep analytics, the solution reduces administrative overhead while increasing collections and transparency for leadership.</p>
+
+          <div class="cols" style="margin-top:12px">
+            <div>
+              <h3>Key Capabilities</h3>
+              <ul class="features">
+                <li><strong>Claims Management:</strong> Automated claim creation, batch submission, status tracking, and intelligent scrubbing to minimize rejections.</li>
+                <li><strong>Payment & ERA Posting:</strong> Automated 835/ERA processing, remittance reconciliation, and flexible write-off workflows.</li>
+                <li><strong>Eligibility & Benefits:</strong> Real-time insurance verification with eligibility rules tailored to FQHC UDS and program requirements.</li>
+                <li><strong>Reporting & Analytics:</strong> Pre-built executive dashboards (A/R aging, denial drivers, payer mix) and ad-hoc reporting exports.</li>
+                <li><strong>Integrations:</strong> Bi-directional HL7/FHIR connectors, EHR adapters, clearinghouse gateways, and 340B system links.</li>
+                <li><strong>Security & Compliance:</strong> HIPAA-safe data handling, audit trails, role-based access control, and configurable data retention.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Business Impact</h3>
+              <ul class="features">
+                <li><strong>Faster Collections:</strong> Reduce days in A/R with automated follow-ups and prioritized denial workflows.</li>
+                <li><strong>Lower Denials:</strong> Intelligent claim scrubbing and payer-rule enforcement reduce avoidable denials.</li>
+                <li><strong>Operational Efficiency:</strong> Automate repetitive tasks to free staff for higher-value clinical and financial work.</li>
+                <li><strong>Regulatory Readiness:</strong> Built-in UDS reporting support and audit-ready documentation for grants and compliance reviews.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="card section">
+          <h2 id="architecture">Technical Architecture (High Level)</h2>
+          <div class="arch">
+            <div class="diagram">
+              <!-- Simple architecture SVG -->
+              <svg viewBox="0 0 900 260" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architecture diagram">
+                <defs>
+                  <style>.t{font:600 13px/1.2 sans-serif;fill:#08323a}.s{font:500 12px/1.2 sans-serif;fill:#0f172a}</style>
+                </defs>
+                <rect x="10" y="10" width="880" height="240" rx="10" fill="#fff" stroke="#eef6f5" />
+
+                <!-- EHRs -->
+                <rect x="28" y="28" width="160" height="60" rx="8" fill="#f3faf9" />
+                <text x="36" y="54" class="t">EHR / Practice Management</text>
+                <text x="36" y="70" class="s">(HL7 / FHIR adapters)</text>
+
+                <!-- Integration bus -->
+                <rect x="210" y="28" width="420" height="100" rx="8" fill="#ffffff" stroke="#eef6f5" />
+                <text x="230" y="52" class="t">Integration & Routing Layer</text>
+                <text x="230" y="70" class="s">API Gateway • Message Broker • Transformation</text>
+
+                <!-- Clearinghouse & Payers -->
+                <rect x="660" y="28" width="200" height="60" rx="8" fill="#f3faf9" />
+                <text x="668" y="54" class="t">Clearinghouse / Payers</text>
+                <text x="668" y="70" class="s">837 / 835 • ERA • EDI</text>
+
+                <!-- RCM platform -->
+                <rect x="210" y="140" width="420" height="90" rx="8" fill="#f7fffd" stroke="#e6fbf9" />
+                <text x="230" y="164" class="t">SamITHealth FQHC Billing</text>
+                <text x="230" y="182" class="s">Claim Engine • Denial Mgmt • Payment Posting • Analytics</text>
+
+                <!-- arrows -->
+                <path d="M190 58 L210 58" stroke="#cdeeea" stroke-width="4" fill="none" />
+                <path d="M630 58 L660 58" stroke="#cdeeea" stroke-width="4" fill="none" />
+                <path d="M420 120 L420 140" stroke="#cdeeea" stroke-width="4" fill="none" />
+
+                <!-- Data stores -->
+                <g>
+                  <rect x="28" y="200" width="220" height="40" rx="6" fill="#fbfffe" />
+                  <text x="40" y="226" class="s">Transactional DB (Claims, Payments)</text>
+                </g>
+                <g>
+                  <rect x="480" y="200" width="220" height="40" rx="6" fill="#fbfffe" />
+                  <text x="492" y="226" class="s">Analytics Warehouse</text>
+                </g>
+              </svg>
+            </div>
+
+            <div>
+              <h3>Integration & Security Notes</h3>
+              <ul class="features">
+                <li>Standard integrations: HL7, FHIR, X12 (837/835), and RESTful APIs for EHR and 3rd-party systems.</li>
+                <li>Secure transport: TLS 1.2+, OAuth2 / JWT for API access, and encrypted-at-rest using AES-256.</li>
+                <li>Identity & access: Role-based access control, SSO (SAML/OIDC), and granular audit logging for HIPAA compliance.</li>
+              </ul>
+            </div>
+
+          </div>
+        </article>
+
+        <article class="card section">
+          <h2>Compliance & Regulatory</h2>
+          <p class="muted">Built to support the unique compliance requirements of FQHCs, SamITHealth FQHC Billing includes:</p>
+          <ul class="features">
+            <li><strong>HIPAA:</strong> Administrative, physical and technical safeguards, Business Associate Agreement (BAA) options, and breach notification support.</li>
+            <li><strong>UDS Support:</strong> Pre-built exports and data collection helpers to assist with Uniform Data System reporting.</li>
+            <li><strong>340B:</strong> Integration-ready hooks to 340B contract pharmacy and program management systems to capture billable drugs appropriately.</li>
+            <li><strong>Audit-Ready:</strong> Configurable retention and tamper-evident audit trails for claims and payment events.</li>
+          </ul>
+        </article>
+
+        <article class="card section">
+          <h2>Implementation Roadmap</h2>
+          <ol class="features">
+            <li><strong>Discovery & Requirements (2–4 weeks):</strong> Stakeholder workshops, data mapping, sample claim analysis.</li>
+            <li><strong>Integration & Configuration (4–8 weeks):</strong> EHR connectors, payer setups, rule engine configuration.</li>
+            <li><strong>Pilot & Parallel Run (4 weeks):</strong> Small clinic pilot, parallel claim submission and reconciliation.</li>
+            <li><strong>Go-Live & Stabilization (2 weeks):</strong> Full cutover support, hypercare, and knowledge transfer.</li>
+            <li><strong>Optimization (Ongoing):</strong> Denial tuning, analytics configuration, and continuous improvement sprints.</li>
+          </ol>
+        </article>
+
+        <article class="card section">
+          <h2>Pricing & Licensing (Sample)</h2>
+          <p class="muted">Flexible subscription and managed-services models for centers of all sizes. Pricing components typically include a base platform fee, per-claim transaction pricing, and optional managed RCM services.</p>
+          <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:13px">
+            <thead>
+              <tr style="text-align:left;color:var(--muted)"><th>Tier</th><th>Typical Clinics</th><th>Includes</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:8px 6px">Core</td><td style="padding:8px 6px">Small (1–3 sites)</td><td style="padding:8px 6px">Claims engine, basic reporting</td><td style="padding:8px 6px">SaaS</td></tr>
+              <tr><td style="padding:8px 6px">Advanced</td><td style="padding:8px 6px">Medium (4–15 sites)</td><td style="padding:8px 6px">Integrations, dashboards, ERA posting</td><td style="padding:8px 6px">Optional managed services</td></tr>
+              <tr><td style="padding:8px 6px">Enterprise</td><td style="padding:8px 6px">Large (15+ sites)</td><td style="padding:8px 6px">Custom SLAs, dedicated support</td><td style="padding:8px 6px">On-prem or private cloud</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+      </section>
+
+      <aside>
+        <div class="card">
+          <h2>At-a-glance Metrics</h2>
+          <div class="stats">
+            <div class="stat"><strong>22%</strong><div class="muted">Avg Denial Reduction</div></div>
+            <div class="stat"><strong>18</strong><div class="muted">Days in A/R (avg target)</div></div>
+            <div class="stat"><strong>99.99%</strong><div class="muted">Uptime SLA</div></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <h3>Claim Status</h3>
+            <!-- small pie chart (inline SVG) -->
+            <svg viewBox="0 0 120 120" width="100%" height="140" aria-hidden>
+              <circle cx="60" cy="60" r="44" fill="#eef6f5" />
+              <path d="M60 16 A44 44 0 0 1 98 60 L60 60 Z" fill="#0b7a75"/>
+              <path d="M98 60 A44 44 0 0 1 74 98 L60 60 Z" fill="#0ea5a3"/>
+              <path d="M74 98 A44 44 0 0 1 28 84 L60 60 Z" fill="#06b6d4"/>
+              <path d="M28 84 A44 44 0 0 1 60 16 L60 60 Z" fill="#c4f0ec"/>
+            </svg>
+            <div style="font-size:13px;margin-top:8px" class="muted">Legend: Paid • Pending • Denied • In Review</div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h3>Dashboard Snapshot</h3>
+            <div style="border-radius:8px;overflow:hidden;margin-top:8px">
+              <div style="padding:12px;background:#fbfffe">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-weight:700">Revenue Trend</div>
+                    <div class="muted" style="font-size:12px">Last 30 days</div>
+                  </div>
+                  <div style="font-size:20px;font-weight:700">$1.2M</div>
+                </div>
+                <!-- miniature line chart -->
+                <svg viewBox="0 0 240 60" width="100%" height="60" style="margin-top:10px" aria-hidden>
+                  <polyline fill="none" stroke="#0b7a75" stroke-width="3" points="0,50 30,36 60,44 90,26 120,30 150,18 180,28 210,12 240,20" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h3>Quick Actions</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <a class="btn" href="#contact">Schedule a Demo</a>
+              <a class="btn-outline" href="#pilot">Request Pilot</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <h3>Contact</h3>
+          <div class="muted">SamITHealth — Enterprise Sales</div>
+          <div style="margin-top:8px">
+            <div style="font-weight:700">sales@samithealth.example</div>
+            <div class="muted" style="font-size:13px">Phone: (555) 203-4501</div>
+          </div>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>
+      <div class="muted">© SamITHealth. This document is intended for internal review and prospective FQHC clients. Sample content — deployment specifics and pricing will be provided under an engagement agreement.</div>
+    </footer>
+  </div>
 </body>
 </html>
