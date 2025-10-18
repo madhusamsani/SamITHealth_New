@@ -67,14 +67,13 @@
 
     /* Solutions */
     .solutions{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-
-    /* Expanded healthcare features */
-    .health-features{margin-top:26px}
-    .hf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .hf{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 26px rgba(6,18,45,0.04);display:flex;gap:12px;align-items:flex-start}
-    .hf svg{flex-shrink:0;width:44px;height:44px}
-    .hf h4{margin:0 0 6px;font-size:15px}
-    .hf p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+    .solution{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+    .solution:hover{transform:translateY(-6px);box-shadow:0 22px 60px rgba(6,18,45,0.08)}
+    .solution img{width:100%;height:100px;object-fit:cover;border-radius:8px;margin-bottom:12px}
+    .solution.provider img{height:84px}
+    .solution a.card-link{display:block;color:inherit;text-decoration:none}
+    .solution h3{margin:6px 0 8px}
+    .solution p{color:var(--muted);font-size:14px;flex:1}
 
     /* Trust & metrics */
     .trust{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
@@ -83,6 +82,14 @@
     .metric{background:var(--card);padding:18px;border-radius:12px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
     .metric .num{font-size:28px;font-weight:800}
     .metric .label{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* Expanded healthcare features */
+    .health-features{margin-top:26px}
+    .hf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .hf{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 26px rgba(6,18,45,0.04);display:flex;gap:12px;align-items:flex-start}
+    .hf img.icon{width:44px;height:44px;flex-shrink:0;border-radius:8px}
+    .hf h4{margin:0 0 6px;font-size:15px}
+    .hf p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
 
     /* Features & case studies */
     .features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
@@ -168,26 +175,23 @@
       </article>
 
       <section class="solutions" aria-label="Core solutions">
-        <div class="solution card">
+        <a href="provider-services.html" class="solution card provider" aria-label="Provider Services">
           <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=1200&auto=format&fit=crop" alt="Provider Services">
           <h3>Provider Services</h3>
           <p>RCM, billing, CDI and clinical operations — designed to optimize hospital and clinic performance.</p>
-          <a href="provider-services.html">Learn more →</a>
-        </div>
+        </a>
 
-        <div class="solution card">
+        <a href="payer-solutions.html" class="solution card" aria-label="Payer Solutions">
           <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop" alt="Payer Solutions">
           <h3>Payer Solutions</h3>
           <p>Claims operations, MAO, repricing and analytics-driven payer workflows.</p>
-          <a href="payer-solutions.html">Learn more →</a>
-        </div>
+        </a>
 
-        <div class="solution card">
+        <a href="laboratory-services.html" class="solution card" aria-label="Laboratory Services">
           <img src="assets/images/OIP (9)-sm-sm.webp" alt="Laboratory Services">
           <h3>Laboratory Services</h3>
           <p>Startup support, compliance, instrumentation and LIMS integrations for diagnostic labs.</p>
-          <a href="laboratory-services.html">Learn more →</a>
-        </div>
+        </a>
       </section>
 
       <!-- Expanded healthcare features to attract clients -->
@@ -195,7 +199,7 @@
         <h2 style="margin-bottom:12px">Healthcare features that deliver measurable value</h2>
         <div class="hf-grid">
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2v20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <img class="icon" src="assets/icons/claims-optimization.png" alt="Claims Optimization icon">
             <div>
               <h4>Claims Optimization</h4>
               <p>Automated scrubbing, rules-based validation and machine-assisted coding reduce rework and denials at scale.</p>
@@ -203,7 +207,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <img class="icon" src="assets/icons/revenue-integrity.png" alt="Revenue Integrity icon">
             <div>
               <h4>Revenue Integrity</h4>
               <p>End-to-end charge capture, bundling checks and audit trails to protect margin and improve financial governance.</p>
@@ -211,7 +215,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/></svg>
+            <img class="icon" src="assets/icons/denial-management.png" alt="Denial Management icon">
             <div>
               <h4>Denial Management</h4>
               <p>Prioritized workflows, root-cause analytics and targeted appeals to recover denied claims faster.</p>
@@ -219,7 +223,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <img class="icon" src="assets/icons/cdi.png" alt="Clinical Documentation Improvement icon">
             <div>
               <h4>Clinical Documentation Improvement</h4>
               <p>Clinician-focused guidance and coding alignment to ensure clinical quality and appropriate reimbursement.</p>
@@ -227,7 +231,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            <img class="icon" src="assets/icons/analytics.png" alt="Revenue Cycle Analytics icon">
             <div>
               <h4>Revenue Cycle Analytics</h4>
               <p>Custom dashboards and KPI pipelines that surface leakage, trends and recovery opportunities in real time.</p>
@@ -235,7 +239,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <img class="icon" src="assets/icons/integration.png" alt="Interoperability icon">
             <div>
               <h4>Interoperability & Integration</h4>
               <p>Secure EDI, HL7/FHIR integrations and LIMS connections that reduce manual reconciliation and speed workflows.</p>
@@ -243,7 +247,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <img class="icon" src="assets/icons/compliance.png" alt="Compliance icon">
             <div>
               <h4>Compliance & Audit Readiness</h4>
               <p>Built-in audit trails, role-based access and automated reporting to simplify HIPAA and SOC2 readiness.</p>
@@ -251,7 +255,7 @@
           </div>
 
           <div class="hf">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <img class="icon" src="assets/icons/rpa.png" alt="RPA icon">
             <div>
               <h4>Automation & RPA</h4>
               <p>Robotic process automation for repetitive tasks—fewer manual touches, faster turnaround and higher accuracy.</p>
