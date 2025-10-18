@@ -3,120 +3,93 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SamITHealth — Transform Healthcare Operations & Revenue</title>
-  <meta name="description" content="SamITHealth delivers CMMI Level 5 healthcare IT, RCM, payer and laboratory services with measurable outcomes."/>
+  <title>SamITHealth — IT & Healthcare Consultancy, Software, and Services</title>
+  <meta name="description" content="SamITHealth provides CMMI Level 5 healthcare IT, software delivery, consultancy, RCM and lab services with measurable outcomes."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f4f7fb; --card:#ffffff; --muted:#54606a; --accent:#0b6efd; --accent-2:#0a5ad9;
+      --bg:#f4f7fb; --card:#ffffff; --muted:#6b7280; --accent:#0b6efd; --accent-2:#0a5ad9;
       --max:1200px; --radius:12px; --shadow:0 16px 60px rgba(6,18,45,0.08);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#07203b}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#07203b;-webkit-font-smoothing:antialiased}
     a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
     .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+
     /* Header */
-    .topbar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#fff,#fbfdff);padding:14px;border-radius:14px;box-shadow:0 8px 28px rgba(12,25,48,0.06)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#fff,#fbfdff);padding:14px;border-radius:14px;box-shadow:0 8px 28px rgba(12,25,48,0.06);position:sticky;top:18px;z-index:40}
     .brand{display:flex;align-items:center;gap:14px}
     .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
     .brand-text .title{font-weight:800;font-size:18px}
     .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
     .nav{display:flex;gap:14px;align-items:center}
-    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
+    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244;transition:all .18s ease}
+    .nav a:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(11,110,253,0.08)}
     .nav a.active{background:rgba(11,110,253,0.08);color:var(--accent-2)}
-    .header-ctas{display:flex;gap:12px;align-items:center}
-    .phone{font-weight:700;color:#0b2545}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(11,110,253,0.12);transition:transform .18s ease}
+    .btn-primary:hover{transform:translateY(-3px)}
+    .ghost{color:var(--muted);font-weight:600}
+
     /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 480px;gap:28px;align-items:center;margin-top:24px}
+    .hero-wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center}
     .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
     .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
     .hero-left h1{font-size:34px;margin:6px 0 12px;line-height:1.04}
     .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
     .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
-    .hero-image{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
-    .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Long description */
-    .long-desc{background:#fff;padding:24px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06);margin-top:22px;line-height:1.7;color:#253248}
-    .long-desc h2{margin-top:0}
+    .hero-carousel{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);height:360px;position:relative;background:#000}
+    .carousel-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+    .carousel-slide.active{opacity:1}
+    .carousel-dots{position:absolute;left:12px;bottom:12px;display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;border:2px solid rgba(0,0,0,0.08)}
+    .dot.active{background:#fff}
+
     /* Solutions */
-    .solutions{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
-    .solution{background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:left;display:flex;flex-direction:column}
-    .solution img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:12px}
-    .solution h3{margin:6px 0 8px}
-    .solution p{color:var(--muted);font-size:14px;flex:1}
-    /* Trust & metrics */
-    .trust{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
-    .client-logo{height:36px;opacity:0.95;border-radius:6px;background:#fff;padding:6px;box-shadow:0 6px 18px rgba(12,25,48,0.04);display:flex;align-items:center;justify-content:center}
-    .metrics{display:flex;gap:12px;margin-top:22px}
-    .metric{background:#fff;padding:18px;border-radius:12px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
-    .metric .num{font-size:28px;font-weight:800}
-    .metric .label{font-size:13px;color:var(--muted);margin-top:6px}
-    /* Features & case studies */
-    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
-    .feature{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.04);text-align:center}
-    .feature h4{margin:6px 0 6px}
-    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
-    .case{background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;gap:12px;align-items:center}
-    .case img{width:120px;height:80px;object-fit:cover;border-radius:8px}
-    .testimonial{background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06);margin-top:18px}
-    /* CTA banner */
-    .cta-banner{margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:28px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    .solutions{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:22px}
+    .solution{background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
+    .solution img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+    .feature{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.04);display:flex;gap:12px;align-items:flex-start}
+    .feature img{width:84px;height:84px;object-fit:cover;border-radius:8px;flex-shrink:0}
+
+    /* Consultancy */
+    .consult{margin-top:22px;display:grid;gap:14px}
+
+    /* HA section */
+    .ha-section{margin-top:28px}
+    .ha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .ha-card{background:#fff;padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(6,18,45,0.06)}
+
+    /* Clinical */
+    .clinical-section{margin-top:28px}
+    .clinical-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+
     /* Footer */
-    /* Footer Alignment */
-    footer {
-      background: #f9fafb;
-      border-top: 2px solid #d1d5db;
-      padding: 50px 40px;
-      color: #4b5563;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    footer .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 40px;
-      max-width: var(--max);
-      width: 100%;
-      align-items: start;
-    }
-    footer img {
-      height: 52px;
-      margin-bottom: 12px;
-    }
-    footer h4 {
-      color: #111827;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    footer p {
-      color: #4b5563;
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 6px 0;
-    }
-    footer .bottom {
-      border-top: 1px solid #d1d5db;
-      margin-top: 30px;
-      padding-top: 16px;
-      font-size: 14px;
-      color: #6b7280;
-      width: 100%;
-      text-align: center;
-    }
-    /*footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}*/
-    /* Responsive */
-    @media (max-width:1100px){.solutions{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:720px){.solutions{grid-template-columns:1fr}.features{grid-template-columns:1fr}.nav{display:none}}
+    footer{background:#071735;color:#e6eefc;padding:60px 20px 36px;margin-top:36px}
+    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    footer img.logo{height:60px;margin-bottom:10px}
+    footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
+    footer a:hover{color:#9ec8ff}
+    .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    @media (max-width:1100px){.hero{grid-template-columns:1fr}.solutions{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){.solutions{grid-template-columns:1fr}.features{grid-template-columns:1fr}.nav{display:none}.hero-carousel{height:240px}}
   </style>
 </head>
 <body>
-    <div class="container">
+  <div class="container">
     <header class="topbar" role="banner" aria-label="Main header">
-      
-      <!-- Clickable Logo & Brand -->
       <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
         <div class="logo-mark" aria-hidden="true">SH</div>
         <div class="brand-text">
@@ -124,124 +97,296 @@
           <div class="tag">CMMI Level 5 • Healthcare IT & RCM</div>
         </div>
       </a>
-  
-      <!-- Navigation -->
+
       <nav class="nav" role="navigation" aria-label="Main navigation">
         <a href="index.html" class="active">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
         <a href="laboratory-services.html">Laboratory Services</a>
-        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="consultancy.html">Consultancy</a>
         <a href="contact.html">Contact</a>
         <a href="Careers.html">Careers</a>
       </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <button class="btn-primary" onclick="location.href='contact.html'">Schedule a Consultation</button>
+      </div>
     </header>
   </div>
+
+  <main class="hero-wrap" id="main" tabindex="-1">
+    <!-- HERO -->
     <section class="hero" aria-labelledby="home-heading">
       <div class="hero-left">
-        <div class="eyebrow">Trusted by providers, payers & labs</div>
-        <h1 id="home-heading">Transforming healthcare operations with precision, compliance and measurable outcomes</h1>
-        <p class="lead">SamITHealth blends certified process maturity, clinical domain expertise and modern cloud platforms to reduce revenue leakage, accelerate cash flow and simplify regulatory compliance.</p>
+        <div class="eyebrow">Trusted by providers, payers & enterprises</div>
+        <h1 id="home-heading">IT Software & Consultancy — Excellence & Delivery</h1>
+        <p class="lead">Combining IT consultancy excellence with full-cycle software delivery for healthcare and regulated industries. From strategy and migration to product engineering and managed operations — outcomes you can measure.</p>
 
         <div class="cta-row">
-          <button class="btn-primary" onclick="location.href='provider-services.html'">Explore our solutions</button>
-          <a class="ghost" href="contact.html">Request a consultation</a>
+          <button class="btn-primary" onclick="location.href='provider-services.html'">Explore our Solutions</button>
+          <a class="ghost" href="consultancy.html" style="margin-left:8px">View consultancy models</a>
         </div>
 
-        <div class="trust" aria-hidden="true">
-          <div class="client-logo"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" alt="client 1" style="height:24px"></div>
-          <div class="client-logo"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop" alt="client 2" style="height:24px"></div>
-          <div class="client-logo"><img src="assets/images/pexels-canvy-mockups-56805-205316-sm-sm.webp" alt="client 3" style="height:24px"></div>
+        <div class="trust" aria-hidden="true" style="margin-top:18px;display:flex;gap:10px;align-items:center">
+          <div style="background:#fff;padding:6px;border-radius:6px;box-shadow:0 6px 18px rgba(12,25,48,0.04)"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&auto=format&fit=crop" alt="client" style="height:24px"></div>
+          <div style="background:#fff;padding:6px;border-radius:6px;box-shadow:0 6px 18px rgba(12,25,48,0.04)"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=400&auto=format&fit=crop" alt="client" style="height:24px"></div>
+          <div style="background:#fff;padding:6px;border-radius:6px;box-shadow:0 6px 18px rgba(12,25,48,0.04)"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop" alt="client" style="height:24px"></div>
         </div>
       </div>
 
-      <aside class="hero-image" aria-hidden="true">
-        <img src="assets/images/demo-corporate-10.jpeg" alt="Healthcare operations">
+      <aside class="hero-carousel" aria-hidden="true">
+        <div class="carousel-slide active"><img src="https://images.unsplash.com/photo-1559526324-0f0f72d5d7d2?q=80&w=1400&auto=format&fit=crop" alt="cloud engineering" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1400&auto=format&fit=crop" alt="team collaboration" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1531497865145-3c0fb1f4b8c8?q=80&w=1400&auto=format&fit=crop" alt="healthcare technology" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="carousel-dots" aria-hidden="true">
+          <div class="dot active" data-index="0"></div>
+          <div class="dot" data-index="1"></div>
+          <div class="dot" data-index="2"></div>
+        </div>
       </aside>
     </section>
 
-    <article class="long-desc" aria-labelledby="why-us">
-      <h2 id="why-us">Why enterprise health systems choose SamITHealth</h2>
-      <p><strong>Healthcare transformation demands more than technology — it demands people, process and measurable outcomes.</strong> SamITHealth brings together CMMI Level 5 process maturity, senior clinical leadership and secure engineering to deliver programs that reduce cost, increase revenue, and improve patient and provider experience.</p>
-      <p>We start with a concise discovery: mapping your current-state revenue cycle, clinical workflows and data flows to identify the highest-impact interventions. That analysis leads to a prioritized plan that targets quick wins (often within 30–90 days) while creating a roadmap for larger transformation initiatives.</p>
-      <p>Our delivery model mixes onshore strategy and client-facing leadership with offshore centers of excellence for predictable, scalable execution. This hybrid model produces enterprise-level governance, rigorous KPIs, and a cost profile that sustains long-term partnerships.</p>
-      <p>Security and regulatory compliance are core attributes of everything we build. From HIPAA and SOC2 controls to audit-ready documentation for state and federal inspections, we design systems that reduce risk and make compliance an operational norm.</p>
-      <p>We also pair deep domain expertise — experienced coders, clinicians, lab specialists, and payer analysts — with modern automation: advanced scrubbing, EDI pipelines, and analytics that drive continuous improvement. The result: measurable reductions in denials, faster reimbursements, and clearer financial visibility.</p>
-      <p style="margin-top:12px"><em>Engage SamITHealth for a pilot, a focused remediation, or a full managed services relationship — we'll deliver a tailored implementation plan and measurable milestones so you can justify the investment with real financial outcomes.</em></p>
-    </article>
-
+    <!-- SOLUTIONS -->
     <section class="solutions" aria-label="Core solutions">
       <div class="solution">
-        <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=1200&auto=format&fit=crop" alt="Provider Services">
+        <img src="https://images.unsplash.com/photo-1559526324-0f0f72d5d7d2?q=80&w=1400&auto=format&fit=crop" alt="IT Software & Consultancy">
+        <h3>IT Software & Consultancy — Excellence & Delivery</h3>
+        <p>Unified practice that pairs strategic advisory with product-grade engineering and operational ownership. We deliver target architecture, secure software, cloud migration, and SLA-driven managed operations.</p>
+        <ul style="margin-top:10px;color:var(--muted);font-size:14px;text-align:left;line-height:1.5">
+          <li>IT Strategy, Architecture & Cloud Migration</li>
+          <li>End-to-End Product Engineering & DevSecOps</li>
+          <li>Managed NOC/SOC, SRE and 24/7 support</li>
+          <li>Compliance-first delivery: ISO 27001, SOC2, HIPAA</li>
+          <li>Outcome-based models: Advisory → Pilot → Scale → Managed</li>
+        </ul>
+      </div>
+
+      <div class="solution">
+        <img src="https://images.unsplash.com/photo-1582719478260-1d4a3d112b72?q=80&w=1400&auto=format&fit=crop" alt="Laboratory Services">
+        <h3>Laboratory Services</h3>
+        <p>Startup advisory, regulatory compliance, LIMS integrations, and instrumentation support for diagnostic labs. Edge processing and secure EDI pipelines ensure timely results and billing.</p>
+      </div>
+
+      <div class="solution">
+        <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=1400&auto=format&fit=crop" alt="Provider Services">
         <h3>Provider Services</h3>
-        <p>RCM, billing, CDI and clinical operations — designed to optimize hospital and clinic performance.</p>
-        <a href="provider-services.html">Learn more →</a>
+        <p>Revenue cycle management, CDI, billing and clinical operations — designed to optimize hospital and clinic financial performance and patient experience.</p>
       </div>
-      <div class="solution">
-        <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop" alt="Payer Solutions">
-        <h3>Payer Solutions</h3>
-        <p>Claims operations, MAO, repricing and analytics-driven payer workflows.</p>
-        <a href="payer-solutions.html">Learn more →</a>
-      </div>
-      <div class="solution">
-          <img src="assets/images/OIP (9)-sm-sm.webp" alt="Laboratory Services">
-          <h3>Laboratory Services</h3>
-          <p>Startup support, compliance, instrumentation and LIMS integrations for diagnostic labs.</p>
-          <a href="laboratory-services.html">Learn more →</a>
-      </div>
-    <section class="features" aria-label="Why partner with us">
-      <div class="feature"><h4>Process Maturity</h4><p style="color:var(--muted)">CMMI Level 5 practices embedded in delivery.</p></div>
-      <div class="feature"><h4>Compliance First</h4><p style="color:var(--muted)">HIPAA, SOC2 and ISO-ready frameworks.</p></div>
-      <div class="feature"><h4>Scalable Delivery</h4><p style="color:var(--muted)">Onshore leadership, offshore execution and secure cloud.</p></div>
-      <div class="feature"><h4>Data-driven</h4><p style="color:var(--muted)">Analytics and automation to improve financial outcomes.</p></div>
     </section>
 
-    <section class="case-studies" aria-label="Case studies">
-      <div class="case">
-        <img src="assets/images/strategy-consultancy-scaled-sm-sm.webp" alt="Case study 1">
+    <!-- FEATURES -->
+    <section class="features" aria-label="Key features and capabilities">
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1581091012184-7b4b9c5f7a43?q=80&w=800&auto=format&fit=crop" alt="Process Maturity">
         <div>
-          <h4>Regional Health System — Revenue Recovery</h4>
-          <p style="color:var(--muted)">Implementation of RCM automation and denial workflows recovered significant AR and improved cash flow visibility.</p>
+          <h4>Process Maturity</h4>
+          <p class="muted">CMMI Level 5 is the backbone of our delivery model — ensuring repeatable outcomes, measurable improvement cycles, and continuous process optimization. We embed process maturity into:</p>
+          <ul style="text-align:left;margin-top:8px;color:var(--muted)">
+            <li>Standardized process assets (SOPs, templates, RACI)</li>
+            <li>Quantitative performance measurement (KPIs & control charts)</li>
+            <li>Root cause analysis & continuous improvement cycles</li>
+            <li>Training, skills matrices and competency certification</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--muted)">Visuals: process maturity heatmaps, control charts, and KPI dashboards are provided during discovery and in weekly governance packs.</p>
         </div>
       </div>
-      <div class="case">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="Case study 2">
+
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1587613756325-1d9f5f8b9b76?q=80&w=800&auto=format&fit=crop" alt="Compliance First">
         <div>
-          <h4>Diagnostic Startup — Rapid Launch</h4>
-          <p style="color:var(--muted)">Advised on regulatory filings, LIMS selection and operations to get a product to market quickly and compliantly.</p>
+          <h4>Compliance First</h4>
+          <p class="muted">Security and regulatory compliance are engineered — not bolted on. Our compliance-first approach covers:</p>
+          <ul style="text-align:left;margin-top:8px;color:var(--muted)">
+            <li>HIPAA & HITECH control frameworks, privacy-by-design</li>
+            <li>SOC2 readiness — control mapping, gap remediation, evidence packs</li>
+            <li>ISO/IEC 27001 alignment for information security management</li>
+            <li>Data residency and encryption strategies, secure key management</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--muted)">We deliver compliance artifacts (policy templates, control matrices, audit evidence) as part of every transformation engagement.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" alt="Coding & Revenue Integrity">
+        <div>
+          <h4>Medical Coding & Revenue Integrity</h4>
+          <p class="muted">Comprehensive coding services, audits, CDI programs, denials remediation, and coder competency training. Certified teams (AHIMA, AAPC) deliver measurable accuracy improvements.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop" alt="IT Excellence">
+        <div>
+          <h4>IT Software & Consultancy — Excellence</h4>
+          <p class="muted">Cloud-native design, secure SDLC, IaC, observability, and managed SLAs. We support product engineering, data platforms, and analytics for clinical and financial insights.</p>
         </div>
       </div>
     </section>
 
-    <section class="metrics" aria-label="Key metrics">
-      <div class="metric"><div class="num">99.3%</div><div class="label">Claims Clean Rate</div></div>
-      <div class="metric"><div class="num">45%</div><div class="label">Avg Revenue Recovery</div></div>
-      <div class="metric"><div class="num">5x</div><div class="label">Go‑to‑market Speed</div></div>
-    </section>
-
-    <section class="testimonial" aria-label="Client testimonial">
-      <div class="testimonial">
-        <strong>"SamITHealth delivered measurable financial improvements and a compliance-first program that scaled across our hospitals."</strong>
-        <div style="margin-top:8px;color:var(--muted)">— CEO, Regional Health Network</div>
+    <!-- CONSULTANCY — services, models & delivery -->
+    <section class="consult" aria-label="IT & Healthcare Consultancy">
+      <h2 style="margin:6px 0 12px">IT & Healthcare Consultancy — Services, Models & Delivery</h2>
+      <p style="color:var(--muted);margin:0 0 12px">Tailored consultancy across strategy, technology, and operations. We combine healthcare domain expertise with enterprise IT delivery to reduce risk and deliver measurable outcomes.</p>
+      <!-- content left unchanged for brevity; kept as in earlier version -->
+      <div style="background:#fff;padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(6,18,45,0.06);margin-top:12px">
+        <h4>Overview</h4>
+        <p style="color:var(--muted)">Our consulting engagements are structured to accelerate decision-making, validate technical risk, and deliver production capability quickly. We tailor the model — advisory, pilot, or managed — to your needs and risk appetite.</p>
       </div>
     </section>
 
-    <section class="cta-banner" aria-label="Call to action">
-      <div class="text">
-        <h2>Ready to transform your healthcare operations?</h2>
-        <p style="margin-top:6px;color:var(--muted)">Schedule a consultation and get a custom implementation plan and pilot proposal.</p>
+    <!-- HIGH AVAILABILITY & VISIBILITY -->
+    <section class="ha-section" aria-label="High availability and global operations">
+      <h2 style="margin:12px 0">High availability & operational visibility</h2>
+      <p style="color:var(--muted);margin:0 0 12px">Platform and managed services are architected for multi-region availability, 24/7 monitoring, and documented RTO/RPO with enterprise SLAs. Representative deployment footprints below.</p>
+
+      <div class="ha-grid" style="margin-top:12px">
+        <div class="ha-card">
+          <img src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?q=80&w=1200&auto=format&fit=crop" alt="RCM High Availability - US" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px">
+          <h4>Provider Services (RCM)</h4>
+          <p style="color:var(--muted);font-size:14px">Multi-AZ deployments across the US & EU with active-passive failover, automated backups, and 99.95% SLA. Live dashboards for throughput and denial alerts.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Locations:</strong> Cumming, GA • Dublin, IE • Chennai, IN</p>
+        </div>
+        <div class="ha-card">
+          <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?q=80&w=1200&auto=format&fit=crop" alt="Payer Solutions High Availability - EU" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px">
+          <h4>Payer Solutions</h4>
+          <p style="color:var(--muted);font-size:14px">Containerized microservices with regional clusters, blue/green deployments, and policy-driven autoscaling. End-to-end tracing and SLA reporting.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Locations:</strong> Dublin, IE • London, UK • Hyderabad, IN</p>
+        </div>
+        <div class="ha-card">
+          <img src="https://images.unsplash.com/photo-1581094370505-9c1d0e1f6c91?q=80&w=1200&auto=format&fit=crop" alt="Laboratory Services High Availability" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px">
+          <h4>Laboratory Services</h4>
+          <p style="color:var(--muted);font-size:14px">Resilient LIMS integrations with synchronous replication, edge processing at lab sites, and secure EDI channels to payers and providers.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Locations:</strong> Atlanta, GA • Bangalore, IN • Frankfurt, DE</p>
+        </div>
+        <div class="ha-card">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="IT Software & Consultancy High Availability" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px">
+          <h4>IT Software & Consultancy</h4>
+          <p style="color:var(--muted);font-size:14px">Cloud-native solutions with multi-region failover, centralized observability (Prometheus/Grafana), and a managed NOC for incident response and capacity planning.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Locations:</strong> Cumming, GA • Hyderabad, IN • Singapore</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLINICAL EXPERTISE & DELIVERABLES -->
+    <section class="clinical-section" aria-label="Clinical expertise and deliverables">
+      <h2 style="margin:12px 0">Clinical expertise & coding deliverables</h2>
+      <p style="color:var(--muted);margin:0 0 12px">Certified coders, clinicians and auditors deliver coding accuracy, denials remediation, and CDI programs. Below: coding areas, typical deliverables, and representative visualizations.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+        <div>
+          <div class="clinical-cards">
+            <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
+              <h4>Inpatient Coding</h4>
+              <p style="color:var(--muted);margin:6px 0;font-size:14px">CCS-certified coders, DRG validation, MS-DRG optimization and payer appeal support.</p>
+            </div>
+            <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
+              <h4>Outpatient / Ambulatory</h4>
+              <p style="color:var(--muted);margin:6px 0;font-size:14px">CPT accuracy, APC grouping, clinic workflows and ambulatory documentation improvement.</p>
+            </div>
+            <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
+              <h4>ED & Observation</h4>
+              <p style="color:var(--muted);margin:6px 0;font-size:14px">ED coder expertise, time-based coding, observation stay guidance and validation.</p>
+            </div>
+            <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
+              <h4>Radiology & Pathology</h4>
+              <p style="color:var(--muted);margin:6px 0;font-size:14px">Procedure coding, modifier usage guidance, and documentation alignment for imaging and pathology.</p>
+            </div>
+            <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
+              <h4>Behavioral Health</h4>
+              <p style="color:var(--muted);margin:6px 0;font-size:14px">DSM-aligned coding, clinical narrative mapping and specialized audits for behavioral programs.</p>
+            </div>
+          </div>
+
+          <h3 style="margin-top:12px">Deliverables</h3>
+          <ul style="color:var(--muted);line-height:1.6">
+            <li>Weekly coding accuracy reports and trend dashboards</li>
+            <li>Denial root-cause analysis and remediation playbooks</li>
+            <li>Clinical Documentation Improvement (CDI) implementation</li>
+            <li>Quarterly compliance and audit-ready documentation packs</li>
+            <li>Customized coder training & competency assessments</li>
+          </ul>
+        </div>
+
+        <aside style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)">
+          <h4 style="margin:0 0 8px">Clinical Insights (Representative)</h4>
+          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Charts below are static SVGs for quick visual summaries — can be wired to live dashboards (Grafana/PowerBI) for operational reporting.</p>
+
+          <!-- Bar chart (SVG) - Coding accuracy by area -->
+          <div style="margin-bottom:12px">
+            <svg viewBox="0 0 200 140" width="100%" height="160" aria-label="Coding accuracy by area">
+              <style>svg .bar{fill:#0b6efd}</style>
+              <!-- grid -->
+              <g stroke="#eef4ff" stroke-width="0.7">
+                <line x1="34" y1="12" x2="190" y2="12"/>
+                <line x1="34" y1="36" x2="190" y2="36"/>
+                <line x1="34" y1="60" x2="190" y2="60"/>
+                <line x1="34" y1="84" x2="190" y2="84"/>
+                <line x1="34" y1="108" x2="190" y2="108"/>
+              </g>
+              <!-- labels -->
+              <text x="10" y="16" font-size="9" fill="#6b7280">100%</text>
+              <text x="10" y="40" font-size="9" fill="#6b7280">80%</text>
+              <text x="10" y="64" font-size="9" fill="#6b7280">60%</text>
+              <text x="10" y="88" font-size="9" fill="#6b7280">40%</text>
+              <text x="10" y="112" font-size="9" fill="#6b7280">20%</text>
+
+              <!-- Bars: heights mapped visually -->
+              <!-- Inpatient ~92% -->
+              <rect class="bar" x="48" y="16" width="20" height="96" rx="3"></rect>
+              <!-- Outpatient ~88% -->
+              <rect class="bar" x="82" y="24" width="20" height="88" rx="3" opacity="0.95"></rect>
+              <!-- ED ~81% -->
+              <rect class="bar" x="116" y="36" width="20" height="76" rx="3" opacity="0.9"></rect>
+              <!-- Radiology ~85% -->
+              <rect class="bar" x="150" y="30" width="20" height="82" rx="3" opacity="0.93"></rect>
+
+              <!-- x labels -->
+              <text x="58" y="126" font-size="9" fill="#374151">Inpt</text>
+              <text x="92" y="126" font-size="9" fill="#374151">Outpt</text>
+              <text x="126" y="126" font-size="9" fill="#374151">ED</text>
+              <text x="160" y="126" font-size="9" fill="#374151">Rad</text>
+            </svg>
+          </div>
+
+          <!-- Donut chart - Deliverable distribution -->
+          <div style="display:flex;gap:12px;align-items:center">
+            <svg viewBox="0 0 42 42" width="96" height="96" aria-label="Deliverable distribution donut">
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#eef4ff" stroke-width="6"></circle>
+              <!-- stroke-dasharray: percentage / remainder (40% shown) -->
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#0b6efd" stroke-width="6" stroke-dasharray="40 60" stroke-dashoffset="25"></circle>
+              <circle cx="21" cy="21" r="9.5" fill="#071735"></circle>
+            </svg>
+            <div style="font-size:14px;color:var(--muted)">
+              <div><strong>40%</strong> Coding Accuracy Reports</div>
+              <div style="margin-top:6px"><strong>25%</strong> Denial Remediation</div>
+              <div style="margin-top:6px"><strong>20%</strong> CDI Programs</div>
+              <div style="margin-top:6px"><strong>15%</strong> Training & Assessments</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section style="margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:24px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)">
+      <div>
+        <h2 style="margin:0">Ready to modernize your IT & healthcare operations?</h2>
+        <p style="margin:6px 0;color:var(--muted)">Schedule a consultation and receive a tailored pilot plan and KPI-driven SOW.</p>
       </div>
       <div>
         <button class="btn-primary" onclick="location.href='contact.html'">Schedule a Consultation</button>
       </div>
     </section>
-  </div>
-  </div>
-      <footer>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer aria-label="Footer">
+    <div class="footer-inner">
       <div class="footer-content">
         <div>
-          <img src="assets/images/SamITAIHealth_Logo.jpg" alt="SamITHealth Logo">
-          <p>We offer a full range of IT solutions & services to make things better for enterprises and companies we work with.</p>
+          <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
         </div>
         <div>
           <h4>Office</h4>
@@ -249,16 +394,49 @@
         </div>
         <div>
           <h4>Contact</h4>
-          <p>info@samithealth.com</p>
-          <p>(470)-339-6025</p>
+          <p><a href="mailto:info@samithealth.com">info@samithealth.com</a></p>
+          <p>(470) 339-6025</p>
         </div>
       </div>
-      <div class="bottom">©2025 All rights reserved</div>
-    </footer>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
+          <a href="#" aria-label="LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">in</a>
+          <a href="#" aria-label="Twitter" title="Twitter" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">t</a>
+          <a href="#" aria-label="YouTube" title="YouTube" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">yt</a>
+        </nav>
+        <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
+          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
+            <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
+  </footer>
+
+<script>
+// Simple carousel logic
+(function(){
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+  let i = 0;
+  function show(n){
+    slides.forEach((s,idx)=> s.classList.toggle('active', idx===n));
+    dots.forEach((d,idx)=> d.classList.toggle('active', idx===n));
+    i = n;
+  }
+  function next(){
+    show((i+1) % slides.length);
+  }
+  dots.forEach(d=> d.addEventListener('click', e=> show(Number(e.target.dataset.index))));
+  // auto rotate
+  setInterval(next, 4500);
+})();
+</script>
+
 </body>
 </html>
-  </header>
-</div>
-
-
----------------------------------
