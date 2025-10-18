@@ -32,7 +32,14 @@
 <body>
   <div class="container">
     <header role="banner">
-      <div class="brand"><div class="logo">SH</div><div><strong>SamITHealth</strong><div style="color:var(--muted);font-size:13px">CMMI Level 5 • Healthcare IT & RCM</div></div></div>
+      <!-- Clickable Logo & Brand -->
+      <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">CMMI Level 5 • Healthcare IT & RCM</div>
+        </div>
+      </a>
       <nav role="navigation" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
@@ -151,8 +158,23 @@
 
     </main>
 
-    <footer>
-      <div style="max-width:var(--max);margin:0 auto">©2025 SamITHealth. All rights reserved. Empowering healthcare innovation through certified excellence and data intelligence.</div>
+    <footer> 
+      <div class="footer-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;max-width:1200px;margin:0 auto;padding:40px 20px;background:#f9fafb;color:#4b5563">
+        <div>
+          <img src="assets/images/SamITAIHealth_Logo.jpg" alt="SamITHealth Logo" style="height:60px;margin-bottom:10px">
+          <p>We offer a full range of IT solutions & services to make things better for enterprises and healthcare organizations we partner with.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:8px;color:#07203b;">Office</h4>
+          <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:8px;color:#07203b;">Contact</h4>
+          <p><a href="mailto:info@samithealth.com" style="color:#0b6efd;text-decoration:none;">info@samithealth.com</a></p>
+          <p><a href="tel:+14703396025" style="color:#0b6efd;text-decoration:none;">(470)-339-6025</a></p>
+        </div>
+      </div>
+      <div class="bottom" style="text-align:center;padding:12px 0;border-top:1px solid #e6e9ee;background:#fff;color:#6b7280;font-size:14px;">©2025 SamITHealth. All rights reserved.</div>
     </footer>
   </div>
 </body>
