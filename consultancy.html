@@ -9,6 +9,7 @@
     :root{
       --bg:#f4f7fb; --card:#ffffff; --muted:#6b7280; --accent:#0b6efd; --accent-2:#0a5ad9;
       --max:1200px; --radius:12px; --shadow:0 16px 60px rgba(6,18,45,0.08);
+      --social-size:40px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -18,18 +19,27 @@
     .container{max-width:var(--max);margin:28px auto;padding:0 20px}
 
     /* Header */
-    .topbar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#fff,#fbfdff);padding:14px;border-radius:14px;box-shadow:0 8px 28px rgba(12,25,48,0.06);position:sticky;top:18px;z-index:40}
+    .topbar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#fff,#fbfdff);padding:14px;border-radius:14px;box-shadow:0 8px 28px rgba(12,25,48,0.06)}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand a{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
     .brand-text .title{font-weight:800;font-size:18px}
     .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
     .nav{display:flex;gap:14px;align-items:center}
     .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244;transition:all .18s ease}
     .nav a:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(11,110,253,0.08)}
     .nav a.active{background:rgba(11,110,253,0.08);color:var(--accent-2)}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(11,110,253,0.12);transition:transform .18s ease}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(11,110,253,0.08)}
     .btn-primary:hover{transform:translateY(-3px)}
     .ghost{color:var(--muted);font-weight:600}
+
+    /* Breadcrumb / quick nav */
+    .breadcrumb{margin:12px 0 0;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
+    .breadcrumb a{color:var(--accent);font-weight:600}
+
+    /* Floating quick-home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(4,32,90,0.18);z-index:9999;text-decoration:none}
+    .home-fab:focus{outline:2px solid #fff;outline-offset:2px}
 
     /* Hero */
     .hero-wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
@@ -56,19 +66,7 @@
     .feature{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.04);display:flex;gap:12px;align-items:flex-start}
     .feature img{width:84px;height:84px;object-fit:cover;border-radius:8px;flex-shrink:0}
 
-    /* Consultancy */
-    .consult{margin-top:22px;display:grid;gap:14px}
-
-    /* HA section */
-    .ha-section{margin-top:28px}
-    .ha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-    .ha-card{background:#fff;padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(6,18,45,0.06)}
-
-    /* Clinical */
-    .clinical-section{margin-top:28px}
-    .clinical-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-
-    /* Footer */
+    /* Footer (from claims-management with visible social icons) */
     footer{background:#071735;color:#e6eefc;padding:60px 20px 36px;margin-top:36px}
     footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
     footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
@@ -76,27 +74,22 @@
     footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
     footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
     footer a:hover{color:#9ec8ff}
+
+    /* Social buttons: distinct colored backgrounds and clearer icon visuals */
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.25);transition:transform .12s ease, box-shadow .12s ease}
+    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.35)}
+
     .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
 
     /* Utilities */
     .muted{color:var(--muted)}
     @media (max-width:1100px){.hero{grid-template-columns:1fr}.solutions{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:720px){.solutions{grid-template-columns:1fr}.features{grid-template-columns:1fr}.nav{display:none}.hero-carousel{height:240px}}
-  
-
-/* Image size & corporate layout standards */
-img{max-width:100%;height:auto;display:block;border-radius:8px}
-.hero-image, .hero-carousel{height:320px;overflow:hidden;border-radius:12px}
-.hero-image img, .hero-carousel img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-.solution img, .ha-card img, .gallery-grid img, .case-img, .feature img{height:180px;object-fit:cover;border-radius:8px}
-.solution img{height:160px}
-.feature img{width:84px;height:84px;object-fit:cover}
-.footer .logo, footer img.logo{height:48px}
-@media (max-width:900px){
-  .hero-image, .hero-carousel{height:240px}
-  .solution img, .ha-card img, .gallery-grid img, .case-img{height:140px}
-}
-
 </style>
 </head>
 <body>
@@ -110,11 +103,11 @@ img{max-width:100%;height:auto;display:block;border-radius:8px}
       </a>
 
       <nav class="nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
         <a href="laboratory-services.html">Laboratory Services</a>
-        <a href="consultancy.html">Consultancy</a>
+        <a href="consultancy.html" class="active">Consultancy</a>
         <a href="contact.html">Contact</a>
         <a href="Careers.html">Careers</a>
       </nav>
@@ -122,180 +115,200 @@ img{max-width:100%;height:auto;display:block;border-radius:8px}
       <div style="display:flex;gap:12px;align-items:center">
         <button class="btn-primary" onclick="location.href='contact.html'">Schedule a Consultation</button>
       </div>
-    </header>
+</header>
 
-  <main class="hero-wrap" id="main" tabindex="-1">
-    <div class="container content-body">
-      <!-- HERO -->
-      <section class="hero" aria-labelledby="consultancy-heading" style="margin-top:18px">
-        <div class="hero-left card-like" style="padding:28px">
-          <div class="eyebrow">Strategic • Technical • Operational</div>
-          <h1 id="consultancy-heading">Consultancy — Transform Healthcare Operations & Revenue</h1>
-          <p class="lead">SamITHealth helps healthcare organizations modernize systems, optimize revenue cycle operations, and deliver secure, compliant digital services. We combine enterprise IT delivery with deep clinical domain expertise to create measurable impact.</p>
-          <div class="cta-row" style="margin-top:12px">
-            <a class="btn-primary" href="contact.html" role="button">Request a Pilot</a>
-            <a class="ghost" href="#services" style="padding:10px 12px;border-radius:10px">View services</a>
-          </div>
-          <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
-            <div class="small muted">CMMI Level 5</div>
-            <div class="small muted">HIPAA • SOC2 • ISO27001</div>
-            <div class="small muted">Managed NOC & SRE</div>
-          </div>
+<!-- Breadcrumb / quick links -->
+<div class="container">
+  <div class="breadcrumb" aria-hidden="false" role="navigation" aria-label="Breadcrumb">
+    <a href="index.html" title="Home">Home</a>
+    <span aria-hidden="true">›</span>
+    <span>Consultancy</span>
+  </div>
+</div>
+
+<main class="hero-wrap" id="main" tabindex="-1">
+  <div class="container content-body">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="consultancy-heading" style="margin-top:18px">
+      <div class="hero-left card-like" style="padding:28px">
+        <div class="eyebrow">Strategic • Technical • Operational</div>
+        <h1 id="consultancy-heading">Consultancy — Transform Healthcare Operations & Revenue</h1>
+        <p class="lead">SamITHealth helps healthcare organizations modernize systems, optimize revenue cycle operations, and deliver secure, compliant digital services. We combine enterprise IT delivery, clinical domain expertise, and operational rigor to produce measurable results.</p>
+        <div class="cta-row" style="margin-top:12px">
+          <a class="btn-primary" href="contact.html" role="button">Request a Pilot</a>
+          <a class="ghost" href="#services" style="padding:10px 12px;border-radius:10px">View services</a>
         </div>
-
-        <aside class="hero-carousel" aria-hidden="true" style="height:320px">
-          <div class="carousel-slide active"><img src="assets/images/OIP_1-sm-sm.webp" alt="Cloud engineering" style="width:100%;height:100%;object-fit:cover"></div>
-          <div class="carousel-slide"><img src="assets/images/OIP_2-sm-sm.webp" alt="Healthcare AI" style="width:100%;height:100%;object-fit:cover"></div>
-          <div class="carousel-slide"><img src="assets/images/OIP_6-sm-sm.webp" alt="Lab automation" style="width:100%;height:100%;object-fit:cover"></div>
-        </aside>
-      </section>
-
-      <!-- Services -->
-      <section id="services" style="margin-top:22px">
-        <h2>Our Consultancy Services</h2>
-        <p class="muted">End-to-end services tailored for providers, payers, and clinical labs — from strategy to managed operations.</p>
-        <div class="solutions" style="margin-top:12px">
-          <div class="solution">
-            <img src="assets/images/OIP_14-sm-sm.webp" alt="IT Strategy">
-            <h3>IT Strategy & Architecture</h3>
-            <p class="small muted">Target-state architecture, cloud roadmaps, TCO/ROI modeling, and migration playbooks.</p>
-          </div>
-          <div class="solution">
-            <img src="assets/images/OIP_15-sm-sm.webp" alt="Product Engineering">
-            <h3>Product Engineering & DevSecOps</h3>
-            <p class="small muted">Secure SDLC, IaC pipelines, automated testing, and deployment for regulated products.</p>
-          </div>
-          <div class="solution">
-            <img src="assets/images/OIP_sm-sm.webp" alt="Managed Services">
-            <h3>Managed Services & SRE</h3>
-            <p class="small muted">24/7 NOC/SOC, observability, incident response, and SLA-backed operations.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SOW summary -->
-      <section style="margin-top:22px" class="card-like">
-        <h2>Sample Statement of Work (Executive Summary)</h2>
-        <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start">
-          <div>
-            <h3>Project: Revenue Cycle Modernization (Pilot)</h3>
-            <p class="small muted">12-week pilot to improve claims clean rate and reduce denials.</p>
-            <h4>Scope</h4>
-            <ul>
-              <li>Discovery & current-state mapping (clinical workflows, RCM systems)</li>
-              <li>Target architecture & integration plan (EHR, LIMS, clearinghouse)</li>
-              <li>Pilot implementation: scrubbing, denial triage, analytics</li>
-              <li>Operational runbooks, monitoring, and knowledge transfer</li>
-            </ul>
-            <h4>Deliverables</h4>
-            <ul>
-              <li>Assessment report & prioritized backlog</li>
-              <li>Deployed pilot with test claims, dashboards, and runbooks</li>
-              <li>ROI estimate & scale plan</li>
-            </ul>
-          </div>
-          <aside class="card-like small muted" style="background:linear-gradient(90deg,#fbfcff,#fff);padding:14px">
-            <h4>Assumptions & Pricing Signals</h4>
-            <p class="small muted">Fixed-fee pilot (up to 4 engineers + 1 PM). Travel & licenses excluded. Transition options: T&M or fixed-phase.</p>
-            <h4>KPIs</h4>
-            <ul>
-              <li>Claims clean rate +10–25% (6 months)</li>
-              <li>Denial reduction -20% (3–6 months)</li>
-              <li>AR days reduction 15–30%</li>
-            </ul>
-          </aside>
-        </div>
-      </section>
-
-      <!-- Case Studies -->
-      <section style="margin-top:22px">
-        <h2>Case Studies</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px">
-          <article class="card-like">
-            <img class="case-img" src="assets/images/OIP_1-sm-sm.webp" alt="Regional Health System">
-            <h3>Regional Health System — Revenue Recovery</h3>
-            <p class="small muted"><strong>Problem:</strong> High denial rates and slow AR turnover.</p>
-            <p class="small muted"><strong>Approach:</strong> Claims scrubbing, denial triage, and analytics prioritization.</p>
-            <p class="small muted"><strong>Outcome:</strong> 18% reduction in denials and 22% increase in cash collections.</p>
-          </article>
-
-          <article class="card-like">
-            <img class="case-img" src="assets/images/OIP_2-sm-sm.webp" alt="Diagnostic Startup">
-            <h3>Diagnostic Startup — Rapid Launch</h3>
-            <p class="small muted"><strong>Problem:</strong> Needed LIMS integration and billing readiness.</p>
-            <p class="small muted"><strong>Approach:</strong> LIMS selection, integration playbook, EDI pipelines.</p>
-            <p class="small muted"><strong>Outcome:</strong> Product launch in 10 weeks; first-bill acceptance across payers.</p>
-          </article>
-
-          <article class="card-like">
-            <img class="case-img" src="assets/images/OIP_6-sm-sm.webp" alt="Cloud Migration">
-            <h3>Enterprise — Cloud Migration</h3>
-            <p class="small muted"><strong>Problem:</strong> Legacy systems causing downtime and high TCO.</p>
-            <p class="small muted"><strong>Approach:</strong> Multi-region migration, IaC, and compliance validation.</p>
-            <p class="small muted"><strong>Outcome:</strong> 40% fewer incidents, 30% reduced TCO.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Clinical Expertise -->
-      <section style="margin-top:22px" class="card-like">
-        <h2>Clinical Expertise & Coding</h2>
-        <p class="muted small">Certified coders (AHIMA, AAPC) and clinicians deliver coding accuracy, CDI programs, and denial remediation across inpatient, outpatient, ED, radiology and behavioral health.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
-          <div class="feature"><img src="assets/images/OIP_14-sm-sm.webp" alt=""><div><h4>Inpatient Coding</h4><p class="small muted">DRG validation and MS-DRG optimization</p></div></div>
-          <div class="feature"><img src="assets/images/OIP_15-sm-sm.webp" alt=""><div><h4>Outpatient & Ambulatory</h4><p class="small muted">CPT accuracy and APC grouping</p></div></div>
-          <div class="feature"><img src="assets/images/OIP_sm-sm.webp" alt=""><div><h4>Denials & Appeals</h4><p class="small muted">Root-cause analysis and remediation playbooks</p></div></div>
-        </div>
-      </section>
-
-      <!-- Contact & CTA -->
-      <section style="margin-top:22px" class="card-like">
-        <h2>Get started — Pilot & Assessment</h2>
-        <p class="muted small">Schedule a 2-week discovery to refine scope, define KPIs, and produce a pilot plan with cost estimates.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-          <a class="btn-primary" href="contact.html">Schedule discovery</a>
-          <a class="ghost" href="mailto:info@samithealth.com">info@samithealth.com</a>
-        </div>
-      </section>
-
-    </div> <!-- container -->
-  </main>
-
-<footer aria-label="Footer">
-    <div class="footer-inner">
-      <div class="footer-content">
-        <div>
-          <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo" loading="lazy" decoding="async">
-          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
-        </div>
-        <div>
-          <h4>Office</h4>
-          <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <p><a href="mailto:info@samithealth.com">info@samithealth.com</a></p>
-          <p>(470) 339-6025</p>
+        <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+          <div class="small muted">CMMI Level 5</div>
+          <div class="small muted">HIPAA • SOC2 • ISO27001</div>
+          <div class="small muted">Managed NOC & SRE</div>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
-        <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
-          <a href="#" aria-label="LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">in</a>
-          <a href="#" aria-label="Twitter" title="Twitter" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">t</a>
-          <a href="#" aria-label="YouTube" title="YouTube" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.04);color:#e6eefc;text-decoration:none">yt</a>
-        </nav>
-        <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
-          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
-          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
-            <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
-            <button class="btn-primary" type="submit">Subscribe</button>
-          </form>
+      <aside class="hero-carousel" aria-hidden="true" style="height:320px">
+        <div class="carousel-slide active"><img src="assets/images/OIP_1-sm-sm.webp" alt="Cloud engineering" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="carousel-slide"><img src="assets/images/OIP_2-sm-sm.webp" alt="Healthcare AI" style="width:100%;height:100%;object-fit:cover"></div>
+        <div class="carousel-slide"><img src="assets/images/OIP_6-sm-sm.webp" alt="Lab automation" style="width:100%;height:100%;object-fit:cover"></div>
+      </aside>
+    </section>
+
+    <!-- Services -->
+    <section id="services" style="margin-top:22px">
+      <h2>Our Consultancy Services</h2>
+      <p class="muted">End-to-end services tailored for providers, payers, and clinical labs — from strategy to managed operations.</p>
+      <div class="solutions" style="margin-top:12px">
+        <div class="solution">
+          <img src="assets/images/OIP_14-sm-sm.webp" alt="IT Strategy">
+          <h3>IT Strategy & Architecture</h3>
+          <p class="small muted">Target-state architecture, cloud roadmaps, TCO/ROI modeling, and migration playbooks.</p>
         </div>
+        <div class="solution">
+          <img src="assets/images/OIP_15-sm-sm.webp" alt="Product Engineering">
+          <h3>Product Engineering & DevSecOps</h3>
+          <p class="small muted">Secure SDLC, IaC pipelines, automated testing, and deployment for regulated products.</p>
+        </div>
+        <div class="solution">
+          <img src="assets/images/OIP_sm-sm.webp" alt="Managed Services">
+          <h3>Managed Services & SRE</h3>
+          <p class="small muted">24/7 NOC/SOC, observability, incident response, and SLA-backed operations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOW summary -->
+    <section style="margin-top:22px" class="card-like">
+      <h2>Sample Statement of Work (Executive Summary)</h2>
+      <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start">
+        <div>
+          <h3>Project: Revenue Cycle Modernization (Pilot)</h3>
+          <p class="small muted">12-week pilot to improve claims clean rate and reduce denials.</p>
+          <h4>Scope</h4>
+          <ul>
+            <li>Discovery & current-state mapping (clinical workflows, RCM systems)</li>
+            <li>Target architecture & integration plan (EHR, LIMS, clearinghouse)</li>
+            <li>Pilot implementation: scrubbing, denial triage, analytics</li>
+            <li>Operational runbooks, monitoring, and knowledge transfer</li>
+          </ul>
+          <h4>Deliverables</h4>
+          <ul>
+            <li>Assessment report & prioritized backlog</li>
+            <li>Deployed pilot with test claims, dashboards, and runbooks</li>
+            <li>ROI estimate & scale plan</li>
+          </ul>
+        </div>
+        <aside class="card-like small muted" style="background:linear-gradient(90deg,#fbfcff,#fff);padding:14px">
+          <h4>Assumptions & Pricing Signals</h4>
+          <p class="small muted">Fixed-fee pilot (up to 4 engineers + 1 PM). Travel & licenses excluded. Transition options: T&M or fixed-phase.</p>
+          <h4>KPIs</h4>
+          <ul>
+            <li>Claims clean rate +10–25% (6 months)</li>
+            <li>Denial reduction -20% (3–6 months)</li>
+            <li>AR days reduction 15–30%</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section style="margin-top:22px">
+      <h2>Case Studies</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px">
+        <article class="card-like">
+          <img class="case-img" src="assets/images/OIP_1-sm-sm.webp" alt="Regional Health System">
+          <h3>Regional Health System — Revenue Recovery</h3>
+          <p class="small muted"><strong>Problem:</strong> High denial rates and slow AR turnover.</p>
+          <p class="small muted"><strong>Approach:</strong> Claims scrubbing, denial triage, and analytics prioritization.</p>
+          <p class="small muted"><strong>Outcome:</strong> 18% reduction in denials and 22% increase in cash collections.</p>
+        </article>
+
+        <article class="card-like">
+          <img class="case-img" src="assets/images/OIP_2-sm-sm.webp" alt="Diagnostic Startup">
+          <h3>Diagnostic Startup — Rapid Launch</h3>
+          <p class="small muted"><strong>Problem:</strong> Needed LIMS integration and billing readiness.</p>
+          <p class="small muted"><strong>Approach:</strong> LIMS selection, integration playbook, EDI pipelines.</p>
+          <p class="small muted"><strong>Outcome:</strong> Product launch in 10 weeks; first-bill acceptance across payers.</p>
+        </article>
+
+        <article class="card-like">
+          <img class="case-img" src="assets/images/OIP_6-sm-sm.webp" alt="Cloud Migration">
+          <h3>Enterprise — Cloud Migration</h3>
+          <p class="small muted"><strong>Problem:</strong> Legacy systems causing downtime and high TCO.</p>
+          <p class="small muted"><strong>Approach:</strong> Multi-region migration, IaC, and compliance validation.</p>
+          <p class="small muted"><strong>Outcome:</strong> 40% fewer incidents, 30% reduced TCO.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Clinical Expertise -->
+    <section style="margin-top:22px" class="card-like">
+      <h2>Clinical Expertise & Coding</h2>
+      <p class="muted small">Certified coders (AHIMA, AAPC) and clinicians deliver coding accuracy, CDI programs, and denial remediation across inpatient, outpatient, ED, radiology and behavioral health.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+        <div class="feature"><img src="assets/images/OIP_14-sm-sm.webp" alt=""><div><h4>Inpatient Coding</h4><p class="small muted">DRG validation and MS-DRG optimization</p></div></div>
+        <div class="feature"><img src="assets/images/OIP_15-sm-sm.webp" alt=""><div><h4>Outpatient & Ambulatory</h4><p class="small muted">CPT accuracy and APC grouping</p></div></div>
+        <div class="feature"><img src="assets/images/OIP_sm-sm.webp" alt=""><div><h4>Denials & Appeals</h4><p class="small muted">Root-cause analysis and remediation playbooks</p></div></div>
+      </div>
+    </section>
+
+    <!-- Contact & CTA -->
+    <section style="margin-top:22px" class="card-like">
+      <h2>Get started — Pilot & Assessment</h2>
+      <p class="muted small">Schedule a 2-week discovery to refine scope, define KPIs, and produce a pilot plan with cost estimates.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <a class="btn-primary" href="contact.html">Schedule discovery</a>
+        <a class="ghost" href="mailto:info@samithealth.com">info@samithealth.com</a>
+      </div>
+    </section>
+
+  </div> <!-- container -->
+</main>
+
+<!-- Footer copied from claims-management (logo/description, socials, newsletter, bottom line) -->
+<footer aria-label="Footer">
+  <div class="footer-inner">
+    <div class="footer-content">
+      <div>
+        <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo" loading="lazy" decoding="async">
+        <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+      </div>
+      <div>
+        <h4>Office</h4>
+        <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:info@samithealth.com">info@samithealth.com</a></p>
+        <p>(470) 339-6025</p>
       </div>
     </div>
 
-    <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
-  </footer>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+      <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
+        <a class="linkedin" href="#" aria-label="LinkedIn" title="LinkedIn" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.4 0 6.4 3.6 6.4 8.2V22h-5v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+        </a>
+        <a class="twitter" href="#" aria-label="Twitter" title="Twitter" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4.47 4.28 4.28 0 0 0 1.33 5.72A4.2 4.2 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.19 4.3 4.3 0 0 1-1.93.07 4.29 4.29 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.55 12.2-12.23v-.56A8.6 8.6 0 0 0 22.46 6z"/></svg>
+        </a>
+        <a class="youtube" href="#" aria-label="YouTube" title="YouTube" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 14 0.6 15.8 0.6 15.8s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 .9.1 4 .3 8.2.3s7.3-.1 8.2-.3c.5-.1 1.6-.1 2.4-1 .6-.7.8-2.4.8-2.4s.6-2.6.6-4.6V9.9c0-1.9-.6-3.7-.6-3.7zM9.6 14.6V7.6l6.6 3.5-6.6 3.5z"/></svg>
+        </a>
+      </nav>
+      <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
+        <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+        <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
+          <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+          <button class="btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
+</footer>
+
+<!-- Floating quick-home button -->
+<a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
 </body>
 </html>
