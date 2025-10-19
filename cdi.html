@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SamITHealth — Clinical Documentation Improvement (CDI)</title>
-  <meta name="description" content="SamITHealth Clinical Documentation Improvement (CDI) services — certified clinical reviewers, physician advisors, and workflow-driven programs to improve documentation quality and reimbursement accuracy." />
+  <meta name="description" content="SamITHealth Clinical Documentation Improvement (CDI) services — certified clinical reviewers, physician advisors, and workflow-driven programs to improve documentation and coding accuracy."/>
   <style>
     :root{
       --bg:#f6f9fc; --surface:#ffffff; --muted:#55606a; --navy:#07203b; --accent:#0b6efd; --accent-2:#0a5ad9;
@@ -13,13 +13,25 @@
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--navy);-webkit-font-smoothing:antialiased}
-    a{color:var(--accent)}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
     .container{max-width:var(--max);margin:28px auto;padding:20px}
     header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px;background:linear-gradient(90deg,#fff,#fbfdff);border-radius:12px;box-shadow:var(--shadow)}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand a{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
     .logo{width:50px;height:50px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
     .brand .title{font-weight:800;color:var(--navy)}
     nav a{margin-left:12px;font-weight:700;color:var(--navy);text-decoration:none}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+
+    /* Breadcrumb / quick nav */
+    .breadcrumb{margin:12px 0 0;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
+    .breadcrumb a{color:var(--accent);font-weight:600}
+
+    /* Floating quick-home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(4,32,90,0.18);z-index:9999;text-decoration:none}
+    .home-fab:focus{outline:2px solid #fff;outline-offset:2px}
 
     .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;margin-top:18px}
     .hero-card{background:var(--surface);padding:24px;border-radius:12px;box-shadow:var(--shadow)}
@@ -45,7 +57,15 @@
     input,textarea,select{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eef7}
     button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;font-weight:800;cursor:pointer}
 
-    footer{margin-top:24px;padding:18px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfdff);display:flex;justify-content:space-between;align-items:center}
+    /* Footer (copied from provider-services.html) */
+    footer{background:#071735;color:#e6eefc;padding:60px 20px 36px;margin-top:36px;border-radius:10px}
+    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    footer img.logo{height:60px;margin-bottom:10px}
+    footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
+    footer a:hover{color:#9ec8ff}
+    .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
 
     @media (max-width:900px){.hero{grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero-card h1{font-size:22px}}
   </style>
@@ -53,59 +73,164 @@
 <body>
   <div class="container">
     <header>
-      <a class="brand" href="home.html" aria-label="SamITHealth Home">
-        <div class="logo">SH</div>
-        <div>
-          <div class="title">SamITHealth</div>
-          <div class="muted" style="font-size:12px">Clinical Documentation Improvement</div>
-        </div>
-      </a>
-      <nav aria-label="Main">
-        <a href="home.html">Home</a>
+      <div class="brand" role="banner">
+        <a href="index.html" aria-label="SamITHealth home">
+          <div class="logo" aria-hidden="true">SH</div>
+          <div>
+            <div class="title">SamITHealth</div>
+            <div class="muted" style="font-size:12px">Clinical Documentation Improvement</div>
+          </div>
+        </a>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
         <a href="rcm-solutions.html">RCM</a>
-        <a href="cdi.html">CDI</a>
+        <a href="cdi.html" class="active">CDI</a>
         <a href="contact.html">Contact</a>
       </nav>
     </header>
 
-    <section class="hero" aria-labelledby="cdi-title">
-      <div class="hero-card">
-        <div class="eyebrow">Improve clinical capture & reimbursement accuracy</div>
-        <h1 id="cdi-title">Clinical Documentation Improvement (CDI) services tailored for hospitals & health systems</h1>
-        <p class="lead">SamITHealth provides clinician-led CDI programs, certified abstractors, and physician advisor support to ensure documentation completeness, coding accuracy, and defensible reimbursement. Our focus: reduce denials, close documentation gaps, and align clinical narratives with coding and quality measures.</p>
+    <!-- Breadcrumb / quick links -->
+    <div class="breadcrumb" aria-hidden="false" role="navigation" aria-label="Breadcrumb">
+      <a href="index.html" title="Home">Home</a>
+      <span aria-hidden="true">›</span>
+      <span>Clinical Documentation Improvement</span>
+    </div>
 
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn-primary" href="#contact" style="background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:800">Contact CDI Team</a>
-          <a href="#services" style="padding:10px 14px;border-radius:8px;background:transparent;border:1px solid #e6eef7;text-decoration:none;font-weight:700;color:var(--accent-2)">See Services</a>
+    <main>
+      <section class="hero" aria-labelledby="cdi-title">
+        <div class="hero-card">
+          <div class="eyebrow">Improve clinical capture & reimbursement accuracy</div>
+          <h1 id="cdi-title">Clinical Documentation Improvement (CDI) services tailored for hospitals & health systems</h1>
+          <p class="lead">SamITHealth provides clinician-led CDI programs, certified abstractors, and physician advisor support to ensure documentation completeness, coding accuracy, and defensible reimbursement outcomes.</p>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn-primary" href="#contact" style="text-decoration:none">Request Consultation</a>
+            <a href="#services" style="padding:10px 14px;border-radius:8px;background:transparent;border:1px solid #e6eef7;text-decoration:none;font-weight:700;color:var(--accent-2)">See Services</a>
+          </div>
+
+          <div class="features">
+            <div class="feature">
+              <h4>Physician Advisors</h4>
+              <p class="muted">Board-certified advisors for complex clinical validation and peer reviews.</p>
+            </div>
+            <div class="feature">
+              <h4>Concurrent & Retrospective Reviews</h4>
+              <p class="muted">Flexible review models to meet acute and ambulatory needs.</p>
+            </div>
+            <div class="feature">
+              <h4>Clinical Education</h4>
+              <p class="muted">Targeted education for providers to improve documentation habits and reduce query lift.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="features">
-          <div class="feature">
-            <h4>Physician Advisors</h4>
-            <p class="muted">Board-certified advisors for complex clinical validation and peer reviews.</p>
+        <aside class="hero-media" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1586773860416-7b6b9b3f8c1e?q=80&w=800&auto=format&fit=crop" alt="clinicians reviewing documentation" />
+        </aside>
+      </section>
+
+      <section class="section content-grid" aria-label="CDI content">
+        <div>
+          <div class="card" id="services">
+            <h2>Our CDI Services</h2>
+            <p class="muted">We deliver a full spectrum of CDI capabilities including chart reviews, physician queries, coding collaboration, and performance analytics.</p>
+
+            <h3 style="margin-top:12px">Typical deliverables</h3>
+            <ul>
+              <li>Concurrent chart reviews and retrospective audits</li>
+              <li>Physician query management and tracking</li>
+              <li>Education sessions and documentation improvement plans</li>
+              <li>Monthly dashboards and KPI reporting</li>
+            </ul>
           </div>
-          <div class="feature">
-            <h4>Concurrent & Retrospective Reviews</h4>
-            <p class="muted">Flexible review models to meet acute and ambulatory needs.</p>
+
+          <div class="card" style="margin-top:18px">
+            <h3>Success snapshot</h3>
+            <p><strong>Outcome:</strong> Improved documentation capture and increased appropriate reimbursement through targeted CDI interventions and education.</p>
+            <a href="case-studies.html">Read our case studies →</a>
           </div>
-          <div class="feature">
-            <h4>Clinical Education</h4>
-            <p class="muted">Targeted education for providers to improve documentation habits and reduce query lift.</p>
+        </div>
+
+        <aside>
+          <div class="card contact-card" id="contact">
+            <h3>Request a consultation</h3>
+            <form id="contactForm" action="https://formspree.io/f/xblknjwz" method="POST">
+              <input type="hidden" name="_subject" value="CDI Inquiry — SamITHealth">
+              <input type="hidden" name="_language" value="en">
+              <label for="cname">Full name</label>
+              <input id="cname" name="name" type="text" placeholder="Your full name" required>
+              <label for="cemail">Work email</label>
+              <input id="cemail" name="email" type="email" placeholder="you@company.com" required>
+              <label for="cphone">Phone</label>
+              <input id="cphone" name="phone" type="tel" placeholder="+1 (555) 555-5555">
+              <label for="cmessage">Brief description</label>
+              <textarea id="cmessage" name="message" rows="4" placeholder="Tell us about your needs"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn-primary" type="submit">Request callback</button>
+                <button type="button" class="ghost" onclick="location.href='mailto:info@samithealth.com'">Email us</button>
+              </div>
+              <div id="formStatus" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
+            </form>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h4>Careers</h4>
+            <p style="color:var(--muted)"><a href="mailto:hr@samithealth.com">hr@samithealth.com</a></p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="testimonial" style="margin-top:18px" aria-label="testimonial">
+        <div class="card">
+          <strong>"SamITHealth's CDI program improved our documentation and reduced downstream denials."</strong>
+          <div style="margin-top:8px;color:var(--muted)">— Director of Coding, Regional Health System</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer copied from provider-services.html (logo/description, socials, newsletter, bottom line) -->
+    <footer aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
+            <a href="#" aria-label="LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+            <a href="#" aria-label="Twitter" title="Twitter" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+            <a href="#" aria-label="YouTube" title="YouTube" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+          </nav>
+          <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
+            <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
+              <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
 
-      <aside class="hero-media" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1586773860416-7b6b9b3f8c1e?q=80&w=800&auto=format&fit=crop&s=placeholder" alt="clinicians reviewing documentation" />
-      </aside>
-    </section>
-
-    <footer>
-      <div>
-        <div style="display:flex;gap:12px;align-items:center"><a href="home.html" class="logo" style="text-decoration:none;color:white;display:flex;align-items:center;justify-content:center">SH</a><div><strong><a href="home.html" style="text-decoration:none;color:var(--navy)">SamITHealth</a></strong><div class="muted">Enterprise RCM & Health IT</div></div></div>
-      </div>
-      <div class="muted">©2025 SamITHealth — All rights reserved</div>
+      <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
     </footer>
   </div>
+
+  <!-- Floating quick-home button -->
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <script>
+    // simple form UX
+    document.getElementById('contactForm')?.addEventListener('submit', function(e){
+      var status = document.getElementById('formStatus');
+      status.textContent = 'Sending…';
+      setTimeout(function(){ status.textContent = 'Thanks — we will get back to you within 1–2 business days.'; e.target.reset(); }, 900);
+    });
+  </script>
 </body>
 </html>
