@@ -15,9 +15,9 @@
     a{color:var(--accent);text-decoration:none}
     .container{max-width:var(--max);margin:28px auto;padding:0 20px}
     /* Header */
-    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
     .brand-text .title{font-weight:800;font-size:18px}
     .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
     .nav{display:flex;gap:14px;align-items:center}
@@ -56,9 +56,17 @@
     /* CTA banner */
     .cta-banner{margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:28px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
     .cta-banner .text{max-width:70%}
-    /* Footer */
-    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
-    /* Responsive */
+    /* Footer - copied from index.html to match appearance (contact & office locations removed) */
+    footer{background:#071735;color:#e6eefc;padding:60px 20px 36px;margin-top:36px}
+    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    footer img.logo{height:60px;margin-bottom:10px}
+    footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
+    footer a:hover{color:#9ec8ff}
+    .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
+    /* Utilities & Responsive */
+    .muted{color:var(--muted)}
     @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr}.metrics{flex-direction:column}}
     @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero-image{display:none}}
   </style>
@@ -93,7 +101,7 @@
         <div class="hero-left">
           <div class="eyebrow">Provider Solutions</div>
           <h1 id="provider-heading">Enterprise RCM, Clinical Documentation & Billing optimized for providers</h1>
-          <p class="lead">Delivering measurable outcomes with CMMI Level 5 process maturity. From billing to clinical documentation improvement, SamITHealth partners with providers to optimize revenue, reduce denials, and ensure regulatory compliance.</p>
+          <p class="lead">Delivering measurable outcomes with CMMI Level 5 process maturity. From billing to clinical documentation improvement, SamITHealth partners with providers to optimize revenue[...]
 
           <div class="cta-row" style="margin-top:14px">
             <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
@@ -212,26 +220,36 @@
         </div>
       </section>
     </main>
-      <!-- FOOTER -->
-  <!-- FOOTER -->
-  <footer>
+
+  <!-- FOOTER (contact/email/phone/office locations removed) -->
+  <footer aria-label="Footer">
+    <div class="footer-inner">
       <div class="footer-content">
         <div>
-          <img src="assets/images/SamITAIHealth_Logo.jpg" alt="SamITHealth Logo">
-          <p>We offer a full range of IT solutions & services to make things better for enterprises and companies we work with.</p>
-        </div>
-        <div>
-          <h4>Office</h4>
-          <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <p>info@samithealth.com</p>
-          <p>(470)-339-6025</p>
+          <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
         </div>
       </div>
-      <div class="bottom">©2025 All rights reserved</div>
-    </footer>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
+          <a href="#" aria-label="LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+          <a href="#" aria-label="Twitter" title="Twitter" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+          <a href="#" aria-label="YouTube" title="YouTube" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.06)"></a>
+        </nav>
+        <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
+          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
+            <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
+  </footer>
+
     </div>
 </body>
 </html>
