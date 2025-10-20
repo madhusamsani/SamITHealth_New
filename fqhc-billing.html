@@ -10,21 +10,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--brand:#0b7a75;--accent:#0f62fe;--radius:12px
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --brand:#0b7a75;
+      --accent:#0f62fe;
+      --accent-2:#0b76d1;
+      --radius:12px;
+      --max:1100px;
+      --shadow: 0 12px 40px rgba(6,18,45,0.06);
+      --social-size:44px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:#0f1724}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
+    a{color:var(--accent)}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
     header{background:#fff;border-bottom:1px solid #e6eef9}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .brand a{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
     .brand .title{font-weight:700;color:var(--brand);font-size:18px}
     nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:var(--brand)}
     h1{font-size:28px;margin:0 0 8px}
     .lead{color:var(--muted);margin-bottom:14px;line-height:1.45}
-    .stat-row{display:flex;gap:12px;margin-top:14px}
+    .stat-row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
     .stat{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:120px}
     .stat strong{font-size:1.2em;display:block}
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
@@ -35,51 +47,96 @@
     ul{padding-left:18px;color:var(--muted)}
     .metrics-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
     .metric{background:linear-gradient(180deg,#fff,#fbfffe);padding:16px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
-    footer{padding:24px 0;margin-top:32px;border-top:1px solid #e6eef9}
-    footer .meta{color:var(--muted);font-size:13px}
     .btn{background:var(--brand);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block}
     form input,form textarea{width:100%;padding:10px;border:1px solid #e6eef9;border-radius:8px;margin-bottom:8px;font-size:14px}
+
+    /* Footer / socials */
+    footer{background:#071735;color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    footer img.logo{height:60px;margin-bottom:10px}
+    footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
+    footer a:hover{color:#9ec8ff}
+
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.24);transition:transform .15s ease,box-shadow .15s ease}
+    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.35)}
+
+    .footer-newsletter{max-width:340px;text-align:right;color:rgba(230,238,252,0.85)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+
+    .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
+
+    /* Floating home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(2,6,23,0.25);z-index:999}
+    .home-fab:focus{outline:2px solid #fff;outline-offset:2px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr 1fr}
+      nav{width:100%;order:3}
+      .nav-inner{align-items:flex-start}
+    }
+    @media (max-width:600px){
+      .features{grid-template-columns:1fr}
+      .metrics-row{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo" aria-hidden>SH</div>
-        <div>
-          <div class="title">SamITHealth</div>
-          <div style="font-size:12px;color:var(--muted)">FQHC Billing & Medical Billing Services</div>
-        </div>
+    <div class="container nav-inner" role="banner" aria-label="Topbar">
+      <div class="brand" aria-hidden="false">
+        <a href="index.html" aria-label="SamITHealth home">
+          <div class="logo" aria-hidden="true">SH</div>
+          <div>
+            <div class="title">SamITHealth</div>
+            <div style="font-size:12px;color:var(--muted)">FQHC Billing & Medical Billing Services</div>
+          </div>
+        </a>
       </div>
+
       <nav aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="laboratory-services.html">Laboratory</a>
+        <a href="consultancy.html">Consultancy</a>
         <a href="contact.html">Contact</a>
-        <a href="https://healthcareitai.com/index.html" target="_blank" rel="noopener">Healthcare ITAI</a>
       </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <a class="btn" href="contact.html">Get a demo</a>
+      </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="fqhc-heading">
       <div>
-        <h1>Enterprise-grade FQHC Billing & RCM</h1>
-        <p class="lead">SamITHealth delivers configurable, compliance-first revenue cycle management for Federally Qualified Health Centers and community clinics. We integrate automation, payer intelligence, and certified billing teams to reduce denials and accelerate reimbursements.</p>
-        <div class="stat-row">
-          <div class="stat"><strong>24%</strong><span style="color:var(--muted)">Improvement in collections</span></div>
-          <div class="stat"><strong>40%</strong><span style="color:var(--muted)">Reduction in denials</span></div>
-          <div class="stat"><strong>48h</strong><span style="color:var(--muted)">Avg first-response time</span></div>
+        <h1 id="fqhc-heading">Enterprise-grade FQHC Billing & RCM</h1>
+        <p class="lead">SamITHealth delivers configurable, compliance-first revenue cycle management for Federally Qualified Health Centers and community clinics. We integrate automation, payer intelligence and human expertise to reduce denials and accelerate reimbursements.</p>
+
+        <div class="stat-row" role="list">
+          <div class="stat" role="listitem"><strong>24%</strong><span style="color:var(--muted)"> Improvement in collections</span></div>
+          <div class="stat" role="listitem"><strong>40%</strong><span style="color:var(--muted)"> Reduction in denials</span></div>
+          <div class="stat" role="listitem"><strong>48h</strong><span style="color:var(--muted)"> Avg first-response time</span></div>
         </div>
       </div>
     </section>
 
     <section id="services">
-      <div class="grid">
+      <div class="grid" aria-label="Main content and contact">
         <div class="card">
           <img src="assets/images/HealthCareITAI.png" alt="Billing dashboard" onerror="this.style.display='none'">
           <h3 class="section-title">How we deliver results</h3>
-          <p style="color:var(--muted)">We integrate technology, process, and expertise to deliver measurable revenue lift — from discovery to pilot to scalable optimization. Each engagement includes KPI mapping, EHR integration, and performance analytics.</p>
+          <p style="color:var(--muted)">We integrate technology, process, and expertise to deliver measurable revenue lift — from discovery to pilot to scalable optimization. Each engagement includes payer mapping, denial triage, and a continuous improvement loop.</p>
+
           <h4 style="margin-top:12px">Engagement Model</h4>
           <ol style="color:var(--muted)">
             <li><strong>Discovery:</strong> Analyze workflows, denials, and leakage.</li>
@@ -89,10 +146,10 @@
           </ol>
         </div>
 
-        <aside class="card">
-          <h3 class="section-title">Contact Sales</h3>
+        <aside class="card" aria-labelledby="contact-sales">
+          <h3 id="contact-sales" class="section-title">Contact Sales</h3>
           <p style="color:var(--muted)">Get in touch for a customized pilot, quote, or partnership discussion. We'll respond within one business day.</p>
-          <form action="https://formspree.io/f/yourFormID" method="POST">
+          <form action="https://formspree.io/f/yourFormID" method="POST" aria-label="Contact sales form">
             <input type="text" name="name" placeholder="Full name" required>
             <input type="email" name="email" placeholder="Business email" required>
             <input type="text" name="organization" placeholder="Organization / Practice">
@@ -103,17 +160,17 @@
         </aside>
       </div>
 
-      <div class="metrics-row">
-        <div class="metric">
-          <h4>Claim Status</h4>
-          <svg viewBox="0 0 120 120" width="100%" height="140">
+      <div class="metrics-row" aria-label="Metrics and dashboard">
+        <div class="metric" aria-labelledby="claim-status">
+          <h4 id="claim-status">Claim Status</h4>
+          <svg viewBox="0 0 120 120" width="100%" height="140" aria-hidden="true">
             <circle cx="60" cy="60" r="44" fill="#eef6f5" />
             <path d="M60 16 A44 44 0 0 1 98 60 L60 60 Z" fill="#0f62fe"/>
             <path d="M98 60 A44 44 0 0 1 74 98 L60 60 Z" fill="#0ea5a3"/>
             <path d="M74 98 A44 44 0 0 1 28 84 L60 60 Z" fill="#06b6d4"/>
             <path d="M28 84 A44 44 0 0 1 60 16 L60 60 Z" fill="#c4f0ec"/>
           </svg>
-          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px">
             <div><strong style="color:#0f62fe">Paid</strong>45%</div>
             <div><strong style="color:#0ea5a3">Pending</strong>30%</div>
             <div><strong style="color:#06b6d4">Denied</strong>15%</div>
@@ -121,8 +178,8 @@
           </div>
         </div>
 
-        <div class="metric">
-          <h4>Dashboard Snapshot</h4>
+        <div class="metric" aria-labelledby="dashboard-snapshot">
+          <h4 id="dashboard-snapshot">Dashboard Snapshot</h4>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
               <div style="font-weight:700">Revenue Trend</div>
@@ -130,7 +187,7 @@
             </div>
             <div style="font-size:20px;font-weight:700">$1.2M</div>
           </div>
-          <svg viewBox="0 0 240 60" width="100%" height="60" style="margin-top:12px">
+          <svg viewBox="0 0 240 60" width="100%" height="60" style="margin-top:12px" aria-hidden="true">
             <polyline fill="none" stroke="#0f62fe" stroke-width="3" points="0,50 30,36 60,44 90,26 120,30 150,18 180,28 210,12 240,20" />
           </svg>
           <p style="color:var(--muted);font-size:13px;margin-top:8px">Schedule demo or explore analytics integration.</p>
@@ -139,13 +196,78 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div class="meta">HIPAA-ready | SOC2-aligned • <a href="https://healthcareitai.com/index.html" target="_blank" style="color:var(--brand)">Healthcare ITAI</a></div>
+  <!-- Footer: adapted from consultancy.html with improved social visuals, newsletter and easy home navigation -->
+  <footer role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" style="display:inline-block" aria-label="SamITHealth home (logo)">
+            <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+            <!-- LinkedIn SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22h-5v-6.7c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+          </a>
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">
+            <!-- Twitter SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.33 5.72A4.25 4.25 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.59 8.59 0 0 1 2 19.54 12.11 12.11 0 0 0 8.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.35-.02-.53A8.36 8.36 0 0 0 22.46 6z"/></svg>
+          </a>
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+            <!-- YouTube SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4s.2 1.7.2 3.5V9.8c0 1.9.2 3.6.2 3.6s.2 1.7.8 2.4c.8.9 1.9.9 2.5 1 1.8.2 7.6.5 7.6.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.7.2-3.5V9.8c0-1.9-.2-3.6-.2-3.6zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter">
+          <div>Subscribe for RCM & health-tech insights</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription disabled in this demo.');">
+            <input aria-label="Email" placeholder="Email address" type="email" required>
+            <button class="btn" type="submit">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <!-- Floating quick-home button -->
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <script>
+    // lightweight demo submit behavior
+    (function(){
+      var forms = document.querySelectorAll('form[action^="https://formspree.io"], form[action="#"]');
+      Array.prototype.forEach.call(forms, function(f){
+        f.addEventListener('submit', function(e){
+          // Formspree posts will proceed; local/demo forms show a message
+          if (f.getAttribute('action') === '#' ) {
+            e.preventDefault();
+            alert('Thanks — this is a demo. Submission disabled.');
+            f.reset();
+          }
+        });
+      });
+    })();
+
+    // Accessibility: quick key 'h' to return home
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'h' || e.key === 'H') { location.href = 'index.html'; }
+    });
+  </script>
 </body>
 </html>

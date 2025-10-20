@@ -5,17 +5,40 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Laboratory Services — SamITHealth</title>
   <meta name="description" content="SamITHealth Laboratory Services — lab startup, management, regulatory compliance, instrument services, RCM auditing and software solutions."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f4f7fb; --card:#ffffff; --muted:#586674; --accent:#0066ff; --accent-2:#0047d1;
-      --max:1200px; --radius:12px; --shadow:0 12px 40px rgba(6,18,45,0.08);
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --muted:#586674;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --max:1200px;
+      --radius:12px;
+      --shadow:0 12px 40px rgba(6,18,45,0.08);
+      --social-size:44px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:var(--bg); color:#07203b;}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--brand);-webkit-font-smoothing:antialiased}
     a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
     .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+
     /* Header */
-    .topbar{background:linear-gradient(90deg,#fff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .topbar{
+      background:linear-gradient(90deg,#fff,#f8fbff);
+      box-shadow:0 8px 28px rgba(12,25,48,0.06);
+      border-radius:14px;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
     .brand{display:flex;align-items:center;gap:14px}
     .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
     .brand-text{line-height:1}
@@ -25,9 +48,9 @@
     .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244}
     .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
     .header-ctas{display:flex;gap:12px;align-items:center}
-    .phone{font-weight:700;color:#0b2545}
     .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-    /* Hero */
+
+    /* Page layout */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;margin-top:22px}
     .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
     .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
@@ -35,7 +58,6 @@
     .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
     .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
     .decor-img{position:absolute;right:-30px;top:-30px;opacity:0.08;transform:rotate(-12deg);width:420px}
-    /* Services grid */
     .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
     .service-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
     .service-card img{width:100%;height:160px;object-fit:cover}
@@ -43,39 +65,72 @@
     .service-card h3{margin:0 0 8px;font-size:18px}
     .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
     .service-card .learn{margin-top:auto;padding-top:8px}
-    /* Case studies */
     .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
     .case-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
     .case-card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-    /* Sidebar */
     .aside{background:linear-gradient(135deg,rgba(0,102,255,0.04),rgba(0,71,209,0.02));padding:18px;border-radius:12px;height:100%;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
     .aside h4{margin:0 0 8px}
     .kpis{display:flex;gap:12px;margin-top:12px}
     .kpis .item{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.05);flex:1;text-align:center}
     .kpis .num{font-weight:800;font-size:18px}
-    /* Footer */
-    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center}
-    /* Responsive */
-    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr} .case-studies{grid-template-columns:1fr}}
-    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero-left .decor-img{display:none}}
+
+    /* Footer (adapted from consultancy.html) */
+    .site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.24);transition:transform .15s ease}
+    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.32)}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(2,6,23,0.25);z-index:999}
+
+    @media (max-width:1100px){
+      .services{grid-template-columns:repeat(2,1fr)}
+      .hero{grid-template-columns:1fr}
+      .case-studies{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      .services{grid-template-columns:1fr}
+      .nav{display:none}
+      .decor-img{display:none}
+      .footer-newsletter{text-align:left}
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <header class="topbar" role="banner">
-      <div class="brand">
-        <div class="logo-mark">SH</div>
-        <div class="brand-text"><div class="title">SamITHealth</div><div class="tag">Healthcare IT & Operations</div></div>
+    <!-- Header: clickable SH logo + SamITHealth (links to home). Phone removed for this page per request -->
+    <header class="topbar" role="banner" aria-label="Topbar">
+      <div class="brand" aria-hidden="false">
+        <a href="index.html" aria-label="SamITHealth home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">Healthcare IT & Operations</div>
+          </div>
+        </a>
       </div>
-      <nav class="nav" role="navigation">
+
+      <nav class="nav" role="navigation" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
         <a href="laboratory-services.html" class="active">Laboratory Services</a>
         <a href="contact.html">Contact</a>
       </nav>
-      <div class="header-ctas">
-        <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none"></a></div>
+
+      <div class="header-ctas" aria-hidden="false">
         <button class="btn-primary" onclick="location.href='contact.html'">Get a demo</button>
       </div>
     </header>
@@ -85,11 +140,11 @@
         <div class="hero-left">
           <div class="eyebrow">Laboratory Services</div>
           <h1 id="lab-heading">Comprehensive laboratory services — from startup to scale</h1>
-          <p class="lead">We provide end-to-end support for laboratories: business strategy, licensing & compliance, operational management, instrument services and connected software — all tailored for clinical, diagnostic and specialty labs.</p>
+          <p class="lead">We provide end-to-end support for laboratories: business strategy, licensing & compliance, operational management, instrument services and connected software — all tailored to your clinical and business needs.</p>
 
           <div class="cta-row">
             <button class="btn-primary" onclick="location.href='contact.html'">Request a consultation</button>
-            <a class="ghost" href="contact.html">View contact options</a>
+            <a class="ghost" href="contact.html" style="padding:8px 10px;color:var(--muted);border-radius:8px;border:1px solid rgba(0,0,0,0.04);">View contact options</a>
           </div>
 
           <img class="decor-img" src="https://images.unsplash.com/photo-1586773860416-8b1a3ed6e1b7?q=80&w=1200&auto=format&fit=crop" alt="Laboratory visualization" aria-hidden="true">
@@ -183,21 +238,81 @@
             <button class="btn-primary" onclick="location.href='contact.html'">Request consultation</button>
             <div style="margin-top:12px;font-size:14px;color:var(--muted)">
               <strong>Contact</strong><br>
-              <a href="mailto:info@samithealth.com">info@samithealth.com</a><br>
-              <a href="tel:+14703396027">+1 (470) 339-6027</a>
+              <a href="mailto:info@samithealth.com">info@samithealth.com</a>
+              <!-- Phone intentionally removed from this page per your 'B' request -->
             </div>
           </div>
         </aside>
       </section>
-
     </main>
 
-    <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-        <div>© 2025 SamITHealth — All rights reserved</div>
-        <div style="opacity:0.9">Careers: <a href="mailto:hr@samithealth.com">hr@samithealth.com</a></div>
+    <!-- Footer: consultancy.html adapted, improved social visuals and newsletter -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            </a>
+            <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+          </div>
+
+          <div>
+            <h4>Explore</h4>
+            <a href="provider-services.html">Provider Services</a><br>
+            <a href="payer-solutions.html">Payer Solutions</a><br>
+            <a href="lab-startup-services.html">Lab Startup</a><br>
+            <a href="consultancy.html">Consultancy</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22h-5v-6.7c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+            </a>
+
+            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.33 5.72A4.25 4.25 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.59 8.59 0 0 1 2 19.54 12.11 12.11 0 0 0 8.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.35-.02-.53A8.36 8.36 0 0 0 22.46 6z"/></svg>
+            </a>
+
+            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 12.8.2 14.5.2 14.5s.2 1.7.8 2.4c.8.9 1.9.9 2.5 1 1.8.2 7.6.5 7.6.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.7.2-3.5V9.8c0-1.9-.2-3.6-.2-3.6zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+            </a>
+          </nav>
+
+          <div class="footer-newsletter">
+            <div>Subscribe for RCM & lab operations insights</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+              <input aria-label="Email address" placeholder="Email address" type="email" required>
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
       </div>
+
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
     </footer>
+
+    <!-- Floating home button -->
+    <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
   </div>
+
+  <script>
+    // Demo forms: prevent submission in this demo copy
+    document.querySelectorAll('form[action="#"], form[action=""]').forEach(function(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        alert('This is a demo. Form submission disabled.');
+      });
+    });
+
+    // Keyboard shortcut: 'h' to go home
+    document.addEventListener('keydown', function(e){
+      if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey){
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
 </body>
 </html>

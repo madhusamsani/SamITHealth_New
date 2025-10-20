@@ -9,61 +9,144 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--accent:#0f62fe;--accent-2:#0b76d1;--radius:12px}
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0f62fe;
+      --accent-2:#0b76d1;
+      --radius:12px;
+      --max:1100px;
+      --shadow: 0 12px 40px rgba(6,18,45,0.06);
+      --social-size:44px;
+    }
     *{box-sizing:border-box}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;margin:0;background:var(--bg);color:#0f1724}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;margin:0;background:var(--bg);color:#0f1724;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
     header.header{background:#fff;border-bottom:1px solid #e6eef9}
-    .nav{display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:700;color:var(--accent);font-size:20px}
-    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand a{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+    .logo-mark{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{line-height:1}
+    .brand-text .title{font-weight:800;color:#07203b;font-size:18px}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    .navlinks{display:flex;gap:16px;align-items:center}
+    .navlinks a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px;border-radius:8px}
+    .navlinks a.active{background:rgba(15,98,254,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .phone{font-weight:700;color:#0b2545}
+    .cta-btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+
+    /* Layout */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:48px 0}
-    .hero-card{background:linear-gradient(180deg,rgba(15,98,254,0.06),rgba(11,118,209,0.03));padding:36px;border-radius:var(--radius)}
+    .hero-card{background:linear-gradient(180deg,rgba(15,98,254,0.06),rgba(11,118,209,0.03));padding:28px;border-radius:var(--radius);box-shadow:var(--shadow)}
     h1{margin:0 0 10px;font-size:32px}
     .lead{color:var(--muted);margin-bottom:18px}
     .stat-row{display:flex;gap:18px;margin-top:18px}
     .stat{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(12,36,60,0.04);min-width:110px}
     .stat strong{display:block;font-size:18px}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+
     .grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:18px}
     .card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 28px rgba(12,36,60,0.06)}
     .card img{width:100%;border-radius:10px;margin-bottom:14px}
     .section-title{margin:6px 0 12px;font-size:18px}
-    ul{padding-left:18px;color:var(--muted)}
-    .cta{background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+    .testimonial{background:linear-gradient(180deg,#0b76d1, #0f62fe);color:#fff;padding:18px;border-radius:12px}
+
+    /* Contact form */
     form input, form textarea{width:100%;padding:12px;border:1px solid #e6eef9;border-radius:8px;margin-bottom:10px;font-size:14px}
     .contact-form .contact-meta{font-size:13px;color:var(--muted);margin-bottom:12px}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-    .feature{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    .testimonial{background:linear-gradient(180deg,#0b76d1, #0f62fe);color:#fff;padding:18px;border-radius:12px}
-    footer.footer{padding:24px 0;margin-top:30px;border-top:1px solid #e6eef9}
-    @media (max-width:900px){.hero{grid-template-columns:1fr;}.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}.stat-row{flex-wrap:wrap}}
+
+    /* Footer (copied/adapted from consultancy) */
+    footer{background:#071735;color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+    footer img.logo{height:60px;margin-bottom:10px}
+    footer h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    footer p, footer a{color:rgba(230,238,252,0.9);font-size:15px;line-height:1.6;margin:6px 0}
+    footer a:hover{color:#9ec8ff}
+
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.24);transition:transform .15s ease,box-shadow .15s ease}
+    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.35)}
+
+    .footer-newsletter{max-width:340px;text-align:right;color:rgba(230,238,252,0.85)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+
+    .bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.7);text-align:center}
+
+    /* Floating home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(2,6,23,0.25);z-index:999}
+    .home-fab:focus{outline:2px solid #fff;outline-offset:2px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr 1fr}
+      .navlinks{display:none}
+      .footer-newsletter{text-align:left}
+    }
+    @media (max-width:600px){
+      .features{grid-template-columns:1fr}
+      .hero-card{padding:20px}
+    }
+
+    /* Small utilities */
+    .muted{color:var(--muted)}
+    .sr-only{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
   <header class="header">
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
+    <div class="container nav" role="banner" aria-label="Top navigation">
+      <div class="brand" aria-hidden="false">
+        <a href="index.html" aria-label="SamITHealth home">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">Form Conversion & Claims</div>
+          </div>
+        </a>
+      </div>
+
       <nav class="navlinks" aria-label="Main navigation">
-        <a href="#services">Services</a>
-        <a href="#benefits">Why Us</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="provider-services.html">Provider Services</a>
+        <a href="payer-solutions.html">Payer Solutions</a>
+        <a href="consultancy.html">Consultancy</a>
+        <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="header-ctas" aria-hidden="false">
+        <div class="phone"><a href="tel:+14703396025" style="color:inherit;text-decoration:none">+1 (470) 339-6025</a></div>
+        <button class="cta-btn" onclick="document.getElementById('contactForm').scrollIntoView({behavior:'smooth'})">Get a demo</button>
+      </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <section class="hero" aria-labelledby="hero-heading">
       <div>
         <h1 id="hero-heading">Enterprise-grade Form Conversion — CMS-1500 &amp; UB-04</h1>
         <p class="lead">Convert paper forms and legacy PDFs into clean, validated electronic claims that flow into your EHR / billing systems — faster, safer, and fully HIPAA-aligned.</p>
-        <div class="stat-row" role="list">
-          <div class="stat" role="listitem"><strong>99.8%</strong><span style="color:var(--muted)">Accuracy on data capture</span></div>
-          <div class="stat" role="listitem"><strong>30%</strong><span style="color:var(--muted)">Average reduction in denials</span></div>
-          <div class="stat" role="listitem"><strong>24h</strong><span style="color:var(--muted)">Initial turnaround for pilot</span></div>
+
+        <div class="stat-row" role="list" aria-label="Key statistics">
+          <div class="stat" role="listitem"><strong>99.8%</strong><span class="muted">Accuracy on data capture</span></div>
+          <div class="stat" role="listitem"><strong>30%</strong><span class="muted">Average reduction in denials</span></div>
+          <div class="stat" role="listitem"><strong>24h</strong><span class="muted">Initial turnaround for pilot</span></div>
         </div>
 
-        <div class="features" id="services">
+        <div class="features" id="services" aria-label="Services">
           <div class="feature">
             <h4 style="margin:0 0 6px">Structured Data Extraction</h4>
             <p style="margin:0;color:var(--muted)">OCR + rule-based validation to capture every required field, including conditional elements on UB-04 and CMS-1500.</p>
@@ -82,19 +165,110 @@
       <aside class="hero-card" aria-labelledby="contact">
         <h3 id="contact" class="section-title">Request a free consultation</h3>
         <p class="contact-meta">Tell us a little about your practice and goals. We'll propose a pilot and ROI estimate — no obligations.</p>
-        <form id="contactForm" novalidate>
+        <form id="contactForm" class="contact-form" novalidate>
           <label for="name" class="sr-only">Name</label>
           <input id="name" name="name" placeholder="Full name" required>
           <label for="email" class="sr-only">Email</label>
           <input id="email" name="email" type="email" placeholder="Work email" required>
-          <label for="org">Organization</label>
+          <label for="org" class="sr-only">Organization</label>
           <input id="org" name="org" placeholder="Organization / Practice">
-          <label for="message">Brief description of needs</label>
+          <label for="message" class="sr-only">Brief description</label>
           <textarea id="message" name="message" rows="5" placeholder="Volume, current workflow, systems you use..."></textarea>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button class="cta-btn" type="submit">Request consultation</button>
+            <button type="button" class="cta-btn" style="background:#fff;color:var(--accent);border:1px solid rgba(11,118,209,0.12)" onclick="location.href='mailto:info@healthcareitai.com'">Email us</button>
+          </div>
         </form>
         <p style="font-size:13px;color:var(--muted);margin-top:12px">We never share your information. Responses within one business day.</p>
       </aside>
     </section>
+
+    <section class="grid" aria-label="Details and testimonial">
+      <article class="card">
+        <h3 class="section-title">How it works</h3>
+        <p class="muted">We combine machine OCR, manual verification and payer rules to produce high-quality electronic claims. Outputs are validated against X12/EDI rules and tailored to your clearinghouse and EHR.</p>
+        <h4 style="margin-top:18px">Typical deliverables</h4>
+        <ul>
+          <li>Validated CMS-1500 & UB-04 conversions</li>
+          <li>EDI/X12-ready claim payloads</li>
+          <li>Denial dashboards and exception reports</li>
+        </ul>
+      </article>
+
+      <aside class="card testimonial" aria-labelledby="testimonial-heading">
+        <h4 id="testimonial-heading" style="color:#fff;margin:0 0 8px">Client success</h4>
+        <p style="margin:0 0 12px">"SamITHealth reduced our manual form-processing time by 72% and cut denials by 28% in 90 days." — Large ambulatory network</p>
+        <p style="opacity:0.9;font-size:13px">Ask us about a pilot — we can usually return sample conversions within 48 hours.</p>
+      </aside>
+    </section>
   </main>
+
+  <!-- Footer: taken from consultancy page and adapted with improved social visuals + newsletter -->
+  <footer role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" style="display:inline-block" aria-label="SamITHealth home (logo)">
+            <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <!-- LinkedIn SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22h-5v-6.7c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+          </a>
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <!-- Twitter SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.33 5.72A4.25 4.25 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.59 8.59 0 0 1 2 19.54 12.11 12.11 0 0 0 8.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.35-.02-.53A8.36 8.36 0 0 0 22.46 6z"/></svg>
+          </a>
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <!-- YouTube SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4s.2 1.7.2 3.5V9.8c0 1.9.2 3.6.2 3.6s.2 1.7.8 2.4c.8.9 1.9.9 2.5 1 1.8.2 7.6.5 7.6.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.7.2-3.5V9.8c0-1.9-.2-3.6-.2-3.6zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter">
+          <div>Subscribe for RCM & health-tech insights</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription disabled in this demo.');">
+            <input aria-label="Email" placeholder="Email address" type="email" required>
+            <button class="cta-btn" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
+  </footer>
+
+  <!-- Floating quick-home button -->
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <script>
+    // lightweight form behavior for demo
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = document.getElementById('status');
+      alert('Thanks — we received your request. Our team will contact you within 1 business day.');
+      this.reset();
+    });
+
+    // small accessibility: keyboard shortcut 'h' returns home (optional)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'h' || e.key === 'H') {
+        location.href = 'index.html';
+      }
+    });
+  </script>
 </body>
 </html>
