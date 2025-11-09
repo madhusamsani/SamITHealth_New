@@ -4,14 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SamITHealth — RCM Solutions</title>
-  <meta name="description" content="SamITHealth Revenue Cycle Management (RCM) solutions: end-to-end coding, billing, denial management, and analytics that improve cash flow, reduce denials and increase revenue capture." />
+  <meta name="description" content="SamITHealth Revenue Cycle Management (RCM) solutions: end-to-end coding, billing, denial management, and analytics that improve cash flow, reduce denials and increase recovery."/>
   <style>
     :root{
+      /* unified palette to match provider-services visuals */
       --navy:#0b2545;
-      --teal:#0fa3a3;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
       --muted:#6b7280;
       --card:#f8fafc;
-      --max-width:1100px;
+      --max-width:1200px; /* increased to match provider page */
       --radius:12px;
       --panel-bg:#f0eefc;
       font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
@@ -19,13 +22,23 @@
     *{box-sizing:border-box}
     body{margin:0;color:#0f172a;line-height:1.6;background:#ffffff}
     .container{max-width:var(--max-width);margin:0 auto;padding:32px}
-    header{background:linear-gradient(180deg,var(--navy),#09203a);color:#fff}
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 32px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img{height:44px;width:44px;object-fit:contain;border-radius:8px;background:#fff;padding:6px}
-    nav a{color:rgba(255,255,255,0.9);text-decoration:none;margin-left:18px;font-weight:600}
+    /* Header layout updated to match provider-services.html */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;text-decoration:none}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .ghost{color:var(--muted);font-weight:600}
 
-    .hero{padding:48px 32px;text-align:left}
+    /* Keep original hero and content styles */
+    .hero{padding:48px 32px;text-align:left;background:linear-gradient(180deg,var(--navy),#09203a);color:#fff}
     .hero h1{font-size:36px;margin:0 0 12px}
     .hero p{color:rgba(255,255,255,0.9);margin:0 0 20px;max-width:70%}
 
@@ -43,61 +56,93 @@
 
     form{background:#f9fafb;padding:24px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.05);max-width:480px}
     form input,form textarea{width:100%;padding:10px;margin-bottom:14px;border-radius:8px;border:1px solid #d1d5db;font-size:15px}
-    form button{background:var(--teal);color:#fff;font-weight:700;border:none;padding:12px 20px;border-radius:8px;cursor:pointer}
+    form button{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;border:none;padding:12px 20px;border-radius:8px;cursor:pointer}
     form button:hover{background:#0c8e8e}
 
     .case-studies{margin-top:28px}
     .case{display:flex;gap:18px;background:#fff;border-radius:10px;padding:18px;align-items:center;border:1px solid #eef2f7}
     .case img{width:120px;height:80px;object-fit:cover;border-radius:8px}
 
-    footer{border-top:1px solid #e6eef6;padding:28px 32px;margin-top:40px;color:var(--muted)}
+    /* Footer: provider-services style (copied/adapted) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .socials a svg{width:18px;height:18px;fill:#fff;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px)}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating SH home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(2,6,23,0.18);z-index:200}
+
+    footer .no-phone{color:rgba(230,238,252,0.85);opacity:0.9}
 
     @media (max-width:980px){
       .grid{grid-template-columns:1fr}
       .features{grid-template-columns:1fr}
       .hero p{max-width:100%}
+      .header-inner{padding:12px}
+      nav.primary{display:none}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="topbar container">
-      <div class="brand">
-        <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="SamITHealth logo placeholder" />
-        <div>
-          <div style="font-weight:800;letter-spacing:0.2px">SamITHealth</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.8)">Enterprise RCM & Health IT Solutions</div>
+  <!-- Header redesigned and aligned to match provider-services.html -->
+  <header class="site-header" role="banner" aria-label="Main header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">Enterprise RCM & Health IT Solutions</div>
         </div>
-      </div>
-      <nav>
-        <a href="https://healthcareitai.com/index.html" target="_blank">Home</a>
-        <a href="#solutions">Solutions</a>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="#solutions" class="active">Solutions</a>
         <a href="#case-studies">Case Studies</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-    </div>
 
-    <div class="hero container">
+      <div class="header-ctas" aria-hidden="false">
+        <!-- phone intentionally omitted on this page -->
+        <button class="btn-primary" onclick="location.href='#contact'">Contact Sales</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
       <h1>Revenue Cycle Management crafted for modern healthcare</h1>
-      <p>SamITHealth's RCM suite transforms billing operations from claim submission through payment posting with deep domain expertise, modern automation, and a compliance-first approach — so providers spend less time chasing revenue and more time on care.</p>
+      <p>SamITHealth's RCM suite transforms billing operations from claim submission through payment posting with deep domain expertise, modern automation, and a compliance-first approach — so providers can focus on care and revenue integrity.</p>
 
       <div class="long-desc">
         <h2 style="margin-top:0">Comprehensive RCM — long description</h2>
-        <p class="muted">SamITHealth delivers an integrated Revenue Cycle Management offering that combines specialized clinical coding, payer-smart claims scrubbing, proactive denials prevention, medical necessity checks, and advanced analytics to optimize cash flow and operational efficiency. Our team blends certified coders, physician advisors, and seasoned revenue cycle managers with AI-enabled automation to reduce manual work, accelerate claims turnaround, and improve reimbursement accuracy across ambulatory, acute and specialty practices.</p>
-        <p class="muted">Key ecosystem touchpoints include: patient access and eligibility verification; point-of-care capture and charge entry; ICD/CPT/HCPCS coding and clinical documentation improvement (CDI); claims submission with payer-specific edits; AR follow-up with root-cause analysis; denial appeals and recovery; and robust reporting that ties KPI improvements to financial outcomes. SamITHealth supports hybrid deployments — fully managed, co-managed, or technology-only — and helps clients converge people, process, and platform into a resilient revenue engine.</p>
+        <p class="muted">SamITHealth delivers an integrated Revenue Cycle Management offering that combines specialized clinical coding, payer-smart claims scrubbing, proactive denials prevention, medical necessity validation, and data-driven AR workflows.</p>
+        <p class="muted">Key ecosystem touchpoints include: patient access and eligibility verification; point-of-care capture and charge entry; ICD/CPT/HCPCS coding and clinical documentation improvement; claims scrubbing and payer rules; denials prevention and appeals; and revenue analytics that connect to financial reconciliation.</p>
       </div>
 
       <div class="features">
         <div class="feature">
-          <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Coding" />
+          <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?q=80&w=400&auto=format&fit=crop" alt="Coding" />
           <div>
             <strong>Coding & CDI</strong>
             <div class="muted">Certified coders and CDI specialists ensure compliant, complete clinical capture for optimal reimbursement.</div>
           </div>
         </div>
         <div class="feature">
-          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Analytics" />
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop" alt="Analytics" />
           <div>
             <strong>Analytics & Insights</strong>
             <div class="muted">Role-based dashboards and predictive models surface the highest-impact interventions and track recovery ROI.</div>
@@ -105,7 +150,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </div>
 
   <main class="container">
     <section id="solutions">
@@ -144,15 +189,15 @@
     <section id="case-studies" class="case-studies">
       <h2 style="margin-top:36px">Selected Case Studies</h2>
       <div class="case" style="margin-top:12px">
-        <img src="https://images.unsplash.com/photo-1586773860416-7b6b9b3f8c1e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Hospital case study"/>
+        <img src="https://images.unsplash.com/photo-1586773860416-7b6b9b3f8c1e?q=80&w=800&auto=format&fit=crop" alt="Hospital case study"/>
         <div>
           <strong>Large Regional Health System — 18% increase in net collections</strong>
-          <div class="muted">SamITHealth implemented co-managed coding, automated claims scrubbing and AR prioritization. Within 9 months the client saw an 18% increase in net collections and a 26% reduction in days in AR.</div>
+          <div class="muted">SamITHealth implemented co-managed coding, automated claims scrubbing and AR prioritization. Within 9 months the client saw an 18% increase in net collections and a 26% reduction in DNFB.</div>
         </div>
       </div>
 
       <div class="case" style="margin-top:12px">
-        <img src="https://images.unsplash.com/photo-1580281657527-3a8a7a19a8f4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Specialty clinic"/>
+        <img src="https://images.unsplash.com/photo-1580281657527-3a8a7a19a8f4?q=80&w=800&auto=format&fit=crop" alt="Specialty clinic"/>
         <div>
           <strong>Multi-specialty Clinic — 37% reduction in denials</strong>
           <div class="muted">Through focused CDI, real-time payer guidance, and denial appeals, the clinic reduced administrative burden and restored revenue from previously underpaid claims.</div>
@@ -162,7 +207,7 @@
 
     <section id="about" style="margin-top:36px">
       <h2>About SamITHealth</h2>
-      <p class="muted">SamITHealth combines healthcare domain expertise with a modern technology backbone to deliver resilient revenue operations. We are HIPAA-compliant, SOC-ready, and follow payer-specific rules across all major commercial and government payers. Our global delivery model is designed to be flexible — supporting onsite, nearshore and offshore arrangements as needed by our clients.</p>
+      <p class="muted">SamITHealth combines healthcare domain expertise with a modern technology backbone to deliver resilient revenue operations. We are HIPAA-compliant, SOC-ready, and follow payer-specific rules to minimize risk and maximize collections.</p>
 
       <div style="display:flex;gap:18px;margin-top:18px;flex-wrap:wrap">
         <div class="card" style="flex:1;min-width:240px">
@@ -195,17 +240,60 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-      <div>
-        <strong>SamITHealth</strong>
-        <div class="muted">Transforming revenue cycles with people, process and platform.</div>
+  <!-- FOOTER: copied/adapted from provider-services.html (phone removed for this page) -->
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div class="muted">123 Corporate Ave · City, State · +1 (555) 123-4567</div>
-        <div class="muted" style="margin-top:6px">© SamITHealth — All rights reserved.</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+            <!-- LinkedIn SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+          </a>
+
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+            <!-- Twitter SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+            <!-- YouTube SVG -->
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13 0 14.4.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.8c0-.1 0-.1 0-.1zM9.8 13.8V7.8l5.1 3-5.1 3z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter" aria-label="Newsletter sign up">
+          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+            <input aria-label="Email address" placeholder="Email address" type="email" required>
+            <button class="btn" type="submit" style="background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:8px 12px;border-radius:8px;border:0">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <!-- Phone removed from footer for this page (kept site-wide contact elsewhere) -->
+    <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <!-- Floating quick-home button -->
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
 </body>
 </html>

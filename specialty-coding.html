@@ -5,52 +5,118 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Specialty Medical Coding — SamITHealth</title>
   <meta name="description" content="Specialty medical coding services: certified coders, DRG/ICD-10/CPT expertise, denial prevention, and revenue protection for specialty practices and hospitals.">
-  <link rel="preconnect" href="https://images.unsplash.com">
   <style>
-    :root{--accent:#0066cc;--muted:#6b7280;--bg:#f7fbff;--card:#ffffff;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    :root{
+      /* Unified site palette to match provider-services */
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --muted:#586674;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --max:1200px;
+      --radius:12px;
+      --shadow:0 12px 40px rgba(6,18,45,0.06);
+      --social-size:44px;
+      --gap:20px;
+      --legal-font:13px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{background:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;margin-top:22px}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#0b1220;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Header (copied style & alignment from provider-services) */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .ghost{color:var(--muted);font-weight:600}
+
+    /* Page layout */
+    .container{max-width:var(--max);margin:0 auto;padding:28px}
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;margin-top:22px}
     .hero-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:32px;border-radius:12px;box-shadow:0 8px 26px rgba(2,6,23,0.04)}
-    h1{font-size:28px;margin:0 0 8px}
+    h1{font-size:30px;margin:0 0 10px}
     .lead{color:var(--muted);font-size:15px;margin:0 0 14px}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:10px 16px;border-radius:9px;border:none;font-weight:700;text-decoration:none}
+    .cta{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 16px;border-radius:9px;border:none;font-weight:700;text-decoration:none}
+
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-    .feature{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
-    .feature h4{margin:0 0 6px;font-size:15px}
-    .feature p{margin:0;color:var(--muted);font-size:13px}
-    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
-    .right-card .card-body{padding:12px}
+    .feature{background:var(--panel);padding:12px;border-radius:10px;border:1px solid #eef6ff;display:flex;gap:12px;align-items:flex-start}
+    .feature img{height:56px;width:56px;border-radius:10px;object-fit:cover}
+
     .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
-    .service{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .service{background:var(--panel);padding:14px;border-radius:10px;border:1px solid #eef6ff}
     .service h3{margin:0 0 6px;font-size:16px}
     .service p{margin:0;color:var(--muted);font-size:13px}
+
     .long-desc{margin-top:20px;background:linear-gradient(180deg,#fff,#fcfeff);padding:18px;border-radius:10px;border:1px solid #eaf3ff}
-    .long-desc p{color:var(--muted);font-size:14px}
     .grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:18px}
-    .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    form input,form textarea{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
+    .card{background:var(--panel);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    form input,form textarea,form select{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
     label{font-weight:600;font-size:13px;color:#243044}
-    footer{margin-top:34px;padding:22px 0;color:var(--muted);font-size:13px}
+
+    /* KPI panel & charts */
+    .kpi-row{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap}
+    .kpi{background:var(--panel);padding:14px;border-radius:10px;flex:1;min-width:160px;box-shadow:0 8px 24px rgba(2,6,23,0.04);text-align:center}
+    .kpi .num{font-size:22px;font-weight:800;color:var(--accent)}
+    .kpi .label{color:var(--muted);font-size:13px;margin-top:6px}
+
+    .charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+    .chart-card{background:var(--panel);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+
+    /* footer (provider style) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .socials a svg{width:18px;height:18px;fill:#fff;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(2,6,23,0.18);z-index:200}
+
     @media (max-width:980px){
       .hero{grid-template-columns:1fr}
       .services{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      nav{padding:12px}
+      .charts{grid-template-columns:1fr}
+      nav.primary{display:none}
+      .header-inner{padding:12px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav>
+  <!-- Header (aligned like provider-services) -->
+  <header class="site-header" role="banner" aria-label="Main header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">Specialty Coding & RCM</div>
+        </div>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
@@ -58,31 +124,304 @@
         <a href="what-makes-us-unique.html">Why Us</a>
         <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="header-ctas" aria-hidden="false">
+        <!-- phone intentionally removed on this page -->
+        <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
+      </div>
     </div>
   </header>
+
   <main class="container">
-    <section class="hero">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-card">
-        <h1>Specialty Medical Coding — Accurate. Compliant. Specialized.</h1>
-        <p class="lead">Certified specialty coders for cardiology, oncology, radiology, pathology, behavioral health and other complex clinical domains — improving reimbursement and reducing audit risk.</p>
+        <h1 id="hero-heading">Specialty Medical Coding — Accurate. Compliant. Specialized.</h1>
+        <p class="lead">Certified specialty coders for cardiology, oncology, radiology, pathology, behavioral health and other complex clinical domains — improving reimbursement, reducing audit risk and supporting revenue integrity across clinical programs.</p>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature">
+            <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?q=80&w=400&auto=format&fit=crop" alt="Certified coders">
+            <div>
+              <h4>Certified Coders</h4>
+              <p class="muted">AHIMA/AAPC-certified teams with deep specialty experience and continuous QA.</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=400&auto=format&fit=crop" alt="Analytics & QA">
+            <div>
+              <h4>Analytics & QA</h4>
+              <p class="muted">Automated quality checks, targeted audits and data-driven remediation workflows.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <a class="cta" href="#contact">Request a Coding Review</a>
+          <a class="ghost" href="specialty-coding-pricing.html" style="margin-left:12px;padding:10px 14px;border-radius:9px;border:1px solid #e6eef6;background:transparent;color:var(--muted);text-decoration:none">Pricing & Models</a>
+        </div>
+
+        <!-- KPI quick row -->
+        <div class="kpi-row" role="region" aria-label="Key performance indicators" style="margin-top:18px">
+          <div class="kpi">
+            <div class="num">98%</div>
+            <div class="label">Coding Accuracy (avg)</div>
+          </div>
+          <div class="kpi">
+            <div class="num">37%</div>
+            <div class="label">Denial Reduction (typical)</div>
+          </div>
+          <div class="kpi">
+            <div class="num">+12%</div>
+            <div class="label">Net Collections Lift</div>
+          </div>
+        </div>
       </div>
-      <aside class="right-card card">
+
+      <aside class="right-card card" aria-labelledby="review-cta">
         <img src="https://images.unsplash.com/photo-1586772005935-1d98a1c2a4b7?q=80&w=1200&auto=format&fit=crop" alt="Clinicians reviewing charts">
         <div class="card-body">
-          <h3>Request a coding review</h3>
-          <p style="color:var(--muted);font-size:13px;margin-top:6px">Upload a sample chart or describe the specialty area and we'll provide a short assessment of coding opportunities and risk.</p>
+          <h3 id="review-cta">Request a coding review</h3>
+          <p style="color:var(--muted);font-size:13px;margin-top:6px">Upload a sample chart or describe the specialty area and we'll provide a short assessment of coding opportunities and risk, plus a sample QA report.</p>
           <a class="cta" href="#contact">Get started</a>
         </div>
       </aside>
     </section>
+
+    <!-- SERVICES -->
+    <section class="services" aria-labelledby="services-heading">
+      <h2 id="services-heading">Specialty Coding Services</h2>
+      <div class="service">
+        <h3>Cardiology Coding</h3>
+        <p class="muted">Procedural coding, device and cath lab capture, and code-to-charge validation for high-complexity workflows.</p>
+      </div>
+      <div class="service">
+        <h3>Oncology Coding</h3>
+        <p class="muted">Infusion/chemotherapy capture, staging and multimodal documentation alignment.</p>
+      </div>
+      <div class="service">
+        <h3>Radiology & Pathology</h3>
+        <p class="muted">Imaging procedure coding, modifier guidance and pathology specimen documentation support.</p>
+      </div>
+    </section>
+
+    <!-- METHODOLOGY & DETAILS -->
+    <section class="long-desc" aria-labelledby="method-heading">
+      <h2 id="method-heading">How we deliver — methodology & governance</h2>
+      <p class="muted">Our specialty coding engagements combine domain experts, workflow integration, and measurement. Typical engagement steps:</p>
+      <ol style="color:var(--muted)">
+        <li>Discovery & chart/sample review — baseline accuracy and risk assessment</li>
+        <li>Staffing & team alignment — specialty coder pool and clinician review</li>
+        <li>Workflows & tooling — EHR interfaces, coding worklists, QA dashboards</li>
+        <li>Quality assurance & training — continuous audit cycles and targeted training</li>
+        <li>Reporting & handoff — KPI dashboards and executive summaries</li>
+      </ol>
+      <p class="muted">Deliverables include weekly QA reports, monthly executive dashboards, denial root-cause analyses, and training packs tailored to specialty areas.</p>
+    </section>
+
+    <!-- CHARTS: coding accuracy by specialty, denial trend, revenue impact donut -->
+    <section aria-label="Representative charts">
+      <h2>Representative charts & trends</h2>
+      <div class="charts" role="region" aria-label="Charts">
+        <!-- Bar chart: Coding accuracy by specialty -->
+        <div class="chart-card" aria-label="Coding accuracy by specialty">
+          <h3 style="margin-top:0">Coding Accuracy by Specialty</h3>
+          <svg viewBox="0 0 300 180" width="100%" height="200" role="img" aria-label="Bar chart showing coding accuracy by specialty">
+            <style>
+              .bar { fill: var(--accent); }
+              .label { fill:#374151; font-size:11px; text-anchor:middle; }
+              .gridline { stroke:#f1f7ff; stroke-width:0.8; }
+            </style>
+            <!-- grid -->
+            <g>
+              <line class="gridline" x1="40" y1="20" x2="290" y2="20"/>
+              <line class="gridline" x1="40" y1="60" x2="290" y2="60"/>
+              <line class="gridline" x1="40" y1="100" x2="290" y2="100"/>
+              <line class="gridline" x1="40" y1="140" x2="290" y2="140"/>
+            </g>
+            <!-- y labels -->
+            <text x="10" y="24" font-size="10" fill="#6b7280">100%</text>
+            <text x="10" y="64" font-size="10" fill="#6b7280">80%</text>
+            <text x="10" y="104" font-size="10" fill="#6b7280">60%</text>
+            <text x="10" y="144" font-size="10" fill="#6b7280">40%</text>
+            <!-- bars (mock values) -->
+            <rect class="bar" x="52" y="26" width="30" height="118" rx="4"></rect>
+            <rect class="bar" x="98" y="38" width="30" height="106" rx="4"></rect>
+            <rect class="bar" x="144" y="50" width="30" height="94" rx="4"></rect>
+            <rect class="bar" x="190" y="44" width="30" height="100" rx="4"></rect>
+            <rect class="bar" x="236" y="30" width="30" height="114" rx="4"></rect>
+            <!-- x labels -->
+            <text class="label" x="67" y="162">Cardio</text>
+            <text class="label" x="113" y="162">Onc</text>
+            <text class="label" x="159" y="162">Rad</text>
+            <text class="label" x="205" y="162">Path</text>
+            <text class="label" x="251" y="162">Behav</text>
+          </svg>
+          <p style="color:var(--muted);font-size:13px;margin-top:8px">Accuracy shown as percent of charts coded without downstream edits. Typical accuracy ranges 88–98% across specialties.</p>
+        </div>
+
+        <!-- Line chart: Denial trend over 12 months -->
+        <div class="chart-card" aria-label="Denial trend chart">
+          <h3 style="margin-top:0">Denial Rate — 12 month trend</h3>
+          <svg viewBox="0 0 300 180" width="100%" height="200" role="img" aria-label="Line chart showing denial rate trend">
+            <style>
+              .line { fill:none; stroke:var(--accent-2); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+              .area { fill:rgba(0,102,255,0.08); }
+              .axis { stroke:#eef4ff; stroke-width:0.7; }
+              .tick { fill:#9ca3af; font-size:10px; }
+            </style>
+            <!-- grid -->
+            <g>
+              <line class="axis" x1="40" y1="20" x2="290" y2="20"/>
+              <line class="axis" x1="40" y1="60" x2="290" y2="60"/>
+              <line class="axis" x1="40" y1="100" x2="290" y2="100"/>
+              <line class="axis" x1="40" y1="140" x2="290" y2="140"/>
+            </g>
+            <!-- months labels -->
+            <text class="tick" x="48" y="170">Jan</text>
+            <text class="tick" x="80" y="170">Feb</text>
+            <text class="tick" x="112" y="170">Mar</text>
+            <text class="tick" x="144" y="170">Apr</text>
+            <text class="tick" x="176" y="170">May</text>
+            <text class="tick" x="208" y="170">Jun</text>
+            <text class="tick" x="240" y="170">Jul</text>
+            <text class="tick" x="272" y="170">Aug</text>
+            <!-- area + line path (mock values) -->
+            <path class="area" d="M40 130 C70 110 100 90 130 92 C160 94 190 84 220 78 C250 72 280 66 290 60 L290 160 L40 160 Z" />
+            <path class="line" d="M40 128 C70 108 100 88 130 90 C160 92 190 82 220 76 C250 70 280 64 290 58" />
+          </svg>
+          <p style="color:var(--muted);font-size:13px;margin-top:8px">Denial rate (percent of clean claims denied) trend shown. Our remediation programs typically reduce denial rate by 20–40% over 6–9 months.</p>
+        </div>
+
+        <!-- Donut chart: Revenue impact -->
+        <div class="chart-card" style="grid-column:1 / -1;">
+          <h3 style="margin-top:0">Representative Revenue Impact</h3>
+          <div style="display:flex;gap:18px;align-items:center">
+            <svg viewBox="0 0 42 42" width="120" height="120" aria-hidden="true" style="flex:0 0 120px">
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#eef4ff" stroke-width="6"></circle>
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--accent)" stroke-width="6" stroke-dasharray="60 40" stroke-dashoffset="25"></circle>
+              <circle cx="21" cy="21" r="9.5" fill="#071735"></circle>
+            </svg>
+            <div style="font-size:14px;color:var(--muted)">
+              <div><strong>+12%</strong> Net collections lift (median)</div>
+              <div style="margin-top:6px"><strong>40%</strong> Coding accuracy uplift contribution</div>
+              <div style="margin-top:6px"><strong>35%</strong> Denial reduction contribution</div>
+              <div style="margin-top:6px"><strong>25%</strong> Process & AR improvements</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DELIVERY & DELIVERABLES -->
+    <section aria-labelledby="deliverables-heading" style="margin-top:22px">
+      <h2 id="deliverables-heading">Sample deliverables</h2>
+      <ul style="color:var(--muted)">
+        <li>Weekly coding accuracy reports (by coder & specialty)</li>
+        <li>Denial root-cause analysis & appeal playbooks</li>
+        <li>Monthly executive dashboard (trend, KPI, ROI)</li>
+        <li>Training packs & clinician feedback loops</li>
+        <li>Audit-ready documentation and defensible coding rationale</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="margin-top:22px" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Request a specialty coding review</h2>
+      <div class="grid">
+        <div>
+          <p class="muted">Complete the form and attach a sample (optional). We return a short assessment and recommended next steps.</p>
+          <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" enctype="multipart/form-data">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required placeholder="Your full name" />
+
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="Hospital / Clinic / Group">
+
+            <label for="specialty">Specialty area</label>
+            <input type="text" id="specialty" name="specialty" placeholder="e.g., Cardiology, Oncology">
+
+            <label for="sample">Attach sample chart (optional)</label>
+            <input type="file" id="sample" name="sample" accept=".pdf,.doc,.docx,.txt">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Describe sample, volumes, concerns..."></textarea>
+
+            <button type="submit" class="btn-primary">Send request</button>
+          </form>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3>Why SamITHealth</h3>
+            <ul style="margin:8px 0 0 18px;color:var(--muted)">
+              <li>Specialty-certified coder pools</li>
+              <li>ISO/SOC/HIPAA-aware processes</li>
+              <li>Integrated analytics and QA dashboards</li>
+            </ul>
+            <div style="margin-top:12px">
+              <a class="ghost" href="provider-services.html">Explore Provider Services</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+
+  <!-- FOOTER (provider-services style) -->
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p style="color:rgba(230,238,252,0.95)">We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+          </a>
+
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13 0 14.4.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.8c0-.1 0-.1 0-.1zM9.8 13.8V7.8l5.1 3-5.1 3z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter" aria-label="Newsletter sign up">
+          <div style="color:rgba(230,238,252,0.95)">Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+            <input aria-label="Email address" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <!-- Floating quick-home button -->
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
 </body>
 </html>
