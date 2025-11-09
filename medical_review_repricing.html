@@ -6,15 +6,15 @@
   <title>SamITHealth — Medical Review & Repricing</title>
   <meta name="description" content="Medical Review & Repricing — data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing." />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
-    /* ORIGINAL PAGE VARIABLES & CORE STYLES (kept unchanged to preserve data visuals/behavior) */
+    /* PRESERVE ORIGINAL COLORS & DATA STYLES */
     :root{
       --navy:#0b2545; --teal:#0aa89e; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
-    .container{max-width:1200px;margin:28px auto;padding:20px}
-    header.orig-header{display:flex;gap:14px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px 28px}
+    /* Original page visuals (kept to avoid data changes) */
     h1{margin:0;font-size:20px}
     p.lead{margin:0;color:var(--muted);font-size:13px}
     .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
@@ -38,59 +38,47 @@
     button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
     @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-    /* ---------------------------
-       HEADER & FOOTER STYLES copied from provider-services.html
-       (only header & footer visuals/layout added — page data/scripts unchanged)
-       --------------------------- */
+    /* HEADER: redesigned to match provider-services.html alignment and spacing */
     :root{
-      --ps-bg:#f4f7fb;
-      --ps-paper:#ffffff;
-      --ps-muted:#586674;
-      --ps-brand:#07203b;
       --ps-accent:#0066ff;
       --ps-accent-2:#0047d1;
-      --ps-max:1200px;
-      --ps-radius:12px;
-      --ps-shadow:0 12px 40px rgba(6,18,45,0.06);
+      --ps-brand:#07203b;
+      --ps-muted:#586674;
     }
-    /* header */
     header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
-    .header-inner{max-width:var(--ps-max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    /* ensure header-inner uses same max width as page container for perfect centering */
+    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex:0 0 56px}
+    .brand-text{display:flex;flex-direction:column;line-height:1}
     .brand-text .title{font-weight:800;font-size:18px;color:var(--ps-brand)}
     .brand-text .tag{font-size:12px;color:var(--ps-muted)}
     nav.primary{display:flex;gap:12px;align-items:center}
-    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--ps-muted);font-weight:600}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--ps-muted);font-weight:600;text-decoration:none}
     nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--ps-accent-2)}
     .header-ctas{display:flex;gap:12px;align-items:center}
     .btn-primary{background:linear-gradient(90deg,var(--ps-accent),var(--ps-accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 
-    /* footer */
+    /* small responsive adjustments to keep header layout consistent with provider-services */
+    @media (max-width:720px){
+      nav.primary{display:none}
+      .brand-text .title{font-size:16px}
+      .logo-mark{width:48px;height:48px}
+    }
+
+    /* Footer styling (copied from provider-services, kept minimal) */
     footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
-    .footer-inner{max-width:var(--ps-max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
     .footer-logo{height:60px;margin-bottom:10px;display:block}
-    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
-    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
     .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s}
-    .socials a svg{width:18px;height:18px;fill:#fff}
-    .socials a.linkedin{background:#0A66C2}
-    .socials a.twitter{background:#1DA1F2}
-    .socials a.youtube{background:#FF0000}
-    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.32)}
-    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
-    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
-
-    /* floating home button */
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none}
     .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- HEADER replaced with provider-services style header (phone intentionally omitted on this page) -->
+    <!-- HEADER: aligned and structured identical to provider-services.html -->
     <header class="site-header" role="banner" aria-label="Main header">
       <div class="header-inner">
         <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
@@ -112,24 +100,22 @@
         </nav>
 
         <div class="header-ctas" aria-hidden="false">
-          <!-- phone intentionally omitted on this page -->
+          <!-- phone intentionally omitted on this page (keeps parity with provider-services.html) -->
           <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
         </div>
       </div>
     </header>
 
-    <!-- RETAINED ORIGINAL page header/content (no data changed) -->
-    <div style="max-width:1200px;margin:18px auto 0;padding:0 20px">
-      <div style="display:flex;gap:14px;align-items:center;margin-top:14px">
-        <div class="logo" aria-hidden="true">SIH</div>
-        <div>
-          <h1>Medical Review &amp; Repricing — SamITHealth</h1>
-          <p class="lead">Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
-        </div>
+    <!-- ORIGINAL PAGE HEADER (kept but visually integrated under the new header) -->
+    <div style="display:flex;gap:14px;align-items:center;margin:18px 0">
+      <div class="logo" aria-hidden="true" style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700"></div>
+      <div>
+        <h1>Medical Review &amp; Repricing — SamITHealth</h1>
+        <p class="lead">Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
       </div>
     </div>
 
-    <div class="grid" style="max-width:1200px;margin:18px auto;padding:0 20px;">
+    <div class="grid">
       <main class="longlist">
 
         <section class="card">
@@ -217,7 +203,7 @@
       </aside>
     </div>
 
-    <!-- FOOTER replaced with provider-services footer (visuals & links); newsletter intercept kept minimal -->
+    <!-- FOOTER: provider-services style footer (visuals only; data unchanged) -->
     <footer class="site-footer" role="contentinfo" aria-label="Footer" style="margin-top:18px;">
       <div class="footer-inner">
         <div class="footer-content">
@@ -262,7 +248,7 @@
         </div>
       </div>
 
-      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
+      <div class="footer-bottom" style="text-align:center;color:rgba(230,238,252,0.75);margin-top:24px;padding-top:18px">© 2025 SamITHealth. All rights reserved.</div>
     </footer>
 
     <!-- Floating quick-home button -->
@@ -271,7 +257,7 @@
   </div>
 
   <script>
-    /* ORIGINAL JAVASCRIPT / DATA — LEFT unchanged as requested */
+    /* ORIGINAL JAVASCRIPT / DATA — LEFT UNCHANGED */
     const now=new Date();
     function genSeries(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),billed:Math.round(500000+Math.random()*300000),allowed:Math.round(500000+Math.random()*200000),repriced:Math.round(500000+Math.random()*150000)})}return out}
     let series90 = genSeries(90);
@@ -349,8 +335,8 @@
     document.getElementById('rp-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);series90 = genSeries(days);repChart.data.labels = series90.map(r=>r.date);repChart.data.datasets[0].data = series90.map(r=>r.billed);repChart.data.datasets[1].data = series90.map(r=>r.allowed);repChart.data.datasets[2].data = series90.map(r=>r.repriced);repChart.update();renderKPIs();setSynced();});
   </script>
 
-  <!-- keep the original small footer (last synced badge) near end to preserve original file structure -->
-  <footer style="margin-top:18px;color:var(--muted);font-size:12px;max-width:1200px;margin-left:auto;margin-right:auto;padding:8px 20px;">
+  <!-- small original last-synced footer area preserved -->
+  <footer style="margin-top:12px;color:var(--muted);font-size:12px;max-width:1200px;margin-left:auto;margin-right:auto;padding:8px 20px;">
     Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing
   </footer>
 </body>
