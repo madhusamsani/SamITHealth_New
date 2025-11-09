@@ -23,7 +23,7 @@
       --footer-bg: #071735;
     }
 
-    /* Base / Desktop-first rules retained, mobile improvements below */
+    /* Base styles */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--brand);-webkit-font-smoothing:antialiased}
@@ -46,7 +46,7 @@
     .btn-primary:hover{transform:translateY(-2px)}
     .ghost{color:var(--muted);font-weight:600}
 
-    /* Mobile menu toggle (hidden by default on wider screens) */
+    /* Mobile menu toggle */
     .menu-toggle{display:none;background:transparent;border:0;cursor:pointer;padding:8px;border-radius:8px;align-items:center;justify-content:center}
     .menu-toggle .bar{display:block;width:22px;height:2px;background:var(--brand);margin:4px 0;border-radius:2px;transition:transform .2s ease,opacity .2s ease}
     .menu-toggle[aria-expanded="true"] .bar.top{transform:translateY(6px) rotate(45deg)}
@@ -105,7 +105,7 @@
     .viz-table th{font-size:12px;text-align:left;color:var(--muted);padding:6px 8px}
     .viz-table td{padding:8px;color:var(--brand);border-top:1px solid #f1f6ff}
 
-    /* Footer redesign: emulate laboratory-services footer alignment */
+    /* Footer */
     footer.site-footer{background:var(--footer-bg);color:#e6eefc;padding:48px 20px 22px;margin-top:36px;border-top:4px solid rgba(11,110,253,0.06)}
     .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 340px;gap:24px;align-items:start;padding-bottom:18px}
     .footer-left{display:flex;flex-direction:column;gap:12px}
@@ -127,8 +127,7 @@
     .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:right}
 
-    /* ---------------- Mobile improvements ---------------- */
-    /* Make layout stack smoothly and make nav usable on narrow screens */
+    /* Responsive adjustments */
     @media (max-width:1100px){
       .footer-inner{grid-template-columns:1fr 1fr;gap:18px}
       .footer-right{align-items:flex-start}
@@ -149,9 +148,9 @@
       .cta-row{flex-wrap:wrap}
     }
 
-    /* Mobile-first: ensure single-column stacking and accessible off-canvas nav */
+    /* Mobile-first rules */
     @media (max-width:720px){
-      /* Header/nav */
+      /* Header & nav */
       .menu-toggle{display:flex}
       nav.primary{
         position:fixed;
@@ -179,22 +178,20 @@
       .hero-left h1{font-size:20px}
       .hero-carousel{height:220px;border-radius:12px}
 
-      /* CTA buttons stack full width */
+      /* Buttons */
       .cta-row{flex-direction:column;align-items:stretch}
       .cta-row .btn-primary{width:100%}
       .cta-row .ghost{margin-left:0;text-align:center}
 
-      /* Solutions, features: stacked single column */
+      /* Content stacks */
       .solutions,.features{grid-template-columns:1fr}
-
-      /* Visualization adjustments */
       .viz-grid{grid-template-columns:1fr;gap:12px}
       .kpi-row{flex-direction:column}
       .kpi{width:100%;min-width:0;padding:12px}
       .mini-chart{height:140px}
       .viz-table{font-size:13px}
 
-      /* Footer stacking & centered */
+      /* Footer stacking */
       .footer-inner{grid-template-columns:1fr;gap:18px}
       .footer-left,.footer-nav,.footer-right{align-items:center;text-align:center}
       .footer-right{align-items:center}
@@ -202,8 +199,9 @@
       .footer-newsletter input{width:180px}
       .footer-bottom{text-align:center}
 
-      /* Floating home action button */
+      /* Floating home button */
       .home-fab{position:fixed;right:16px;bottom:16px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-weight:800;z-index:180;box-shadow:0 8px 30px rgba(11,110,253,0.12)}
+      .home-fab[aria-hidden="true"]{display:none}
     }
 
     body.menu-open{overflow:hidden}
@@ -424,7 +422,7 @@
       </div>
     </section>
 
-    <!-- CORPORATE STANDARDS (kept) -->
+    <!-- CORPORATE STANDARDS -->
     <section class="standards-section" aria-label="Corporate standards and organizational insights" style="margin-top:28px">
       <h2 style="margin:6px 0 12px">Corporate Standards & Organizational Insights</h2>
       <p class="muted" style="margin:0 0 12px">SamITHealth adopts a set of corporate standards that direct how we design, build, and operate solutions for healthcare clients. These standards help ensure patient safety, data protection, regulatory compliance, and measurable business outcomes.</p>
@@ -665,7 +663,7 @@
     <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
 
-  <a class="home-fab" href="index.html" aria-label="Back to home" style="display:none">SH</a>
+  <a class="home-fab" href="index.html" aria-label="Back to home" aria-hidden="true">SH</a>
 
 <script>
 /* Carousel */
@@ -768,8 +766,7 @@ document.getElementById('main')?.focus();
   });
 })();
 
-/* Visualization demo logic: builds simple SVG paths for the trend area/line and updates KPIs when scope changes.
-   Replace with live data (fetch) or embed dashboards in production. */
+/* Visualization demo: simple SVG path generation and KPI updates */
 (function(){
   const linePath = document.getElementById('linePath');
   const areaPath = document.getElementById('areaPath');
@@ -790,10 +787,7 @@ document.getElementById('main')?.focus();
   }
 
   function buildPaths(values){
-    const svg = document.getElementById('lineTrend');
-    const w = 300;
-    const h = 80;
-    const pad = 6;
+    const w = 300, h = 80, pad = 6;
     const max = 100, min = 72;
     const scaleY = (val) => pad + (h - pad*2) * (1 - (val - min) / (max - min));
     const step = w / Math.max(1, values.length - 1);
