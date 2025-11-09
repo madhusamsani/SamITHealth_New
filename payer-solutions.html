@@ -21,18 +21,18 @@
       --max:1200px;
       --radius:12px;
       --shadow:0 12px 40px rgba(6,18,45,0.06);
-      --social-size:44px;
+      --social-size:52px;
+      --social-label-color:rgba(230,238,252,0.95);
+      --card-accent: linear-gradient(90deg,#eef6ff,#f8fbff);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--brand);-webkit-font-smoothing:antialiased}
     a{color:var(--accent);text-decoration:none}
     img{max-width:100%;display:block}
-
     .wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
 
-    /* Provider-services style header */
+    /* Header (provider-services aligned) */
     header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
     .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
@@ -62,7 +62,15 @@
     .service-card h3{margin:0 0 8px;font-size:18px;color:var(--brand)}
     .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
 
-    /* Advanced visualizations panel */
+    /* Insights rail */
+    .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .insight{background:#fff;padding:14px;border-radius:10px;border:1px solid #eef6ff;box-shadow:0 8px 20px rgba(6,18,45,0.04)}
+    .insight h4{margin:0 0 8px;font-size:15px}
+    .insight p{margin:0;color:var(--muted);font-size:13px}
+    .insight ul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px}
+    .insight .cta-small{margin-top:10px;display:inline-block;padding:8px 10px;border-radius:8px;background:var(--card-accent);font-weight:700;color:var(--accent-2);text-decoration:none}
+
+    /* Advanced visualizations */
     .viz-panel{display:flex;flex-direction:column;gap:12px;margin-top:22px;background:linear-gradient(180deg,#fff,#fcfeff);padding:16px;border-radius:12px;border:1px solid #eaf3ff;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
     .viz-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .viz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
@@ -85,17 +93,26 @@
     .metric .label{color:var(--muted);font-size:13px;margin-top:6px}
     .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
 
-    /* Footer */
+    /* Footer: align like provider-services.html and improve social visuals */
     footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
     .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
     .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+
+    /* Social tile improvements to attract business clients */
     .socials{display:flex;gap:12px;align-items:center}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s}
-    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:8px 12px;border-radius:12px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s,box-shadow .18s}
+    .socials a svg{width:20px;height:20px;fill:currentColor;display:block}
+    .socials a .label{display:none;font-size:13px;color:var(--social-label-color)}
+    @media (min-width:720px){ .socials a .label{display:inline-block} }
     .socials a.linkedin{background:#0A66C2}
     .socials a.twitter{background:#1DA1F2}
     .socials a.youtube{background:#FF0000}
+    .socials a.facebook{background:#1877F2}
+    .socials a.instagram{background:linear-gradient(45deg,#f77737,#fccc63)}
+    .socials a:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(2,6,23,0.28)}
     .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
     .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
@@ -106,6 +123,7 @@
       .services{grid-template-columns:repeat(2,1fr)}
       .hero{grid-template-columns:1fr}
       .viz-grid{grid-template-columns:1fr}
+      .insights{grid-template-columns:1fr}
     }
     @media (max-width:720px){
       nav.primary{display:none}
@@ -115,7 +133,7 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
+    <!-- Header (provider-services style) -->
     <header class="site-header" role="banner" aria-label="Main header">
       <div class="header-inner">
         <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
@@ -157,7 +175,6 @@
           <img class="decor-img" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1200&auto=format&fit=crop" alt="Payer analytics visual decoration" aria-hidden="true">
 
           <div class="services" aria-label="Payer services overview">
-            <!-- keep all original service cards intact -->
             <div class="service-card">
               <div class="img" style="background-image:url('assets/images/lifetime-renewability-with-no-maximums-sm-sm.webp')" role="img" aria-label="MAO & Risk Adjustment visual"></div>
               <div class="body">
@@ -213,6 +230,36 @@
             </div>
           </div>
 
+          <!-- Expanded insights rail -->
+          <div class="insights" aria-label="Key insights">
+            <div class="insight">
+              <h4>Executive Summary</h4>
+              <p>Typical projects deliver rapid ROI through prioritized repricing, denial automation and targeted provider education — our pilots show recoveries within 90 days and recurring net benefit thereafter.</p>
+              <a class="cta-small" href="contact.html">Request executive brief →</a>
+            </div>
+
+            <div class="insight">
+              <h4>Financial Impact (Quick estimate)</h4>
+              <p>Use the quick calculator to estimate annual recovery opportunity.</p>
+              <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+                <input id="avg-claims" type="number" placeholder="Avg claims/day" style="width:110px;padding:8px;border-radius:8px;border:1px solid #e7ecf6">
+                <input id="avg-value" type="number" placeholder="Avg claim $ (k)" style="width:110px;padding:8px;border-radius:8px;border:1px solid #e7ecf6">
+                <button id="calc-opp" class="btn-primary">Estimate</button>
+              </div>
+              <div id="calc-result" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+            </div>
+
+            <div class="insight">
+              <h4>Risk Heatmap & Roadmap</h4>
+              <p>We prioritize remediation and automation where spend, leakage and regulatory risk overlap. Typical roadmap: Pilot → Scale → Automation → Continuous monitoring.</p>
+              <ul>
+                <li>Phase 1: 90-day claims pilot (sampling + analytics)</li>
+                <li>Phase 2: Repricing + appeals & provider remediation</li>
+                <li>Phase 3: Automation & controls embedded into adjudication</li>
+              </ul>
+            </div>
+          </div>
+
           <!-- Advanced visualizations -->
           <div class="viz-panel" aria-label="Advanced payer visualizations">
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -225,6 +272,7 @@
                   <option value="180">Last 180 days</option>
                 </select>
                 <button id="viz-refresh" class="btn-primary" style="margin-left:10px">Refresh</button>
+                <button id="download-report" class="btn-primary" style="margin-left:6px;background:#0b6efd">Download PDF</button>
               </div>
             </div>
 
@@ -232,33 +280,35 @@
               <div class="viz-card">
                 <h4>Claims Trend (reported vs resolved)</h4>
                 <canvas id="chart-claims-trend" height="220" aria-label="Claims trend chart"></canvas>
+                <div style="margin-top:8px;font-size:13px;color:var(--muted)">Volume and throughput — hover to inspect days with spikes and backlog.</div>
               </div>
 
               <div class="viz-card">
                 <h4>Denials by Reason</h4>
                 <canvas id="chart-denials-reason" height="220" aria-label="Denials breakdown"></canvas>
+                <div style="margin-top:8px;font-size:13px;color:var(--muted)">Identify top categories for automation and templated appeals.</div>
               </div>
 
               <div class="viz-card">
                 <h4>Payment Accuracy by Provider</h4>
                 <canvas id="chart-payment-accuracy" height="220" aria-label="Payment accuracy"></canvas>
+                <div style="margin-top:8px;font-size:13px;color:var(--muted)">Spot providers needing audit or documentation coaching.</div>
               </div>
 
               <div class="viz-card">
                 <h4>Remediation Pipeline</h4>
                 <canvas id="chart-remediation-funnel" height="220" aria-label="Remediation pipeline"></canvas>
+                <div style="margin-top:8px;font-size:13px;color:var(--muted)">Track remediation stages, owners and ETAs for SLA reporting.</div>
               </div>
             </div>
 
-            <div style="margin-top:10px;color:var(--muted);font-size:13px">Demo visualizations — easily wired to your data (APIs, Snowflake, BigQuery, S3).</div>
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">Live wiring available: API, Snowflake, BigQuery, S3 — we can build scheduled exports, PDF reports and role-based dashboards for your teams.</div>
           </div>
-
         </div>
 
         <aside style="width:420px">
-<<<<<<< HEAD
-          <!-- Slideshow (preserves original image as first slide) -->
-          <div class="hero-visual" aria-hidden="false" aria-label="Payer analytics visualization carousel">
+          <!-- Slideshow -->
+          <div class="hero-visual" aria-hidden="false" aria-label="Payer analytics visualization carousel" tabindex="0">
             <div class="slide active" role="img" aria-label="Payer analytics visualization 1">
               <img src="assets/images/ChatGPT Image Oct 22, 2025, 08_17_47 AM.png" alt="Payer analytics dashboard 1">
             </div>
@@ -274,10 +324,6 @@
               <button data-index="1" aria-label="Show slide 2"></button>
               <button data-index="2" aria-label="Show slide 3"></button>
             </div>
-=======
-          <div class="hero-visual" aria-hidden="true" style="border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06)">
-            <img src="assets/images/ChatGPT Image Oct 22, 2025, 08_17_47 AM.png" alt="Payer analytics visualization">
->>>>>>> 743064c9a8a65a5135d626a7ec64b503e5e512b5
           </div>
 
           <div class="metrics" style="margin-top:18px">
@@ -312,7 +358,7 @@
       </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer: aligned like provider-services.html with improved social tiles -->
     <footer class="site-footer" role="contentinfo" aria-label="Footer">
       <div class="footer-inner">
         <div class="footer-content">
@@ -334,16 +380,29 @@
 
         <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
           <nav class="socials" aria-label="Social media">
-            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn — Connect with us">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
+              <span class="label">LinkedIn</span>
             </a>
 
-            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter — Industry updates">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
+              <span class="label">X / Twitter</span>
             </a>
 
-            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube — Case study videos">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
+              <span class="label">YouTube</span>
+            </a>
+
+            <a class="facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook — SamITHealth" title="Facebook — Company page">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.3c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6v1.9H18l-.4 3h-2.6v7A10 10 0 0 0 22 12z"/></svg>
+              <span class="label">Facebook</span>
+            </a>
+
+            <a class="instagram" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram — SamITHealth" title="Instagram — Visual highlights">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.9a4.1 4.1 0 1 0 .001 8.201A4.1 4.1 0 0 0 12 7.9zm5.2-.6a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>
+              <span class="label">Instagram</span>
             </a>
           </nav>
 
@@ -364,7 +423,7 @@
   </div>
 
   <script>
-    // Normalize inline SVGs in footer social icons so CSS controls color
+    // Normalize inline SVG fills so CSS currentColor controls the icon color
     (function normalizeSocialSVGs(){
       try {
         document.querySelectorAll('.socials a svg').forEach(svg=>{
@@ -376,7 +435,7 @@
       } catch(e){ console.warn('SVG normalization failed', e); }
     })();
 
-    // Slideshow for payer analytics visualization (auto-rotate). Only runs on this page.
+    // Slideshow auto-rotate (right column)
     (function(){
       const container = document.querySelector('.hero-visual');
       if(!container) return;
@@ -389,42 +448,30 @@
         indicators.forEach((b,bi)=> b.classList.toggle('active', bi===i));
         idx = i;
       }
-      function next(){
-        show((idx+1) % slides.length);
-      }
-      function start(){
-        if(interval) clearInterval(interval);
-        interval = setInterval(next, 4000);
-      }
-      function stop(){
-        if(interval) { clearInterval(interval); interval = null; }
-      }
-      // indicator clicks
+      function next(){ show((idx+1) % slides.length); }
+      function start(){ if(interval) clearInterval(interval); interval = setInterval(next, 4000); }
+      function stop(){ if(interval){ clearInterval(interval); interval = null; } }
       indicators.forEach(btn=>{
-        btn.addEventListener('click', (e)=>{
+        btn.addEventListener('click', ()=>{
           const i = parseInt(btn.dataset.index,10);
           if(isNaN(i)) return;
-          show(i);
-          stop();
-          setTimeout(start, 3000);
+          show(i); stop(); setTimeout(start, 3000);
         });
       });
-      // pause on hover/focus for accessibility
       container.addEventListener('mouseenter', stop);
       container.addEventListener('mouseleave', start);
       container.addEventListener('focusin', stop);
       container.addEventListener('focusout', start);
-
-      // init
-      show(0);
-      start();
+      show(0); start();
     })();
 
-    // Advanced Visualizations (Chart.js) - demo data + interactive range
+    // Advanced visualizations (Chart.js) demos and controls
     (function(){
       const rangeEl = document.getElementById('viz-range');
       const refreshBtn = document.getElementById('viz-refresh');
+      const downloadBtn = document.getElementById('download-report');
       const rand = (n,min=0) => Math.round(min + Math.random()*n);
+
       function genTimeLabels(days){
         const labels = [];
         const now = new Date();
@@ -445,23 +492,18 @@
 
       function createCharts(days=90){
         const labels = genTimeLabels(days);
-        // claims trend
         const reported = labels.map(()=> rand(60,20));
         const resolved = reported.map(r => Math.round(r * (0.6 + Math.random()*0.35)));
         if(claimsChart) claimsChart.destroy();
         claimsChart = new Chart(ctxClaims, {
           type:'line',
-          data:{
-            labels,
-            datasets:[
-              {label:'Reported', data:reported, borderColor:'rgba(6,86,255,0.9)', backgroundColor:'rgba(6,86,255,0.06)', tension:0.25, pointRadius:0},
-              {label:'Resolved', data:resolved, borderColor:'rgba(16,185,129,0.9)', backgroundColor:'rgba(16,185,129,0.06)', tension:0.25, pointRadius:0}
-            ]
-          },
+          data:{ labels, datasets:[
+            {label:'Reported', data:reported, borderColor:'rgba(6,86,255,0.9)', backgroundColor:'rgba(6,86,255,0.06)', tension:0.25, pointRadius:0},
+            {label:'Resolved', data:resolved, borderColor:'rgba(16,185,129,0.9)', backgroundColor:'rgba(16,185,129,0.06)', tension:0.25, pointRadius:0}
+          ]},
           options:{plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true}}}
         });
 
-        // denials by reason
         const reasons = ['Eligibility','Coding','Auth','Bundling','Other'];
         const reasonCounts = reasons.map(()=> rand(200,10));
         if(denialsChart) denialsChart.destroy();
@@ -471,7 +513,6 @@
           options:{plugins:{legend:{position:'bottom'}}}
         });
 
-        // payment accuracy by provider
         const providers = ['Provider A','Provider B','Provider C','Provider D','Provider E'];
         const accuracy = providers.map(()=> Math.min(100, Math.max(80, 90 + (Math.random()*10 - 5))));
         if(paymentChart) paymentChart.destroy();
@@ -481,7 +522,6 @@
           options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true, max:100}}}
         });
 
-        // remediation pipeline
         const stages = ['Triage','Investigate','Remediate','Closed'];
         const counts = stages.map(()=> rand(50,5));
         if(remChart) remChart.destroy();
@@ -492,7 +532,6 @@
         });
       }
 
-      // initial render
       createCharts(parseInt(rangeEl.value || 90,10));
 
       refreshBtn.addEventListener('click', ()=> {
@@ -500,11 +539,42 @@
         createCharts(days);
       });
 
-      window.SamItViz = { refresh: ()=> refreshBtn.click(), createCharts };
+      downloadBtn.addEventListener('click', ()=>{
+        const canvases = [];
+        [claimsChart, denialsChart, paymentChart, remChart].forEach(c=>{
+          try{ if(c && c.toBase64Image) canvases.push(c.toBase64Image()); }catch(e){}
+        });
+        if(!canvases.length){ alert('Charts not ready'); return; }
+        const w = window.open('', '_blank');
+        if(!w){ alert('Popup blocked — allow popups to download report.'); return; }
+        w.document.write('<html><head><title>SamITHealth — Payer Insights</title></head><body style="font-family:Inter,Arial;padding:18px">');
+        w.document.write('<h1>Payer Insights (demo)</h1>');
+        canvases.forEach((src,i)=> w.document.write('<div style="margin-bottom:18px"><h3>Chart '+(i+1)+'</h3><img src="'+src+'" style="max-width:100%;height:auto;border:1px solid #ddd"></div>'));
+        w.document.write('</body></html>');
+        w.document.close();
+      });
 
+      window.SamItViz = { refresh: ()=> refreshBtn.click(), createCharts };
     })();
 
-    // Demo intercept for footer forms
+    // Financial impact quick calculator
+    (function(){
+      const avgClaims = document.getElementById('avg-claims');
+      const avgValue = document.getElementById('avg-value');
+      const calcBtn = document.getElementById('calc-opp');
+      const result = document.getElementById('calc-result');
+      function calc(){
+        const c = Number(avgClaims.value) || 0;
+        const v = Number(avgValue.value) || 0;
+        const recoveryPct = 0.035;
+        const annualOpportunity = c * (v*1000) * 365 * recoveryPct;
+        if(annualOpportunity <= 0){ result.textContent = 'Enter sample values to estimate annual opportunity.'; return; }
+        result.textContent = 'Estimated annual recoverable opportunity: $' + annualOpportunity.toLocaleString(undefined,{maximumFractionDigits:0});
+      }
+      if(calcBtn) calcBtn.addEventListener('click', calc);
+    })();
+
+    // Demo intercept for newsletter forms
     document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
 
     // keyboard shortcut 'h' to go home
