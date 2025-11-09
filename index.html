@@ -148,10 +148,12 @@
       .cta-row{flex-wrap:wrap}
     }
 
-    /* Mobile-first rules (drawer nav like index_old.html) */
+    /* Mobile-first rules (drawer nav improved to match index_old alignment/spacing) */
     @media (max-width:720px){
       /* Header & nav */
       .menu-toggle{display:flex}
+
+      /* Drawer layout and sizing (match index_old's left drawer - 320px with max 92%) */
       nav.primary{
         position:fixed;
         top:0;
@@ -171,6 +173,14 @@
       }
       nav.primary.open{transform:translateX(0)}
       .nav-backdrop{z-index:150}
+
+      /* Explicit header + panel layout inside nav (added to fix alignment issues on mobile) */
+      nav.primary .nav-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+      nav.primary .nav-panel{display:flex;flex-direction:column;gap:10px;align-items:stretch;margin-top:8px}
+      nav.primary a{display:block;padding:12px 14px;border-radius:8px;background:transparent;color:var(--brand);font-size:18px;font-weight:700}
+      nav.primary a.active{background:linear-gradient(90deg, rgba(11,110,253,0.06), rgba(10,90,217,0.04));color:var(--accent-2)}
+      .nav-cta{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+      .nav-footer{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 
       .header-inner{padding:10px 14px}
       .logo-mark{width:46px;height:46px}
