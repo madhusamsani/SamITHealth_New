@@ -8,32 +8,52 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root{
-      --navy:#0b2545; --teal:#0aa89e; --purple:#6366f1; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; --max:1200px; --radius:12px; --shadow:0 16px 60px rgba(6,18,45,0.08); font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      /* unified palette to match provider-services */
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --muted:#586674;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --teal:#0aa89e;
+      --max:1200px;
+      --radius:12px;
+      --shadow:0 12px 40px rgba(6,18,45,0.06);
+      --social-size:44px;
+      --gap:20px;
+      --success:#10b981;
+      --danger:#ef4444;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
-    .container{max-width:var(--max);margin:28px auto;padding:20px}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--brand);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
 
-    /* Header (consultancy-aligned) */
-    .topbar{padding:14px 0;border-bottom:1px solid rgba(11,37,69,0.06)}
-    .topbar-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
-    .brand-text .title{font-weight:700;font-size:18px}
+    .wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
+
+    /* Header: provider-services-aligned */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
     .brand-text .tag{font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:18px;align-items:center}
-    .nav a{text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-size:14px}
-    .nav a:hover{color:var(--navy);background:var(--accent-2)}
-    .nav a.active{color:var(--navy);background:rgba(10,168,158,0.08);font-weight:600}
-    .actions{display:flex;gap:12px;align-items:center}
-    .btn-primary{background:var(--teal);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    .sh-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:var(--navy);color:white;text-decoration:none;font-weight:700}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 
-    /* Layout */
+    /* Page layout */
+    .container{max-width:var(--max);margin:28px auto;padding:20px}
+    h1{margin:0}
+    .muted{color:var(--muted)}
+
     .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
     .longlist{display:flex;flex-direction:column;gap:12px}
-    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .card{background:var(--panel);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
     .card h3{margin:0;font-size:15px}
-    .card .muted{font-size:13px;color:var(--muted);margin-top:6px}
     .viz{min-height:160px;display:flex;flex-direction:column;gap:10px}
     canvas{width:100% !important;max-height:260px}
     .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
@@ -52,177 +72,197 @@
     .controls{display:flex;gap:8px;align-items:center}
     .small{padding:6px 10px;font-size:13px}
 
-    footer{background:var(--navy);color:rgba(230,238,252,0.95);padding:36px 20px 24px;margin-top:36px;border-radius:12px}
-    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
-    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
-    footer img.logo{height:56px;margin-bottom:8px}
-    footer h4{color:rgba(230,238,252,0.95);font-size:15px;margin-bottom:8px}
-    footer p, footer a{color:rgba(230,238,252,0.9);font-size:14px;line-height:1.6;margin:6px 0}
+    /* Footer: provider-services style (copied/adapted) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:12px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
     .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.25);transition:transform .12s ease, box-shadow .12s ease}
-    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .socials a svg{width:18px;height:18px;fill:#fff}
     .socials a.linkedin{background:#0A66C2}
     .socials a.twitter{background:#1DA1F2}
     .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(2,6,23,0.18);z-index:200}
 
     @media(max-width:980px){
       .grid{grid-template-columns:1fr}
-      .topbar-inner{flex-direction:column;align-items:flex-start;gap:12px}
-      .nav{flex-wrap:wrap}
+      .header-inner{flex-direction:column;align-items:flex-start;gap:12px}
+      nav.primary{flex-wrap:wrap}
     }
   </style>
 </head>
 <body>
-  <header class="topbar" role="banner" aria-label="Main header">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
-      <div class="logo-mark" aria-hidden="true">SH</div>
-      <div class="brand-text">
-        <div class="title">SamITHealth</div>
-        <div class="tag">Claims Management</div>
+  <div class="wrap">
+    <!-- Header: aligned and consistent with provider-services -->
+    <header class="site-header" role="banner" aria-label="Main header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">MAO & Risk Adjustment</div>
+          </div>
+        </a>
+
+        <nav class="primary" role="navigation" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="Analytics&AI.html">Analytics</a>
+          <a href="Claims_Management.html" class="active">Claims</a>
+          <a href="Medical_Review&Repricing.html">Medical Review</a>
+          <a href="Form_Conversion&Interoperability.html">Interoperability</a>
+          <a href="provider-services.html">Provider Services</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-ctas" aria-hidden="false">
+          <!-- Phone purposely removed on this page only -->
+          <button class="btn-primary" onclick="location.href='contact.html'">Get Support</button>
+        </div>
       </div>
-    </a>
-
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="Analytics&AI.html">Analytics</a>
-      <a href="Claims_Management.html" class="active">Claims</a>
-      <a href="Medical_Review&Repricing.html">Medical Review</a>
-      <a href="Form_Conversion&Interoperability.html">Interoperability</a>
-    </nav>
-
-    <div class="actions">
-      <button class="btn-primary" onclick="location.href='contact.html'">Get Support</button>
-      <a class="sh-icon" href="index.html" aria-label="SamITHealth home">SH</a>
-    </div>
-  </div>
-</header>
-
-  <div class="container">
-    <header style="margin-top:18px">
-      <h1 style="margin:0;font-size:20px">MAO &amp; Risk Adjustment</h1>
-      <p class="muted" style="margin:6px 0 0">Accurate HCC coding, risk score optimization, and audit-ready workflows for Medicare Advantage and managed plans.</p>
     </header>
 
-    <div class="grid">
-      <main class="longlist">
+    <main class="container">
+      <header>
+        <h1 style="margin:0;font-size:20px">MAO &amp; Risk Adjustment</h1>
+        <p class="muted" style="margin:6px 0 0">Accurate HCC coding, risk score optimization, and audit-ready workflows for Medicare Advantage and managed plans.</p>
+      </header>
 
-        <section class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <h3>1. Risk Score Trend (12 months)</h3>
-              <div class="muted">Risk-adjusted score by month — predicted vs realized</div>
+      <div class="grid">
+        <main class="longlist">
+
+          <section class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <h3>1. Risk Score Trend (12 months)</h3>
+                <div class="muted">Risk-adjusted score by month — predicted vs realized</div>
+              </div>
+              <div class="controls">
+                <select id="rs-range" class="small"><option value="6">6mo</option><option value="12" selected>12mo</option><option value="24">24mo</option></select>
+                <button class="btn-primary small" onclick="downloadCSV('risk_trend')">CSV</button>
+              </div>
             </div>
-            <div class="controls">
-              <select id="rs-range" class="small"><option value="6">6mo</option><option value="12" selected>12mo</option><option value="24">24mo</option></select>
-              <button class="btn-primary small" onclick="downloadCSV('risk_trend')">CSV</button>
+            <div class="viz"><canvas id="chart-risk-trend"></canvas></div>
+          </section>
+
+          <section class="card">
+            <h3>2. HCC Coding Accuracy</h3>
+            <div class="muted">Auto-coded vs chart-validated accuracy and false positives</div>
+            <div class="viz"><canvas id="chart-hcc-accuracy"></canvas></div>
+          </section>
+
+          <section class="card">
+            <h3>3. Audit Readiness & Findings</h3>
+            <div class="muted">Open audit items, pass rate and time to close</div>
+            <div class="viz"><canvas id="chart-audits"></canvas></div>
+          </section>
+
+          <section class="card">
+            <h3>4. Coding Gap Heatmap (Long list)</h3>
+            <div class="muted">Providers vs missing HCC groups — prioritization heatmap</div>
+            <div class="viz"><canvas id="chart-heatmap"></canvas></div>
+          </section>
+
+          <section class="card">
+            <h3>5. Top HCCs & Impact</h3>
+            <div class="muted">Most frequent HCCs, count and avg score impact</div>
+            <div class="viz"><canvas id="chart-top-hcc"></canvas></div>
+          </section>
+
+          <section class="card">
+            <h3>6. Recent Audits (Long list)</h3>
+            <div class="muted">Latest audit jobs and quick actions</div>
+            <div style="margin-top:8px;overflow:auto;max-height:260px">
+              <table aria-label="Recent audits">
+                <thead><tr><th>Audit ID</th><th>Provider</th><th>Status</th><th>Findings</th><th>Impact</th><th></th></tr></thead>
+                <tbody id="recent-audits-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+
+        <aside style="display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <h3>Overview KPIs</h3>
+            <div class="kpi-grid">
+              <div class="kpi"><div class="value" id="kpi-risk-score">—</div><div class="label">Avg Risk Score</div></div>
+              <div class="kpi"><div class="value" id="kpi-capture-rate">—</div><div class="label">HCC Capture Rate</div></div>
+              <div class="kpi"><div class="value" id="kpi-audit-pass">—</div><div class="label">Audit Pass Rate</div></div>
+              <div class="kpi"><div class="value" id="kpi-avg-impact">—</div><div class="label">Avg Score Impact</div></div>
             </div>
           </div>
-          <div class="viz"><canvas id="chart-risk-trend"></canvas></div>
-        </section>
 
-        <section class="card">
-          <h3>2. HCC Coding Accuracy</h3>
-          <div class="muted">Auto-coded vs chart-validated accuracy and false positives</div>
-          <div class="viz"><canvas id="chart-hcc-accuracy"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>3. Audit Readiness & Findings</h3>
-          <div class="muted">Open audit items, pass rate and time to close</div>
-          <div class="viz"><canvas id="chart-audits"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>4. Coding Gap Heatmap (Long list)</h3>
-          <div class="muted">Providers vs missing HCC groups — prioritization heatmap</div>
-          <div class="viz"><canvas id="chart-heatmap"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>5. Top HCCs & Impact</h3>
-          <div class="muted">Most frequent HCCs, count and avg score impact</div>
-          <div class="viz"><canvas id="chart-top-hcc"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>6. Recent Audits (Long list)</h3>
-          <div class="muted">Latest audit jobs and quick actions</div>
-          <div style="margin-top:8px;overflow:auto;max-height:260px">
-            <table aria-label="Recent audits">
-              <thead><tr><th>Audit ID</th><th>Provider</th><th>Status</th><th>Findings</th><th>Impact</th><th></th></tr></thead>
-              <tbody id="recent-audits-body"></tbody>
-            </table>
+          <div class="card">
+            <h3>Top Providers (Priority)</h3>
+            <div class="muted">Providers with largest coding gaps</div>
+            <ol id="top-providers" style="margin-top:10px;padding-left:18px"></ol>
           </div>
-        </section>
 
-      </main>
-
-      <aside style="display:flex;flex-direction:column;gap:12px">
-        <div class="card">
-          <h3>Overview KPIs</h3>
-          <div class="kpi-grid">
-            <div class="kpi"><div class="value" id="kpi-risk-score">—</div><div class="label">Avg Risk Score</div></div>
-            <div class="kpi"><div class="value" id="kpi-capture-rate">—</div><div class="label">HCC Capture Rate</div></div>
-            <div class="kpi"><div class="value" id="kpi-audit-pass">—</div><div class="label">Audit Pass Rate</div></div>
-            <div class="kpi"><div class="value" id="kpi-avg-impact">—</div><div class="label">Avg Score Impact</div></div>
+          <div class="card">
+            <h3>Model & Documentation Registry</h3>
+            <div class="muted">Active models, last retrain and audit artifacts</div>
+            <table style="margin-top:8px"><thead><tr><th>Model</th><th>Version</th></tr></thead><tbody id="model-registry"></tbody></table>
           </div>
-        </div>
 
-        <div class="card">
-          <h3>Top Providers (Priority)</h3>
-          <div class="muted">Providers with largest coding gaps</div>
-          <ol id="top-providers" style="margin-top:10px;padding-left:18px"></ol>
-        </div>
-
-        <div class="card">
-          <h3>Model & Documentation Registry</h3>
-          <div class="muted">Active models, last retrain and audit artifacts</div>
-          <table style="margin-top:8px"><thead><tr><th>Model</th><th>Version</th></tr></thead><tbody id="model-registry"></tbody></table>
-        </div>
-
-        <div class="card">
-          <h3>Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <button class="btn-primary" onclick="simulateRefresh()">Refresh Data</button>
-            <button class="btn-primary" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openWorkflow()">Open Audit Workflow</button>
+          <div class="card">
+            <h3>Actions</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <button class="btn-primary" onclick="simulateRefresh()">Refresh Data</button>
+              <button class="btn-primary" style="background:transparent;color:var(--brand);border:1px solid #e6eef2" onclick="openWorkflow()">Open Audit Workflow</button>
+            </div>
           </div>
-        </div>
 
-      </aside>
-    </div>
+        </aside>
+      </div>
 
-    <footer aria-label="Footer">
+    </main>
+
+    <!-- Footer: provider-services-style; phone removed for this page (kept email only) -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
       <div class="footer-inner">
         <div class="footer-content">
           <div>
-            <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo" loading="lazy" decoding="async">
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo" loading="lazy" decoding="async">
+            </a>
             <p>MAO &amp; Risk Adjustment tools to improve HCC capture, audit readiness and compliant risk scoring.</p>
           </div>
+
           <div>
             <h4>Office</h4>
             <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
           </div>
+
           <div>
             <h4>Contact</h4>
-            <p><a href="mailto:info@samithealth.com">info@samithealth.com</a><br>+1 (555) 555‑0100</p>
+            <p><a href="mailto:info@samithealth.com">info@samithealth.com</a></p>
+            <!-- phone intentionally removed from this page -->
           </div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
-          <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
-            <a class="linkedin" href="#" aria-label="LinkedIn" title="LinkedIn" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.4 0 6.4 3.6 6.4 8.2V22h-5v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
             </a>
-            <a class="twitter" href="#" aria-label="Twitter" title="Twitter" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4.47 4.28 4.28 0 0 0 1.33 5.72A4.2 4.2 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.19 4.3 4.3 0 0 1-1.93.07 4.29 4.29 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.55 12.2-12.23v-.56A8.6 8.6 0 0 0 22.46 6z"/></svg>
+
+            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
             </a>
-            <a class="youtube" href="#" aria-label="YouTube" title="YouTube" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 14 0.6 15.8 0.6 15.8s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 .9.1 4 .3 8.2.3s7.3-.1 8.2-.3c.5-.1 1.6-.1 2.4-1 .6-.7.8-2.4.8-2.4s.6-2.6.6-4.6V9.9c0-1.9-.6-3.7-.6-3.7zM9.6 14.6V7.6l6.6 3.5-6.6 3.5z"/></svg>
+
+            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.2c0 1.4.2 2.5.6 3.7.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
             </a>
           </nav>
 
-          <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
+          <div class="footer-newsletter" aria-label="Newsletter sign up">
             <div>Subscribe for MAO updates, coding guides and audit tips.</div>
             <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Subscription not active in mockup')">
               <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
@@ -232,56 +272,121 @@
         </div>
       </div>
 
-      <div class="bottom" style="margin-top:12px;color:rgba(230,238,252,0.85);text-align:center">© 2025 SamITHealth. All rights reserved.</div>
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
     </footer>
 
   </div>
 
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
   <script>
-    // Mock data and charts
+    // Mock data and charts (kept from original, adapted to work with the updated markup)
     const now = new Date();
     const palette = {navy:'#0b2545',teal:'#0aa89e',purple:'#6366f1',danger:'#ef4444',success:'#10b981'};
 
+    // helper to generate monthly series
     function genMonthly(months){
-      const out=[]; for(let i=months-1;i>=0;i--){const d=new Date();d.setMonth(now.getMonth()-i);out.push({date:d.toISOString().slice(0,7),pred:Math.round(1.0*100)/100 + Math.random()*0.5 + 2,real:Math.round(1.0*100)/100 + Math.random()*0.5 + 1.8})}return out;
+      const out=[];
+      for(let i=months-1;i>=0;i--){
+        const d=new Date();
+        d.setMonth(now.getMonth()-i);
+        const label = d.toISOString().slice(0,7);
+        // mock predicted and realized risk scores (rounded)
+        const base = 2.5 + Math.random()*0.6;
+        const pred = +(base + (Math.random()-0.4)*0.4).toFixed(2);
+        const real = +(base + (Math.random()-0.6)*0.6).toFixed(2);
+        out.push({date:label,pred:pred,real:real});
+      }
+      return out;
     }
 
     let riskSeries = genMonthly(12);
 
     // Risk trend chart
     const ctxR = document.getElementById('chart-risk-trend').getContext('2d');
-    const riskChart = new Chart(ctxR,{type:'line',data:{labels:riskSeries.map(r=>r.date),datasets:[{label:'Predicted Risk Score',data:riskSeries.map(r=>r.pred),tension:0.3,borderColor:palette.purple,backgroundColor:'rgba(99,102,241,0.08)',pointBackgroundColor:palette.purple},{label:'Realized Risk Score',data:riskSeries.map(r=>r.real),tension:0.3,borderColor:palette.teal,backgroundColor:'rgba(10,168,158,0.08)',pointBackgroundColor:palette.teal}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:false}}}});
+    const riskChart = new Chart(ctxR,{
+      type:'line',
+      data:{
+        labels:riskSeries.map(r=>r.date),
+        datasets:[
+          {label:'Predicted Risk Score', data:riskSeries.map(r=>r.pred), tension:0.3, borderColor:palette.purple, backgroundColor:'rgba(99,102,241,0.06)', pointRadius:3},
+          {label:'Realized Risk Score', data:riskSeries.map(r=>r.real), tension:0.3, borderColor:palette.teal, backgroundColor:'rgba(10,168,158,0.06)', pointRadius:3}
+        ]
+      },
+      options:{responsive:true,plugins:{legend:{position:'top'}}}
+    });
 
     // HCC coding accuracy (doughnut)
     const ctxH = document.getElementById('chart-hcc-accuracy').getContext('2d');
-    const hccChart = new Chart(ctxH,{type:'doughnut',data:{labels:['Auto-correct','Flagged','Manual-correct'],datasets:[{data:[68,18,14],backgroundColor:['rgba(10,168,158,0.9)','rgba(250,204,21,0.9)','rgba(99,102,241,0.9)']}]} ,options:{plugins:{legend:{position:'bottom'}}}});
+    const hccChart = new Chart(ctxH,{
+      type:'doughnut',
+      data:{labels:['Auto-correct','Flagged','Manual-correct'],datasets:[{data:[68,18,14],backgroundColor:['rgba(10,168,158,0.9)','rgba(250,204,21,0.9)','rgba(99,102,241,0.9)']}]},
+      options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+    });
 
-    // Audits (bar)
+    // Audits (bar, stacked)
     const ctxA = document.getElementById('chart-audits').getContext('2d');
     const months = riskSeries.map(r=>r.date);
     const auditsOpen = months.map(()=>Math.round(2 + Math.random()*6));
     const auditsClosed = months.map(()=>Math.round(1 + Math.random()*5));
-    const auditsChart = new Chart(ctxA,{type:'bar',data:{labels:months,datasets:[{label:'Open',data:auditsOpen,backgroundColor:'rgba(239,68,68,0.85)'},{label:'Closed',data:auditsClosed,backgroundColor:'rgba(16,185,129,0.85)'}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true}}}});
+    const auditsChart = new Chart(ctxA,{
+      type:'bar',
+      data:{
+        labels:months,
+        datasets:[
+          {label:'Open',data:auditsOpen,backgroundColor:'rgba(239,68,68,0.85)'},
+          {label:'Closed',data:auditsClosed,backgroundColor:'rgba(16,185,129,0.85)'}
+        ]
+      },
+      options:{responsive:true,plugins:{legend:{position:'top'}},scales:{x:{stacked:true},y:{stacked:true}}}
+    });
 
-    // Heatmap (simulated with stacked bar groups)
+    // Heatmap (simulated with summed gaps per provider)
     const ctxHMap = document.getElementById('chart-heatmap').getContext('2d');
     const providers=['Prov A','Prov B','Prov C','Prov D','Prov E','Prov F','Prov G','Prov H'];
     const gaps = providers.map(()=>Array.from({length:6}).map(()=>Math.round(Math.random()*10)));
-    // For visualization, sum gaps per provider and render as bar
     const gapSums = gaps.map(g=>g.reduce((a,b)=>a+b,0));
-    const heatChart = new Chart(ctxHMap,{type:'bar',data:{labels:providers,datasets:[{label:'Missing HCC count',data:gapSums,backgroundColor:gapSums.map(v=> v>24? 'rgba(239,68,68,0.9)': (v>16? 'rgba(250,204,21,0.9)': 'rgba(10,168,158,0.9)'))}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+    const heatChart = new Chart(ctxHMap,{
+      type:'bar',
+      data:{labels:providers,datasets:[{label:'Missing HCC count',data:gapSums,backgroundColor:gapSums.map(v=> v>24? 'rgba(239,68,68,0.9)': (v>16? 'rgba(250,204,21,0.9)' : 'rgba(10,168,158,0.9)'))}]},
+      options:{responsive:true,plugins:{legend:{display:false}}}
+    });
 
     // Top HCCs
     const ctxT = document.getElementById('chart-top-hcc').getContext('2d');
     const hccs=['HCC18','HCC85','HCC6','HCC108','HCC157'];
     const counts=[420,310,280,220,180];
     const impact=[0.45,0.32,0.28,0.22,0.18];
-    const topHccChart = new Chart(ctxT,{type:'bar',data:{labels:hccs,datasets:[{label:'Count',data:counts,backgroundColor:'rgba(99,102,241,0.9)'},{label:'Avg score impact',data:impact,backgroundColor:'rgba(10,168,158,0.9)'}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+    const topHccChart = new Chart(ctxT,{
+      type:'bar',
+      data:{labels:hccs,datasets:[
+        {label:'Count',data:counts,backgroundColor:'rgba(99,102,241,0.9)'},
+        {label:'Avg score impact',data:impact.map(v=>v*100),backgroundColor:'rgba(10,168,158,0.85)'}
+      ]},
+      options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}
+    });
 
-    // Recent audits table
-    const recent = Array.from({length:16}).map((_,i)=>({id:`AUD-${203000+i}`,provider:providers[i%providers.length],status:['Open','Closed','In Review'][Math.floor(Math.random()*3)],findings:Math.round(Math.random()*5),impact:(Math.random()*1.2).toFixed(2)}));
-    function renderRecent(){const tbody=document.getElementById('recent-audits-body');tbody.innerHTML='';recent.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.id}</td><td>${r.provider}</td><td>${formatStatus(r.status)}</td><td>${r.findings}</td><td>${r.impact}</td><td><button onclick="openAudit('${r.id}')" class="small">Open</button></td>`;tbody.appendChild(tr)})}
-    function formatStatus(s){if(s==='Closed')return '<span class="badge ok">Closed</span>'; if(s==='In Review')return '<span class="badge warn">In Review</span>'; return '<span class="badge err">Open</span>'}
+    // Recent audits (table)
+    const recent = Array.from({length:16}).map((_,i)=>({
+      id:`AUD-${203000+i}`,
+      provider:providers[i%providers.length],
+      status:['Open','Closed','In Review'][Math.floor(Math.random()*3)],
+      findings:Math.round(Math.random()*6),
+      impact:`${(Math.random()*1.2).toFixed(2)}`
+    }));
+    function formatStatus(s){
+      if(s==='Closed') return '<span class="badge ok">Closed</span>';
+      if(s==='In Review') return '<span class="badge warn">In Review</span>';
+      return '<span class="badge err">Open</span>';
+    }
+    function renderRecent(){
+      const tbody=document.getElementById('recent-audits-body');tbody.innerHTML='';
+      recent.forEach(r=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${r.id}</td><td>${r.provider}</td><td>${formatStatus(r.status)}</td><td>${r.findings}</td><td>${r.impact}</td><td><button class="small" onclick="openAudit('${r.id}')">Open</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
 
     // Top providers list
     const topProviders = ['Prov A — 34 gaps','Prov D — 28 gaps','Prov B — 22 gaps','Prov F — 18 gaps','Prov H — 16 gaps'];
@@ -292,25 +397,55 @@
     function renderRegistry(){const tbody=document.getElementById('model-registry');tbody.innerHTML='';models.forEach(m=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${m.name}</td><td>${m.ver}</td>`;tbody.appendChild(tr)})}
 
     // KPIs
-    function renderKPIs(){const avgRisk = (riskSeries.reduce((a,b)=>a+Number(b.real),0)/riskSeries.length).toFixed(2);const captureRate = Math.round(72 + Math.random()*10);const auditPass = Math.round(80 + Math.random()*10);const avgImpact = (impact.reduce((a,b)=>a+b,0)/impact.length).toFixed(2);document.getElementById('kpi-risk-score').textContent = avgRisk;document.getElementById('kpi-capture-rate').textContent = captureRate + '%';document.getElementById('kpi-audit-pass').textContent = auditPass + '%';document.getElementById('kpi-avg-impact').textContent = avgImpact}
-
-    function setSynced(){document.getElementById('last-sync')?.remove();}
+    function renderKPIs(){
+      const avgRisk = (riskSeries.reduce((a,b)=>a+Number(b.real),0)/riskSeries.length).toFixed(2);
+      const captureRate = Math.round(72 + Math.random()*10);
+      const auditPass = Math.round(65 + Math.random()*20);
+      const avgImpact = (Math.round((Math.random()*0.5 + 0.12)*100)/100).toFixed(2);
+      document.getElementById('kpi-risk-score').textContent = avgRisk;
+      document.getElementById('kpi-capture-rate').textContent = captureRate + '%';
+      document.getElementById('kpi-audit-pass').textContent = auditPass + '%';
+      document.getElementById('kpi-avg-impact').textContent = avgImpact;
+    }
 
     function openAudit(id){alert('Open audit: '+id+' — opens audit detail in product')}
     function openWorkflow(){alert('Open audit workflow — manage assignments and findings')}
 
     function simulateRefresh(){
-      // mutate data slightly to simulate
-      riskSeries.forEach(r=>{r.real = Math.max(1.5, (r.real + (Math.random()-0.4)*0.2).toFixed(2)); r.pred = Math.max(r.real, (r.pred + (Math.random()-0.4)*0.2).toFixed(2));});
-      riskChart.data.datasets[0].data = riskSeries.map(r=>r.pred);riskChart.data.datasets[1].data = riskSeries.map(r=>r.real);riskChart.update();
-      hccChart.data.datasets[0].data = [Math.max(55,68+Math.round((Math.random()-0.5)*8)),Math.max(8,18+Math.round((Math.random()-0.5)*8)),Math.max(10,14+Math.round((Math.random()-0.5)*8))];hccChart.update();
-      auditsChart.data.datasets[0].data = auditsOpen.map(a=>Math.max(0,a + Math.round((Math.random()-0.5)*3)));auditsChart.data.datasets[1].data = auditsClosed.map(a=>Math.max(0,a + Math.round((Math.random()-0.5)*3)));auditsChart.update();
-      heatChart.data.datasets[0].data = gapSums.map(v=>Math.max(2, v + Math.round((Math.random()-0.5)*8)));heatChart.update();
-      topHccChart.data.datasets[0].data = counts.map(c=>Math.max(30, c + Math.round((Math.random()-0.5)*60)));topHccChart.data.datasets[1].data = impact.map(i=>Math.max(0.05, (i + (Math.random()-0.5)*0.1).toFixed(2)));topHccChart.update();
+      // mutate data slightly to simulate refresh
+      riskSeries.forEach(r=>{
+        r.real = +(Math.max(1.5, (r.real + (Math.random()-0.5)*0.2)).toFixed(2));
+        r.pred = +(Math.max(r.real, (r.pred + (Math.random()-0.5)*0.2)).toFixed(2));
+      });
+      riskChart.data.datasets[0].data = riskSeries.map(r=>r.pred);
+      riskChart.data.datasets[1].data = riskSeries.map(r=>r.real);
+      riskChart.update();
+
+      // update other charts with small random deltas
+      hccChart.data.datasets[0].data = [Math.max(55,68+Math.round((Math.random()-0.5)*8)),Math.max(8,18+Math.round((Math.random()-0.5)*8)),Math.max(10,14+Math.round((Math.random()-0.5)*8))];
+      hccChart.update();
+
+      auditsChart.data.datasets[0].data = auditsOpen.map(a=>Math.max(0,a + Math.round((Math.random()-0.5)*3)));
+      auditsChart.data.datasets[1].data = auditsClosed.map(a=>Math.max(0,a + Math.round((Math.random()-0.5)*3)));
+      auditsChart.update();
+
+      heatChart.data.datasets[0].data = gapSums.map(v=>Math.max(2, v + Math.round((Math.random()-0.5)*8)));
+      heatChart.update();
+
+      topHccChart.data.datasets[0].data = counts.map(c=>Math.max(30, c + Math.round((Math.random()-0.5)*60)));
+      topHccChart.update();
+
       renderRecent();renderTopProviders();renderRegistry();renderKPIs();
     }
 
-    function downloadCSV(key){let csv='';if(key==='risk_trend'){csv='date,predicted,real\n'+riskSeries.map(r=>`${r.date},${r.pred},${r.real}`).join('\n')}const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url)}
+    function downloadCSV(key){
+      let csv='';
+      if(key==='risk_trend'){
+        csv = 'date,predicted,real\n' + riskSeries.map(r=>`${r.date},${r.pred},${r.real}`).join('\n');
+      }
+      const blob = new Blob([csv],{type:'text/csv'}); const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = key + '.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
 
     // initial render
     renderRecent();renderTopProviders();renderRegistry();renderKPIs();

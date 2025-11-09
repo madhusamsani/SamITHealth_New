@@ -5,67 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SamITHealth — Claims Management Dashboard</title>
   <meta name="description" content="Claims Management & TPA Support — end-to-end claim lifecycle management, rule-based adjudication, and TPA integration." />
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <!-- Updated corporate CSS (aligned with consultancy style) -->
+
   <style>
     :root{
-      --navy:#0b2545; --teal:#0aa89e; --purple:#6366f1; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; --max:1200px; --radius:12px; --shadow:0 16px 60px rgba(6,18,45,0.08); --social-size:40px; font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      --bg:#f4f7fb;
+      --paper:#ffffff;
+      --muted:#586674;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --teal:#0aa89e;
+      --success:#10b981;
+      --danger:#ef4444;
+      --max:1200px;
+      --radius:12px;
+      --shadow:0 12px 40px rgba(6,18,45,0.06);
+      --social-size:44px;
+      --gap:20px;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     }
-    /* Header styles */
-    .topbar{padding:14px 0;border-bottom:1px solid rgba(11,37,69,0.06);}
-    .topbar-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
-    .brand-text .title{font-weight:700;font-size:18px}
-    .brand-text .tag{font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:18px;align-items:center}
-    .nav a{text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-size:14px}
-    .nav a:hover{color:var(--navy);background:var(--accent-2)}
-    .nav a.active{color:var(--navy);background:rgba(10,168,158,0.08);font-weight:600}
-    .actions{display:flex;gap:12px;align-items:center}
-    .btn-primary{background:var(--teal);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    .sh-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:var(--navy);color:white;text-decoration:none;font-weight:700} 
 
-    /* Header styles (consultancy aligned) */
-    .topbar{padding:14px 0;border-bottom:1px solid rgba(11,37,69,0.06);}
-    .topbar-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
-    .brand-text .title{font-weight:700;font-size:18px}
-    .brand-text .tag{font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:18px;align-items:center}
-    .nav a{text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-size:14px}
-    .nav a:hover{color:var(--navy);background:var(--accent-2)}
-    .nav a.active{color:var(--navy);background:rgba(10,168,158,0.08);font-weight:600}
-    .actions{display:flex;gap:12px;align-items:center}
-    .btn-primary{background:var(--teal);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    .sh-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:var(--navy);color:white;text-decoration:none;font-weight:700}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--brand);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
 
-    /* Corporate style for SamITHealth: navy + teal + cool gray */
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy);}
-    .container{max-width:1200px;margin:28px auto;padding:20px;}
+    .wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
+
+    /* Header: provider-services alignment */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+
+    /* Layout */
+    .container{max-width:var(--max);margin:28px auto;padding:20px}
+    header.page-header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    header.page-header .logo-mini{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
 
     .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
     .longlist{display:flex;flex-direction:column;gap:12px}
-    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 6px 18px rgba(11,37,69,0.06);}
-    .card h3{margin:0;font-size:14px;color:var(--navy)}
+    .card{background:var(--paper);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+    .card h3{margin:0;font-size:14px;color:var(--brand)}
     .card .muted{font-size:12px;color:var(--muted);margin-top:6px}
-
-    /* Long-listed visualization style: each card stacks vertically for scanning */
-    .viz {min-height:180px;display:flex;flex-direction:column;gap:10px}
-    canvas{width:100% !important;max-height:240px}
+    .viz{min-height:180px;display:flex;flex-direction:column;gap:10px}
+    canvas{width:100% !important;max-height:260px}
 
     /* Right column styles */
     .sidebar{display:flex;flex-direction:column;gap:12px}
     .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#fff);}
+    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,#eef6ff,#fff);}
     .kpi .value{font-weight:700;font-size:18px}
     .kpi .label{font-size:12px;color:var(--muted)}
 
     table{width:100%;border-collapse:collapse;font-size:13px}
     th,td{padding:8px;text-align:left;border-bottom:1px solid #eef2f7}
-    th{font-size:12px;color:var(--muted);}    
+    th{font-size:12px;color:var(--muted)}
     .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px}
     .badge.ok{background:rgba(16,185,129,0.12);color:var(--success)}
     .badge.warn{background:rgba(250,204,21,0.12);color:#b45309}
@@ -73,261 +78,316 @@
 
     .controls{display:flex;gap:8px;align-items:center}
     .search{flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef2}
-    button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    button.btn{background:var(--brand);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
     .small{padding:6px 10px;font-size:13px}
 
-    /* Footer and social styles (consultancy) */
-    footer{background:var(--navy);color:rgba(230,238,252,0.95);padding:36px 20px 24px;margin-top:36px;border-radius:12px}
-    footer .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
-    footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
-    footer img.logo{height:56px;margin-bottom:8px}
-    footer h4{color:rgba(230,238,252,0.95);font-size:15px;margin-bottom:8px}
-    footer p, footer a{color:rgba(230,238,252,0.9);font-size:14px;line-height:1.6;margin:6px 0}
+    /* Footer - provider-services style */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
     .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.25);transition:transform .12s ease, box-shadow .12s ease}
-    .socials a svg{width:18px;height:18px;display:block;fill:#fff}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .socials a svg{width:18px;height:18px;fill:#fff;display:block}
     .socials a.linkedin{background:#0A66C2}
     .socials a.twitter{background:#1DA1F2}
     .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(2,6,23,0.18);z-index:200}
 
     @media(max-width:980px){
       .grid{grid-template-columns:1fr}
-      .sidebar{order:2}
-      .topbar-inner{flex-direction:column;align-items:flex-start;gap:12px}
-      .nav{flex-wrap:wrap}
+      .header-inner{flex-direction:column;align-items:flex-start;gap:12px}
+      nav.primary{flex-wrap:wrap}
     }
   </style>
 </head>
 <body>
-  <header class="topbar" role="banner" aria-label="Main header">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
-      <div class="logo-mark" aria-hidden="true">SH</div>
-      <div class="brand-text">
-        <div class="title">SamITHealth</div>
-        <div class="tag">Medical Review &amp; Repricing</div>
-      </div>
-    </a>
+  <div class="wrap">
+    <!-- Header: SH icon + SamITHealth linking to home; aligned like provider-services -->
+    <header class="site-header" role="banner" aria-label="Main header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">Claims Management</div>
+          </div>
+        </a>
 
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="Analytics&AI.html">Analytics</a>
-      <a href="Claims_Management.html">Claims</a>
-      <a href="Medical_Review&Repricing.html" class="active">Medical Review</a>
-      <a href="Form_Conversion&Interoperability.html">Interoperability</a>
-    </nav>
+        <nav class="primary" role="navigation" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="provider-services.html">Provider Services</a>
+          <a href="claims-management.html" class="active">Claims</a>
+          <a href="medical-review.html">Medical Review</a>
+          <a href="contact.html">Contact</a>
+        </nav>
 
-    <div class="actions">
-      <button class="btn-primary" onclick="location.href='contact.html'">Get Support</button>
-      <a class="sh-icon" href="index.html" aria-label="SamITHealth home">SH</a>
-    </div>
-  </div>
-</header>
-
-  <div class="container">
-
-    <header style="display:flex;align-items:center;gap:16px;margin-bottom:18px">
-      <div class="logo-mark" style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px">SIH</div>
-      <div>
-        <h1 style="margin:0;font-size:20px">Claims Management — SamITHealth</h1>
-        <p class="lead" style="margin:0;color:var(--muted);font-size:13px">Claims Management &amp; TPA Support — end-to-end claim lifecycle, rule-based adjudication, and third‑party administrator integration.</p>
+        <div class="header-ctas" aria-hidden="false">
+          <!-- phone intentionally removed on this page -->
+          <button class="btn-primary" onclick="location.href='contact.html'">Get Support</button>
+        </div>
       </div>
     </header>
 
-    <div class="grid">
-      <!-- left column: long-listed visualizations -->
-      <main class="longlist">
+    <main class="container">
+      <header class="page-header">
+        <div class="logo-mini" style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700">CM</div>
+        <div>
+          <h1 style="margin:0;font-size:20px">Claims Management — SamITHealth</h1>
+          <p class="muted" style="margin:6px 0 0;font-size:13px">Claims Management &amp; TPA Support — end-to-end claim lifecycle, rule-based adjudication, and third‑party administrator integrations.</p>
+        </div>
+      </header>
 
-        <section class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <h3>1. Claims Volume (30 days)</h3>
-              <div class="muted">Daily submitted vs adjudicated</div>
+      <div class="grid" role="main">
+        <!-- left column: long-listed visualizations -->
+        <main class="longlist" aria-label="Claims visualizations">
+
+          <section class="card" aria-labelledby="claims-volume">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <h3 id="claims-volume">1. Claims Volume (30 days)</h3>
+                <div class="muted">Daily submitted vs adjudicated</div>
+              </div>
+              <div class="controls">
+                <select id="cv-range" class="small" aria-label="Claims volume range">
+                  <option value="30">Last 30 days</option>
+                  <option value="90">Last 90 days</option>
+                  <option value="365">Last 12 months</option>
+                </select>
+                <button class="btn small" onclick="downloadCSV('claims_volume')">CSV</button>
+              </div>
             </div>
-            <div class="controls">
-              <select id="cv-range" class="small">
-                <option value="30">Last 30 days</option>
-                <option value="90">Last 90 days</option>
-                <option value="365">Last 12 months</option>
-              </select>
-              <button class="btn small" onclick="downloadCSV('claims_volume')">CSV</button>
+            <div class="viz"><canvas id="chart-claims-volume" aria-label="Claims volume chart"></canvas></div>
+          </section>
+
+          <section class="card" aria-labelledby="claim-funnel">
+            <h3 id="claim-funnel">2. Claim Lifecycle Funnel</h3>
+            <div class="muted">Submission → Validation → Adjudication → Payment / Denial</div>
+            <div class="viz"><canvas id="chart-funnel" aria-label="Claim funnel chart"></canvas></div>
+          </section>
+
+          <section class="card" aria-labelledby="rule-adjudication">
+            <h3 id="rule-adjudication">3. Rule-based Adjudication Results</h3>
+            <div class="muted">Rules fired, auto-adjudicated, manual review required</div>
+            <div class="viz"><canvas id="chart-rules" aria-label="Rule adjudication chart"></canvas></div>
+          </section>
+
+          <section class="card" aria-labelledby="denials">
+            <h3 id="denials">4. Top 6 Denial Reasons (Long list)</h3>
+            <div class="muted">Bar chart showing frequent denial categories</div>
+            <div class="viz"><canvas id="chart-denials" aria-label="Denials chart"></canvas></div>
+          </section>
+
+          <section class="card" aria-labelledby="aht">
+            <h3 id="aht">5. Average Handling Time by TPA</h3>
+            <div class="muted">Avg business hours from submission to closure</div>
+            <div class="viz"><canvas id="chart-aht" aria-label="Average handling time chart"></canvas></div>
+          </section>
+
+          <section class="card" aria-labelledby="recent-claims">
+            <h3 id="recent-claims">6. Recent Claims (Long list)</h3>
+            <div class="muted">Most recent claims with quick actions</div>
+            <div style="margin-top:8px;overflow:auto;max-height:220px">
+              <table aria-label="Recent claims">
+                <thead><tr><th>Claim ID</th><th>Patient</th><th>TPA</th><th>Status</th><th>Amount</th><th></th></tr></thead>
+                <tbody id="recent-claims-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+        </main>
+
+        <!-- right column: KPIs and TPA status -->
+        <aside class="sidebar" aria-label="Sidebar KPIs and actions">
+          <div class="card" aria-labelledby="overview-kpis">
+            <h3 id="overview-kpis">Overview KPIs</h3>
+            <div class="kpi-grid" style="margin-top:10px">
+              <div class="kpi"><div class="value" id="kpi-submitted">—</div><div class="label">Submitted (30d)</div></div>
+              <div class="kpi"><div class="value" id="kpi-adjudicated">—</div><div class="label">Adjudicated (30d)</div></div>
+              <div class="kpi"><div class="value" id="kpi-autorule">—</div><div class="label">Auto-adjudicated %</div></div>
+              <div class="kpi"><div class="value" id="kpi-denialrate">—</div><div class="label">Denial rate</div></div>
             </div>
           </div>
-          <div class="viz"><canvas id="chart-claims-volume"></canvas></div>
-        </section>
 
-        <section class="card">
-          <h3>2. Claim Lifecycle Funnel</h3>
-          <div class="muted">Submission → Validation → Adjudication → Payment / Denial</div>
-          <div class="viz"><canvas id="chart-funnel"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>3. Rule-based Adjudication Results</h3>
-          <div class="muted">Rules fired, auto-adjudicated, manual review required</div>
-          <div class="viz"><canvas id="chart-rules"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>4. Top 6 Denial Reasons (Long list)</h3>
-          <div class="muted">Bar chart showing frequent denial categories</div>
-          <div class="viz"><canvas id="chart-denials"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>5. Average Handling Time by TPA</h3>
-          <div class="muted">Avg business hours from submission to closure</div>
-          <div class="viz"><canvas id="chart-aht"></canvas></div>
-        </section>
-
-        <section class="card">
-          <h3>6. Recent Claims (Long list)</h3>
-          <div class="muted">Most recent claims with quick actions</div>
-          <div style="margin-top:8px;overflow:auto;max-height:220px">
-            <table aria-label="Recent claims">
-              <thead><tr><th>Claim ID</th><th>Patient</th><th>TPA</th><th>Status</th><th>Amount</th><th></th></tr></thead>
-              <tbody id="recent-claims-body"></tbody>
+          <div class="card" aria-labelledby="tpa-integrations">
+            <h3 id="tpa-integrations">TPA Integrations</h3>
+            <div class="muted">Real-time status for connected third-party administrators</div>
+            <table style="margin-top:8px">
+              <thead><tr><th>TPA</th><th>Status</th></tr></thead>
+              <tbody id="tpa-status"></tbody>
             </table>
           </div>
-        </section>
 
-      </main>
+          <div class="card" aria-labelledby="rule-engine">
+            <h3 id="rule-engine">Rule Engine Snapshot</h3>
+            <div class="muted">Top rules fired in last 24 hours</div>
+            <ol id="top-rules" style="margin-top:10px;padding-left:18px"></ol>
+          </div>
 
-      <!-- right column: KPIs and TPA status -->
-      <aside class="sidebar">
-        <div class="card">
-          <h3>Overview KPIs</h3>
-          <div class="kpi-grid" style="margin-top:10px">
-            <div class="kpi"><div class="value" id="kpi-submitted">—</div><div class="label">Submitted (30d)</div></div>
-            <div class="kpi"><div class="value" id="kpi-adjudicated">—</div><div class="label">Adjudicated (30d)</div></div>
-            <div class="kpi"><div class="value" id="kpi-autorule">—</div><div class="label">Auto-adjudicated %</div></div>
-            <div class="kpi"><div class="value" id="kpi-denialrate">—</div><div class="label">Denial rate</div></div>
+          <div class="card" aria-labelledby="actions">
+            <h3 id="actions">Actions</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
+              <button class="btn" style="background:transparent;color:var(--brand);border:1px solid #e6eef2" onclick="openSettings()">Settings</button>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </main>
+
+    <!-- Footer: provider-services style (logo, description, explore links, socials, newsletter). Phone removed for this page. -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            </a>
+            <p>Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
+          </div>
+
+          <div>
+            <h4>Explore</h4>
+            <a href="provider-services.html">Provider Services</a><br>
+            <a href="rcm-solutions.html">RCM Solutions</a><br>
+            <a href="payer-solutions.html">Payer Solutions</a><br>
+            <a href="consultancy.html">Consultancy</a>
           </div>
         </div>
 
-        <div class="card">
-          <h3>TPA Integrations</h3>
-          <div class="muted">Real-time status for connected third-party administrators</div>
-          <table style="margin-top:8px">
-            <thead><tr><th>TPA</th><th>Status</th></tr></thead>
-            <tbody id="tpa-status"></tbody>
-          </table>
-        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+            </a>
 
-        <div class="card">
-          <h3>Rule Engine Snapshot</h3>
-          <div class="muted">Top rules fired in last 24 hours</div>
-          <ol id="top-rules" style="margin-top:10px;padding-left:18px"></ol>
-        </div>
+            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
 
-        <div class="card">
-          <h3>Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-            <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
-            <button class="btn" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openSettings()">Settings</button>
+            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 13 0 14.5.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
+            </a>
+          </nav>
+
+          <div class="footer-newsletter" aria-label="Newsletter sign up">
+            <div>Subscribe to our repricing newsletter for provider engagement best practices.</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
+              <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
-
-      </aside>
-    </div>
-
-    <footer aria-label="Footer">
-  <div class="footer-inner">
-    <div class="footer-content">
-      <div>
-        <img class="logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo" loading="lazy" decoding="async">
-        <p>Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
       </div>
-      <div>
-        <h4>Office</h4>
-        <p>106 Colony Park Dr, Suite 800-G<br>Cumming, GA 30040</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <p><a href="mailto:info@samithealth.com">info@samithealth.com</a></p>
-        <!-- Phone removed on this page per request -->
-      </div>
-    </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
-      <nav class="socials" aria-label="Social media" style="display:flex;gap:12px">
-        <a class="linkedin" href="#" aria-label="LinkedIn" title="LinkedIn" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.4 0 6.4 3.6 6.4 8.2V22h-5v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
-        </a>
-        <a class="twitter" href="#" aria-label="Twitter" title="Twitter" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4.47 4.28 4.28 0 0 0 1.33 5.72A4.2 4.2 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.19 4.3 4.3 0 0 1-1.93.07 4.29 4.29 0 0 0 4 2.97A8.6 8.6 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.55 12.2-12.23v-.56A8.6 8.6 0 0 0 22.46 6z"/></svg>
-        </a>
-        <a class="youtube" href="#" aria-label="YouTube" title="YouTube" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 14 0.6 15.8 0.6 15.8s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 .9.1 4 .3 8.2.3s7.3-.1 8.2-.3c.5-.1 1.6-.1 2.4-1 .6-.7.8-2.4.8-2.4s.6-2.6.6-4.6V9.9c0-1.9-.6-3.7-.6-3.7zM9.6 14.6V7.6l6.6 3.5-6.6 3.5z"/></svg>
-        </a>
-      </nav>
-      <div style="max-width:320px;text-align:right;color:rgba(230,238,252,0.85)">
-        <div>Subscribe to our repricing newsletter for provider engagement best practices.</div>
-        <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thank you — form submission is disabled in this mockup.')">
-          <input aria-label="Email" placeholder="Email address" type="email" required style="padding:10px;border-radius:8px;border:0;min-width:0">
-          <button class="btn-primary" type="submit">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </div>
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
+    </footer>
 
-  <div class="bottom">© 2025 SamITHealth. All rights reserved.</div>
-</footer>
-
+    <!-- Floating quick-home button -->
+    <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
   </div>
 
   <script>
-    // Mock long-listed dataset (real implementation would fetch APIs)
+    // Simple demo data generation and Chart.js wiring (self-contained)
     const now = new Date();
-    const palette = {navy:'#0b2545',teal:'#0aa89e',purple:'#6366f1',danger:'#ef4444',success:'#10b981'};
-    function genDailySeries(days){
-      const out=[]; for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),submitted:Math.round(200+Math.random()*140),adjudicated:Math.round(150+Math.random()*140)})}return out;
-    }
-    const claims30 = genDailySeries(30);
 
-    // KPI calculation
+    function genDailySeries(days){
+      const out=[];
+      for(let i=days-1;i>=0;i--){
+        const d=new Date();
+        d.setDate(now.getDate()-i);
+        const date = d.toISOString().slice(0,10);
+        const submitted = Math.round(200 + Math.random()*140);
+        const adjudicated = Math.max(0, submitted - Math.round(Math.random()*60));
+        out.push({date, submitted, adjudicated});
+      }
+      return out;
+    }
+
+    let claims30 = genDailySeries(30);
+
     function computeKPIs(series){
       const submitted = series.reduce((s,r)=>s+r.submitted,0);
       const adjudicated = series.reduce((s,r)=>s+r.adjudicated,0);
-      const autoPct = Math.round((adjudicated/submitted)*100);
-      const denialRate = Math.round((1 - adjudicated/submitted)*100);
+      const autoPct = submitted ? Math.round((adjudicated/submitted)*100) : 0;
+      const denialRate = submitted ? Math.round((1 - adjudicated/submitted)*100) : 0;
       return {submitted,adjudicated,autoPct,denialRate};
     }
 
-    // Chart: Claims Volume
+    // Claims Volume (stacked bars)
     const ctxCV = document.getElementById('chart-claims-volume').getContext('2d');
-    const claimsVolumeChart = new Chart(ctxCV,{type:'bar',data:{labels:claims30.map(r=>r.date),datasets:[{type:'bar',label:'Submitted',data:claims30.map(r=>r.submitted),yAxisID:'y',backgroundColor:palette.teal,borderColor:palette.teal},{type:'line',label:'Adjudicated',data:claims30.map(r=>r.adjudicated),yAxisID:'y',tension:0.3,borderColor:palette.purple,backgroundColor:'rgba(99,102,241,0.08)',pointBackgroundColor:palette.purple,pointBorderColor:'#fff'}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true}}}});
+    const claimsVolumeChart = new Chart(ctxCV, {
+      type: 'bar',
+      data: {
+        labels: claims30.map(r=>r.date),
+        datasets: [
+          { label:'Submitted', data: claims30.map(r=>r.submitted), backgroundColor: 'rgba(6,86,255,0.8)' },
+          { label:'Adjudicated', data: claims30.map(r=>r.adjudicated), backgroundColor: 'rgba(10,168,158,0.85)' }
+        ]
+      },
+      options: { responsive:true, plugins:{legend:{position:'top'}} }
+    });
 
-    // Chart: Funnel (simulated using horizontal bar stacked)
+    // Funnel (horizontal stacked)
     const ctxF = document.getElementById('chart-funnel').getContext('2d');
-    const funnelData = {labels:['Funnel'],datasets:[{label:'Submission',data:[1000],backgroundColor:palette.teal},{label:'Validation',data:[820],backgroundColor:palette.navy},{label:'Adjudication',data:[675],backgroundColor:palette.success},{label:'Payment',data:[540],backgroundColor:palette.purple}]};
-    const funnelChart = new Chart(ctxF,{type:'bar',data:funnelData,options:{indexAxis:'y',plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true},y:{stacked:true}}}});
+    const funnelChart = new Chart(ctxF, {
+      type: 'bar',
+      data: {
+        labels: ['Funnel'],
+        datasets: [
+          { label:'Submission', data:[1000], backgroundColor:'rgba(10,168,158,0.9)' },
+          { label:'Validation', data:[820], backgroundColor:'rgba(6,86,255,0.85)' },
+          { label:'Adjudication', data:[650], backgroundColor:'rgba(99,102,241,0.9)' },
+          { label:'Payment', data:[540], backgroundColor:'rgba(16,185,129,0.9)' }
+        ]
+      },
+      options: { indexAxis: 'y', plugins:{legend:{position:'bottom'}}, scales:{x:{stacked:true},y:{stacked:true}} }
+    });
 
-    // Chart: Rules fired pie/donut
+    // Rules (doughnut)
     const ctxR = document.getElementById('chart-rules').getContext('2d');
-    const rulesChart = new Chart(ctxR,{type:'doughnut',data:{labels:['Auto-pass','Auto-deny','Manual-review'],datasets:[{data:[58,12,30],backgroundColor:[palette.teal,palette.danger,palette.purple]}]} ,options:{plugins:{legend:{position:'bottom'}}}});
+    const rulesChart = new Chart(ctxR, {
+      type: 'doughnut',
+      data: { labels:['Auto-pass','Auto-deny','Manual-review'], datasets:[{ data:[58,12,30], backgroundColor:['rgba(10,168,158,0.9)','rgba(239,68,68,0.9)','rgba(99,102,241,0.9)'] }] },
+      options: { responsive:true, plugins:{legend:{position:'bottom'}} }
+    });
 
-    // Chart: Denials
+    // Denials (bar)
     const ctxD = document.getElementById('chart-denials').getContext('2d');
-    const denials = {labels:['Missing info','Pre-existing','Policy limit','Coding error','Eligibility','Other'],data:[120,95,70,55,40,24]};
-    const denialsChart = new Chart(ctxD,{type:'bar',data:{labels:denials.labels,datasets:[{label:'Denials',data:denials.data,backgroundColor:denials.data.map((d,i)=>['rgba(10,168,158,0.9)','rgba(239,68,68,0.9)','rgba(99,102,241,0.9)','rgba(250,204,21,0.9)','rgba(79,70,229,0.9)','rgba(14,165,233,0.9)'][i])}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+    const denialsData = { labels:['Missing info','Pre-existing','Policy limit','Coding error','Eligibility','Other'], values:[120,95,70,55,40,24] };
+    const denialsChart = new Chart(ctxD, {
+      type: 'bar',
+      data: { labels: denialsData.labels, datasets:[{ label:'Denials', data: denialsData.values, backgroundColor: denialsData.values.map((v,i)=>['rgba(10,168,158,0.9)','rgba(239,68,68,0.9)','rgba(99,102,241,0.9)','rgba(250,204,21,0.9)','rgba(6,86,255,0.9)','rgba(120,121,140,0.9)'][i]) }]},
+      options: { responsive:true, plugins:{legend:{display:false}}}
+    });
 
-    // Chart: AHT by TPA (horizontal)
+    // AHT (bar)
     const ctxA = document.getElementById('chart-aht').getContext('2d');
     const tpas = ['TPA One','TPA Two','TPA Three','TPA Four'];
     const aht = [48,72,36,60];
-    const ahtChart = new Chart(ctxA,{type:'bar',data:{labels:tpas,datasets:[{label:'Avg hours',data:aht,backgroundColor:aht.map((v,i)=>[palette.teal,palette.purple,palette.navy,palette.success][i])}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+    const ahtChart = new Chart(ctxA, {
+      type: 'bar',
+      data: { labels: tpas, datasets:[{ label:'Avg hours', data: aht, backgroundColor: ['rgba(10,168,158,0.9)','rgba(99,102,241,0.9)','rgba(6,86,255,0.9)','rgba(16,185,129,0.9)'] }]},
+      options: { responsive:true, plugins:{legend:{display:false}} }
+    });
 
-    // Recent claims table population
-    const recentClaims = Array.from({length:16}).map((_,i)=>({id:`CLM-${2025000+i}`,patient:`Patient ${i+1}`,tpa:tpas[i%tpas.length],status:['Submitted','Adjudicated','Denied','Manual Review'][Math.floor(Math.random()*4)],amount:(Math.round(Math.random()*5000)+300).toFixed(2)}));
-    function renderRecent(){
-      const tbody=document.getElementById('recent-claims-body');tbody.innerHTML='';
-      recentClaims.forEach(c=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${c.id}</td><td>${c.patient}</td><td>${c.tpa}</td><td>${formatStatus(c.status)}</td><td>₹ ${c.amount}</td><td><button onclick="openClaim('${c.id}')" class="small">Open</button></td>`;
-        tbody.appendChild(tr);
-      });
-    }
+    // Recent claims (table) and supporting lists
+    const recentClaims = Array.from({length:16}).map((_,i)=>{
+      const id = `CLM-${2025000+i}`;
+      const patient = `Patient ${i+1}`;
+      const tpa = tpas[i % tpas.length];
+      const statuses = ['Submitted','Adjudicated','Denied','Manual Review'];
+      const status = statuses[Math.floor(Math.random()*statuses.length)];
+      const amount = (Math.round((200 + Math.random()*480) * 100)/100).toLocaleString();
+      return { id, patient, tpa, status, amount };
+    });
 
     function formatStatus(s){
       if(s==='Adjudicated') return '<span class="badge ok">Adjudicated</span>';
@@ -336,100 +396,95 @@
       return '<span class="badge" style="background:#eef2f7;color:var(--muted)">Submitted</span>';
     }
 
+    function renderRecent(){
+      const tbody = document.getElementById('recent-claims-body'); tbody.innerHTML = '';
+      recentClaims.forEach(c=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${c.id}</td><td>${c.patient}</td><td>${c.tpa}</td><td>${formatStatus(c.status)}</td><td>${c.amount}</td><td><button class="small" onclick="openClaim('${c.id}')">Open</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
     // TPA status
     const tpaStatus = [
-      {name:'TPA One',status:'OK'},
-      {name:'TPA Two',status:'Degraded'},
-      {name:'TPA Three',status:'OK'},
-      {name:'TPA Four',status:'Offline'}
+      {name:'TPA One', status:'OK'},
+      {name:'TPA Two', status:'Degraded'},
+      {name:'TPA Three', status:'OK'},
+      {name:'TPA Four', status:'Offline'}
     ];
     function renderTPA(){
-      const tbody=document.getElementById('tpa-status');tbody.innerHTML='';
+      const tbody = document.getElementById('tpa-status'); tbody.innerHTML = '';
       tpaStatus.forEach(t=>{
-        const tr=document.createElement('tr');
-        const s = t.status==='OK'?'<span class="badge ok">OK</span>':(t.status==='Degraded'?'<span class="badge warn">Degraded</span>':'<span class="badge err">Offline</span>');
-        tr.innerHTML=`<td>${t.name}</td><td>${s}</td>`;tbody.appendChild(tr);
-      })
+        const tr = document.createElement('tr');
+        const s = t.status==='OK' ? '<span class="badge ok">OK</span>' : (t.status==='Degraded' ? '<span class="badge warn">Degraded</span>' : '<span class="badge err">Offline</span>');
+        tr.innerHTML = `<td>${t.name}</td><td>${s}</td>`;
+        tbody.appendChild(tr);
+      });
     }
 
-    // Top rules list
-    const rulesList = ['Citizenship mismatch check','Policy limit check','Provider network validation','Duplicate claim detection','Unsupported procedure code','Pre-authorization missing'];
+    // Top rules
+    const rulesList = ['Duplicate detection','Policy eligibility','Pre-auth check','Coding validation','Provider contract check','Fraud pattern scan'];
     function renderTopRules(){
-      const ol=document.getElementById('top-rules');ol.innerHTML='';
-      rulesList.slice(0,6).forEach(r=>{const li=document.createElement('li');li.textContent=r;ol.appendChild(li)});
+      const ol = document.getElementById('top-rules'); ol.innerHTML = '';
+      rulesList.slice(0,6).forEach(r=>{ const li = document.createElement('li'); li.textContent = r; ol.appendChild(li); });
     }
 
-    // KPIs render
+    // KPIs
     function renderKPIs(){
-      const k=computeKPIs(claims30);
+      const k = computeKPIs(claims30);
       document.getElementById('kpi-submitted').textContent = k.submitted.toLocaleString();
       document.getElementById('kpi-adjudicated').textContent = k.adjudicated.toLocaleString();
       document.getElementById('kpi-autorule').textContent = k.autoPct + '%';
       document.getElementById('kpi-denialrate').textContent = k.denialRate + '%';
     }
 
-    // Last synced
-    function setSynced(){document.getElementById('last-synced').textContent = new Date().toLocaleString();}
+    // Interactions
+    function openClaim(id){ alert('Open claim: ' + id + ' — (would open claim detail in product)'); }
+    function openSettings(){ alert('Open Settings — configuration for rules, TPA keys, export, etc.'); }
 
-    // Simulated interactions
-    function openClaim(id){alert('Open claim: '+id+' — (in production this would route to claim detail)')}
     function simulateRefresh(){
-      // In a real app, call your APIs here. We'll mutate some data to simulate.
-      claims30.forEach(r=>{r.adjudicated = Math.max(0, r.submitted - Math.round(Math.random()*40));});
+      // mutate data and update charts to simulate refresh
+      claims30.forEach(r => { r.adjudicated = Math.max(0, r.submitted - Math.round(Math.random()*60)); });
       claimsVolumeChart.data.datasets[0].data = claims30.map(r=>r.submitted);
       claimsVolumeChart.data.datasets[1].data = claims30.map(r=>r.adjudicated);
       claimsVolumeChart.update();
 
-      rulesChart.data.datasets[0].data = [50 + Math.round(Math.random()*10),10 + Math.round(Math.random()*8),40 + Math.round(Math.random()*12)];
-      rulesChart.update();
-
-      denialsChart.data.datasets[0].data = denials.data.map(d=>Math.max(5, d + Math.round((Math.random()-0.5)*30)));
+      denialsChart.data.datasets[0].data = denialsData.values.map(d => Math.max(5, d + Math.round((Math.random()-0.5)*30)));
       denialsChart.update();
 
       ahtChart.data.datasets[0].data = aht.map(a=>Math.max(10, Math.round(a + (Math.random()-0.5)*20)));
       ahtChart.update();
 
-      renderRecent();renderTPA();renderTopRules();renderKPIs();setSynced();
+      renderRecent(); renderTPA(); renderTopRules(); renderKPIs();
+      document.querySelector('.footer-bottom')?.textContent && setTimeout(()=>{},0);
     }
 
-    // Utility: download CSV for a chart dataset
     function downloadCSV(key){
-      let csv='';
-      if(key==='claims_volume'){
+      let csv = '';
+      if(key === 'claims_volume'){
         csv = 'date,submitted,adjudicated\n' + claims30.map(r=>`${r.date},${r.submitted},${r.adjudicated}`).join('\n');
       }
-      const blob = new Blob([csv],{type:'text/csv'});
+      const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url);
+      const a = document.createElement('a'); a.href = url; a.download = key + '.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     }
 
-    function openSettings(){alert('Open Settings — configuration for rules, TPA keys, export, etc.')}
-
     // Initial render
-    renderRecent();renderTPA();renderTopRules();renderKPIs();setSynced();
+    renderRecent(); renderTPA(); renderTopRules(); renderKPIs();
 
-    // Wire range selector
+    // Range selector: regenerate series when changed
     document.getElementById('cv-range').addEventListener('change', (e)=>{
       const days = parseInt(e.target.value,10);
-      // regenerate series for selected days
-      const newSeries = genDailySeries(days);
-      claimsVolumeChart.data.labels = newSeries.map(r=>r.date);
-      claimsVolumeChart.data.datasets[0].data = newSeries.map(r=>r.submitted);
-      claimsVolumeChart.data.datasets[1].data = newSeries.map(r=>r.adjudicated);
+      claims30 = genDailySeries(days);
+      claimsVolumeChart.data.labels = claims30.map(r=>r.date);
+      claimsVolumeChart.data.datasets[0].data = claims30.map(r=>r.submitted);
+      claimsVolumeChart.data.datasets[1].data = claims30.map(r=>r.adjudicated);
       claimsVolumeChart.update();
-      // update KPIs
-      // use the series to update KPI display
-      const k = (function(series){const s=series.reduce((a,b)=>a+b.submitted,0);const ad=series.reduce((a,b)=>a+b.adjudicated,0);return {submitted:s,adjudicated:ad,autoPct:Math.round((ad/s)*100),denialRate:Math.round((1-ad/s)*100)}})(newSeries);
-      document.getElementById('kpi-submitted').textContent = k.submitted.toLocaleString();
-      document.getElementById('kpi-adjudicated').textContent = k.adjudicated.toLocaleString();
-      document.getElementById('kpi-autorule').textContent = k.autoPct + '%';
-      document.getElementById('kpi-denialrate').textContent = k.denialRate + '%';
+      renderKPIs();
     });
 
-    // Accessibility note: keyboard focus styles
-    document.addEventListener('keydown', e=>{if(e.key==='/' ){document.querySelector('.search')?.focus();e.preventDefault();}})
-
-    // End of file
+    // Accessibility: '/' focuses search if exists
+    document.addEventListener('keydown', e => { if(e.key === '/') { document.querySelector('.search')?.focus(); e.preventDefault(); } });
   </script>
 </body>
 </html>
