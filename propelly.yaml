@@ -1,0 +1,15 @@
+# Propelly Static Site Deployment Configuration
+# This configuration deploys the SamITHealth static website
+
+# Specification version
+version: 1.0
+
+# Build configuration (none needed for static sites)
+build:
+  enabled: false
+  
+# Publish configuration - specifies the directory to deploy
+publish:
+  directory: ./
+  
+# No custom routes or headers required for basic deployment
