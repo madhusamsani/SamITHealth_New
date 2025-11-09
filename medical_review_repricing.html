@@ -5,24 +5,65 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SamITHealth — Medical Review & Repricing</title>
   <meta name="description" content="Medical Review & Repricing — data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
     :root{
-      --navy:#0b2545; --teal:#0aa89e; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      /* Updated color scheme to match provider-services (clean blue gradients) */
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --muted:#586674;
+      --bg:#f4f7fb;
+      --paper:#ffffff;
+      --card-bg: linear-gradient(180deg,#fff,#fbfdff);
+      --success:#10b981;
+      --danger:#ef4444;
+      --max-width:1200px;
+      --radius:12px;
+      --shadow:0 10px 30px rgba(6,18,45,0.06);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
-    .container{max-width:1200px;margin:28px auto;padding:20px}
-    header{display:flex;gap:14px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:0;color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
-    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,37,69,0.06)}
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--brand);-webkit-font-smoothing:antialiased;line-height:1.45}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Page wrapper */
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:0 20px}
+
+    /* Header - aligned like provider-services.html */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+
+    /* Page title block (below header) */
+    .page-header{display:flex;gap:14px;align-items:center;margin:20px 0}
+    .page-header h1{margin:0;font-size:20px}
+    .lead{margin:0;color:var(--muted);font-size:13px}
+
+    /* Main grid */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:6px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--paper);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
     .longlist{display:flex;flex-direction:column;gap:12px}
     .viz{min-height:160px;display:flex;flex-direction:column;gap:10px}
     canvas{width:100% !important;max-height:260px}
     .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#fff)}
+    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(0,102,255,0.04),#fff)}
     .kpi .value{font-weight:700;font-size:18px}
     .kpi .label{font-size:12px;color:var(--muted)}
     table{width:100%;border-collapse:collapse;font-size:13px}
@@ -34,19 +75,71 @@
     .badge.err{background:rgba(239,68,68,0.12);color:var(--danger)}
     .controls{display:flex;gap:8px;align-items:center}
     .small{padding:6px 10px;font-size:13px}
-    button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+    button.btn{background:var(--brand);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+
+    /* Footer (copied + adjusted visuals from provider-services) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s}
+    .socials a svg{width:18px;height:18px;fill:#fff}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.32)}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating quick-home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
+
+    /* Small responsive tweaks */
+    @media (max-width:1100px){ .grid{grid-template-columns:1fr} .footer-inner{grid-template-columns:1fr} }
+    @media (max-width:720px){ nav.primary{display:none} .footer-newsletter{text-align:left} .page-header{flex-direction:column;align-items:flex-start;gap:8px} }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">SIH</div>
+  <div class="wrap">
+    <!-- Header aligned like provider-services.html: SamITHealth brand + nav + CTAs (phone intentionally omitted here) -->
+    <header class="site-header" role="banner" aria-label="Main header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">CMMI Level 5 • Healthcare IT & RCM</div>
+          </div>
+        </a>
+
+        <nav class="primary" role="navigation" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="provider-services.html">Provider Services</a>
+          <a href="payer-solutions.html">Payer Solutions</a>
+          <a href="laboratory-services.html">Laboratory Services</a>
+          <a href="what-makes-us-unique.html">Why Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="Careers.html">Careers</a>
+        </nav>
+
+        <div class="header-ctas" aria-hidden="false">
+          <!-- phone intentionally omitted on this specific page -->
+          <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-header">
+      <div class="logo-mark" style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">SIH</div>
       <div>
         <h1>Medical Review &amp; Repricing — SamITHealth</h1>
         <p class="lead">Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
       </div>
-    </header>
+    </div>
 
     <div class="grid">
       <main class="longlist">
@@ -129,67 +222,171 @@
           <h3>Actions</h3>
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
             <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
-            <button class="btn" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openSettings()">Configure Rules</button>
+            <button class="btn" style="background:transparent;color:var(--brand);border:1px solid #e6eef2" onclick="openSettings()">Configure Rules</button>
           </div>
         </div>
 
       </aside>
     </div>
 
-    <footer style="margin-top:18px;color:var(--muted);font-size:12px">Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing</footer>
+    <!-- Footer: copied/adapted from provider-services.html with improved social visualizations -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            </a>
+            <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+          </div>
+
+          <div>
+            <h4>Explore</h4>
+            <a href="provider-services.html">Provider Services</a><br>
+            <a href="payer-solutions.html">Payer Solutions</a><br>
+            <a href="laboratory-services.html">Laboratory Services</a><br>
+            <a href="consultancy.html">Consultancy</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <!-- simple LinkedIn icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" role="img"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
+            </a>
+
+            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true" role="img"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
+            </a>
+
+            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" role="img"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
+            </a>
+          </nav>
+
+          <div class="footer-newsletter" aria-label="Newsletter sign up">
+            <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+              <input aria-label="Email address" placeholder="Email address" type="email" required>
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
+    </footer>
+
+    <!-- Floating quick-home button -->
+    <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
   </div>
 
   <script>
+    // --- DATA + CHARTS (kept from original file, minor name fixes) ---
     const now=new Date();
-    function genSeries(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),billed:Math.round(500000+Math.random()*300000),allowed:Math.round(350000+Math.random()*200000),repriced:Math.round(100000+Math.random()*120000)})}return out}
+    function genSeries(days){
+      const out=[];
+      for(let i=days-1;i>=0;i--){
+        const d=new Date();
+        d.setDate(now.getDate()-i);
+        // make daily numbers deterministic-ish demo
+        const billed = Math.round(500000 + Math.random()*300000);
+        const allowed = Math.round(billed * (0.6 + Math.random()*0.25));
+        const repriced = Math.round(allowed * (0.6 + Math.random()*0.25));
+        out.push({date:d.toISOString().slice(0,10), billed, allowed, repriced});
+      }
+      return out;
+    }
+
     let series90 = genSeries(90);
 
-    function computeKPIs(s){const reviews = 320; const savings = series90.reduce((a,b)=>a+(b.billed - b.repriced),0); const avg = Math.round(savings / reviews); const providers= Math.round(28 + Math.random()*10); return {reviews,savings,avg,providers};}
+    function computeKPIs(s){
+      const reviews = 320;
+      const savings = s.reduce((a,b)=>a+(b.billed - b.repriced),0);
+      const avg = Math.round(savings / reviews);
+      const providers= Math.round(28 + Math.random()*10);
+      return {reviews, savings, avg, providers};
+    }
 
     // Repricing trend chart
     const ctxR=document.getElementById('chart-repricing').getContext('2d');
-    const repChart = new Chart(ctxR,{type:'line',data:{labels:series90.map(r=>r.date),datasets:[{label:'Gross Billed',data:series90.map(r=>r.billed),tension:0.25},{label:'Allowed',data:series90.map(r=>r.allowed),tension:0.25},{label:'Repriced',data:series90.map(r=>r.repriced),tension:0.25}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:false}}}});
+    const repChart = new Chart(ctxR,{
+      type:'line',
+      data:{
+        labels:series90.map(r=>r.date),
+        datasets:[
+          {label:'Gross Billed',data:series90.map(r=>r.billed),tension:0.25,borderColor:'rgba(0,102,255,0.9)',backgroundColor:'rgba(0,102,255,0.08)',pointRadius:0},
+          {label:'Allowed',data:series90.map(r=>r.allowed),tension:0.25,borderColor:'rgba(4,120,87,0.9)',backgroundColor:'rgba(4,120,87,0.06)',pointRadius:0},
+          {label:'Repriced',data:series90.map(r=>r.repriced),tension:0.25,borderColor:'rgba(220,38,38,0.9)',backgroundColor:'rgba(220,38,38,0.06)',pointRadius:0}
+        ]
+      },
+      options:{
+        plugins:{legend:{position:'bottom'}},
+        scales:{y:{beginAtZero:false}}
+      }
+    });
 
     // Clinical review outcomes (donut)
     const ctxC=document.getElementById('chart-clinical').getContext('2d');
-    const clinChart = new Chart(ctxC,{type:'doughnut',data:{labels:['Approved','Modified','Denied'],datasets:[{data:[62,28,10]}]},options:{plugins:{legend:{position:'bottom'}}}});
+    const clinChart = new Chart(ctxC,{type:'doughnut',data:{labels:['Approved','Modified','Denied'],datasets:[{data:[62,28,10],backgroundColor:['#06f','#ffc107','#ef4444']}]},options:{plugins:{legend:{position:'bottom'}}}});
 
     // Provider engagement (bar)
     const ctxP=document.getElementById('chart-providers').getContext('2d');
     const providers=['Provider A','Provider B','Provider C','Provider D','Provider E','Provider F','Provider G','Provider H'];
     const contacts=[24,18,16,12,10,8,7,5];
-    const provChart = new Chart(ctxP,{type:'bar',data:{labels:providers,datasets:[{label:'Contacts',data:contacts}]},options:{plugins:{legend:{display:false}}}});
+    const provChart = new Chart(ctxP,{type:'bar',data:{labels:providers,datasets:[{label:'Contacts',data:contacts,backgroundColor:'rgba(0,102,255,0.8)'}]},options:{plugins:{legend:{display:false}}}});
 
-    // Price variance (box-like using bar of avg variance)
+    // Price variance (bar)
     const ctxV=document.getElementById('chart-variance').getContext('2d');
     const groups=['Surgery','Imaging','Pharmacy','Consult','Diagnostics','Therapy'];
     const variance=[28,15,40,12,22,18];
-    const varChart = new Chart(ctxV,{type:'bar',data:{labels:groups,datasets:[{label:'Avg % variance',data:variance}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+    const varChart = new Chart(ctxV,{type:'bar',data:{labels:groups,datasets:[{label:'Avg % variance',data:variance,backgroundColor:'rgba(0,102,255,0.6)'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
 
     // Top CPT codes
     const ctxT=document.getElementById('chart-cpt').getContext('2d');
     const cptCodes=['99213','93000','80050','70450','27447'];
     const freq=[120,90,85,60,45];
     const savingsPer=[4200,3200,1500,5000,2300];
-    const cptChart = new Chart(ctxT,{type:'bar',data:{labels:cptCodes,datasets:[{label:'Frequency',data:freq},{label:'Avg saving (₹)',data:savingsPer}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+    const cptChart = new Chart(ctxT,{type:'bar',data:{labels:cptCodes,datasets:[{label:'Frequency',data:freq,backgroundColor:'rgba(0,102,255,0.6)'},{label:'Avg saving (₹)',data:savingsPer,backgroundColor:'rgba(4,120,87,0.6)'}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
 
     // Recent reviews
-    const recent = Array.from({length:16}).map((_,i)=>({id:`RVW-${202600+i}`,patient:`Patient ${i+1}`,provider:providers[i%providers.length],outcome:['Approved','Modified','Denied'][Math.floor(Math.random()*3)],savings:(Math.round(Math.random()*12000)).toLocaleString()}));
-    function renderRecent(){const tbody=document.getElementById('recent-reviews-body');tbody.innerHTML='';recent.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.id}</td><td>${r.patient}</td><td>${r.provider}</td><td>${formatOutcome(r.outcome)}</td><td>₹ ${r.savings}</td><td><button onclick="openReview('${r.id}')" class="small">Open</button></td>`;tbody.appendChild(tr)})}
-    function formatOutcome(o){if(o==='Approved')return '<span class="badge ok">Approved</span>'; if(o==='Denied')return '<span class="badge err">Denied</span>'; return '<span class="badge warn">Modified</span>'}
+    const recent = Array.from({length:16}).map((_,i)=>({id:`RVW-${202600+i}`,patient:`Patient ${i+1}`,provider:providers[i%providers.length],outcome:['Approved','Modified','Denied'][Math.floor(Math.random()*3)],savings:'₹ ' + (1000 + Math.round(Math.random()*8000))}));
+    function renderRecent(){
+      const tbody=document.getElementById('recent-reviews-body');
+      tbody.innerHTML='';
+      recent.forEach(r=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${r.id}</td><td>${r.patient}</td><td>${r.provider}</td><td>${formatOutcome(r.outcome)}</td><td>${r.savings}</td><td><button class="small" onclick="openReview('${r.id}')">Open</button></td>`;
+        tbody.appendChild(tr);
+      })
+    }
+    function formatOutcome(o){
+      if(o==='Approved')return '<span class="badge ok">Approved</span>';
+      if(o==='Denied')return '<span class="badge err">Denied</span>';
+      return '<span class="badge warn">Modified</span>';
+    }
 
     // Provider status
     const provStatus = providers.map((p,i)=>({name:p,status:['Engaged','Contacted','No Response'][i%3]}));
-    function renderProviders(){const tbody=document.getElementById('provider-status');tbody.innerHTML='';provStatus.forEach(p=>{const tr=document.createElement('tr');const s = p.status==='Engaged'?'<span class="badge ok">Engaged</span>':(p.status==='Contacted'?'<span class="badge warn">Contacted</span>':'<span class="badge" style="background:#eef2f7;color:var(--muted)">No Response</span>');tr.innerHTML=`<td>${p.name}</td><td>${s}</td>`;tbody.appendChild(tr)})}
+    function renderProviders(){
+      const tbody=document.getElementById('provider-status');tbody.innerHTML='';
+      provStatus.forEach(p=>{
+        const tr=document.createElement('tr');
+        const s = p.status==='Engaged'?'<span class="badge ok">Engaged</span>':p.status==='Contacted'?'<span class="badge warn">Contacted</span>':'<span class="badge err">No Response</span>';
+        tr.innerHTML=`<td>${p.name}</td><td>${s}</td>`;
+        tbody.appendChild(tr);
+      })
+    }
 
     // Top rules
     const rules=['Outpatient bundling check','Price cap enforcement','Pharmacy generic substitution','Duplicate service detection','Pre-auth validation'];
     function renderTopRules(){const ol=document.getElementById('top-review-rules');ol.innerHTML='';rules.forEach(r=>{const li=document.createElement('li');li.textContent=r;ol.appendChild(li)})}
 
     // KPIs
-    function renderKPIs(){const k = computeKPIs(series90);document.getElementById('kpi-reviewed').textContent = k.reviews.toLocaleString();document.getElementById('kpi-savings').textContent = '₹ ' + k.savings.toLocaleString();document.getElementById('kpi-avg-savings').textContent = '₹ ' + k.avg.toLocaleString();document.getElementById('kpi-provider-eng').textContent = k.providers.toLocaleString();}
+    function renderKPIs(){const k = computeKPIs(series90);document.getElementById('kpi-reviewed').textContent = k.reviews.toLocaleString();document.getElementById('kpi-savings').textContent = '₹ ' + k.savings.toLocaleString();document.getElementById('kpi-avg-savings').textContent = '₹ ' + k.avg.toLocaleString();document.getElementById('kpi-provider-eng').textContent = k.providers;}
 
-    function setSynced(){document.getElementById('last-synced').textContent = new Date().toLocaleString()}
+    function setSynced(){document.getElementById('last-synced')?.textContent = new Date().toLocaleString()}
 
     function simulateRefresh(){
       // mutate series
@@ -205,7 +402,21 @@
       renderRecent();renderProviders();renderTopRules();renderKPIs();setSynced();
     }
 
-    function downloadCSV(key){let csv='';if(key==='repricing_trend'){csv='date,billed,allowed,repriced\n'+series90.map(s=>`${s.date},${s.billed},${s.allowed},${s.repriced}`).join('\n')}const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url)}
+    function downloadCSV(key){
+      let csv='';
+      if(key==='repricing_trend'){
+        csv='date,billed,allowed,repriced\n'+series90.map(s=>`${s.date},${s.billed},${s.allowed},${s.repriced}`).join('\n');
+      }
+      const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download=(key||'data')+'.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
 
     function openReview(id){alert('Open review: '+id+' (routes to clinical detail in product)')}
     function openSettings(){alert('Open Rules & Repricing Settings — configure thresholds, provider contracts, etc.')}
@@ -214,7 +425,25 @@
     renderRecent();renderProviders();renderTopRules();renderKPIs();setSynced();
 
     // range selector
-    document.getElementById('rp-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);series90 = genSeries(days);repChart.data.labels = series90.map(r=>r.date);repChart.data.datasets[0].data = series90.map(r=>r.billed);repChart.data.datasets[1].data = series90.map(r=>r.allowed);repChart.data.datasets[2].data = series90.map(r=>r.repriced);repChart.update();renderKPIs();});
+    document.getElementById('rp-range').addEventListener('change',(e)=>{
+      const days=parseInt(e.target.value,10);
+      series90 = genSeries(days);
+      repChart.data.labels = series90.map(r=>r.date);
+      repChart.data.datasets[0].data = series90.map(r=>r.billed);
+      repChart.data.datasets[1].data = series90.map(r=>r.allowed);
+      repChart.data.datasets[2].data = series90.map(r=>r.repriced);
+      repChart.update();
+      renderKPIs();
+      setSynced();
+    });
+
+    // Demo intercept for newsletter forms (no network calls)
+    document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
+
+    // keyboard shortcut 'h' to go home
+    document.addEventListener('keydown', function(e){ if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html'; });
   </script>
+
+  <footer style="margin-top:12px;color:var(--muted);font-size:12px">Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing</footer>
 </body>
 </html>
