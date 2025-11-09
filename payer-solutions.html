@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
     :root{
       --bg:#f4f7fb;
@@ -21,67 +23,76 @@
       --shadow:0 12px 40px rgba(6,18,45,0.06);
       --social-size:44px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--brand);-webkit-font-smoothing:antialiased}
     a{color:var(--accent);text-decoration:none}
     img{max-width:100%;display:block}
+
     .wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
 
-    /* Header */
+    /* Provider-services style header */
     header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
     .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
-    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
-    .brand-text .tag{font-size:12px;color:var(--muted)}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .brand-text{display:flex;flex-direction:column;line-height:1}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand);margin:0}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin:0}
     nav.primary{display:flex;gap:12px;align-items:center}
     nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
     nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
     .header-ctas{display:flex;gap:12px;align-items:center}
     .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;margin-top:22px}
-    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    /* Layout */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:start;margin-top:22px}
+    .hero-left{background:linear-gradient(180deg,#fff,#fbfdff);padding:28px;border-radius:14px;box-shadow:var(--shadow);position:relative}
     .eyebrow{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
     h1{font-size:30px;margin:6px 0 12px}
     .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
     .cta-row{display:flex;gap:12px;align-items:center;margin-top:12px}
     .decor-img{position:absolute;right:-30px;top:-30px;opacity:0.08;transform:rotate(-12deg);width:420px}
 
-    /* Services grid */
     .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
     .service-card{background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);display:flex;flex-direction:column}
     .service-card .img{height:160px;background-size:cover;background-position:center}
     .service-card .body{padding:16px;flex:1;display:flex;flex-direction:column}
     .service-card h3{margin:0 0 8px;font-size:18px;color:var(--brand)}
     .service-card p{margin:0 0 12px;color:var(--muted);flex:1}
-    .service-card .learn{margin-top:auto;padding-top:8px}
 
-    /* Metrics, case studies */
-    .metrics{display:flex;gap:12px;margin-top:22px;align-items:stretch}
-    .metric{background:var(--paper);padding:18px;border-radius:12px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
-    .metric .num{font-size:26px;font-weight:800;color:var(--brand)}
-    .metric .label{font-size:13px;color:var(--muted);margin-top:6px}
-    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
-    .case-card{background:var(--paper);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)}
-    .case-card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+    /* Advanced visualizations panel */
+    .viz-panel{display:flex;flex-direction:column;gap:12px;margin-top:22px;background:linear-gradient(180deg,#fff,#fcfeff);padding:16px;border-radius:12px;border:1px solid #eaf3ff;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
+    .viz-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .viz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .viz-card{background:var(--paper);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+    .viz-card h4{margin:0 0 8px;font-size:15px}
 
-    /* CTA banner */
-    .cta-banner{margin-top:28px;background:linear-gradient(90deg,#eef6ff,#f8fbff);padding:28px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 30px rgba(6,18,45,0.04)}
-    .cta-banner .text{max-width:70%}
+    /* Slideshow on right */
+    .hero-visual{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06);position:relative;height:260px}
+    .hero-visual .slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;object-fit:cover;width:100%;height:100%;display:block}
+    .hero-visual .slide.active{opacity:1;z-index:2}
+    .hero-visual .slide img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-visual .indicators{position:absolute;left:12px;bottom:12px;display:flex;gap:8px;z-index:3}
+    .hero-visual .indicators button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(255,255,255,0.6);cursor:pointer}
+    .hero-visual .indicators button.active{background:#fff}
 
-    /* Footer (consultancy) */
+    /* Metrics & case studies */
+    .metrics{display:flex;gap:12px;margin-top:18px;align-items:stretch}
+    .metric{background:var(--paper);padding:14px;border-radius:10px;flex:1;box-shadow:0 10px 30px rgba(6,18,45,0.06);text-align:center}
+    .metric .num{font-weight:800;font-size:22px}
+    .metric .label{color:var(--muted);font-size:13px;margin-top:6px}
+    .case-studies{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+
+    /* Footer */
     footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
     .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
-    .footer-logo{height:60px;margin-bottom:10px;display:block}
-    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
-    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
-    .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.24);transition:transform .14s ease}
-    .socials a svg{width:18px;height:18px;fill:#fff}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .socials{display:flex;gap:12px;align-items:center}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:var(--social-size);height:var(--social-size);border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
     .socials a.linkedin{background:#0A66C2}
     .socials a.twitter{background:#1DA1F2}
     .socials a.youtube{background:#FF0000}
@@ -89,22 +100,29 @@
     .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
 
-    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 12px 30px rgba(2,6,23,0.25);z-index:999}
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
 
-    @media (max-width:1100px){.services{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.case-studies{grid-template-columns:1fr}}
-    @media (max-width:720px){.services{grid-template-columns:1fr} .nav{display:none} .hero{grid-template-columns:1fr 1fr}}
+    @media (max-width:1100px){
+      .services{grid-template-columns:repeat(2,1fr)}
+      .hero{grid-template-columns:1fr}
+      .viz-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      nav.primary{display:none}
+      .hero-visual{height:200px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Header: SH icon + SamITHealth linking to home. Phone removed for this page -->
+    <!-- Header -->
     <header class="site-header" role="banner" aria-label="Main header">
       <div class="header-inner">
-        <a href="index.html" class="brand" aria-label="SamITHealth home">
+        <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
           <div class="logo-mark" aria-hidden="true">SH</div>
           <div class="brand-text">
             <div class="title">SamITHealth</div>
-            <div class="tag">CMMI Level 5 • Healthcare IT & RCM</div>
+            <div class="tag">CMMI Level 5 • Healthcare IT &amp; RCM</div>
           </div>
         </a>
 
@@ -119,7 +137,6 @@
         </nav>
 
         <div class="header-ctas" aria-hidden="false">
-          <!-- Phone intentionally removed on this page per request -->
           <button class="btn-primary" onclick="location.href='contact.html'">Schedule a Consultation</button>
         </div>
       </div>
@@ -129,17 +146,18 @@
       <section class="hero" aria-labelledby="payer-heading">
         <div class="hero-left">
           <div class="eyebrow">Payer Solutions</div>
-          <h1 id="payer-heading">Innovative, compliant & data‑driven payer operations</h1>
-          <p class="lead">Empowering payers and TPAs with analytics, automation, and process maturity (CMMI-aligned) to improve claim accuracy, reduce denials, and accelerate reimbursements.</p>
+          <h1 id="payer-heading">Innovative, compliant &amp; data‑driven payer operations</h1>
+          <p class="lead">Empowering payers and TPAs with analytics, automation, and process maturity (CMMI‑aligned) to improve claim accuracy, reduce denials, accelerate reimbursements, and enable scalable, auditable operations.</p>
 
           <div class="cta-row">
             <button class="btn-primary" onclick="location.href='contact.html'">Talk to our experts</button>
             <a class="ghost" href="contact.html" style="padding:8px 10px;color:var(--muted);border-radius:8px;border:1px solid rgba(0,0,0,0.04);">Request a pilot</a>
           </div>
 
-          <img class="decor-img" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1200&auto=format&fit=crop" alt="Payer analytics visual" aria-hidden="true">
+          <img class="decor-img" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1200&auto=format&fit=crop" alt="Payer analytics visual decoration" aria-hidden="true">
 
           <div class="services" aria-label="Payer services overview">
+            <!-- keep all original service cards intact -->
             <div class="service-card">
               <div class="img" style="background-image:url('assets/images/lifetime-renewability-with-no-maximums-sm-sm.webp')" role="img" aria-label="MAO & Risk Adjustment visual"></div>
               <div class="body">
@@ -152,7 +170,7 @@
             <div class="service-card">
               <div class="img" style="background-image:url('assets/images/personalised-service.png')" role="img" aria-label="Claims Management visual"></div>
               <div class="body">
-                <h3>Claims Management & TPA Support</h3>
+                <h3>Claims Management &amp; TPA Support</h3>
                 <p>End-to-end claim lifecycle management, rule-based adjudication and third‑party administrator integration.</p>
                 <div class="learn"><a href="claims-management.html">Learn more →</a></div>
               </div>
@@ -161,7 +179,7 @@
             <div class="service-card">
               <div class="img" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="Medical Review visual"></div>
               <div class="body">
-                <h3>Medical Review & Repricing</h3>
+                <h3>Medical Review &amp; Repricing</h3>
                 <p>Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
                 <div class="learn"><a href="medical_review_repricing.html">Learn more →</a></div>
               </div>
@@ -170,7 +188,7 @@
             <div class="service-card">
               <div class="img" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="Workers' Comp visual"></div>
               <div class="body">
-                <h3>Workers' Comp & Auto Claims</h3>
+                <h3>Workers' Comp &amp; Auto Claims</h3>
                 <p>Specialized workflows, compliance controls and adjudication tailored for workers' compensation and auto insurance.</p>
                 <div class="learn"><a href="workers_comp_auto_claims.html">Learn more →</a></div>
               </div>
@@ -179,8 +197,8 @@
             <div class="service-card">
               <div class="img" style="background-image:url('https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="Form Conversion visual"></div>
               <div class="body">
-                <h3>Form Conversion & Interoperability</h3>
-                <p>Automated CMS-1500/UB-04 conversion, EDI mapping and system harmonization for cleaner feeds.</p>
+                <h3>Form Conversion &amp; Interoperability</h3>
+                <p>Automated CMS‑1500/UB‑04 conversion, EDI mapping and system harmonization for cleaner feeds.</p>
                 <div class="learn"><a href="form_conversion_interoperability.html">Learn more →</a></div>
               </div>
             </div>
@@ -188,17 +206,73 @@
             <div class="service-card">
               <div class="img" style="background-image:url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="Analytics visual"></div>
               <div class="body">
-                <h3>Analytics & AI</h3>
+                <h3>Analytics &amp; AI</h3>
                 <p>Predictive analytics, denials root-cause and AI-assisted coding to continuously improve operations.</p>
                 <div class="learn"><a href="analytics_ai.html">Learn more →</a></div>
               </div>
             </div>
           </div>
+
+          <!-- Advanced visualizations -->
+          <div class="viz-panel" aria-label="Advanced payer visualizations">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700">Advanced Visualizations</div>
+              <div class="viz-controls">
+                <label for="viz-range" style="font-size:13px;color:var(--muted);margin-right:6px">Range:</label>
+                <select id="viz-range" aria-label="Select time range">
+                  <option value="30">Last 30 days</option>
+                  <option value="90" selected>Last 90 days</option>
+                  <option value="180">Last 180 days</option>
+                </select>
+                <button id="viz-refresh" class="btn-primary" style="margin-left:10px">Refresh</button>
+              </div>
+            </div>
+
+            <div class="viz-grid" aria-hidden="false">
+              <div class="viz-card">
+                <h4>Claims Trend (reported vs resolved)</h4>
+                <canvas id="chart-claims-trend" height="220" aria-label="Claims trend chart"></canvas>
+              </div>
+
+              <div class="viz-card">
+                <h4>Denials by Reason</h4>
+                <canvas id="chart-denials-reason" height="220" aria-label="Denials breakdown"></canvas>
+              </div>
+
+              <div class="viz-card">
+                <h4>Payment Accuracy by Provider</h4>
+                <canvas id="chart-payment-accuracy" height="220" aria-label="Payment accuracy"></canvas>
+              </div>
+
+              <div class="viz-card">
+                <h4>Remediation Pipeline</h4>
+                <canvas id="chart-remediation-funnel" height="220" aria-label="Remediation pipeline"></canvas>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">Demo visualizations — easily wired to your data (APIs, Snowflake, BigQuery, S3).</div>
+          </div>
+
         </div>
 
         <aside style="width:420px">
-          <div class="hero-visual" aria-hidden="true" style="border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(6,18,45,0.06)">
-            <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1400&auto=format&fit=crop" alt="Payer analytics visualization">
+          <!-- Slideshow (preserves original image as first slide) -->
+          <div class="hero-visual" aria-hidden="false" aria-label="Payer analytics visualization carousel">
+            <div class="slide active" role="img" aria-label="Payer analytics visualization 1">
+              <img src="assets/images/ChatGPT Image Oct 22, 2025, 08_17_47 AM.png" alt="Payer analytics dashboard 1">
+            </div>
+            <div class="slide" role="img" aria-label="Payer analytics visualization 2">
+              <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop" alt="Payer analytics dashboard 2">
+            </div>
+            <div class="slide" role="img" aria-label="Payer analytics visualization 3">
+              <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1200&auto=format&fit=crop" alt="Payer analytics dashboard 3">
+            </div>
+
+            <div class="indicators" aria-hidden="false">
+              <button class="active" data-index="0" aria-label="Show slide 1"></button>
+              <button data-index="1" aria-label="Show slide 2"></button>
+              <button data-index="2" aria-label="Show slide 3"></button>
+            </div>
           </div>
 
           <div class="metrics" style="margin-top:18px">
@@ -233,7 +307,7 @@
       </section>
     </main>
 
-    <!-- Footer: consultancy-style adapted -->
+    <!-- Footer -->
     <footer class="site-footer" role="contentinfo" aria-label="Footer">
       <div class="footer-inner">
         <div class="footer-content">
@@ -256,20 +330,20 @@
         <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
           <nav class="socials" aria-label="Social media">
             <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22h-5v-6.7c0-1.6 0-3.6-2.2-3.6-2.2 0-2.5 1.7-2.5 3.4V22h-5V8z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
             </a>
 
             <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.33 5.72A4.25 4.25 0 0 1 2.8 9.7v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.59 8.59 0 0 1 2 19.54 12.11 12.11 0 0 0 8.29 21c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.35-.02-.53A8.36 8.36 0 0 0 22.46 6z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
             </a>
 
             <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 12.8.2 14.5.2 14.5s.2 1.7.8 2.4c.8.9 1.9.9 2.5 1 1.8.2 7.6.5 7.6.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.7.2-3.5V9.8c0-1.9-.2-3.6-.2-3.6zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
             </a>
           </nav>
 
           <div class="footer-newsletter" aria-label="Newsletter sign up">
-            <div>Subscribe for RCM & health-tech insights</div>
+            <div>Subscribe for RCM &amp; health-tech insights</div>
             <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
               <input aria-label="Email address" placeholder="Email address" type="email" required>
               <button class="btn-primary" type="submit">Subscribe</button>
@@ -281,14 +355,154 @@
       <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
     </footer>
 
-    <!-- Floating home button -->
     <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
   </div>
 
   <script>
-    // Demo: no network calls
+    // Normalize inline SVGs in footer social icons so CSS controls color
+    (function normalizeSocialSVGs(){
+      try {
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          svg.querySelectorAll('[fill]').forEach(node=>{
+            try{ if(node.getAttribute('fill') && node.getAttribute('fill') !== 'none') node.setAttribute('fill','currentColor'); }catch(e){}
+          });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      } catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // Slideshow for payer analytics visualization (auto-rotate). Only runs on this page.
+    (function(){
+      const container = document.querySelector('.hero-visual');
+      if(!container) return;
+      const slides = Array.from(container.querySelectorAll('.slide'));
+      const indicators = Array.from(container.querySelectorAll('.indicators button'));
+      let idx = 0;
+      let interval = null;
+      function show(i){
+        slides.forEach((s,si)=> s.classList.toggle('active', si===i));
+        indicators.forEach((b,bi)=> b.classList.toggle('active', bi===i));
+        idx = i;
+      }
+      function next(){
+        show((idx+1) % slides.length);
+      }
+      function start(){
+        if(interval) clearInterval(interval);
+        interval = setInterval(next, 4000);
+      }
+      function stop(){
+        if(interval) { clearInterval(interval); interval = null; }
+      }
+      // indicator clicks
+      indicators.forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const i = parseInt(btn.dataset.index,10);
+          if(isNaN(i)) return;
+          show(i);
+          stop();
+          setTimeout(start, 3000);
+        });
+      });
+      // pause on hover/focus for accessibility
+      container.addEventListener('mouseenter', stop);
+      container.addEventListener('mouseleave', start);
+      container.addEventListener('focusin', stop);
+      container.addEventListener('focusout', start);
+
+      // init
+      show(0);
+      start();
+    })();
+
+    // Advanced Visualizations (Chart.js) - demo data + interactive range
+    (function(){
+      const rangeEl = document.getElementById('viz-range');
+      const refreshBtn = document.getElementById('viz-refresh');
+      const rand = (n,min=0) => Math.round(min + Math.random()*n);
+      function genTimeLabels(days){
+        const labels = [];
+        const now = new Date();
+        for(let i=days-1;i>=0;i--){
+          const d = new Date(now);
+          d.setDate(now.getDate()-i);
+          labels.push(d.toISOString().slice(0,10));
+        }
+        return labels;
+      }
+
+      const ctxClaims = document.getElementById('chart-claims-trend').getContext('2d');
+      const ctxDenials = document.getElementById('chart-denials-reason').getContext('2d');
+      const ctxPayment = document.getElementById('chart-payment-accuracy').getContext('2d');
+      const ctxRem = document.getElementById('chart-remediation-funnel').getContext('2d');
+
+      let claimsChart, denialsChart, paymentChart, remChart;
+
+      function createCharts(days=90){
+        const labels = genTimeLabels(days);
+        // claims trend
+        const reported = labels.map(()=> rand(60,20));
+        const resolved = reported.map(r => Math.round(r * (0.6 + Math.random()*0.35)));
+        if(claimsChart) claimsChart.destroy();
+        claimsChart = new Chart(ctxClaims, {
+          type:'line',
+          data:{
+            labels,
+            datasets:[
+              {label:'Reported', data:reported, borderColor:'rgba(6,86,255,0.9)', backgroundColor:'rgba(6,86,255,0.06)', tension:0.25, pointRadius:0},
+              {label:'Resolved', data:resolved, borderColor:'rgba(16,185,129,0.9)', backgroundColor:'rgba(16,185,129,0.06)', tension:0.25, pointRadius:0}
+            ]
+          },
+          options:{plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true}}}
+        });
+
+        // denials by reason
+        const reasons = ['Eligibility','Coding','Auth','Bundling','Other'];
+        const reasonCounts = reasons.map(()=> rand(200,10));
+        if(denialsChart) denialsChart.destroy();
+        denialsChart = new Chart(ctxDenials, {
+          type:'doughnut',
+          data:{labels:reasons,datasets:[{data:reasonCounts,backgroundColor:['#0b6efd','#6366f1','#f97316','#ef4444','#6b7280']}]},
+          options:{plugins:{legend:{position:'bottom'}}}
+        });
+
+        // payment accuracy by provider
+        const providers = ['Provider A','Provider B','Provider C','Provider D','Provider E'];
+        const accuracy = providers.map(()=> Math.min(100, Math.max(80, 90 + (Math.random()*10 - 5))));
+        if(paymentChart) paymentChart.destroy();
+        paymentChart = new Chart(ctxPayment, {
+          type:'bar',
+          data:{labels:providers,datasets:[{label:'Accuracy %',data:accuracy,backgroundColor:'rgba(6,86,255,0.85)'}]},
+          options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true, max:100}}}
+        });
+
+        // remediation pipeline
+        const stages = ['Triage','Investigate','Remediate','Closed'];
+        const counts = stages.map(()=> rand(50,5));
+        if(remChart) remChart.destroy();
+        remChart = new Chart(ctxRem, {
+          type:'bar',
+          data:{labels:stages,datasets:[{label:'Items',data:counts,backgroundColor:['#f59e0b','#f97316','#ef4444','#10b981']}]},
+          options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+        });
+      }
+
+      // initial render
+      createCharts(parseInt(rangeEl.value || 90,10));
+
+      refreshBtn.addEventListener('click', ()=> {
+        const days = parseInt(rangeEl.value,10) || 90;
+        createCharts(days);
+      });
+
+      window.SamItViz = { refresh: ()=> refreshBtn.click(), createCharts };
+
+    })();
+
+    // Demo intercept for footer forms
     document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
-    // 'h' to go home
+
+    // keyboard shortcut 'h' to go home
     document.addEventListener('keydown', function(e){ if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html'; });
   </script>
 </body>
