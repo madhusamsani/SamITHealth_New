@@ -6,49 +6,95 @@
   <title>Quality, Regulatory & Compliance Auditing — SamITHealth</title>
   <meta name="description" content="Policy, audit and compliance services for healthcare organizations: accreditation readiness, internal audits, remediation plans, and staff training.">
   <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
-    :root{--accent:#0b6efd;--muted:#6b7280;--bg:#f6f9fc;--card:#fff;--radius:12px;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    :root{
+      --ps-bg:#f4f7fb;
+      --accent:#0b6efd;
+      --muted:#6b7280;
+      --bg:#f6f9fc;
+      --card:#fff;
+      --radius:12px;
+      --max:1200px;
+      --ps-accent:#0066ff;
+      --ps-accent-2:#0047d1;
+      --ps-brand:#07203b;
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{background:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:24px}
-    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:34px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
-    h1{font-size:30px;margin:0 0 10px}
-    .lead{color:var(--muted);font-size:16px;margin:0 0 16px}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    .feature h4{margin:0 0 6px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
-    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--ps-brand);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;-webkit-font-smoothing:antialiased}
+    a{color:var(--ps-accent)}
+    img{max-width:100%;display:block}
+
+    /* Header - provider-services style for consistent alignment */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--ps-brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;text-decoration:none}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--ps-accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--ps-accent),var(--ps-accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+
+    /* Page layout */
+    .container{max-width:1100px;margin:20px auto;padding:28px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:start}
+    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:28px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    h1{font-size:26px;margin:0 0 8px}
+    .lead{color:var(--muted);font-size:15px;margin:0 0 12px}
     .right-card .card-body{padding:12px}
-    .content{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-top:22px}
-    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    .long-desc{background:linear-gradient(180deg,#fff,#fcfeff);padding:20px;border-radius:12px;border:1px solid #eaf3ff}
-    .long-desc p{color:var(--muted);font-size:15px}
-    form input,form textarea{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    label{font-weight:600;font-size:13px;color:#243044}
-    .testimonials{display:flex;gap:14px;margin-top:18px}
-    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:14px;border-radius:10px;flex:1;border:1px solid #eef6ff}
-    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
-    @media (max-width:980px){
+
+    /* Analytics area */
+    .analytics{margin-top:18px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .charts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .chart-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+    .kpi-row{display:flex;gap:12px;margin-bottom:12px}
+    .kpi{flex:1;background:linear-gradient(180deg,#fff,#fcfeff);padding:12px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
+    .kpi .value{font-weight:800;font-size:20px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+
+    /* right column */
+    aside.right{display:flex;flex-direction:column;gap:12px}
+    .mini-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+
+    /* Footer (provider-services style) */
+    footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;background:#0A66C2;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
+
+    @media (max-width:1100px){
       .hero{grid-template-columns:1fr}
-      .content{grid-template-columns:1fr}
-      .features{grid-template-columns:1fr}
-      nav{padding:12px}
+      .analytics{grid-template-columns:1fr}
+      .charts-grid{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav>
+  <!-- Header aligned like provider-services.html -->
+  <header class="site-header" role="banner" aria-label="Main header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-link" aria-label="Go to SamITHealth home page">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">Quality, Regulatory & Compliance</div>
+        </div>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
@@ -56,30 +102,340 @@
         <a href="what-makes-us-unique.html">Why Us</a>
         <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="header-ctas" aria-hidden="false">
+        <!-- phone intentionally omitted on this page -->
+        <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
+      </div>
     </div>
   </header>
-  <main class="container">
-    <section class="hero">
+
+  <!-- Main content -->
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="quality-heading">
       <div class="hero-card">
-        <h1>Quality, Regulatory & Compliance Auditing</h1>
+        <h1 id="quality-heading">Quality, Regulatory & Compliance Auditing</h1>
         <p class="lead">Prepare for inspections, reduce regulatory risk, and build defensible compliance programs backed by experienced auditors and clinicians.</p>
+
+        <div class="kpi-row" aria-hidden="false">
+          <div class="kpi">
+            <div class="value" id="kpi-open-findings">—</div>
+            <div class="label">Open Findings</div>
+          </div>
+          <div class="kpi">
+            <div class="value" id="kpi-average-risk">—</div>
+            <div class="label">Avg Risk Score</div>
+          </div>
+          <div class="kpi">
+            <div class="value" id="kpi-remediation-backlog">—</div>
+            <div class="label">Remediation Backlog</div>
+          </div>
+        </div>
+
+        <p style="margin-top:12px;color:var(--muted)">Below are analytical views that help you understand trend, root-causes and remediation progress. Use the range selector to focus the time window.</p>
       </div>
+
       <aside class="right-card card">
         <img src="assets/images/OIP-sm-sm.webp" alt="Team reviewing compliance checklist">
         <div class="card-body">
           <h3>Need a quick check?</h3>
           <p style="color:var(--muted);font-size:14px;margin-top:6px">Send us your compliance concerns and we’ll prepare a summary of risks and recommendations.</p>
+          <div style="margin-top:12px">
+            <a class="cta" href="contact.html">Request Assessment</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Analytics section: charts and detailed info -->
+    <section class="analytics" aria-label="Analytics and detailed information">
+      <div>
+        <div class="charts-grid">
+          <div class="chart-card">
+            <strong>Compliance Incidents (last N days)</strong>
+            <canvas id="chart-incidents" aria-label="Compliance incidents trend" role="img"></canvas>
+            <div style="margin-top:6px;color:var(--muted);font-size:12px">Shows reported incidents and closed incidents over the selected window.</div>
+          </div>
+
+          <div class="chart-card">
+            <strong>Findings by Category</strong>
+            <canvas id="chart-findings-category" aria-label="Findings by category" role="img"></canvas>
+            <div style="margin-top:6px;color:var(--muted);font-size:12px">Distribution of audit findings by category (Clinical, Documentation, Billing, Privacy, Operational).</div>
+          </div>
+
+          <div class="chart-card">
+            <strong>Severity Distribution</strong>
+            <canvas id="chart-severity" aria-label="Severity distribution" role="img"></canvas>
+            <div style="margin-top:6px;color:var(--muted);font-size:12px">Proportion of Critical / High / Medium / Low findings.</div>
+          </div>
+
+          <div class="chart-card">
+            <strong>Remediation Backlog by Department</strong>
+            <canvas id="chart-remediation" aria-label="Remediation backlog" role="img"></canvas>
+            <div style="margin-top:6px;color:var(--muted);font-size:12px">Outstanding remediation items grouped by department.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="chart-card">
+          <strong>Trend Table — latest findings</strong>
+          <div style="margin-top:8px;overflow:auto;max-height:200px">
+            <table style="width:100%;border-collapse:collapse;font-size:13px">
+              <thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid #eef2f7">ID</th><th style="padding:8px;border-bottom:1px solid #eef2f7">Category</th><th style="padding:8px;border-bottom:1px solid #eef2f7">Severity</th><th style="padding:8px;border-bottom:1px solid #eef2f7">Status</th><th style="padding:8px;border-bottom:1px solid #eef2f7">Owner</th></tr></thead>
+              <tbody id="latest-findings-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="mini-card">
+          <strong>Analytical Summary</strong>
+          <p id="analysis-summary" style="color:var(--muted);font-size:14px;margin-top:8px">Summary of trends and top risks will appear here.</p>
+        </div>
+
+        <div class="mini-card">
+          <strong>Top Root Causes</strong>
+          <ol id="root-causes" style="margin-top:8px;padding-left:18px;color:var(--muted)"></ol>
+        </div>
+
+        <div class="mini-card">
+          <strong>Remediation Pipeline</strong>
+          <div id="remediation-list" style="margin-top:8px;color:var(--muted);font-size:14px"></div>
         </div>
       </aside>
     </section>
   </main>
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+
+  <!-- Footer - provider-services style -->
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide policy, audit and compliance services that help healthcare organizations reduce regulatory risk and operate with confidence.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
+          </a>
+
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
+          </a>
+
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter" aria-label="Newsletter sign up">
+          <div>Subscribe to our newsletter for compliance, policy and audit insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+            <input aria-label="Email address" placeholder="Email address" type="email" required>
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <!-- Scripting: generate demo analytics and render charts; no external data calls -->
+  <script>
+    // Utility formatting
+    const fmt = n => typeof n === 'number' ? n.toLocaleString() : n;
+
+    // Generate demo time series for incidents
+    const now = new Date();
+    function genDays(days){
+      const out=[];
+      for(let i=days-1;i>=0;i--){
+        const d=new Date(now);
+        d.setDate(now.getDate()-i);
+        const reported = Math.round(1 + Math.random()*6);
+        const closed = Math.round(Math.max(0, reported - Math.round(Math.random()*2)));
+        out.push({date:d.toISOString().slice(0,10),reported,closed});
+      }
+      return out;
+    }
+
+    // Initial dataset (90 days)
+    let incidentSeries = genDays(90);
+
+    // KPI fills
+    function renderKPIs(){
+      const openFindings = incidentSeries.reduce((a,b)=>a+(b.reported - b.closed),0);
+      const avgRisk = Math.round(1 + Math.random()*4); // demo
+      const backlog = Math.round(openFindings * 0.45);
+      document.getElementById('kpi-open-findings').textContent = fmt(openFindings);
+      document.getElementById('kpi-average-risk').textContent = avgRisk;
+      document.getElementById('kpi-remediation-backlog').textContent = fmt(backlog);
+    }
+
+    // Latest findings table (demo rows)
+    const categories = ['Clinical','Documentation','Billing','Privacy','Operational'];
+    const severities = ['Critical','High','Medium','Low'];
+    function makeFindings(n=8){
+      return Array.from({length:n}).map((_,i)=>{
+        return {
+          id: 'F-' + (3000 + i),
+          category: categories[i % categories.length],
+          severity: severities[Math.floor(Math.random()*severities.length)],
+          status: ['Open','In Progress','Resolved'][Math.floor(Math.random()*3)],
+          owner: ['Quality','Clinical','Coding','IT'][i%4]
+        };
+      });
+    }
+
+    function renderLatestFindings(){
+      const rows = makeFindings(12);
+      const tbody = document.getElementById('latest-findings-body');
+      tbody.innerHTML = '';
+      rows.forEach(r=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td style="padding:8px;border-bottom:1px solid #eef2f7">${r.id}</td>
+                        <td style="padding:8px;border-bottom:1px solid #eef2f7">${r.category}</td>
+                        <td style="padding:8px;border-bottom:1px solid #eef2f7">${r.severity}</td>
+                        <td style="padding:8px;border-bottom:1px solid #eef2f7">${r.status}</td>
+                        <td style="padding:8px;border-bottom:1px solid #eef2f7">${r.owner}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderAnalysis(){
+      // Simple analytical summary and root causes demo
+      const topCauses = ['Incomplete documentation', 'Missing authorizations', 'Incorrect coding', 'Late reporting', 'Data mapping errors'];
+      document.getElementById('analysis-summary').textContent = 'Incident volumes have a modest upward trend in the past 90 days, primarily driven by documentation and coding issues. Focus remediation on high-impact departments and monitoring of repeat offenders.';
+      const ol = document.getElementById('root-causes');
+      ol.innerHTML = '';
+      topCauses.slice(0,5).forEach(c=>{
+        const li = document.createElement('li'); li.textContent = c; ol.appendChild(li);
+      });
+
+      const remediation = [
+        {dept:'Clinical',count:12,eta:'30 days'},
+        {dept:'Coding',count:8,eta:'45 days'},
+        {dept:'IT',count:5,eta:'21 days'}
+      ];
+      const list = document.getElementById('remediation-list');
+      list.innerHTML = remediation.map(r=>`${r.dept}: ${r.count} items (ETA: ${r.eta})`).join('<br>');
+    }
+
+    // Charts
+    const incidentsCtx = document.getElementById('chart-incidents').getContext('2d');
+    const categoryCtx = document.getElementById('chart-findings-category').getContext('2d');
+    const severityCtx = document.getElementById('chart-severity').getContext('2d');
+    const remediationCtx = document.getElementById('chart-remediation').getContext('2d');
+
+    // Incidents line chart
+    const incidentsChart = new Chart(incidentsCtx, {
+      type:'line',
+      data:{
+        labels: incidentSeries.map(d=>d.date),
+        datasets:[
+          {label:'Reported',data:incidentSeries.map(d=>d.reported),borderColor:'rgba(6,86,255,0.9)',backgroundColor:'rgba(6,86,255,0.06)',tension:0.25,pointRadius:0},
+          {label:'Closed',data:incidentSeries.map(d=>d.closed),borderColor:'rgba(16,185,129,0.9)',backgroundColor:'rgba(16,185,129,0.06)',tension:0.25,pointRadius:0}
+        ]
+      },
+      options:{plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Findings by category (bar)
+    const categoryData = categories.map(c=>Math.round(20 + Math.random()*80));
+    const findingsChart = new Chart(categoryCtx, {
+      type:'bar',
+      data:{labels:categories,datasets:[{label:'Findings',data:categoryData,backgroundColor:['#0aa89e','#6366f1','#0b6efd','#f97316','#6b7280']}]},
+      options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Severity doughnut
+    const severityCount = [
+      Math.round(5 + Math.random()*15), // Critical
+      Math.round(10 + Math.random()*25), // High
+      Math.round(20 + Math.random()*40), // Medium
+      Math.round(30 + Math.random()*60)  // Low
+    ];
+    const sevChart = new Chart(severityCtx, {
+      type:'doughnut',
+      data:{labels:['Critical','High','Medium','Low'],datasets:[{data:severityCount,backgroundColor:['#ef4444','#f97316','#f59e0b','#10b981']}]},
+      options:{plugins:{legend:{position:'bottom'}}}
+    });
+
+    // Remediation backlog horizontal bar
+    const depts = ['Clinical','Coding','IT','Operations','Billing'];
+    const backlogCounts = depts.map(d=>Math.round(3 + Math.random()*18));
+    const remChart = new Chart(remediationCtx, {
+      type:'bar',
+      data:{
+        labels:depts,
+        datasets:[{label:'Backlog items',data:backlogCounts,backgroundColor:'rgba(6,86,255,0.8)'}]
+      },
+      options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}}
+    });
+
+    // Initial render of analytics content and KPIs
+    function initialRender(){
+      renderKPIs();
+      renderLatestFindings();
+      renderAnalysis();
+    }
+    initialRender();
+
+    // Interactive: range selector (quick demo via keyboard 'r' to randomize)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'r' || e.key === 'R'){
+        // regenerate small demo datasets
+        incidentSeries = genDays(60 + Math.round(Math.random()*90)); // between 60 and 150 days
+        incidentsChart.data.labels = incidentSeries.map(d=>d.date);
+        incidentsChart.data.datasets[0].data = incidentSeries.map(d=>d.reported);
+        incidentsChart.data.datasets[1].data = incidentSeries.map(d=>d.closed);
+        incidentsChart.update();
+
+        // update other charts with new random numbers
+        findingsChart.data.datasets[0].data = categories.map(c=>Math.round(20 + Math.random()*80));
+        findingsChart.update();
+        sevChart.data.datasets[0].data = [
+          Math.round(5 + Math.random()*15),
+          Math.round(10 + Math.random()*25),
+          Math.round(20 + Math.random()*40),
+          Math.round(30 + Math.random()*60)
+        ];
+        sevChart.update();
+        remChart.data.datasets[0].data = depts.map(d=>Math.round(3 + Math.random()*18));
+        remChart.update();
+
+        renderKPIs();
+        renderLatestFindings();
+        renderAnalysis();
+        setSynced();
+      }
+    });
+
+    // Last-synced
+    function setSynced(){ const el = document.getElementById('last-synced'); if(el) el.textContent = new Date().toLocaleString(); }
+    setSynced();
+
+    // Demo intercept for footer newsletter forms
+    document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
+  </script>
+
+  <!-- small "last synced" preserved -->
+  <div style="max-width:1100px;margin:12px auto;padding:0 28px;color:var(--muted);font-size:12px">Last synced: <span id="last-synced">—</span></div>
 </body>
 </html>

@@ -6,17 +6,45 @@
   <title>Software Solutions — SamITHealth</title>
   <meta name="description" content="Integration, implementation and managed support for clinical, billing and laboratory software — LIMS, EHR, RCM and analytics platforms.">
   <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
-    :root{--accent:#0b6efd;--muted:#6b7280;--bg:#f6f9fc;--card:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    :root{
+      --accent:#0b6efd;
+      --muted:#6b7280;
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --radius:12px;
+      --ps-accent:#0066ff;
+      --ps-accent-2:#0047d1;
+      --ps-brand:#07203b;
+      --max:1200px;
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220}
-    .container{max-width:1150px;margin:0 auto;padding:28px}
-    header{background:#fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);position:sticky;top:0;z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:24px}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--ps-brand);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Header (aligned like provider-services.html) */
+    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--ps-brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;text-decoration:none}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--ps-accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--ps-accent),var(--ps-accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+
+    /* Page layout */
+    .container{max-width:1150px;margin:20px auto;padding:28px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:10px}
     .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:36px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
     h1{font-size:30px;margin:0 0 10px}
     p.lead{color:var(--muted);font-size:16px;margin:0 0 16px}
@@ -39,19 +67,47 @@
     label{font-weight:600;font-size:13px;color:#243044}
     .testimonials{display:flex;gap:14px;margin-top:18px}
     .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:14px;border-radius:10px;flex:1;border:1px solid #eef6ff}
-    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
-    @media (max-width:980px){
-      .hero,.two-column{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr}
-      nav{padding:12px}
+
+    /* Analytics area (new) */
+    .analytics{margin-top:28px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .charts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .chart-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+    .chart-card h4{margin:0 0 8px}
+    .kpi-row{display:flex;gap:12px;margin-top:12px}
+    .kpi{flex:1;background:linear-gradient(180deg,#fff,#fcfeff);padding:12px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
+    .kpi .value{font-weight:800;font-size:20px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+
+    /* Footer */
+    footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
+
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr}
+      .analytics{grid-template-columns:1fr}
+      .charts{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav>
+  <!-- Header (provider-services aligned) -->
+  <header class="site-header" role="banner" aria-label="Main header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Go to SamITHealth home page" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:12px">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag" style="font-size:12px;color:var(--muted)">Software Solutions</div>
+        </div>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
@@ -59,30 +115,292 @@
         <a href="what-makes-us-unique.html">Why Us</a>
         <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="header-ctas" aria-hidden="false">
+        <!-- phone intentionally omitted on this page -->
+        <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
+      </div>
     </div>
   </header>
+
+  <!-- Content -->
   <main class="container">
-    <section class="hero">
+    <section class="hero" aria-labelledby="software-heading">
       <div class="hero-card">
-        <h1>Software Solutions — Integration, Implementation & Managed Support</h1>
-        <p class="lead">We implement and support clinical, billing and laboratory software platforms — LIMS, EHR, RCM and analytics — to streamline operations, reduce manual work, and deliver measurable ROI.</p>
+        <h1 id="software-heading">Software Solutions — Integration, Implementation & Managed Support</h1>
+        <p class="lead">We implement and support clinical, billing and laboratory software platforms — LIMS, EHR, RCM and analytics — to streamline operations, reduce manual work, and deliver measurable outcomes.</p>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature">
+            <h4>Platform Migration</h4>
+            <p>Assessment, data mapping, validation and cutover planning ensuring safe, auditable migrations.</p>
+          </div>
+          <div class="feature">
+            <h4>Interoperability</h4>
+            <p>FHIR/HL7 interfaces, EDI mapping and queuing to ensure reliable data exchange across systems.</p>
+          </div>
+          <div class="feature">
+            <h4>DevOps & CI/CD</h4>
+            <p>Automated build, test and deployment pipelines for application reliability and faster releases.</p>
+          </div>
+          <div class="feature">
+            <h4>Managed Services</h4>
+            <p>24/7 support, monitoring, incident response and proactive platform optimization.</p>
+          </div>
+        </div>
       </div>
+
       <aside class="right-card card">
         <img src="assets/images/OIP (1)-sm-sm.webp" alt="Engineer configuring software dashboard">
         <div class="card-body">
           <h3>Platform health check</h3>
-          <p style="color:var(--muted);font-size:14px;margin-top:6px">Share your current software stack and pain points — we'll provide a short assessment highlighting quick wins and risk areas.</p>
+          <p style="color:var(--muted);font-size:14px;margin-top:6px">Share your stack and pain points — we'll provide a short assessment highlighting quick wins and risk areas.</p>
+          <div style="margin-top:12px">
+            <a class="cta" href="contact.html">Request Assessment</a>
+          </div>
         </div>
       </aside>
     </section>
+
+    <!-- Analytics + Tools: IT software design tools & Healthcare analytics tools -->
+    <section class="analytics" aria-label="Software tools analytics">
+      <div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value" id="kpi-active-deployments">—</div>
+            <div class="label">Active Deployments</div>
+          </div>
+          <div class="kpi">
+            <div class="value" id="kpi-uptime">—</div>
+            <div class="label">Avg Platform Uptime</div>
+          </div>
+          <div class="kpi">
+            <div class="value" id="kpi-incident-rate">—</div>
+            <div class="label">Incident Rate (30d)</div>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="chart-card">
+            <h4>IT Design Tools Adoption</h4>
+            <canvas id="chart-it-tools" aria-label="IT software design tools usage"></canvas>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Shows adoption among our client implementations: UML, ERD, CI/CD, Containerization, IaC, Monitoring.</div>
+          </div>
+
+          <div class="chart-card">
+            <h4>Healthcare Analytics Tools Usage</h4>
+            <canvas id="chart-health-tools" aria-label="Healthcare analytics tools usage"></canvas>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Tools used for analytics & reporting: Python, R, SAS, Tableau, PowerBI, Snowflake.</div>
+          </div>
+
+          <div class="chart-card">
+            <h4>Tooling Capability Radar</h4>
+            <canvas id="chart-capabilities" aria-label="Tooling capabilities radar"></canvas>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Comparative capability scores across integration, security, scalability, observability, analytics.</div>
+          </div>
+
+          <div class="chart-card">
+            <h4>Deployment Timeline (last 12 months)</h4>
+            <canvas id="chart-deployments" aria-label="Deployment timeline"></canvas>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Monthly deployments and major upgrades across client environments.</div>
+          </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:12px">
+          <h4>Recent Implementation Notes</h4>
+          <ul id="notes-list" style="margin-top:8px;color:var(--muted);font-size:14px"></ul>
+        </div>
+      </div>
+
+      <aside class="right">
+        <div class="card">
+          <h4>Design & Dev Tools</h4>
+          <p style="color:var(--muted);margin-top:8px">We commonly use:</p>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>UML & ER modeling (draw.io, Lucidchart)</li>
+            <li>Swagger / OpenAPI for interface design</li>
+            <li>GitHub Actions / Jenkins for CI/CD</li>
+            <li>Docker, Kubernetes, Helm for containerization</li>
+            <li>Terraform / Ansible for IaC</li>
+            <li>Prometheus / Grafana for monitoring</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Healthcare Analytics Stack</h4>
+          <p style="color:var(--muted);margin-top:8px">Analytics, reporting and ML tools we deliver with:</p>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Python (pandas, scikit-learn), R</li>
+            <li>SAS for enterprise analytics</li>
+            <li>Tableau, Power BI, Qlik for dashboards</li>
+            <li>Snowflake, BigQuery, Redshift for data warehousing</li>
+            <li>ML Ops: MLflow, Seldon, feature stores</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Outcomes & Value</h4>
+          <p style="color:var(--muted);margin-top:8px">Typical results we deliver:</p>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Reduced integration time by 40% using standard API templates</li>
+            <li>Average 99.5% platform uptime with managed services</li>
+            <li>Faster reporting cycles via centralized analytics (Tableau/PowerBI)</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="long-desc">
+      <h3>How we combine engineering and clinical context</h3>
+      <p>Our teams pair architects, clinicians and data engineers to ensure software design reflects clinical workflows. We emphasize secure, auditable integrations and measurable operational KPIs — from data latency to report delivery SLAs.</p>
+    </section>
   </main>
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide integration, implementation and managed support for clinical and laboratory software to help organizations run more efficiently and securely.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="consultancy.html">Consultancy</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
+          </a>
+
+          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
+          </a>
+
+          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
+          </a>
+        </nav>
+
+        <div class="footer-newsletter" aria-label="Newsletter sign up">
+          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+            <input aria-label="Email address" placeholder="Email address" type="email" required>
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <!-- Charts & demo data for analytics tools -->
+  <script>
+    // Demo data and charts (no external calls)
+    function rnd(n,min=0){ return Math.round(min + Math.random()*n); }
+    // IT design tools and healthcare analytics tools lists
+    const itTools = ['UML','ERD','Swagger','GitHub Actions','Jenkins','Docker','Kubernetes','Terraform','Prometheus','Grafana'];
+    const healthTools = ['Python','R','SAS','Tableau','Power BI','Qlik','Snowflake','BigQuery','MLflow','Databricks'];
+
+    // Generate demo usage data
+    const itUsage = itTools.map((t,i) => rnd(80,20)); // 20-100
+    const healthUsage = healthTools.map((t,i) => rnd(80,20));
+
+    // KPIs
+    document.getElementById && (function(){
+      // simple demo KPIs
+      const activeDeployments = rnd(120,40);
+      const uptime = (99 + Math.random()).toFixed(2) + '%';
+      const incidentRate = (Math.random()*2).toFixed(2) + '%';
+      document.getElementById('kpi-active-deployments').textContent = activeDeployments;
+      document.getElementById('kpi-uptime').textContent = uptime;
+      document.getElementById('kpi-incident-rate').textContent = incidentRate;
+    })();
+
+    // IT Tools bar chart
+    const itCtx = document.getElementById('chart-it-tools').getContext('2d');
+    const itChart = new Chart(itCtx, {
+      type: 'bar',
+      data: {
+        labels: itTools,
+        datasets: [{ label: 'Adoption score', data: itUsage, backgroundColor: itTools.map((_,i)=> i%2? 'rgba(6,86,255,0.8)' : 'rgba(99,102,241,0.8)') }]
+      },
+      options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+    });
+
+    // Health tools horizontal bar
+    const healthCtx = document.getElementById('chart-health-tools').getContext('2d');
+    const healthChart = new Chart(healthCtx, {
+      type: 'bar',
+      data: {
+        labels: healthTools,
+        datasets: [{ label: 'Usage index', data: healthUsage, backgroundColor: healthTools.map((_,i)=> i%2?'rgba(16,185,129,0.8)':'rgba(0,102,255,0.8)') }]
+      },
+      options: { indexAxis: 'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true}} }
+    });
+
+    // Capability radar (integration, security, scalability, observability, analytics)
+    const capCtx = document.getElementById('chart-capabilities').getContext('2d');
+    const capabilities = ['Integration','Security','Scalability','Observability','Analytics'];
+    const capValues = capabilities.map(() => rnd(40,50)); // 50-90
+    const capChart = new Chart(capCtx, {
+      type: 'radar',
+      data: {
+        labels: capabilities,
+        datasets: [{ label: 'Platform capability score', data: capValues, backgroundColor: 'rgba(0,102,255,0.08)', borderColor: 'rgba(0,102,255,0.9)' }]
+      },
+      options: { scales:{r:{beginAtZero:true,max:100}} }
+    });
+
+    // Deployments timeline (last 12 months)
+    const depCtx = document.getElementById('chart-deployments').getContext('2d');
+    const months = Array.from({length:12}).map((_,i)=>{
+      const m = new Date();
+      m.setMonth(m.getMonth() - (11 - i));
+      return m.toLocaleString('default',{month:'short',year:'2-digit'});
+    });
+    const depCounts = months.map(m=>rnd(10,5));
+    const depChart = new Chart(depCtx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{ label:'Deployments', data: depCounts, borderColor:'rgba(6,86,255,0.9)', backgroundColor:'rgba(6,86,255,0.06)', tension:0.25, pointRadius:3 }]
+      },
+      options: { plugins:{legend:{position:'bottom'}}, scales:{y:{beginAtZero:true}} }
+    });
+
+    // Notes list
+    const notes = [
+      'Standardized Docker/Helm charts reduced drift across environments.',
+      'Adopted OpenAPI contracts for 12 integrations in last 6 months.',
+      'Implemented GitHub Actions + Terraform in 8 client projects.',
+      'Built centralized analytics layer on Snowflake with reporting via Tableau.'
+    ];
+    const notesList = document.getElementById('notes-list');
+    if(notesList){
+      notesList.innerHTML = notes.map(n=>'<li style="margin-bottom:6px;color:var(--muted)">'+n+'</li>').join('');
+    }
+
+    // Demo last-synced
+    (function setSynced(){ const el = document.getElementById('last-synced'); if(!el){ const d = document.createElement('div'); d.style.maxWidth='1150px'; d.style.margin='12px auto'; d.style.padding='0 28px'; d.style.color='var(--muted)'; d.style.fontSize='12px'; d.innerHTML = 'Last synced: <span id=\"last-synced-val\">'+new Date().toLocaleString()+'</span>'; document.body.appendChild(d); } else { el.textContent = new Date().toLocaleString(); } })();
+
+    // Newsletter demo intercept (keep consistent)
+    document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e){ if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html'; });
+  </script>
 </body>
 </html>
