@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SamITHealth — Workers' Comp & Auto Claims</title>
+  <meta name="description" content="Workers' Comp & Auto Claims — specialized workflows, compliance controls and adjudication tailored for workers' compensation and auto insurance." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{--navy:#0b2545;--teal:#0aa89e;--muted:#6b7280;--bg:#f7fafc;--card:#fff;--accent-2:#e6f7f5;--danger:#ef4444;--success:#10b981;font-family:Inter, system-ui, -apple-system,"Segoe UI",Roboto,Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
+    .container{max-width:1200px;margin:28px auto;padding:20px}
+    header{display:flex;gap:14px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,37,69,0.06)}
+    .longlist{display:flex;flex-direction:column;gap:12px}
+    .viz{min-height:160px;display:flex;flex-direction:column;gap:10px}
+    canvas{width:100% !important;max-height:260px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#fff)}
+    .kpi .value{font-weight:700;font-size:18px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:8px;text-align:left;border-bottom:1px solid #eef2f7}
+    th{font-size:12px;color:var(--muted)}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px}
+    .badge.ok{background:rgba(16,185,129,0.12);color:var(--success)}
+    .badge.warn{background:rgba(250,204,21,0.12);color:#b45309}
+    .badge.err{background:rgba(239,68,68,0.12);color:var(--danger)}
+    .controls{display:flex;gap:8px;align-items:center}
+    .small{padding:6px 10px;font-size:13px}
+    button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    footer{margin-top:18px;color:var(--muted);font-size:12px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SIH</div>
+      <div>
+        <h1>Workers' Comp &amp; Auto Claims — SamITHealth</h1>
+        <p class="lead">Specialized workflows, compliance controls and adjudication tailored for workers' compensation and auto insurance.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="longlist">
+
+        <section class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h3>1. Claim Type Volume (60 days)</h3>
+              <div class="muted">Workers' comp vs Auto — reported vs settled</div>
+            </div>
+            <div class="controls">
+              <select id="cv-range" class="small"><option value="30">30d</option><option value="60" selected>60d</option><option value="180">180d</option></select>
+              <button class="btn small" onclick="downloadCSV('claim_types')">CSV</button>
+            </div>
+          </div>
+          <div class="viz"><canvas id="chart-claim-types"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>2. Reserve Trend & Payments</h3>
+          <div class="muted">Outstanding reserves vs payouts over time</div>
+          <div class="viz"><canvas id="chart-reserves"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>3. Time-to-First-Action (Long list)</h3>
+          <div class="muted">Avg hours from report to first action by workflow</div>
+          <div class="viz"><canvas id="chart-fta"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>4. Cause & Injury Types (Long list)</h3>
+          <div class="muted">Most common causes and injury categories</div>
+          <div class="viz"><canvas id="chart-injuries"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>5. Compliance Alerts & Litigation Rate</h3>
+          <div class="muted">Flagged compliance events and % of claims escalating to litigation</div>
+          <div class="viz"><canvas id="chart-compliance"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>6. Recent Claims (Long list)</h3>
+          <div class="muted">Latest claims with quick triage actions</div>
+          <div style="margin-top:8px;overflow:auto;max-height:240px">
+            <table aria-label="Recent claims">
+              <thead><tr><th>Claim ID</th><th>Type</th><th>Insured/Driver</th><th>Status</th><th>Reserve</th><th></th></tr></thead>
+              <tbody id="recent-claims-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div class="card">
+          <h3>Overview KPIs</h3>
+          <div class="kpi-grid">
+            <div class="kpi"><div class="value" id="kpi-reported">—</div><div class="label">Reported (60d)</div></div>
+            <div class="kpi"><div class="value" id="kpi-settled">—</div><div class="label">Settled (60d)</div></div>
+            <div class="kpi"><div class="value" id="kpi-avg-fta">—</div><div class="label">Avg FTA (hrs)</div></div>
+            <div class="kpi"><div class="value" id="kpi-lit-rate">—</div><div class="label">Litigation rate</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Vendors & TPA Status</h3>
+          <div class="muted">Field services, medical vendors and TPAs</div>
+          <table style="margin-top:8px"><thead><tr><th>Vendor</th><th>Status</th></tr></thead><tbody id="vendor-status"></tbody></table>
+        </div>
+
+        <div class="card">
+          <h3>Top Workflow Rules</h3>
+          <div class="muted">Rules frequently triggered in worker/auto flows</div>
+          <ol id="top-rules" style="margin-top:10px;padding-left:18px"></ol>
+        </div>
+
+        <div class="card">
+          <h3>Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
+            <button class="btn" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openSettings()">Configure Workflows</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>Last synced: <span id="last-synced">—</span> · SamITHealth workers' comp & auto claims</footer>
+  </div>
+
+  <script>
+    const now = new Date();
+    function genDaily(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),wcReported:Math.round(10+Math.random()*20),autoReported:Math.round(8+Math.random()*18),wcSettled:Math.round(6+Math.random()*16),autoSettled:Math.round(4+Math.random()*14),reserve:Math.round(200000+Math.random()*150000)})}return out}
+    let series = genDaily(60);
+
+    // KPIs
+    function computeKPIs(s){const reported = s.reduce((a,b)=>a+b.wcReported+b.autoReported,0);const settled = s.reduce((a,b)=>a+b.wcSettled+b.autoSettled,0);const avgFTA = Math.round(8 + Math.random()*12);const litRate = Math.round(1 + Math.random()*5);return {reported,settled,avgFTA,litRate};}
+
+    // Claim types chart
+    const ctxCT = document.getElementById('chart-claim-types').getContext('2d');
+    const claimTypesChart = new Chart(ctxCT,{type:'bar',data:{labels:series.map(r=>r.date),datasets:[{label:"WC Reported",data:series.map(r=>r.wcReported)},{label:"Auto Reported",data:series.map(r=>r.autoReported)},{label:"WC Settled",data:series.map(r=>r.wcSettled)},{label:"Auto Settled",data:series.map(r=>r.autoSettled)}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true}}}});
+
+    // Reserve trend
+    const ctxR = document.getElementById('chart-reserves').getContext('2d');
+    const reservesChart = new Chart(ctxR,{type:'line',data:{labels:series.map(r=>r.date),datasets:[{label:'Outstanding Reserve',data:series.map(r=>r.reserve),tension:0.25}]},options:{interaction:{mode:'index',intersect:false}}});
+
+    // Time-to-first-action
+    const ctxF = document.getElementById('chart-fta').getContext('2d');
+    const workflows=['First Notice','Nurse Triage','Field Visit','Investigation'];
+    const fta=[12,6,48,72];
+    const ftaChart = new Chart(ctxF,{type:'bar',data:{labels:workflows,datasets:[{label:'Avg hrs',data:fta}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+
+    // Injuries
+    const ctxI = document.getElementById('chart-injuries').getContext('2d');
+    const injuries = ['Fracture','Sprain/Strain','Head injury','Soft tissue','Whiplash','Laceration'];
+    const injCount = [60,90,18,120,85,30];
+    const injChart = new Chart(ctxI,{type:'bar',data:{labels:injuries,datasets:[{label:'Count',data:injCount}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+
+    // Compliance & litigation
+    const ctxC = document.getElementById('chart-compliance').getContext('2d');
+    const compChart = new Chart(ctxC,{type:'doughnut',data:{labels:['No Issue','Compliance Alert','Litigation'],datasets:[{data:[82,12,6]}]},options:{plugins:{legend:{position:'bottom'}}}});
+
+    // Recent claims
+    const claimTypes = ['Workers Comp','Auto'];
+    const statuses = ['Reported','In Review','Medical','Settled','Litigation'];
+    const recent = Array.from({length:18}).map((_,i)=>({id:`WCAC-${202700+i}`,type:claimTypes[Math.floor(Math.random()*2)],person:`Insured ${i+1}`,status:statuses[Math.floor(Math.random()*statuses.length)],reserve:Math.round(50000+Math.random()*300000)}));
+    function renderRecent(){const tbody=document.getElementById('recent-claims-body');tbody.innerHTML='';recent.forEach(c=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${c.id}</td><td>${c.type}</td><td>${c.person}</td><td>${formatStatus(c.status)}</td><td>₹ ${c.reserve.toLocaleString()}</td><td><button onclick="openClaim('${c.id}')" class="small">Open</button></td>`;tbody.appendChild(tr)})}
+    function formatStatus(s){if(s==='Settled')return '<span class="badge ok">Settled</span>';if(s==='Litigation')return '<span class="badge err">Litigation</span>';if(s==='In Review' || s==='Medical')return '<span class="badge warn">'+s+'</span>';return '<span class="badge" style="background:#eef2f7;color:var(--muted)">'+s+'</span>'}
+
+    // Vendor status
+    const vendors = [{name:'TPA FieldOps',status:'OK'},{name:'Med Vendor A',status:'Degraded'},{name:'Forensic Team',status:'OK'},{name:'Auto Repair Net',status:'OK'}];
+    function renderVendors(){const tbody=document.getElementById('vendor-status');tbody.innerHTML='';vendors.forEach(v=>{const tr=document.createElement('tr');const s = v.status==='OK'?'<span class="badge ok">OK</span>':'<span class="badge warn">Degraded</span>';tr.innerHTML=`<td>${v.name}</td><td>${s}</td>`;tbody.appendChild(tr)})}
+
+    // Top rules
+    const rules=['Immediate hospitalization flag','Fraud scoring > 80','High reserve threshold','Late reporting alert','Subrogation candidate'];
+    function renderTopRules(){const ol=document.getElementById('top-rules');ol.innerHTML='';rules.forEach(r=>{const li=document.createElement('li');li.textContent=r;ol.appendChild(li)})}
+
+    // KPIs render
+    function renderKPIs(){const k = computeKPIs(series);document.getElementById('kpi-reported').textContent = k.reported.toLocaleString();document.getElementById('kpi-settled').textContent = k.settled.toLocaleString();document.getElementById('kpi-avg-fta').textContent = k.avgFTA + ' hrs';document.getElementById('kpi-lit-rate').textContent = k.litRate + '%';}
+
+    // Last synced
+    function setSynced(){document.getElementById('last-synced').textContent = new Date().toLocaleString()}
+
+    // Interactions
+    function openClaim(id){alert('Open claim: '+id+' — navigates to claim detail in production')}
+    function openSettings(){alert('Open Workflow Settings — configure compliance thresholds, auto-escalations, vendor rules')}
+    function simulateRefresh(){
+      // mutate some series
+      series.forEach(s=>{s.reserve = Math.max(50000, Math.round(s.reserve * (0.98 + Math.random()*0.05)));s.wcSettled = Math.max(0,Math.round(s.wcSettled + (Math.random()-0.4)*6));s.autoSettled = Math.max(0,Math.round(s.autoSettled + (Math.random()-0.4)*6));});
+      claimTypesChart.data.datasets[0].data = series.map(r=>r.wcReported);claimTypesChart.data.datasets[1].data = series.map(r=>r.autoReported);claimTypesChart.data.datasets[2].data = series.map(r=>r.wcSettled);claimTypesChart.data.datasets[3].data = series.map(r=>r.autoSettled);claimTypesChart.update();
+      reservesChart.data.datasets[0].data = series.map(r=>r.reserve);reservesChart.update();
+      injChart.data.datasets[0].data = injCount.map(i=>Math.max(5, i + Math.round((Math.random()-0.5)*20)));injChart.update();
+      compChart.data.datasets[0].data = [82 - Math.round(Math.random()*6),12 + Math.round(Math.random()*6),6 + Math.round(Math.random()*3)];compChart.update();
+      renderRecent();renderVendors();renderTopRules();renderKPIs();setSynced();
+    }
+
+    // CSV download
+    function downloadCSV(key){let csv='';if(key==='claim_types'){csv='date,wcReported,autoReported,wcSettled,autoSettled,reserve\n'+series.map(s=>`${s.date},${s.wcReported},${s.autoReported},${s.wcSettled},${s.autoSettled},${s.reserve}`).join('\n')}const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url)}
+
+    // initial render
+    renderRecent();renderVendors();renderTopRules();renderKPIs();setSynced();
+
+    // range selector
+    document.getElementById('cv-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);series = genDaily(days);claimTypesChart.data.labels = series.map(r=>r.date);claimTypesChart.data.datasets[0].data = series.map(r=>r.wcReported);claimTypesChart.data.datasets[1].data = series.map(r=>r.autoReported);claimTypesChart.data.datasets[2].data = series.map(r=>r.wcSettled);claimTypesChart.data.datasets[3].data = series.map(r=>r.autoSettled);claimTypesChart.update();renderKPIs();});
+  </script>
+</body>
+</html>

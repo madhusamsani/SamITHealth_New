@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SamITHealth — Medical Review & Repricing</title>
+  <meta name="description" content="Medical Review & Repricing — data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{
+      --navy:#0b2545; --teal:#0aa89e; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
+    .container{max-width:1200px;margin:28px auto;padding:20px}
+    header{display:flex;gap:14px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,37,69,0.06)}
+    .longlist{display:flex;flex-direction:column;gap:12px}
+    .viz{min-height:160px;display:flex;flex-direction:column;gap:10px}
+    canvas{width:100% !important;max-height:260px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#fff)}
+    .kpi .value{font-weight:700;font-size:18px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:8px;text-align:left;border-bottom:1px solid #eef2f7}
+    th{font-size:12px;color:var(--muted)}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px}
+    .badge.ok{background:rgba(16,185,129,0.12);color:var(--success)}
+    .badge.warn{background:rgba(250,204,21,0.12);color:#b45309}
+    .badge.err{background:rgba(239,68,68,0.12);color:var(--danger)}
+    .controls{display:flex;gap:8px;align-items:center}
+    .small{padding:6px 10px;font-size:13px}
+    button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SIH</div>
+      <div>
+        <h1>Medical Review &amp; Repricing — SamITHealth</h1>
+        <p class="lead">Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="longlist">
+
+        <section class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h3>1. Repricing Savings Trend (90 days)</h3>
+              <div class="muted">Gross billed vs repriced allowed vs realized savings</div>
+            </div>
+            <div class="controls">
+              <select id="rp-range" class="small"><option value="30">30d</option><option value="90" selected>90d</option><option value="365">12mo</option></select>
+              <button class="btn small" onclick="downloadCSV('repricing_trend')">CSV</button>
+            </div>
+          </div>
+          <div class="viz"><canvas id="chart-repricing"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>2. Clinical Review Outcomes</h3>
+          <div class="muted">Approved, modified, denied after clinical review</div>
+          <div class="viz"><canvas id="chart-clinical"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>3. Provider Engagement Heatmap (Top 8)</h3>
+          <div class="muted">Contacts, agreements, resubmissions per provider</div>
+          <div class="viz"><canvas id="chart-providers"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>4. Price Variance (Long list)</h3>
+          <div class="muted">Distribution of billed vs allowed across CPT groups</div>
+          <div class="viz"><canvas id="chart-variance"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>5. Top CPT Codes Reviewed</h3>
+          <div class="muted">Frequency and average savings per code</div>
+          <div class="viz"><canvas id="chart-cpt"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>6. Recent Reviews (Long list)</h3>
+          <div class="muted">Most recent medical reviews and quick actions</div>
+          <div style="margin-top:8px;overflow:auto;max-height:240px">
+            <table aria-label="Recent reviews">
+              <thead><tr><th>Review ID</th><th>Patient</th><th>Provider</th><th>Outcome</th><th>Savings</th><th></th></tr></thead>
+              <tbody id="recent-reviews-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div class="card">
+          <h3>Overview KPIs</h3>
+          <div class="kpi-grid">
+            <div class="kpi"><div class="value" id="kpi-reviewed">—</div><div class="label">Reviews (30d)</div></div>
+            <div class="kpi"><div class="value" id="kpi-savings">—</div><div class="label">Realized Savings</div></div>
+            <div class="kpi"><div class="value" id="kpi-avg-savings">—</div><div class="label">Avg Saving / Review</div></div>
+            <div class="kpi"><div class="value" id="kpi-provider-eng">—</div><div class="label">Providers Engaged</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Top Provider Status</h3>
+          <div class="muted">Engagement and agreement status</div>
+          <table style="margin-top:8px"><thead><tr><th>Provider</th><th>Status</th></tr></thead><tbody id="provider-status"></tbody></table>
+        </div>
+
+        <div class="card">
+          <h3>Rules Snapshot</h3>
+          <div class="muted">Top repricing / clinical rules triggered</div>
+          <ol id="top-review-rules" style="margin-top:10px;padding-left:18px"></ol>
+        </div>
+
+        <div class="card">
+          <h3>Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
+            <button class="btn" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openSettings()">Configure Rules</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer style="margin-top:18px;color:var(--muted);font-size:12px">Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing</footer>
+  </div>
+
+  <script>
+    const now=new Date();
+    function genSeries(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),billed:Math.round(500000+Math.random()*300000),allowed:Math.round(350000+Math.random()*200000),repriced:Math.round(100000+Math.random()*120000)})}return out}
+    let series90 = genSeries(90);
+
+    function computeKPIs(s){const reviews = 320; const savings = series90.reduce((a,b)=>a+(b.billed - b.repriced),0); const avg = Math.round(savings / reviews); const providers= Math.round(28 + Math.random()*10); return {reviews,savings,avg,providers};}
+
+    // Repricing trend chart
+    const ctxR=document.getElementById('chart-repricing').getContext('2d');
+    const repChart = new Chart(ctxR,{type:'line',data:{labels:series90.map(r=>r.date),datasets:[{label:'Gross Billed',data:series90.map(r=>r.billed),tension:0.25},{label:'Allowed',data:series90.map(r=>r.allowed),tension:0.25},{label:'Repriced',data:series90.map(r=>r.repriced),tension:0.25}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:false}}}});
+
+    // Clinical review outcomes (donut)
+    const ctxC=document.getElementById('chart-clinical').getContext('2d');
+    const clinChart = new Chart(ctxC,{type:'doughnut',data:{labels:['Approved','Modified','Denied'],datasets:[{data:[62,28,10]}]},options:{plugins:{legend:{position:'bottom'}}}});
+
+    // Provider engagement (bar)
+    const ctxP=document.getElementById('chart-providers').getContext('2d');
+    const providers=['Provider A','Provider B','Provider C','Provider D','Provider E','Provider F','Provider G','Provider H'];
+    const contacts=[24,18,16,12,10,8,7,5];
+    const provChart = new Chart(ctxP,{type:'bar',data:{labels:providers,datasets:[{label:'Contacts',data:contacts}]},options:{plugins:{legend:{display:false}}}});
+
+    // Price variance (box-like using bar of avg variance)
+    const ctxV=document.getElementById('chart-variance').getContext('2d');
+    const groups=['Surgery','Imaging','Pharmacy','Consult','Diagnostics','Therapy'];
+    const variance=[28,15,40,12,22,18];
+    const varChart = new Chart(ctxV,{type:'bar',data:{labels:groups,datasets:[{label:'Avg % variance',data:variance}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+
+    // Top CPT codes
+    const ctxT=document.getElementById('chart-cpt').getContext('2d');
+    const cptCodes=['99213','93000','80050','70450','27447'];
+    const freq=[120,90,85,60,45];
+    const savingsPer=[4200,3200,1500,5000,2300];
+    const cptChart = new Chart(ctxT,{type:'bar',data:{labels:cptCodes,datasets:[{label:'Frequency',data:freq},{label:'Avg saving (₹)',data:savingsPer}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+
+    // Recent reviews
+    const recent = Array.from({length:16}).map((_,i)=>({id:`RVW-${202600+i}`,patient:`Patient ${i+1}`,provider:providers[i%providers.length],outcome:['Approved','Modified','Denied'][Math.floor(Math.random()*3)],savings:(Math.round(Math.random()*12000)).toLocaleString()}));
+    function renderRecent(){const tbody=document.getElementById('recent-reviews-body');tbody.innerHTML='';recent.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.id}</td><td>${r.patient}</td><td>${r.provider}</td><td>${formatOutcome(r.outcome)}</td><td>₹ ${r.savings}</td><td><button onclick="openReview('${r.id}')" class="small">Open</button></td>`;tbody.appendChild(tr)})}
+    function formatOutcome(o){if(o==='Approved')return '<span class="badge ok">Approved</span>'; if(o==='Denied')return '<span class="badge err">Denied</span>'; return '<span class="badge warn">Modified</span>'}
+
+    // Provider status
+    const provStatus = providers.map((p,i)=>({name:p,status:['Engaged','Contacted','No Response'][i%3]}));
+    function renderProviders(){const tbody=document.getElementById('provider-status');tbody.innerHTML='';provStatus.forEach(p=>{const tr=document.createElement('tr');const s = p.status==='Engaged'?'<span class="badge ok">Engaged</span>':(p.status==='Contacted'?'<span class="badge warn">Contacted</span>':'<span class="badge" style="background:#eef2f7;color:var(--muted)">No Response</span>');tr.innerHTML=`<td>${p.name}</td><td>${s}</td>`;tbody.appendChild(tr)})}
+
+    // Top rules
+    const rules=['Outpatient bundling check','Price cap enforcement','Pharmacy generic substitution','Duplicate service detection','Pre-auth validation'];
+    function renderTopRules(){const ol=document.getElementById('top-review-rules');ol.innerHTML='';rules.forEach(r=>{const li=document.createElement('li');li.textContent=r;ol.appendChild(li)})}
+
+    // KPIs
+    function renderKPIs(){const k = computeKPIs(series90);document.getElementById('kpi-reviewed').textContent = k.reviews.toLocaleString();document.getElementById('kpi-savings').textContent = '₹ ' + k.savings.toLocaleString();document.getElementById('kpi-avg-savings').textContent = '₹ ' + k.avg.toLocaleString();document.getElementById('kpi-provider-eng').textContent = k.providers.toLocaleString();}
+
+    function setSynced(){document.getElementById('last-synced').textContent = new Date().toLocaleString()}
+
+    function simulateRefresh(){
+      // mutate series
+      series90.forEach(s=>{s.repriced = Math.max(50000, Math.round(s.repriced * (0.95 + Math.random()*0.1)));});
+      repChart.data.datasets[0].data = series90.map(r=>r.billed);
+      repChart.data.datasets[1].data = series90.map(r=>r.allowed);
+      repChart.data.datasets[2].data = series90.map(r=>r.repriced);
+      repChart.update();
+      clinChart.data.datasets[0].data = [50+Math.round(Math.random()*20),30+Math.round(Math.random()*15),5+Math.round(Math.random()*10)];clinChart.update();
+      provChart.data.datasets[0].data = contacts.map(c=>Math.max(3, c + Math.round((Math.random()-0.5)*6)));provChart.update();
+      varChart.data.datasets[0].data = variance.map(v=>Math.max(5, v + Math.round((Math.random()-0.5)*8)));varChart.update();
+      cptChart.data.datasets[0].data = freq.map(f=>Math.max(10,f + Math.round((Math.random()-0.5)*30)));cptChart.update();
+      renderRecent();renderProviders();renderTopRules();renderKPIs();setSynced();
+    }
+
+    function downloadCSV(key){let csv='';if(key==='repricing_trend'){csv='date,billed,allowed,repriced\n'+series90.map(s=>`${s.date},${s.billed},${s.allowed},${s.repriced}`).join('\n')}const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url)}
+
+    function openReview(id){alert('Open review: '+id+' (routes to clinical detail in product)')}
+    function openSettings(){alert('Open Rules & Repricing Settings — configure thresholds, provider contracts, etc.')}
+
+    // initial render
+    renderRecent();renderProviders();renderTopRules();renderKPIs();setSynced();
+
+    // range selector
+    document.getElementById('rp-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);series90 = genSeries(days);repChart.data.labels = series90.map(r=>r.date);repChart.data.datasets[0].data = series90.map(r=>r.billed);repChart.data.datasets[1].data = series90.map(r=>r.allowed);repChart.data.datasets[2].data = series90.map(r=>r.repriced);repChart.update();renderKPIs();});
+  </script>
+</body>
+</html>

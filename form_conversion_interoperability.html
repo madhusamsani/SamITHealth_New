@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SamITHealth — Form Conversion & Interoperability</title>
+  <meta name="description" content="Form Conversion & Interoperability — automated CMS-1500/UB-04 conversion, EDI mapping, and system harmonization." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root{--navy:#0b2545;--teal:#0aa89e;--muted:#6b7280;--bg:#f7fafc;--card:#fff;--accent-2:#e6f7f5;--danger:#ef4444;--success:#10b981; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
+    .container{max-width:1200px;margin:28px auto;padding:20px}
+    header{display:flex;gap:14px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,37,69,0.06)}
+    .longlist{display:flex;flex-direction:column;gap:12px}
+    .viz{min-height:160px;display:flex;flex-direction:column;gap:10px}
+    canvas{width:100% !important;max-height:260px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+    .kpi{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#fff)}
+    .kpi .value{font-weight:700;font-size:18px}
+    .kpi .label{font-size:12px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:8px;text-align:left;border-bottom:1px solid #eef2f7}
+    th{font-size:12px;color:var(--muted)}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px}
+    .badge.ok{background:rgba(16,185,129,0.12);color:var(--success)}
+    .badge.warn{background:rgba(250,204,21,0.12);color:#b45309}
+    .badge.err{background:rgba(239,68,68,0.12);color:var(--danger)}
+    .controls{display:flex;gap:8px;align-items:center}
+    .small{padding:6px 10px;font-size:13px}
+    button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    footer{margin-top:18px;color:var(--muted);font-size:12px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SIH</div>
+      <div>
+        <h1>Form Conversion &amp; Interoperability — SamITHealth</h1>
+        <p class="lead">Automated CMS-1500/UB-04 conversion, EDI mapping, and system harmonization for cleaner feeds.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="longlist">
+
+        <section class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h3>1. Conversion Volume & Success Rate (30d)</h3>
+              <div class="muted">Total conversions, success %, and error trend</div>
+            </div>
+            <div class="controls">
+              <select id="conv-range" class="small"><option value="30" selected>30d</option><option value="90">90d</option><option value="365">12mo</option></select>
+              <button class="btn small" onclick="downloadCSV('conversion_volume')">CSV</button>
+            </div>
+          </div>
+          <div class="viz"><canvas id="chart-conversion-volume"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>2. EDI Mapping Coverage</h3>
+          <div class="muted">Fields mapped vs unmapped across common segments</div>
+          <div class="viz"><canvas id="chart-mapping"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>3. Error Types (Long list)</h3>
+          <div class="muted">Frequent parsing and validation errors requiring manual intervention</div>
+          <div class="viz"><canvas id="chart-errors"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>4. System Harmonization Latency</h3>
+          <div class="muted">Time from source submission to target system ingest</div>
+          <div class="viz"><canvas id="chart-latency"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>5. Top Source Formats & Destinations</h3>
+          <div class="muted">Which formats (PDF, EDI, XML) and targets see most activity</div>
+          <div class="viz"><canvas id="chart-formats"></canvas></div>
+        </section>
+
+        <section class="card">
+          <h3>6. Recent Conversion Jobs (Long list)</h3>
+          <div class="muted">Latest jobs with status and quick actions</div>
+          <div style="margin-top:8px;overflow:auto;max-height:240px">
+            <table aria-label="Recent conversions">
+              <thead><tr><th>Job ID</th><th>Source</th><th>Target</th><th>Status</th><th>Errors</th><th></th></tr></thead>
+              <tbody id="recent-jobs-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div class="card">
+          <h3>Overview KPIs</h3>
+          <div class="kpi-grid">
+            <div class="kpi"><div class="value" id="kpi-jobs">—</div><div class="label">Jobs (30d)</div></div>
+            <div class="kpi"><div class="value" id="kpi-success">—</div><div class="label">Success Rate</div></div>
+            <div class="kpi"><div class="value" id="kpi-manual">—</div><div class="label">Manual Fixes</div></div>
+            <div class="kpi"><div class="value" id="kpi-latency">—</div><div class="label">Avg Latency (s)</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Top Mapping Issues</h3>
+          <div class="muted">Fields requiring mapping review</div>
+          <ol id="top-mapping-issues" style="margin-top:10px;padding-left:18px"></ol>
+        </div>
+
+        <div class="card">
+          <h3>Connected Systems</h3>
+          <div class="muted">Ingest and target endpoints with health status</div>
+          <table style="margin-top:8px"><thead><tr><th>System</th><th>Status</th></tr></thead><tbody id="system-status"></tbody></table>
+        </div>
+
+        <div class="card">
+          <h3>Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <button class="btn" onclick="simulateRefresh()">Refresh Data</button>
+            <button class="btn" style="background:transparent;color:var(--navy);border:1px solid #e6eef2" onclick="openSettings()">Manage Mappings</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>Last synced: <span id="last-synced">—</span> · SamITHealth form conversion &amp; interoperability</footer>
+  </div>
+
+  <script>
+    const now = new Date();
+    function genDays(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),jobs:Math.round(80+Math.random()*40),success:Math.round(60+Math.random()*30),errors:Math.round(5+Math.random()*20),latency:Math.round(1+Math.random()*6)})}return out}
+    let convSeries = genDays(30);
+
+    // Conversion volume chart
+    const ctxV = document.getElementById('chart-conversion-volume').getContext('2d');
+    const convChart = new Chart(ctxV,{type:'bar',data:{labels:convSeries.map(r=>r.date),datasets:[{label:'Jobs',data:convSeries.map(r=>r.jobs)},{type:'line',label:'Success %',data:convSeries.map(r=>Math.round((r.success/r.jobs)*100))}]},options:{interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true}}}});
+
+    // Mapping coverage (radar)
+    const ctxM = document.getElementById('chart-mapping').getContext('2d');
+    const segments=['Patient','Provider','Claim','Service','Diagnosis','Payer'];
+    const mapped=[95,88,80,76,70,92];
+    const mapChart = new Chart(ctxM,{type:'radar',data:{labels:segments,datasets:[{label:'% Mapped',data:mapped,tension:0.3}]},options:{scales:{r:{beginAtZero:true,max:100}}}});
+
+    // Error types
+    const ctxE = document.getElementById('chart-errors').getContext('2d');
+    const etypes=['Missing NPI','Invalid DOB','Line-item mismatch','Unsupported code','Segment parse error','Payer reject'];
+    const ecount=[42,28,35,18,26,14];
+    const errChart = new Chart(ctxE,{type:'bar',data:{labels:etypes,datasets:[{label:'Count',data:ecount}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+
+    // Latency
+    const ctxL = document.getElementById('chart-latency').getContext('2d');
+    const dates = convSeries.map(r=>r.date);
+    const latencyChart = new Chart(ctxL,{type:'line',data:{labels:dates,datasets:[{label:'Avg Latency (s)',data:convSeries.map(r=>r.latency),tension:0.25}]},options:{interaction:{mode:'index',intersect:false}}});
+
+    // Formats
+    const ctxF = document.getElementById('chart-formats').getContext('2d');
+    const formats=['CMS-1500','UB-04','EDI 837','PDF','XML'];
+    const fmtCount=[420,310,880,240,180];
+    const fmtChart = new Chart(ctxF,{type:'bar',data:{labels:formats,datasets:[{label:'Count',data:fmtCount}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+
+    // Recent jobs
+    const statuses=['Success','Partial','Failed','Manual Review'];
+    const recent = Array.from({length:18}).map((_,i)=>({id:`JC-${202800+i}`,source:['PDF','EDI','XML'][Math.floor(Math.random()*3)],target:['837','1500','UB-04'][Math.floor(Math.random()*3)],status:statuses[Math.floor(Math.random()*statuses.length)],errors:Math.round(Math.random()*4)}));
+    function renderRecent(){const tbody=document.getElementById('recent-jobs-body');tbody.innerHTML='';recent.forEach(j=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${j.id}</td><td>${j.source}</td><td>${j.target}</td><td>${formatStatus(j.status)}</td><td>${j.errors}</td><td><button onclick="openJob('${j.id}')" class="small">Open</button></td>`;tbody.appendChild(tr)})}
+    function formatStatus(s){if(s==='Success')return '<span class="badge ok">Success</span>'; if(s==='Failed')return '<span class="badge err">Failed</span>'; if(s==='Partial')return '<span class="badge warn">Partial</span>'; return '<span class="badge warn">Manual</span>'}
+
+    // System status
+    const systems = [{name:'Ingest API',status:'OK'},{name:'Mapping Engine',status:'OK'},{name:'EDI Gateway',status:'Degraded'},{name:'Target Queue',status:'OK'}];
+    function renderSystems(){const tbody=document.getElementById('system-status');tbody.innerHTML='';systems.forEach(s=>{const tr=document.createElement('tr');const st = s.status==='OK'?'<span class="badge ok">OK</span>':'<span class="badge warn">'+s.status+'</span>';tr.innerHTML=`<td>${s.name}</td><td>${st}</td>`;tbody.appendChild(tr)})}
+
+    // Top mapping issues
+    const topIssues=['NPI variants','Missing taxonomy','Unmapped CPT subfields','Date formats','Payer-specific loops'];
+    function renderTopIssues(){const ol=document.getElementById('top-mapping-issues');ol.innerHTML='';topIssues.forEach(i=>{const li=document.createElement('li');li.textContent=i;ol.appendChild(li)})}
+
+    // KPIs
+    function renderKPIs(){const jobs = convSeries.reduce((a,b)=>a+b.jobs,0);const success = Math.round(convSeries.reduce((a,b)=>a+b.success,0)/convSeries.length);const manual = Math.round(convSeries.reduce((a,b)=>a+b.errors,0)/2);const latency = Math.round(convSeries.reduce((a,b)=>a+b.latency,0)/convSeries.length);document.getElementById('kpi-jobs').textContent = jobs.toLocaleString();document.getElementById('kpi-success').textContent = success + '%';document.getElementById('kpi-manual').textContent = manual.toLocaleString();document.getElementById('kpi-latency').textContent = latency + ' s';}
+
+    function setSynced(){document.getElementById('last-synced').textContent = new Date().toLocaleString()}
+
+    function simulateRefresh(){
+      // mutate a bit
+      convSeries.forEach(s=>{s.jobs = Math.max(20, s.jobs + Math.round((Math.random()-0.4)*20)); s.success = Math.max(10, Math.round(s.jobs*(0.6 + Math.random()*0.35))); s.errors = Math.max(0, Math.round((Math.random())*20)); s.latency = Math.max(0.5, Math.round((1+Math.random()*6)));});
+      convChart.data.labels = convSeries.map(r=>r.date);convChart.data.datasets[0].data = convSeries.map(r=>r.jobs);convChart.data.datasets[1].data = convSeries.map(r=>Math.round((r.success/r.jobs)*100));convChart.update();
+      latencyChart.data.datasets[0].data = convSeries.map(r=>r.latency);latencyChart.update();
+      errChart.data.datasets[0].data = ecount.map(e=>Math.max(5, e + Math.round((Math.random()-0.5)*20)));errChart.update();
+      renderRecent();renderSystems();renderTopIssues();renderKPIs();setSynced();
+    }
+
+    function openJob(id){alert('Open job: '+id+' — opens job detail in product')}
+    function openSettings(){alert('Open mapping manager — configure templates, conversions and rules')}
+
+    function downloadCSV(key){let csv='';if(key==='conversion_volume'){csv='date,jobs,success,errors,latency\n'+convSeries.map(s=>`${s.date},${s.jobs},${s.success},${s.errors},${s.latency}`).join('\n')}const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';a.click();URL.revokeObjectURL(url)}
+
+    // initial render
+    renderRecent();renderSystems();renderTopIssues();renderKPIs();setSynced();
+
+    document.getElementById('conv-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);convSeries = genDays(days);convChart.data.labels = convSeries.map(r=>r.date);convChart.data.datasets[0].data = convSeries.map(r=>r.jobs);convChart.data.datasets[1].data = convSeries.map(r=>Math.round((r.success/r.jobs)*100));convChart.update();renderKPIs();});
+  </script>
+</body>
+</html>
