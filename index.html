@@ -148,7 +148,7 @@
       .cta-row{flex-wrap:wrap}
     }
 
-    /* Mobile-first rules */
+    /* Mobile-first rules (drawer nav like index_old.html) */
     @media (max-width:720px){
       /* Header & nav */
       .menu-toggle{display:flex}
@@ -157,9 +157,9 @@
         top:0;
         left:0;
         height:100vh;
-        width:100%;
-        max-width:100%;
-        transform:translateX(-110%);
+        width:320px;
+        max-width:92%;
+        transform:translateX(-112%);
         padding:20px;
         background:#fff;
         z-index:160;
@@ -167,6 +167,7 @@
         overflow:auto;
         transition:transform .28s cubic-bezier(.2,.8,.2,1);
         -webkit-overflow-scrolling:touch;
+        box-shadow:0 20px 60px rgba(6,18,45,0.12);
       }
       nav.primary.open{transform:translateX(0)}
       .nav-backdrop{z-index:150}
@@ -687,7 +688,7 @@
 /* Accessibility: focus main for keyboard users */
 document.getElementById('main')?.focus();
 
-/* Off-canvas mobile nav behavior */
+/* Off-canvas mobile nav behavior (updated: includes outside-click close like index_old.html) */
 (function(){
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primaryNav');
@@ -754,6 +755,15 @@ document.getElementById('main')?.focus();
     if(t.tagName === 'A' && isMobile()){
       // close menu when a nav link is selected (better UX)
       closeMenu();
+    }
+  });
+
+  // Close when clicking outside nav or toggle on mobile (copied from index_old.html behavior)
+  document.addEventListener('click', function(e){
+    if(isMobile() && primaryNav.classList.contains('open')){
+      if(!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && !backdrop.contains(e.target)){
+        closeMenu();
+      }
     }
   });
 
