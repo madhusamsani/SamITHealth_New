@@ -10,17 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
+      /* Updated visual palette to match provider-services page (more vivid accents) */
       --bg:#f4f7fb;
       --card:#ffffff;
       --muted:#6b7280;
       --accent:#0066ff;
       --accent-2:#0047d1;
-      --accent-3:#0b6efd;
       --max:1200px;
       --radius:12px;
       --shadow:0 16px 60px rgba(6,18,45,0.08);
       --brand:#07203b;
       --footer-bg: #071735;
+      --footer-accent: #0b6efd;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -89,32 +90,28 @@
     .clinical-section{margin-top:28px}
     .clinical-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 
-    /* Visualization-specific styles */
-    .viz-grid{display:grid;grid-template-columns:1fr 360px;gap:12px;align-items:start}
-    .kpi-row{display:flex;gap:12px;flex-wrap:wrap}
-    .kpi{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(6,18,45,0.04);min-width:120px;flex:1;text-align:center}
-    .kpi .value{font-weight:800;font-size:20px}
-    .kpi .label{font-size:12px;color:var(--muted);margin-top:6px}
+    /* Utilities */
+    .muted{color:var(--muted)}
 
-    .mini-chart{width:100%;height:140px;background:linear-gradient(90deg,#fbfdff,#fff);border-radius:8px;padding:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.6)}
-    .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .legend .item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
-
-    /* small table */
-    .viz-table{background:#fff;border-radius:10px;padding:10px;box-shadow:0 6px 18px rgba(6,18,45,0.04);font-size:14px}
-    .viz-table table{width:100%;border-collapse:collapse}
-    .viz-table th{font-size:12px;text-align:left;color:var(--muted);padding:6px 8px}
-    .viz-table td{padding:8px;color:var(--brand);border-top:1px solid #f1f6ff}
-
-    /* Footer redesign: emulate laboratory-services footer alignment */
-    footer.site-footer{background:var(--footer-bg);color:#e6eefc;padding:48px 20px 22px;margin-top:36px;border-top:4px solid rgba(11,110,253,0.06)}
-    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 340px;gap:24px;align-items:start;padding-bottom:18px}
-    .footer-left{display:flex;flex-direction:column;gap:12px}
-    .footer-nav{display:flex;gap:24px;flex-wrap:wrap}
-    .footer-links{display:flex;flex-direction:column;gap:6px}
-    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
-    .footer-right .socials{justify-content:flex-end}
-    .footer-logo{height:60px;margin-bottom:6px;display:block;border-radius:8px}
+    /* Footer - corporate standard styles (updated to provider-services layout/colors) */
+    footer.site-footer{
+      background:var(--footer-bg);
+      color:#e6eefc;
+      padding:48px 20px 22px;
+      margin-top:36px;
+      border-top:4px solid rgba(11,110,253,0.06);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:24px;
+      align-items:start;
+      padding-bottom:18px;
+    }
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
     .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
     .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
     .socials{display:flex;gap:12px}
@@ -123,39 +120,51 @@
     .socials a.linkedin{background:#0A66C2}
     .socials a.twitter{background:#1DA1F2}
     .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-2px)}
     .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
-    .footer-newsletter form{display:flex;gap:8px;justify-content:flex-end}
-    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:right}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
 
-    /* Responsive */
-    @media (max-width:1100px){
-      .footer-inner{grid-template-columns:1fr 1fr;gap:18px}
-      .footer-right{align-items:flex-start}
-    }
+    /* Provide consistent small home button (SH) for easy navigation like provider page */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 10px 28px rgba(6,18,45,0.12);text-decoration:none;z-index:140}
+    .home-fab:hover{transform:translateY(-3px)}
+    .home-fab:focus{outline:3px solid rgba(0,102,255,0.12);outline-offset:4px}
+
+    /* Responsive footer */
     @media (max-width:900px){
       .footer-inner{grid-template-columns:1fr;gap:20px}
-      .footer-right{align-items:center}
-      .footer-newsletter{justify-content:center;text-align:center}
-      .footer-bottom{text-align:center}
-      .viz-grid{grid-template-columns:1fr}
-    }
-    @media (max-width:720px){
-      .solutions,.features{grid-template-columns:1fr}
-      .hero-carousel{height:240px}
-      .header-inner{padding:12px}
-      .menu-toggle{display:flex}
-      nav.primary{position:fixed;top:0;left:0;height:100vh;width:320px;transform:translateX(-112%);padding:20px;background:#fff;z-index:130}
-      nav.primary.open{transform:translateX(0)}
-      .hero{grid-template-columns:1fr;gap:18px}
-      .hero-left{padding:20px}
+      .footer-newsletter{text-align:left}
+      .footer-bottom{text-align:left}
     }
 
+    /* Mobile nav & layout adjustments */
+    @media (max-width:1100px){.hero{grid-template-columns:1fr}.solutions{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){
+      .solutions{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero-carousel{height:240px}.header-inner{padding:12px}
+      .menu-toggle{display:flex}
+      /* off-canvas mobile nav (left) */
+      nav.primary{display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;width:320px;max-width:92%;transform:translateX(-112%);transition:transform .32s cubic-bezier(.2,.8,.2,1);padding:20px;background:#fff;z-index:130;box-shadow:0 20px 60px rgba(6,18,45,0.12)}
+      nav.primary.open{transform:translateX(0)}
+      nav.primary .nav-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+      nav.primary .nav-panel{display:flex;flex-direction:column;gap:10px;align-items:stretch;margin-top:8px}
+      nav.primary a{display:block;padding:12px 14px;border-radius:8px;background:transparent;color:var(--brand);font-size:18px;font-weight:700}
+      nav.primary a.active{background:linear-gradient(90deg, rgba(11,110,253,0.06), rgba(10,90,217,0.04));color:var(--accent-2)}
+      .nav-cta{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+      .nav-footer{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+      .header-ctas{display:flex;gap:8px;align-items:center}
+      .hero{grid-template-columns:1fr;gap:18px}
+      .hero-left{padding:20px}
+      .footer-inner{grid-template-columns:1fr;align-items:center}
+      .footer-legal{align-items:flex-start}
+      .footer-newsletter{justify-content:center;text-align:center}
+    }
+
+    /* Prevent content shift when nav opens */
     body.menu-open{overflow:hidden}
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (brand + navigation + CTAs) -->
   <header class="site-header" role="banner" aria-label="Main header">
     <div class="header-inner">
       <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
@@ -166,14 +175,17 @@
         </div>
       </a>
 
+      <!-- Mobile menu toggle -->
       <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" id="menuToggle">
         <span class="bar top"></span>
         <span class="bar mid"></span>
         <span class="bar bot"></span>
       </button>
 
+      <!-- Backdrop for mobile nav -->
       <div id="navBackdrop" class="nav-backdrop" aria-hidden="true" tabindex="-1"></div>
 
+      <!-- Primary navigation - same links preserved -->
       <nav class="primary" role="navigation" aria-label="Main navigation" id="primaryNav">
         <div class="nav-header" aria-hidden="false">
           <a href="index.html" class="brand" aria-label="SamITHealth home (mobile)">
@@ -184,6 +196,7 @@
             </div>
           </a>
           <button id="menuClose" aria-label="Close navigation" style="background:transparent;border:0;cursor:pointer;padding:8px;display:inline-flex">
+            <!-- simple X icon -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6" stroke="#07203b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -197,6 +210,7 @@
           <a href="contact.html" role="menuitem">Contact</a>
           <a href="Careers.html" role="menuitem">Careers</a>
 
+          <!-- Mobile CTA area (visible when nav is shown on mobile) -->
           <div class="nav-cta" aria-hidden="false">
             <button class="btn-primary" onclick="location.href='contact.html'">Contact</button>
           </div>
@@ -326,7 +340,7 @@
 
       </section>
 
-    <!-- CONSULTANCY -->
+    <!-- CONSULTANCY — services, models & delivery -->
     <section class="consult" aria-label="IT & Healthcare Consultancy">
       <h2 style="margin:6px 0 12px">IT & Healthcare Consultancy — Services, Models & Delivery</h2>
       <p style="color:var(--muted);margin:0 0 12px">Tailored consultancy across strategy, technology, and operations. We combine healthcare domain expertise with enterprise IT delivery to reduce time-to-value and technical risk.</p>
@@ -336,7 +350,7 @@
       </div>
     </section>
 
-    <!-- HIGH AVAILABILITY -->
+    <!-- HIGH AVAILABILITY & VISIBILITY -->
     <section class="ha-section" aria-label="High availability and global operations">
       <h2 style="margin:12px 0">High availability & operational visibility</h2>
       <p style="color:var(--muted);margin:0 0 12px">Platform and managed services are architected for multi-region availability, 24/7 monitoring, and documented RTO/RPO with enterprise SLAs.</p>
@@ -369,7 +383,7 @@
       </div>
     </section>
 
-    <!-- CORPORATE STANDARDS (kept) -->
+    <!-- CORPORATE STANDARDS & ORGANIZATIONAL INSIGHTS -->
     <section class="standards-section" aria-label="Corporate standards and organizational insights" style="margin-top:28px">
       <h2 style="margin:6px 0 12px">Corporate Standards & Organizational Insights</h2>
       <p class="muted" style="margin:0 0 12px">SamITHealth adopts a set of corporate standards that direct how we design, build, and operate solutions for healthcare clients. These standards help ensure patient safety, data protection, regulatory compliance, and measurable business outcomes.</p>
@@ -379,30 +393,37 @@
           <h4>Security & Compliance</h4>
           <p class="muted">We enforce privacy-by-design, encryption at rest and in transit, role-based access controls, regular third-party audits, and maintain alignment with HIPAA, ISO 27001 and SOC2 frameworks.</p>
         </div>
+
         <div class="ha-card">
           <h4>Data Governance & Privacy</h4>
           <p class="muted">Clear data ownership, classification, lifecycle policies and data minimization are applied. We implement consent-aware data handling and robust de-identification for analytics.</p>
         </div>
+
         <div class="ha-card">
           <h4>Interoperability & Standards</h4>
           <p class="muted">We follow HL7, FHIR, DICOM and ASTM standards where applicable to ensure systems can securely exchange clinical and administrative data with minimal friction.</p>
         </div>
+
         <div class="ha-card">
           <h4>Patient Safety & Quality</h4>
           <p class="muted">Clinical safety reviews, change control for clinical workflows, and integration testing with clinician stakeholders reduce risk and preserve patient safety across deployments.</p>
         </div>
+
         <div class="ha-card">
           <h4>Workforce & Training</h4>
           <p class="muted">Ongoing training, role-specific competency assessments, and compliance certifications ensure our teams meet the domain and regulatory requirements of healthcare clients.</p>
         </div>
+
         <div class="ha-card">
           <h4>Ethical AI & Analytics</h4>
           <p class="muted">Models are validated for bias, performance and clinical relevance. We apply governance for model updates, explainability and human-in-the-loop reviews where decisions affect care.</p>
         </div>
+
         <div class="ha-card">
           <h4>Vendor Management & Third-Party Risk</h4>
           <p class="muted">Third-party vendors are assessed for security, privacy and compliance posture. We require contractual SLAs, data handling agreements and periodic reassessments.</p>
         </div>
+
         <div class="ha-card">
           <h4>Continuous Improvement & Metrics</h4>
           <p class="muted">We define KPIs (uptime, latency, coding accuracy, denial rates) and run quarterly reviews that feed into improvement backlogs and customer-facing reports.</p>
@@ -410,12 +431,12 @@
       </div>
     </section>
 
-    <!-- CLINICAL EXPERTISE & VISUALIZATIONS -->
+    <!-- CLINICAL EXPERTISE & DELIVERABLES -->
     <section class="clinical-section" aria-label="Clinical expertise and deliverables">
-      <h2 style="margin:12px 0">Clinical expertise, deliverables & visual insights</h2>
-      <p style="color:var(--muted);margin:0 0 12px">Certified coders, clinicians and auditors deliver coding accuracy, denials remediation, and CDI programs. Below are representative visual insights used for operational and executive reporting.</p>
+      <h2 style="margin:12px 0">Clinical expertise & coding deliverables</h2>
+      <p style="color:var(--muted);margin:0 0 12px">Certified coders, clinicians and auditors deliver coding accuracy, denials remediation, and CDI programs. Below: coding areas and typical deliverables.</p>
 
-      <div style="display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start">
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
         <div>
           <div class="clinical-cards">
             <div style="background:#fff;padding:14px;border-radius:10px;box-shadow:0 8px 30px rgba(6,18,45,0.06)">
@@ -450,96 +471,58 @@
           </ul>
         </div>
 
-        <!-- Visualization panel (expanded) -->
         <aside style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(6,18,45,0.06)">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <h4 style="margin:0">Clinical Insights (Representative)</h4>
-            <div style="font-size:13px;color:var(--muted)">
-              <label for="vizScope" style="font-size:13px;color:var(--muted);margin-right:6px">Scope</label>
-              <select id="vizScope" aria-label="Select visualization scope">
-                <option value="30">Last 30 days</option>
-                <option value="90">Last 90 days</option>
-                <option value="365">Last 12 months</option>
-              </select>
-            </div>
-          </div>
+          <h4 style="margin:0 0 8px">Clinical Insights (Representative)</h4>
+          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Charts below are static SVGs for quick visual summaries — can be wired to live dashboards (Grafana/PowerBI) for operational reporting.</p>
 
-          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">The widgets below showcase KPIs and small charts used in operational reviews. These are static SVG examples that can be wired to live data (Grafana, PowerBI, etc.).</p>
-
-          <!-- KPI row -->
-          <div class="kpi-row" style="margin-bottom:12px">
-            <div class="kpi" aria-hidden="false">
-              <div class="value" id="kpi-uptime">99.95%</div>
-              <div class="label">Platform Uptime (30d)</div>
-            </div>
-            <div class="kpi">
-              <div class="value" id="kpi-coding">96.2%</div>
-              <div class="label">Coding Accuracy</div>
-            </div>
-            <div class="kpi">
-              <div class="value" id="kpi-denials">3.8%</div>
-              <div class="label">Denial Rate</div>
-            </div>
-            <div class="kpi">
-              <div class="value" id="kpi-tat">18h</div>
-              <div class="label">Avg Turnaround Time</div>
-            </div>
-          </div>
-
-          <!-- Mini line chart (trend) -->
-          <div class="mini-chart" role="img" aria-label="Coding accuracy trend">
-            <svg viewBox="0 0 300 80" width="100%" height="80" id="lineTrend">
-              <defs>
-                <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="rgba(11,110,253,0.14)"></stop>
-                  <stop offset="100%" stop-color="rgba(11,110,253,0)"></stop>
-                </linearGradient>
-              </defs>
+          <!-- Bar chart (SVG) - Coding accuracy by area -->
+          <div style="margin-bottom:12px">
+            <svg viewBox="0 0 200 140" width="100%" height="160" aria-label="Coding accuracy by area">
+              <style>svg .bar{fill:var(--accent)}</style>
               <!-- grid -->
               <g stroke="#eef4ff" stroke-width="0.7">
-                <line x1="0" y1="10" x2="300" y2="10"/>
-                <line x1="0" y1="30" x2="300" y2="30"/>
-                <line x1="0" y1="50" x2="300" y2="50"/>
-                <line x1="0" y1="70" x2="300" y2="70"/>
+                <line x1="34" y1="12" x2="190" y2="12"/>
+                <line x1="34" y1="36" x2="190" y2="36"/>
+                <line x1="34" y1="60" x2="190" y2="60"/>
+                <line x1="34" y1="84" x2="190" y2="84"/>
+                <line x1="34" y1="108" x2="190" y2="108"/>
               </g>
-              <!-- shaded area placeholder -->
-              <path id="areaPath" d="" fill="url(#g1)" opacity="0.9"></path>
-              <!-- line -->
-              <path id="linePath" d="" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <!-- labels -->
+              <text x="10" y="16" font-size="9" fill="#6b7280">100%</text>
+              <text x="10" y="40" font-size="9" fill="#6b7280">80%</text>
+              <text x="10" y="64" font-size="9" fill="#6b7280">60%</text>
+              <text x="10" y="88" font-size="9" fill="#6b7280">40%</text>
+              <text x="10" y="112" font-size="9" fill="#6b7280">20%</text>
+
+              <!-- Bars: heights mapped visually -->
+              <rect class="bar" x="48" y="16" width="20" height="96" rx="3"></rect>
+              <rect class="bar" x="82" y="24" width="20" height="88" rx="3" opacity="0.95"></rect>
+              <rect class="bar" x="116" y="36" width="20" height="76" rx="3" opacity="0.9"></rect>
+              <rect class="bar" x="150" y="30" width="20" height="82" rx="3" opacity="0.93"></rect>
+
+              <!-- x labels -->
+              <text x="58" y="126" font-size="9" fill="#374151">Inpt</text>
+              <text x="92" y="126" font-size="9" fill="#374151">Outpt</text>
+              <text x="126" y="126" font-size="9" fill="#374151">ED</text>
+              <text x="160" y="126" font-size="9" fill="#374151">Rad</text>
             </svg>
-            <div class="legend" aria-hidden="true">
-              <div class="item"><svg width="12" height="8"><rect width="12" height="8" fill="var(--accent)"></rect></svg> Coding accuracy</div>
-              <div class="item"><svg width="12" height="8"><rect width="12" height="8" fill="#94a3b8"></rect></svg> Industry benchmark</div>
-            </div>
           </div>
 
-          <!-- Stacked bar chart (deliverable distribution) -->
-          <div style="margin-top:12px;display:flex;gap:12px;align-items:flex-start">
-            <svg viewBox="0 0 200 60" width="60%" height="60" aria-label="Deliverable distribution stacked bar">
-              <rect x="8" y="12" width="120" height="18" rx="4" fill="var(--accent)"></rect>
-              <rect x="128" y="12" width="40" height="18" rx="4" fill="#7dd3fc"></rect>
-              <rect x="168" y="12" width="24" height="18" rx="4" fill="#c7d2fe"></rect>
-              <text x="12" y="46" font-size="11" fill="#374151">Deliverable mix: Reports · Remediation · Training</text>
+          <!-- Donut chart - Deliverable distribution -->
+          <div style="display:flex;gap:12px;align-items:center">
+            <svg viewBox="0 0 42 42" width="96" height="96" aria-label="Deliverable distribution donut">
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#eef4ff" stroke-width="6"></circle>
+              <!-- stroke-dasharray: percentage / remainder (40% shown) -->
+              <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="var(--accent)" stroke-width="6" stroke-dasharray="40 60" stroke-dashoffset="25"></circle>
+              <circle cx="21" cy="21" r="9.5" fill="#071735"></circle>
             </svg>
-
-            <!-- small table of sample KPIs -->
-            <div class="viz-table" style="flex:1">
-              <table aria-label="Sample KPIs">
-                <thead>
-                  <tr><th>Metric</th><th>Value</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Avg Coding Accuracy</td><td>96.2%</td></tr>
-                  <tr><td>Denial Rate</td><td>3.8%</td></tr>
-                  <tr><td>Claims Processed / day</td><td>4,320</td></tr>
-                  <tr><td>Avg TAT (hours)</td><td>18</td></tr>
-                </tbody>
-              </table>
+            <div style="font-size:14px;color:var(--muted)">
+              <div><strong>40%</strong> Coding Accuracy Reports</div>
+              <div style="margin-top:6px"><strong>25%</strong> Denial Remediation</div>
+              <div style="margin-top:6px"><strong>20%</strong> CDI Programs</div>
+              <div style="margin-top:6px"><strong>15%</strong> Training & Assessments</div>
             </div>
           </div>
-
-          <!-- small note -->
-          <div style="margin-top:12px;font-size:13px;color:var(--muted)">Note: These visualizations are illustrative. Replace static SVG paths with live data feeds or embed visual dashboards (Grafana/PowerBI) for real-time reporting.</div>
         </aside>
       </div>
     </section>
@@ -557,49 +540,44 @@
     </div>
   </main>
 
-  <!-- FOOTER (redesigned to match laboratory-services layout/alignment) -->
+  <!-- FOOTER: copied/adapted from provider-services.html (consultancy-style) -->
   <footer class="site-footer" role="contentinfo" aria-label="Footer">
     <div class="footer-inner">
-      <div class="footer-left">
-        <a href="index.html" aria-label="SamITHealth home (logo)">
-          <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
-        </a>
-        <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
-      </div>
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p>We provide comprehensive IT consultancy, software engineering, and healthcare technology services that enable enterprises to transform with confidence and measurable value.</p>
+        </div>
 
-      <div class="footer-nav">
-        <div class="footer-links">
-          <h4 style="margin:0 0 8px">Explore</h4>
-          <a href="provider-services.html">Provider Services</a>
-          <a href="payer-solutions.html">Payer Solutions</a>
-          <a href="laboratory-services.html">Laboratory Services</a>
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
           <a href="consultancy.html">Consultancy</a>
         </div>
-
-        <div class="footer-links" style="min-width:150px">
-          <h4 style="margin:0 0 8px">Company</h4>
-          <a href="contact.html">Contact</a>
-          <a href="Careers.html">Careers</a>
-          <a href="privacy.html">Privacy</a>
-        </div>
       </div>
 
-      <div class="footer-right">
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
         <nav class="socials" aria-label="Social media">
           <a class="linkedin" href="https://www.linkedin.com/company/109910013/admin/dashboard/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.2 0 6.1 3.4 6.1 7.8V22h-5V15.2c0-1.6 0-3.7-2.3-3.7-2.3 0-2.6 1.8-2.6 3.6V22h-5V8z"/></svg>
           </a>
+
           <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13c-1.9.5-3.9.6-6 .2 9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
           </a>
+
           <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.6-.8-1.6-.8-2-.9C16.5 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v4.4C0 17 1.2 19 2.5 19.5c1 .4 4.4.5 4.4.5s4.6 0 8.2-.5c.4 0 1.4-.1 2-.9.6-.8.8-2.5.8-2.5s.2-1.6.2-3.3c0-1.8-.2-3.3-.2-3.3zM9.8 15.1V8.9l6.2 3.1-6.2 3.1z"/></svg>
           </a>
         </nav>
 
         <div class="footer-newsletter" aria-label="Newsletter sign up">
-          <div style="margin-bottom:8px">Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
-          <form action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+          <div>Subscribe to our newsletter for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
             <input aria-label="Email address" placeholder="Email address" type="email" required>
             <button class="btn-primary" type="submit">Subscribe</button>
           </form>
@@ -610,6 +588,7 @@
     <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
 
+  <!-- Floating quick-home button (SH) for easy navigation to home) -->
   <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
 
 <script>
@@ -627,6 +606,7 @@
     show((i+1) % slides.length);
   }
   dots.forEach(d=> d.addEventListener('click', e=> show(Number(e.target.dataset.index))));
+  // auto rotate
   setInterval(next, 4500);
 })();
 
@@ -641,6 +621,7 @@ document.getElementById('main')?.focus();
   const menuClose = document.getElementById('menuClose');
   let lastFocused = null;
 
+  // Show/hide mobile-only parts depending on viewport
   function updateMobileVisibility(){
     const isMobile = window.matchMedia('(max-width:720px)').matches;
     const navHeader = primaryNav.querySelector('.nav-header');
@@ -711,67 +692,6 @@ document.getElementById('main')?.focus();
       }
     }
   });
-})();
-
-/* Visualization demo logic: builds simple SVG paths for the trend area/line and updates KPIs when scope changes.
-   Replace with live data (fetch) or embed dashboards in production. */
-(function(){
-  const linePath = document.getElementById('linePath');
-  const areaPath = document.getElementById('areaPath');
-  const vizScope = document.getElementById('vizScope');
-  const kpiCoding = document.getElementById('kpi-coding');
-  const kpiDenials = document.getElementById('kpi-denials');
-  const kpiUptime = document.getElementById('kpi-uptime');
-  const kpiTAT = document.getElementById('kpi-tat');
-
-  function generateData(points, base=95, volatility=3){
-    const arr = [];
-    let v = base;
-    for(let i=0;i<points;i++){
-      v = Math.max(72, Math.min(100, v + (Math.random()-0.45)*volatility));
-      arr.push(Number(v.toFixed(1)));
-    }
-    return arr;
-  }
-
-  function buildPaths(values){
-    const w = 300, h = 80, pad = 6;
-    const max = 100, min = 72;
-    const scaleY = (val) => {
-      return pad + (h - pad*2) * (1 - (val - min) / (max - min));
-    };
-    const step = w / Math.max(1, values.length - 1);
-    let dLine = '', dArea = '';
-    values.forEach((v,i)=>{
-      const x = Math.round(i * step);
-      const y = Math.round(scaleY(v));
-      dLine += (i===0?`M ${x} ${y}`:` L ${x} ${y}`);
-      dArea += (i===0?`M ${x} ${h-pad} L ${x} ${y}`:` L ${x} ${y}`);
-    });
-    const lastX = Math.round((values.length-1) * step);
-    dArea += ` L ${lastX} ${h-pad} Z`;
-    return {dLine, dArea};
-  }
-
-  function updateViz(){
-    const scope = Number(vizScope.value);
-    const points = scope <= 30 ? 12 : scope <= 90 ? 24 : 36;
-    const baseCoding = scope<=30 ? 96.2 : scope<=90 ? 95.4 : 94.8;
-    const data = generateData(points, baseCoding, 3.5);
-    const {dLine, dArea} = buildPaths(data);
-    if(linePath) linePath.setAttribute('d', dLine);
-    if(areaPath) areaPath.setAttribute('d', dArea);
-    const avg = data.reduce((a,b)=>a+b,0)/data.length;
-    kpiCoding.textContent = `${avg.toFixed(1)}%`;
-    const denials = Math.max(1.8, (6 - (avg-92)/1.5)).toFixed(1);
-    kpiDenials.textContent = `${denials}%`;
-    kpiUptime.textContent = (99.9 + (Math.random()*0.05)).toFixed(2) + '%';
-    const tat = Math.max(8, 22 - ((avg-92)*0.8)).toFixed(0);
-    kpiTAT.textContent = `${tat}h`;
-  }
-
-  vizScope.addEventListener('change', updateViz);
-  updateViz();
 })();
 </script>
 
