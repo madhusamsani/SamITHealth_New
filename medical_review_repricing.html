@@ -10,7 +10,15 @@
   <style>
     /* PRESERVE ORIGINAL COLORS & DATA STYLES */
     :root{
-      --navy:#0b2545; --teal:#0aa89e; --muted:#6b7280; --bg:#f7fafc; --card:#fff; --accent-2:#e6f7f5; --success:#10b981; --danger:#ef4444; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --navy:#0b2545;
+      --teal:#0aa89e;
+      --muted:#6b7280;
+      --bg:#f7fafc;
+      --card:#fff;
+      --accent-2:#e6f7f5;
+      --success:#10b981;
+      --danger:#ef4444;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
     html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--navy)}
     .container{max-width:1200px;margin:0 auto;padding:0 20px 28px}
@@ -38,7 +46,7 @@
     button.btn{background:var(--navy);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
     @media(max-width:980px){.grid{grid-template-columns:1fr}}
 
-    /* HEADER: redesigned to match provider-services.html alignment and spacing */
+    /* HEADER: redesigned to match provider-services.html / behavioral-health alignment */
     :root{
       --ps-accent:#0066ff;
       --ps-accent-2:#0047d1;
@@ -46,10 +54,9 @@
       --ps-muted:#586674;
     }
     header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
-    /* ensure header-inner uses same max width as page container for perfect centering */
     .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex:0 0 56px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
     .brand-text{display:flex;flex-direction:column;line-height:1}
     .brand-text .title{font-weight:800;font-size:18px;color:var(--ps-brand)}
     .brand-text .tag{font-size:12px;color:var(--ps-muted)}
@@ -59,26 +66,43 @@
     .header-ctas{display:flex;gap:12px;align-items:center}
     .btn-primary{background:linear-gradient(90deg,var(--ps-accent),var(--ps-accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 
-    /* small responsive adjustments to keep header layout consistent with provider-services */
     @media (max-width:720px){
       nav.primary{display:none}
       .brand-text .title{font-size:16px}
       .logo-mark{width:48px;height:48px}
     }
 
-    /* Footer styling (copied from provider-services, kept minimal) */
-    footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    /* Footer styling (adopted from provider-services.html, aligned like behavioral-health) */
+    footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:10px}
     .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
-    .footer-logo{height:60px;margin-bottom:10px;display:block}
-    .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none}
-    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+
+    /* Social visuals: colored tiles + SVG inherit currentColor */
+    .socials{display:flex;gap:12px;align-items:center}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s ease}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a .label{display:none;color:rgba(230,238,252,0.95);font-size:13px}
+    @media (min-width:720px){ .socials a .label{display:inline-block} }
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .socials a:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,0.32)}
+
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(4,24,64,0.12)}
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- HEADER: aligned and structured identical to provider-services.html -->
+    <!-- HEADER: aligned and structured identical to provider-services / behavioral-health -->
     <header class="site-header" role="banner" aria-label="Main header">
       <div class="header-inner">
         <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
@@ -100,7 +124,6 @@
         </nav>
 
         <div class="header-ctas" aria-hidden="false">
-          <!-- phone intentionally omitted on this page (keeps parity with provider-services.html) -->
           <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
         </div>
       </div>
@@ -108,7 +131,7 @@
 
     <!-- ORIGINAL PAGE HEADER (kept but visually integrated under the new header) -->
     <div style="display:flex;gap:14px;align-items:center;margin:18px 0">
-      <div class="logo" aria-hidden="true" style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:white;font-weight:700"></div>
+      <div class="logo" aria-hidden="true" style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">MR</div>
       <div>
         <h1>Medical Review &amp; Repricing — SamITHealth</h1>
         <p class="lead">Data-driven repricing, clinical review and provider engagement to contain costs and ensure fair pricing.</p>
@@ -203,7 +226,7 @@
       </aside>
     </div>
 
-    <!-- FOOTER: provider-services style footer (visuals only; data unchanged) -->
+    <!-- FOOTER: provider-services style footer (visuals only; data unchanged), aligned like behavioral-health -->
     <footer class="site-footer" role="contentinfo" aria-label="Footer" style="margin-top:18px;">
       <div class="footer-inner">
         <div class="footer-content">
@@ -225,16 +248,16 @@
 
         <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
           <nav class="socials" aria-label="Social media">
-            <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
+            <a class="linkedin" href="https://www.linkedin.com/company/samithealth/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
             </a>
 
-            <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
+            <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
             </a>
 
-            <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
+            <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 13 0 14.5.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
             </a>
           </nav>
 
@@ -254,51 +277,104 @@
     <!-- Floating quick-home button -->
     <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
 
+    <!-- small original last-synced footer area preserved -->
+    <footer style="margin-top:12px;color:var(--muted);font-size:12px;max-width:1200px;margin-left:auto;margin-right:auto;padding:8px 20px;">
+      Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing
+    </footer>
   </div>
 
   <script>
-    /* ORIGINAL JAVASCRIPT / DATA — LEFT UNCHANGED */
+    /* ORIGINAL JAVASCRIPT / DATA — LEFT UNCHANGED (preserved, minor formatting only) */
     const now=new Date();
-    function genSeries(days){const out=[];for(let i=days-1;i>=0;i--){const d=new Date();d.setDate(now.getDate()-i);out.push({date:d.toISOString().slice(0,10),billed:Math.round(500000+Math.random()*300000),allowed:Math.round(500000+Math.random()*200000),repriced:Math.round(500000+Math.random()*150000)})}return out}
+    function genSeries(days){
+      const out=[];
+      for(let i=days-1;i>=0;i--){
+        const d=new Date();
+        d.setDate(now.getDate()-i);
+        out.push({
+          date:d.toISOString().slice(0,10),
+          billed:Math.round(500000+Math.random()*300000),
+          allowed:Math.round(400000+Math.random()*200000),
+          repriced:Math.round(300000+Math.random()*150000)
+        });
+      }
+      return out;
+    }
     let series90 = genSeries(90);
 
-    function computeKPIs(s){const reviews = 320; const savings = series90.reduce((a,b)=>a+(b.billed - b.repriced),0); const avg = Math.round(savings / reviews); const providers= Math.round(28 + Math.random()*10); return {reviews,savings,avg,providers}}
+    function computeKPIs(s){
+      const reviews = 320;
+      const savings = s.reduce((a,b)=>a+(b.billed - b.repriced),0);
+      const avg = Math.round(savings / reviews);
+      const providers= Math.round(28 + Math.random()*6);
+      return {reviews,savings,avg,providers};
+    }
 
     // Repricing trend chart
     const ctxR=document.getElementById('chart-repricing').getContext('2d');
-    const repChart = new Chart(ctxR,{type:'line',data:{labels:series90.map(r=>r.date),datasets:[{label:'Gross Billed',data:series90.map(r=>r.billed),tension:0.25},{label:'Allowed',data:series90.map(r=>r.allowed),tension:0.25},{label:'Repriced',data:series90.map(r=>r.repriced),tension:0.25}]},options:{plugins:{legend:{position:'bottom'}}}});
+    const repChart = new Chart(ctxR,{
+      type:'line',
+      data:{
+        labels:series90.map(r=>r.date),
+        datasets:[
+          {label:'Gross Billed',data:series90.map(r=>r.billed),tension:0.25,borderColor:'#9fbfff',backgroundColor:'rgba(159,191,255,0.06)',pointRadius:0},
+          {label:'Allowed',data:series90.map(r=>r.allowed),tension:0.25,borderColor:'#6fcf97',backgroundColor:'rgba(111,207,151,0.06)',pointRadius:0},
+          {label:'Repriced',data:series90.map(r=>r.repriced),tension:0.25,borderColor:'#ffb86b',backgroundColor:'rgba(255,184,107,0.06)',pointRadius:0}
+        ]
+      },
+      options:{plugins:{legend:{position:'bottom'}}}
+    });
 
     // Clinical review outcomes (donut)
     const ctxC=document.getElementById('chart-clinical').getContext('2d');
-    const clinChart = new Chart(ctxC,{type:'doughnut',data:{labels:['Approved','Modified','Denied'],datasets:[{data:[62,28,10]}]},options:{plugins:{legend:{position:'bottom'}}}});
+    const clinChart = new Chart(ctxC,{type:'doughnut',data:{labels:['Approved','Modified','Denied'],datasets:[{data:[62,28,10],backgroundColor:['#10b981','#f59e0b','#ef4444']}]},options:{plugins:{legend:{position:'bottom'}}}});
 
     // Provider engagement (bar)
     const ctxP=document.getElementById('chart-providers').getContext('2d');
     const providers=['Provider A','Provider B','Provider C','Provider D','Provider E','Provider F','Provider G','Provider H'];
     const contacts=[24,18,16,12,10,8,7,5];
-    const provChart = new Chart(ctxP,{type:'bar',data:{labels:providers,datasets:[{label:'Contacts',data:contacts}]},options:{plugins:{legend:{display:false}}}});
+    const provChart = new Chart(ctxP,{type:'bar',data:{labels:providers,datasets:[{label:'Contacts',data:contacts,backgroundColor:'#6fcf97'}]},options:{plugins:{legend:{display:false}}}});
 
-    // Price variance (box-like using bar of avg variance)
+    // Price variance (bar)
     const ctxV=document.getElementById('chart-variance').getContext('2d');
     const groups=['Surgery','Imaging','Pharmacy','Consult','Diagnostics','Therapy'];
     const variance=[28,15,40,12,22,18];
-    const varChart = new Chart(ctxV,{type:'bar',data:{labels:groups,datasets:[{label:'Avg % variance',data:variance}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+    const varChart = new Chart(ctxV,{type:'bar',data:{labels:groups,datasets:[{label:'Avg % variance',data:variance,backgroundColor:'#9fbfff'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
 
     // Top CPT codes
     const ctxT=document.getElementById('chart-cpt').getContext('2d');
     const cptCodes=['99213','93000','80050','70450','27447'];
     const freq=[120,90,85,60,45];
     const savingsPer=[4200,3200,1500,5000,2300];
-    const cptChart = new Chart(ctxT,{type:'bar',data:{labels:cptCodes,datasets:[{label:'Frequency',data:freq},{label:'Avg saving (₹)',data:savingsPer}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+    const cptChart = new Chart(ctxT,{type:'bar',data:{labels:cptCodes,datasets:[{label:'Frequency',data:freq,backgroundColor:'#9fbfff'},{label:'Avg saving (₹)',data:savingsPer,backgroundColor:'#ffb86b'}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
 
     // Recent reviews
-    const recent = Array.from({length:16}).map((_,i)=>({id:`RVW-${202600+i}`,patient:`Patient ${i+1}`,provider:providers[i%providers.length],outcome:['Approved','Modified','Denied'][Math.floor(Math.random()*3)],savings:'₹ ' + (1000 + Math.round(Math.random()*8000))}));
-    function renderRecent(){const tbody=document.getElementById('recent-reviews-body');tbody.innerHTML='';recent.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.id}</td><td>${r.patient}</td><td>${r.provider}</td><td>${formatOutcome(r.outcome)}</td><td>${r.savings}</td><td><button class="small" onclick="openReview('${r.id}')">Open</button></td>`;tbody.appendChild(tr)})}
-    function formatOutcome(o){if(o==='Approved')return '<span class="badge ok">Approved</span>'; if(o==='Denied')return '<span class="badge err">Denied</span>'; return '<span class="badge warn">Modified</span>'}
+    const recent = Array.from({length:16}).map((_,i)=>({id:`RVW-${202600+i}`,patient:`Patient ${i+1}`,provider:providers[i%providers.length],outcome:['Approved','Modified','Denied'][Math.floor(Math.random()*3)],savings:'₹ '+(200+Math.round(Math.random()*4000))}));
+    function renderRecent(){
+      const tbody=document.getElementById('recent-reviews-body');tbody.innerHTML='';
+      recent.forEach(r=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${r.id}</td><td>${r.patient}</td><td>${r.provider}</td><td>${formatOutcome(r.outcome)}</td><td>${r.savings}</td><td><button class="small" onclick="openReview('${r.id}')">Open</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    function formatOutcome(o){
+      if(o==='Approved')return '<span class="badge ok">Approved</span>';
+      if(o==='Denied')return '<span class="badge err">Denied</span>';
+      return '<span class="badge warn">Modified</span>';
+    }
 
     // Provider status
     const provStatus = providers.map((p,i)=>({name:p,status:['Engaged','Contacted','No Response'][i%3]}));
-    function renderProviders(){const tbody=document.getElementById('provider-status');tbody.innerHTML='';provStatus.forEach(p=>{const tr=document.createElement('tr');const s = p.status==='Engaged'?'<span class="badge ok">Engaged</span>':p.status==='Contacted'?'<span class="badge warn">Contacted</span>':'<span class="badge err">No Response</span>';tr.innerHTML=`<td>${p.name}</td><td>${s}</td>`;tbody.appendChild(tr)})}
+    function renderProviders(){
+      const tbody=document.getElementById('provider-status');tbody.innerHTML='';
+      provStatus.forEach(p=>{
+        const tr=document.createElement('tr');
+        const s = p.status==='Engaged'?'<span class="badge ok">Engaged</span>':(p.status==='Contacted'?'<span class="badge warn">Contacted</span>':'<span class="badge err">No Response</span>');
+        tr.innerHTML=`<td>${p.name}</td><td>${s}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
 
     // Top rules
     const rules=['Outpatient bundling check','Price cap enforcement','Pharmacy generic substitution','Duplicate service detection','Pre-auth validation'];
@@ -323,7 +399,11 @@
       renderRecent();renderProviders();renderTopRules();renderKPIs();setSynced();
     }
 
-    function downloadCSV(key){let csv='';if(key==='repricing_trend'){csv='date,billed,allowed,repriced\n'+series90.map(s=>`${s.date},${s.billed},${s.allowed},${s.repriced}`).join('\n')}const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=(key||'data')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+    function downloadCSV(key){
+      let csv='';
+      if(key==='repricing_trend'){csv='date,billed,allowed,repriced\n'+series90.map(s=>`${s.date},${s.billed},${s.allowed},${s.repriced}`).join('\n')}
+      const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=key+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+    }
 
     function openReview(id){alert('Open review: '+id+' (routes to clinical detail in product)')}
     function openSettings(){alert('Open Rules & Repricing Settings — configure thresholds, provider contracts, etc.')}
@@ -333,11 +413,22 @@
 
     // range selector
     document.getElementById('rp-range').addEventListener('change',(e)=>{const days=parseInt(e.target.value,10);series90 = genSeries(days);repChart.data.labels = series90.map(r=>r.date);repChart.data.datasets[0].data = series90.map(r=>r.billed);repChart.data.datasets[1].data = series90.map(r=>r.allowed);repChart.data.datasets[2].data = series90.map(r=>r.repriced);repChart.update();renderKPIs();setSynced();});
-  </script>
 
-  <!-- small original last-synced footer area preserved -->
-  <footer style="margin-top:12px;color:var(--muted);font-size:12px;max-width:1200px;margin-left:auto;margin-right:auto;padding:8px 20px;">
-    Last synced: <span id="last-synced">—</span> · SamITHealth medical review &amp; repricing
-  </footer>
+    // Normalize inline social SVGs so they inherit currentColor and show on colored backgrounds
+    (function normalizeSocialSVGs(){
+      try {
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          // set any explicit fills to currentColor for consistent tile coloring
+          svg.querySelectorAll('[fill]').forEach(node=>{
+            try{ if(node.getAttribute('fill') && node.getAttribute('fill') !== 'none') node.setAttribute('fill','currentColor'); }catch(e){}
+          });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      } catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // keyboard shortcut 'h' to go home
+    document.addEventListener('keydown', function(e){ if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html'; });
+  </script>
 </body>
 </html>

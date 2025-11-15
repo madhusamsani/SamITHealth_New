@@ -9,89 +9,178 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#f6f8fb;--card:#fff;--muted:#6b7280;--accent:#0f62fe;--accent-2:#0b76d1;--radius:12px}
+    :root{
+      --bg:#f6f8fb;
+      --surface:#ffffff;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --muted:#586674;
+      --card-border:#eef6ff;
+      --radius:12px;
+      --max:1200px;
+      --shadow:0 12px 40px rgba(6,18,45,0.06);
+      --gap:20px;
+    }
     *{box-sizing:border-box}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans',sans-serif;margin:0;background:var(--bg);color:#0f1724}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{background:#fff;border-bottom:1px solid #e6eef9}
-    .nav{display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    .navlinks a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-    h1{font-size:30px;margin:18px 0}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center}
-    .lead{color:var(--muted);margin-bottom:12px}
-    .card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(12,36,60,0.06)}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
-    .feature{padding:14px;border-radius:10px;border:1px solid #eef6ff;background:linear-gradient(180deg,#fff,#fbfdff)}
-    .stat-row{display:flex;gap:12px;margin-top:12px}
-    .stat{padding:12px;border-radius:10px;background:#fff;border:1px solid #eef6ff}
-    img.responsive{width:100%;border-radius:10px;display:block}
-    .long-desc{color:var(--muted);line-height:1.6}
-    footer{padding:24px 0;margin-top:28px;border-top:1px solid #e6eef9}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr}}</style>
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block;height:auto}
+
+    .container{max-width:var(--max);margin:28px auto;padding:0 20px}
+
+    /* Header (site-wide corporate header) */
+    header.site-header{background:var(--surface);border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    .brand-text{display:flex;flex-direction:column;line-height:1}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid #e6e9ef;padding:10px 14px;border-radius:10px;cursor:pointer;color:var(--muted)}
+
+    /* Page layout */
+    main{padding:28px 0}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+    .hero-left{display:flex;flex-direction:column;gap:16px}
+    .hero-card{background:var(--surface);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    h1{font-size:30px;margin:0 0 6px;color:var(--brand)}
+    .lead{color:var(--muted);margin:0 0 12px;font-size:15px}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+    .feature{padding:14px;border-radius:10px;border:1px solid var(--card-border);background:linear-gradient(180deg,#fff,#fbfdff)}
+    .feature h3{margin:0 0 6px;font-size:16px;color:var(--brand)}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+    .stat-row{display:flex;gap:12px;margin-top:16px}
+    .stat{padding:12px;border-radius:10px;background:var(--surface);border:1px solid var(--card-border);min-width:0;flex:1;text-align:center}
+    .stat strong{display:block;font-size:18px}
+    .long-desc{color:var(--muted);line-height:1.7;margin-top:12px}
+
+    /* Aside */
+    aside.card{background:var(--surface);padding:16px;border-radius:12px;border:1px solid var(--card-border);box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    .section-title{margin:12px 0 8px;color:var(--brand)}
+    .testimonial-box{color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px;border-radius:8px}
+
+    /* Footer (provider-services style) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:10px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+
+    /* Social tiles */
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s ease}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating quick home */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(4,24,64,0.12)}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+      nav.primary{display:none}
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav class="navlinks" aria-label="Main navigation">
+  <header class="site-header" role="banner" aria-label="Main header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="SamITHealth home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="logo-mark" aria-hidden="true">SH</div>
+        <div class="brand-text">
+          <div class="title">SamITHealth</div>
+          <div class="tag">Clinical + RCM Solutions</div>
+        </div>
+      </a>
+
+      <nav class="primary" role="navigation" aria-label="Primary navigation">
         <a href="index.html">Home</a>
         <a href="provider-services.html">Provider Services</a>
         <a href="payer-solutions.html">Payer Solutions</a>
         <a href="laboratory-services.html">Laboratory Services</a>
-        <a href="what-makes-us-unique.html">Why Us</a>
+        <a href="what-makes-us-unique.html" class="active">Why Us</a>
+        <a href="careers.html">Careers</a>
         <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="header-ctas" aria-hidden="false">
+        <button class="btn-primary" onclick="location.href='contact.html'">Get in touch</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="hero">
-      <div>
-        <h1>What makes SamITHealth unique</h1>
-        <p class="lead">We combine deep domain experience, automation-first engineering, and pragmatic operations to deliver measurable revenue and operational outcomes for providers, labs and payers.</p>
+    <section class="hero" aria-labelledby="unique-heading">
+      <div class="hero-left">
+        <div class="hero-card">
+          <h1 id="unique-heading">What makes SamITHealth unique</h1>
+          <p class="lead">We combine deep domain experience, automation-first engineering, and pragmatic operations to deliver measurable revenue and operational outcomes for providers, labs and payers.</p>
 
-        <div class="features">
-          <div class="feature">
-            <h3 style="margin:0 0 6px">Domain Expertise</h3>
-            <p class="long-desc">20+ years of combined experience across RCM, coding, LIS integrations and payer operations. Our teams include certified coders, clinicians, data engineers and revenue integrity analysts who understand the interplay between clinical workflows and revenue outcomes.</p>
+          <div class="features" aria-hidden="false">
+            <div class="feature">
+              <h3>Domain Expertise</h3>
+              <p>20+ years of combined experience across RCM, coding, LIS integrations and payer operations. Our teams include certified coders, clinicians, data engineers and revenue integrity specialists.</p>
+            </div>
+
+            <div class="feature">
+              <h3>Automation + Human-in-the-loop</h3>
+              <p>We build automation (OCR, claim scrubbers, denial classifiers) to eliminate routine work while keeping specialized human review where accuracy and defensibility matter.</p>
+            </div>
+
+            <div class="feature">
+              <h3>Compliance & Security</h3>
+              <p>HIPAA-first engineering, SOC2-ready processes, and secure data handling are embedded into every engagement. We provide role-based access, encryption, and auditable intake channels.</p>
+            </div>
+
+            <div class="feature">
+              <h3>Flexible Engagements</h3>
+              <p>Project-based pilots, managed services, or embedded FTE models — we adapt to your operational needs while delivering predictable SLAs and measurable ROI reporting.</p>
+            </div>
           </div>
 
-          <div class="feature">
-            <h3 style="margin:0 0 6px">Automation + Human-in-the-loop</h3>
-            <p class="long-desc">We build automation (OCR, claim scrubbers, denial classifiers) to eliminate routine work, while keeping specialized human review where accuracy and defensibility matter. This hybrid approach reduces cost and improves first-pass acceptance rates.</p>
+          <div class="stat-row" aria-hidden="false">
+            <div class="stat"><strong>99%+</strong><div style="color:var(--muted)">Data capture accuracy (where applicable)</div></div>
+            <div class="stat"><strong>30%+</strong><div style="color:var(--muted)">Typical denials reduction</div></div>
+            <div class="stat"><strong>3–6 months</strong><div style="color:var(--muted)">Common ROI payback window</div></div>
           </div>
 
-          <div class="feature">
-            <h3 style="margin:0 0 6px">Compliance & Security</h3>
-            <p class="long-desc">HIPAA-first engineering, SOC2-ready processes, and secure data handling are embedded into every engagement. We provide secure intake channels, role-based access and audit trails for all review and recovery work.</p>
-          </div>
+          <div class="hero-card long-desc" style="margin-top:14px">
+            <h2 style="margin-top:0">Long description — why clients pick us</h2>
+            <p>Healthcare organizations operate in an environment of competing pressures: rising costs, complex payer rules, staffing constraints, and tighter margins. Our discovery begins with a rapid, measurable opportunity assessment — whether that’s underpayments recoverable through repricing, systemic denial drivers, or workflow bottlenecks that slow collections.</p>
 
-          <div class="feature">
-            <h3 style="margin:0 0 6px">Flexible Engagements</h3>
-            <p class="long-desc">Project-based pilots, managed services, or embedded FTE models — we adapt to your operational needs and governance while delivering predictable SLAs and ROI reporting.</p>
+            <p style="margin-top:8px">We are fanatical about defensibility. Whether recovering funds with payers or training clinical teams to document differently, our work is documented and auditable. That rigor supports long-term improvement and reduces repeat failures.</p>
           </div>
         </div>
-
-        <div class="stat-row" style="margin-top:16px">
-          <div class="stat"><strong>99%+</strong><div style="color:var(--muted)">Data capture accuracy (where applicable)</div></div>
-          <div class="stat"><strong>30%+</strong><div style="color:var(--muted)">Typical denials reduction</div></div>
-          <div class="stat"><strong>3–6 months</strong><div style="color:var(--muted)">Common ROI payback window</div></div>
-        </div>
-
-        <h2 style="margin-top:22px">Long description — why clients pick us</h2>
-        <p class="long-desc">Healthcare organizations operate in an environment of competing pressures: rising costs, complex payer rules, staffing constraints, and tighter margins. Too often operational teams react to denials, manual tasks and ad-hoc fixes rather than preventing leakage in the first place. SamITHealth approaches these challenges differently: we link clinical, operational and financial data to produce prioritized, defensible actions that move the needle.</p>
-
-        <p class="long-desc">Our engagements begin with a rapid discovery to establish the measurable opportunity: whether that’s underpayments recoverable through repricing, systemic denial drivers, or missed charges due to poor integrations. We deliver a pilot that proves impact — combining analytics, sample-based clinical/coding review, and automated repricing where appropriate. Post-pilot, our playbooks and integrations make improvements operational: denial playbooks are codified, claim scrubbing rules are deployed, and dashboards provide leadership with the KPIs they need to govern performance.</p>
-
-        <p class="long-desc">We are fanatical about defensibility. Whether recovering funds with payers or training clinical teams to document differently, our work is documented and auditable. That reduces friction with payers and shortens recovery cycles. Finally, we tailor our delivery to your culture — some clients want an embedded team that becomes an extension of operations; others prefer short, high-impact pilots that address a single pain point. Either way, our focus is the same: measurable, sustainable financial improvement and operational simplicity.</p>
       </div>
 
-      <aside style="max-width:360px">
-        <div class="card">
-          <img class="responsive" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Team collaborating on strategy and data analysis">
+      <aside>
+        <div class="card" style="margin-bottom:18px">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Team collaborating on strategy and data analysis" style="border-radius:8px">
           <h3 class="section-title">Quick facts</h3>
-          <ul style="color:var(--muted)">
+          <ul style="color:var(--muted);margin-top:8px">
             <li>Certified coders and clinical reviewers</li>
             <li>HIPAA & SOC2-aligned practices</li>
             <li>Embedded automation with human QA</li>
@@ -99,27 +188,88 @@
           </ul>
         </div>
 
-        <div style="height:18px"></div>
-
         <div class="card">
-          <img class="responsive" src="assets/images/ChatGPT Image Oct 22, 2025, 10_57_25 AM.png" alt="Analytics dashboard showing revenue metrics" style="margin-bottom:8px">
+          <img src="assets/images/ChatGPT Image Oct 22, 2025, 10_57_25 AM.png" alt="Analytics dashboard showing revenue metrics" style="border-radius:8px;margin-bottom:8px">
           <h3 class="section-title">Client testimonial</h3>
-          <div style="color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px;border-radius:8px">
+          <div class="testimonial-box">
             <strong>"SamITHealth delivered a pilot that recovered six-figures and gave us a road map to prevent reoccurrence."</strong>
-            <div style="font-size:13px;margin-top:8px">— Director Revenue Integrity</div>
+            <div style="font-size:13px;margin-top:8px">— Director, Revenue Integrity</div>
           </div>
         </div>
       </aside>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div style="color:var(--muted);font-size:13px">HIPAA-ready | SOC2-ready processes</div>
+  <!-- Footer copied / adapted from provider-services.html for consistent corporate layout -->
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" aria-label="SamITHealth home (logo)">
+            <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+          </a>
+          <p style="margin-top:6px">SamITHealth provides clinical, RCM and software solutions that help healthcare organizations recover revenue, reduce denials, and operate more efficiently and securely.</p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <a href="provider-services.html">Provider Services</a><br>
+          <a href="payer-solutions.html">Payer Solutions</a><br>
+          <a href="laboratory-services.html">Laboratory Services</a><br>
+          <a href="software-solutions.html">Software Solutions</a><br>
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com/company/samithealth/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+            </a>
+
+            <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+
+            <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 13 0 14.5.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
+            </a>
+        </nav>
+
+        <div class="footer-newsletter" aria-label="Newsletter sign up">
+          <div>Subscribe for RCM, compliance, and health-tech insights.</div>
+          <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+            <input aria-label="Email address" placeholder="Email address" type="email" required>
+            <button class="btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
       </div>
     </div>
+
+    <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
   </footer>
+
+  <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+
+  <script>
+    // Normalize inline social SVGs so icons inherit currentColor and display correctly on colored tiles
+    (function normalizeSocialSVGs(){
+      try {
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          svg.querySelectorAll('[fill]').forEach(node=>{
+            try{ if(node.getAttribute('fill') && node.getAttribute('fill') !== 'none') node.setAttribute('fill','currentColor'); }catch(e){}
+          });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      } catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // keyboard shortcut 'h' to go home
+    document.addEventListener('keydown', function(e){
+      if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey){
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
 </body>
 </html>

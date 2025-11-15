@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Software Solutions — SamITHealth</title>
   <meta name="description" content="Integration, implementation and managed support for clinical, billing and laboratory software — LIMS, EHR, RCM and analytics platforms.">
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -12,81 +12,128 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <style>
+    /* Corporate tokens (aligned with behavioral-health & provider-services) */
     :root{
-      --accent:#0b6efd;
-      --muted:#6b7280;
-      --bg:#f6f9fc;
-      --card:#ffffff;
-      --radius:12px;
-      --ps-accent:#0066ff;
-      --ps-accent-2:#0047d1;
-      --ps-brand:#07203b;
+      --page-bg:#f6f8fb;
+      --surface:#ffffff;
+      --brand:#07203b;
+      --muted:#586674;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
       --max:1200px;
+      --radius:12px;
+      --shadow:0 12px 40px rgba(6,18,45,0.06);
+      --gap:20px;
+      --aside-width:360px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--ps-brand);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;-webkit-font-smoothing:antialiased}
-    a{color:var(--accent);text-decoration:none}
-    img{max-width:100%;display:block}
 
-    /* Header (aligned like provider-services.html) */
-    header.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:90}
-    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
-    .brand-text{display:flex;flex-direction:column}
-    .brand-text .title{font-weight:800;font-size:18px;color:var(--ps-brand)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background:var(--page-bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block;height:auto}
+
+    .container{max-width:1150px;margin:20px auto;padding:28px}
+
+    /* Header — site-wide corporate header */
+    header.site-header{
+      background:var(--surface);
+      border-bottom:1px solid #e6eef6;
+      position:sticky;
+      top:0;
+      z-index:90;
+    }
+    .header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 20px;
+      gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;
+      box-shadow:0 6px 18px rgba(4,24,64,0.08);
+      flex-shrink:0;
+    }
+    .brand-text{display:flex;flex-direction:column;line-height:1}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
     .brand-text .tag{font-size:12px;color:var(--muted)}
     nav.primary{display:flex;gap:12px;align-items:center}
-    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;text-decoration:none}
-    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--ps-accent-2)}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
     .header-ctas{display:flex;gap:12px;align-items:center}
-    .btn-primary{background:linear-gradient(90deg,var(--ps-accent),var(--ps-accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+      box-shadow:0 6px 18px rgba(11,102,255,0.12);
+    }
+    .btn-ghost{background:transparent;border:1px solid #e6e9ef;padding:10px 14px;border-radius:10px;cursor:pointer;color:var(--muted)}
 
-    /* Page layout */
-    .container{max-width:1150px;margin:20px auto;padding:28px}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:10px}
+    /* Hero & layout */
+    .hero{display:grid;grid-template-columns:1fr var(--aside-width);gap:26px;align-items:start;margin-top:10px}
     .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:36px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
-    h1{font-size:30px;margin:0 0 10px}
-    p.lead{color:var(--muted);font-size:16px;margin:0 0 16px}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    .feature h4{margin:0 0 6px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
-    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
-    .right-card .card-body{padding:12px}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    .service h3{margin:0 0 8px}
-    .service p{margin:0;color:var(--muted);font-size:14px}
-    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:22px;border-radius:12px;border:1px solid #eaf3ff}
-    .long-desc p{color:var(--muted);font-size:15px}
-    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-top:18px}
-    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    form input, form textarea, form select{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    label{font-weight:600;font-size:13px;color:#243044}
-    .testimonials{display:flex;gap:14px;margin-top:18px}
-    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:14px;border-radius:10px;flex:1;border:1px solid #eef6ff}
+    .hero-card h1{font-size:30px;margin:0 0 10px;color:var(--brand)}
+    .lead{color:var(--muted);font-size:16px;margin:0 0 16px;max-width:70ch}
 
-    /* Analytics area (new) */
-    .analytics{margin-top:28px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .feature{background:var(--surface);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 6px;color:var(--brand)}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    .right-card.card{background:var(--surface);padding:0;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    .right-card img{width:100%;height:220px;object-fit:cover;display:block}
+    .right-card .card-body{padding:16px}
+
+    /* Analytics area */
+    .analytics{margin-top:28px;display:grid;grid-template-columns:1fr 320px;gap:18px}
     .charts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .chart-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid #eef6ff}
+    .chart-card{background:var(--surface);padding:12px;border-radius:10px;border:1px solid #eef6ff}
     .chart-card h4{margin:0 0 8px}
     .kpi-row{display:flex;gap:12px;margin-top:12px}
     .kpi{flex:1;background:linear-gradient(180deg,#fff,#fcfeff);padding:12px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
     .kpi .value{font-weight:800;font-size:20px}
     .kpi .label{font-size:12px;color:var(--muted)}
 
-    /* Footer */
-    footer.site-footer{background:var(--ps-brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px}
+    .card{background:var(--surface);padding:18px;border-radius:12px;border:1px solid #eef6ff}
+
+    /* Footer (provider-services style, aligned to behavioral-health) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:10px}
     .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
     .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
-    .footer-logo{height:60px;margin-bottom:10px;display:block}
-    .socials{display:flex;gap:12px}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
-    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ps-accent),var(--ps-accent-2));display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 12px 40px rgba(6,18,45,0.12)}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
 
+    /* Social tiles: colored backgrounds; svg inherits currentColor */
+    .socials{display:flex;gap:12px;align-items:center}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s ease}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(4,24,64,0.12)}
+
+    /* Responsive */
     @media (max-width:1100px){
       .hero{grid-template-columns:1fr}
       .analytics{grid-template-columns:1fr}
@@ -96,14 +143,14 @@
   </style>
 </head>
 <body>
-  <!-- Header (provider-services aligned) -->
+  <!-- Header -->
   <header class="site-header" role="banner" aria-label="Main header">
     <div class="header-inner">
-      <a href="index.html" class="brand" aria-label="Go to SamITHealth home page" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:12px">
+      <a href="index.html" class="brand" aria-label="SamITHealth home (logo)">
         <div class="logo-mark" aria-hidden="true">SH</div>
         <div class="brand-text">
           <div class="title">SamITHealth</div>
-          <div class="tag" style="font-size:12px;color:var(--muted)">Software Solutions</div>
+          <div class="tag">Software Solutions</div>
         </div>
       </a>
 
@@ -117,18 +164,18 @@
       </nav>
 
       <div class="header-ctas" aria-hidden="false">
-        <!-- phone intentionally omitted on this page -->
+        <!-- phone intentionally removed on this page -->
         <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
       </div>
     </div>
   </header>
 
   <!-- Content -->
-  <main class="container">
+  <main class="container" role="main">
     <section class="hero" aria-labelledby="software-heading">
       <div class="hero-card">
         <h1 id="software-heading">Software Solutions — Integration, Implementation & Managed Support</h1>
-        <p class="lead">We implement and support clinical, billing and laboratory software platforms — LIMS, EHR, RCM and analytics — to streamline operations, reduce manual work, and deliver measurable outcomes.</p>
+        <p class="lead">We implement and support clinical, billing and laboratory software platforms — LIMS, EHR, RCM and analytics — to streamline operations, reduce manual work, and deliver measurable operational outcomes.</p>
 
         <div class="features" aria-hidden="false">
           <div class="feature">
@@ -150,19 +197,19 @@
         </div>
       </div>
 
-      <aside class="right-card card">
+      <aside class="right-card card" aria-label="Platform health check">
         <img src="assets/images/OIP (1)-sm-sm.webp" alt="Engineer configuring software dashboard">
         <div class="card-body">
           <h3>Platform health check</h3>
           <p style="color:var(--muted);font-size:14px;margin-top:6px">Share your stack and pain points — we'll provide a short assessment highlighting quick wins and risk areas.</p>
           <div style="margin-top:12px">
-            <a class="cta" href="contact.html">Request Assessment</a>
+            <a class="btn-primary" href="contact.html">Request Assessment</a>
           </div>
         </div>
       </aside>
     </section>
 
-    <!-- Analytics + Tools: IT software design tools & Healthcare analytics tools -->
+    <!-- Analytics -->
     <section class="analytics" aria-label="Software tools analytics">
       <div>
         <div class="kpi-row">
@@ -180,17 +227,17 @@
           </div>
         </div>
 
-        <div class="charts">
+        <div class="charts" aria-hidden="false">
           <div class="chart-card">
             <h4>IT Design Tools Adoption</h4>
             <canvas id="chart-it-tools" aria-label="IT software design tools usage"></canvas>
-            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Shows adoption among our client implementations: UML, ERD, CI/CD, Containerization, IaC, Monitoring.</div>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Shows adoption among our client implementations.</div>
           </div>
 
           <div class="chart-card">
             <h4>Healthcare Analytics Tools Usage</h4>
             <canvas id="chart-health-tools" aria-label="Healthcare analytics tools usage"></canvas>
-            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Tools used for analytics & reporting: Python, R, SAS, Tableau, PowerBI, Snowflake.</div>
+            <div style="margin-top:8px;font-size:12px;color:var(--muted)">Tools used for analytics & reporting.</div>
           </div>
 
           <div class="chart-card">
@@ -212,7 +259,7 @@
         </div>
       </div>
 
-      <aside class="right">
+      <aside class="right" aria-label="Tooling & stack details">
         <div class="card">
           <h4>Design & Dev Tools</h4>
           <p style="color:var(--muted);margin-top:8px">We commonly use:</p>
@@ -244,15 +291,15 @@
           <ul style="color:var(--muted);margin-top:8px">
             <li>Reduced integration time by 40% using standard API templates</li>
             <li>Average 99.5% platform uptime with managed services</li>
-            <li>Faster reporting cycles via centralized analytics (Tableau/PowerBI)</li>
+            <li>Faster reporting cycles via centralized analytics</li>
           </ul>
         </div>
       </aside>
     </section>
 
-    <section class="long-desc">
+    <section class="long-desc" style="margin-top:18px">
       <h3>How we combine engineering and clinical context</h3>
-      <p>Our teams pair architects, clinicians and data engineers to ensure software design reflects clinical workflows. We emphasize secure, auditable integrations and measurable operational KPIs — from data latency to report delivery SLAs.</p>
+      <p style="color:var(--muted)">Our teams pair architects, clinicians and data engineers to ensure software design reflects clinical workflows. We emphasize secure, auditable integrations and measurable operational KPIs — enabling faster time-to-value and lower operational risk.</p>
     </section>
   </main>
 
@@ -278,17 +325,17 @@
 
       <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
         <nav class="socials" aria-label="Social media">
-          <a class="linkedin" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.5 3.6 6.5 8.3V22H22v-6.6c0-3.2-.1-7.3-4.5-7.3-2.2 0-3.6 1.2-4.2 2.1v-1.8H7.5V8z"/></svg>
-          </a>
+            <a class="linkedin" href="https://www.linkedin.com/company/samithealth/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+            </a>
 
-          <a class="twitter" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04A4.28 4.28 0 0 0 12.07 9a12.14 12.14 0 0 1-8.82-4 4.28 4.28 0 0 0 1.32 5.72A4.25 4.25 0 0 1 2 9.7v.05a4.28 4.28 0 0 0 3.44 4.19c-.5.13-1.02.2-1.56.08a4.28 4.28 0 0 0 3.99 2.97A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.54 12.2-12.2v-.56A8.72 8.72 0 0 0 24 5.1a8.4 8.4 0 0 1-2.54.7z"/></svg>
-          </a>
+            <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
 
-          <a class="youtube" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S0 8 0 9.8v1.4C0 13.6.6 15.4.6 15.4s.2 1.7.8 2.4c.8.9 1.8.9 2.3 1.1 1.7.2 7.3.5 7.3.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.6-1.8.6-3.6v-1.4c0-1.8-.6-3.6-.6-3.6zM9.8 15.1V8.9l5.3 3.1-5.3 3.1z"/></svg>
-          </a>
+            <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 13 0 14.5.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
+            </a>
         </nav>
 
         <div class="footer-newsletter" aria-label="Newsletter sign up">
@@ -310,17 +357,15 @@
   <script>
     // Demo data and charts (no external calls)
     function rnd(n,min=0){ return Math.round(min + Math.random()*n); }
-    // IT design tools and healthcare analytics tools lists
+
     const itTools = ['UML','ERD','Swagger','GitHub Actions','Jenkins','Docker','Kubernetes','Terraform','Prometheus','Grafana'];
     const healthTools = ['Python','R','SAS','Tableau','Power BI','Qlik','Snowflake','BigQuery','MLflow','Databricks'];
 
-    // Generate demo usage data
-    const itUsage = itTools.map((t,i) => rnd(80,20)); // 20-100
-    const healthUsage = healthTools.map((t,i) => rnd(80,20));
+    const itUsage = itTools.map(() => rnd(80,20));
+    const healthUsage = healthTools.map(() => rnd(80,20));
 
     // KPIs
-    document.getElementById && (function(){
-      // simple demo KPIs
+    (function initKPIs(){
       const activeDeployments = rnd(120,40);
       const uptime = (99 + Math.random()).toFixed(2) + '%';
       const incidentRate = (Math.random()*2).toFixed(2) + '%';
@@ -329,7 +374,7 @@
       document.getElementById('kpi-incident-rate').textContent = incidentRate;
     })();
 
-    // IT Tools bar chart
+    // Charts
     const itCtx = document.getElementById('chart-it-tools').getContext('2d');
     const itChart = new Chart(itCtx, {
       type: 'bar',
@@ -340,7 +385,6 @@
       options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
     });
 
-    // Health tools horizontal bar
     const healthCtx = document.getElementById('chart-health-tools').getContext('2d');
     const healthChart = new Chart(healthCtx, {
       type: 'bar',
@@ -351,10 +395,9 @@
       options: { indexAxis: 'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true}} }
     });
 
-    // Capability radar (integration, security, scalability, observability, analytics)
     const capCtx = document.getElementById('chart-capabilities').getContext('2d');
     const capabilities = ['Integration','Security','Scalability','Observability','Analytics'];
-    const capValues = capabilities.map(() => rnd(40,50)); // 50-90
+    const capValues = capabilities.map(() => rnd(40,50));
     const capChart = new Chart(capCtx, {
       type: 'radar',
       data: {
@@ -364,14 +407,13 @@
       options: { scales:{r:{beginAtZero:true,max:100}} }
     });
 
-    // Deployments timeline (last 12 months)
     const depCtx = document.getElementById('chart-deployments').getContext('2d');
     const months = Array.from({length:12}).map((_,i)=>{
       const m = new Date();
       m.setMonth(m.getMonth() - (11 - i));
       return m.toLocaleString('default',{month:'short',year:'2-digit'});
     });
-    const depCounts = months.map(m=>rnd(10,5));
+    const depCounts = months.map(() => rnd(10,5));
     const depChart = new Chart(depCtx, {
       type: 'line',
       data: {
@@ -381,7 +423,6 @@
       options: { plugins:{legend:{position:'bottom'}}, scales:{y:{beginAtZero:true}} }
     });
 
-    // Notes list
     const notes = [
       'Standardized Docker/Helm charts reduced drift across environments.',
       'Adopted OpenAPI contracts for 12 integrations in last 6 months.',
@@ -393,13 +434,41 @@
       notesList.innerHTML = notes.map(n=>'<li style="margin-bottom:6px;color:var(--muted)">'+n+'</li>').join('');
     }
 
-    // Demo last-synced
-    (function setSynced(){ const el = document.getElementById('last-synced'); if(!el){ const d = document.createElement('div'); d.style.maxWidth='1150px'; d.style.margin='12px auto'; d.style.padding='0 28px'; d.style.color='var(--muted)'; d.style.fontSize='12px'; d.innerHTML = 'Last synced: <span id=\"last-synced-val\">'+new Date().toLocaleString()+'</span>'; document.body.appendChild(d); } else { el.textContent = new Date().toLocaleString(); } })();
+    // Demo last-synced (appends if not present)
+    (function setSynced(){
+      const id = 'last-synced';
+      let el = document.getElementById(id);
+      if(!el){
+        el = document.createElement('div');
+        el.id = id;
+        el.style.maxWidth = '1150px';
+        el.style.margin = '12px auto';
+        el.style.padding = '0 28px';
+        el.style.color = 'var(--muted)';
+        el.style.fontSize = '12px';
+        el.innerHTML = 'Last synced: ' + new Date().toLocaleString();
+        document.body.appendChild(el);
+      } else {
+        el.textContent = 'Last synced: ' + new Date().toLocaleString();
+      }
+    })();
 
-    // Newsletter demo intercept (keep consistent)
+    // Normalize inline social SVGs so they inherit currentColor and render crisply on colored tiles
+    (function normalizeSocialSVGs(){
+      try {
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          svg.querySelectorAll('[fill]').forEach(node=>{
+            try{ if(node.getAttribute('fill') && node.getAttribute('fill') !== 'none') node.setAttribute('fill','currentColor'); }catch(e){}
+          });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      } catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // Newsletter demo intercept
     document.querySelectorAll('.site-footer form[action="#"], .site-footer form[action=""]').forEach(f => f.addEventListener('submit', function(e){ e.preventDefault(); alert('Thanks — subscription demo (disabled).'); }));
 
-    // Keyboard shortcuts
+    // Keyboard shortcut 'h' to go home
     document.addEventListener('keydown', function(e){ if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html'; });
   </script>
 </body>

@@ -4,145 +4,444 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Workers' Compensation & Auto-Claim RCM — SamITHealth</title>
-  <meta name="description" content="Comprehensive workers' compensation and auto-claim RCM: eligibility, claims generation, repricing, denials, and analytics to protect revenue and speed recovery." />
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <meta name="description" content="Comprehensive workers' compensation and auto-claim RCM: intake, encounter-based claim generation, repricing, denials, analytics and remediation to protect revenue and speed recovery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
-    :root{--accent:#0052cc;--muted:#6b7280;--bg:#f7fbff;--card:#ffffff;--radius:12px;font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial}
+    /* Corporate design tokens */
+    :root{
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --brand: #07203b;
+      --muted: #586674;
+      --accent: #0066ff;
+      --accent-2: #0047d1;
+      --max: 1200px;
+      --radius: 12px;
+      --shadow: 0 12px 40px rgba(6,18,45,0.06);
+      --gap: 20px;
+      --aside-width: 420px;
+      --measure: 70ch;
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0f1724}
-    .container{max-width:1150px;margin:0 auto;padding:28px}
-    header{background:#fff;box-shadow:0 6px 20px rgba(11,23,39,0.04);position:sticky;top:0;z-index:40}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
-    .brand{font-weight:800;color:var(--accent);font-size:20px}
-    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;margin-top:26px}
-    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:34px;border-radius:14px;box-shadow:0 12px 30px rgba(11,23,39,0.04)}
-    h1{font-size:30px;margin:0 0 10px}
-    p.lead{color:var(--muted);font-size:16px;margin:0 0 16px}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;text-decoration:none}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block;height:auto}
+
+    .wrap{max-width:var(--max);margin:28px auto;padding:0 20px}
+
+    /* Header */
+    header.site-header{
+      background:var(--surface);
+      border-bottom:1px solid #e6eef6;
+      position:sticky;
+      top:0;
+      z-index:90;
+    }
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex-shrink:0}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .title{font-weight:800;font-size:18px;color:var(--brand)}
+    .brand-text .tag{font-size:12px;color:var(--muted)}
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .header-ctas{display:flex;gap:12px;align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid #e6e9ef;padding:10px 14px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* Main layout */
+    main{padding:28px 0}
+    .hero{display:grid;grid-template-columns:1fr var(--aside-width);gap:26px;align-items:start}
+    .hero-card{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:34px;border-radius:14px;box-shadow:var(--shadow)}
+    .hero-card h1{font-size:30px;margin:0 0 8px;color:var(--brand)}
+    .lede{color:var(--muted);font-size:16px;max-width:var(--measure);margin:0 0 16px}
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-    .feature{background:var(--card);padding:14px;border-radius:10px;border:1px solid #eef6ff}
-    .feature h4{margin:0 0 8px;font-size:16px}
+    .feature{background:var(--surface);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .feature h4{margin:0 0 8px;color:var(--brand)}
     .feature p{margin:0;color:var(--muted);font-size:14px}
-    .right-card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
-    .right-card .card-body{padding:12px}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .service{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    .service h3{margin:0 0 8px}
-    .service p{margin:0;color:var(--muted);font-size:14px}
-    .long-desc{margin-top:24px;background:linear-gradient(180deg,#fff,#fcfeff);padding:22px;border-radius:12px;border:1px solid #eaf3ff}
-    .long-desc p{color:var(--muted);font-size:15px}
-    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-top:18px}
-    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid #eef6ff}
-    form input, form textarea, form select{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    label{font-weight:600;font-size:13px;color:#243044}
-    .testimonials{display:flex;gap:14px;margin-top:18px}
-    .testimonial{background:linear-gradient(180deg,#fff,#fbfbff);padding:14px;border-radius:10px;flex:1;border:1px solid #eef6ff}
-    footer{margin-top:40px;padding:22px 0;color:var(--muted);font-size:14px}
-    @media (max-width:980px){.hero,.two-column{grid-template-columns:1fr}.services{grid-template-columns:1fr}nav{padding:12px}}
+
+    /* KPI strip */
+    .kpi-strip{display:flex;gap:12px;margin-top:18px}
+    .kpi{flex:1;background:linear-gradient(180deg,#fff,#fcfeff);padding:14px;border-radius:10px;border:1px solid #eef6ff;text-align:center}
+    .kpi .num{font-size:20px;font-weight:800;color:var(--brand)}
+    .kpi .lbl{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* Analytics & methodology */
+    .analytics{margin-top:22px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .charts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .chart-card{background:var(--surface);padding:14px;border-radius:10px;border:1px solid #eef6ff}
+    .method-card{background:var(--surface);padding:14px;border-radius:10px;border:1px solid #eef6ff;margin-top:12px}
+
+    .two-col{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+
+    /* Aside contact and quick info */
+    .aside-card{background:var(--surface);padding:18px;border-radius:12px;border:1px solid #eef6ff;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    form .field{display:flex;flex-direction:column;margin-bottom:8px}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc;background:#fff;font-size:14px}
+    label{font-weight:600;font-size:13px;color:var(--brand);margin-bottom:6px}
+
+    /* Footer */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:10px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:60px;margin-bottom:10px;display:block;border-radius:8px}
+    .footer-content h4{color:#e6eefc;font-size:16px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:10px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12)}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating FAB */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(4,24,64,0.12)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      nav.primary{display:none}
+      .hero{grid-template-columns:1fr}
+      .analytics{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">SamITHealth</div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="provider-services.html">Provider Services</a>
-        <a href="payer-solutions.html">Payer Solutions</a>
-        <a href="laboratory-services.html">Laboratory Services</a>
-        <a href="what-makes-us-unique.html">Why Us</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <h1>Workers' Compensation & Auto-Claim RCM</h1>
-        <p class="lead">Specialized claim handling, repricing and denial prevention for workers' compensation and auto claims — protecting reimbursements while reducing administrative burden.</p>
-        <div class="features">
-          <div class="feature"><h4>Claims Intake & Eligibility</h4><p>Accurate capture of incident details, payer identification and eligibility verification to avoid preventable denials.</p></div>
-          <div class="feature"><h4>Encounter-Based Claim Generation</h4><p>Structured encounter processing to ensure services are translated into correct, auditable claims for WC and auto payers.</p></div>
-          <div class="feature"><h4>Repricing & Fee Schedule Management</h4><p>Expert repricing against state fee schedules and vendor agreements to maximize allowable reimbursement.</p></div>
-          <div class="feature"><h4>Denial Management & Appeals</h4><p>Root-cause analytics, targeted appeals and payer negotiation to recover revenue and prevent recurrence.</p></div>
-        </div>
-        <p style="margin-top:14px;color:var(--muted)">Our specialists understand jurisdictional rules, fee schedules and the nuances of injury-related billing — letting clinical teams focus on care while we protect revenue.</p>
-      </div>
-      <aside class="right-card card">
-        <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" alt="Claims specialist working on documents">
-        <div class="card-body">
-          <h3>Talk to a workers' comp specialist</h3>
-          <p style="color:var(--muted);font-size:14px;margin-top:6px">Share a sample claim or a brief description of your challenges and we'll return a short analysis with recommended next steps.</p>
-        </div>
-      </aside>
-    </section>
-    <section class="services" aria-labelledby="servicesHeading">
-      <h2 id="servicesHeading" style="margin-top:28px">Core Workers' Comp & Auto-Claim Services</h2>
-      <div class="service"><h3>Incident Intake & Triage</h3><p>Structured intake and triage workflows that collect compensable details and assign workqueues for rapid processing.</p></div>
-      <div class="service"><h3>Claims Creation & Submission</h3><p>Accurate claim generation, X12 formats, and payer-specific routing to speed adjudication.</p></div>
-      <div class="service"><h3>Repricing, Auditing & Recovery</h3><p>Fee schedule repricing, audits for compliance and recovery workflows for underpaid claims.</p></div>
-    </section>
-    <section class="two-column">
-      <div>
-        <div class="long-desc card">
-          <h2>Why choose SamITHealth for workers' compensation RCM?</h2>
-          <p>Workers' compensation and auto claims live at the intersection of clinical care, regulatory rules and specialized payer practices. Mistakes are costly: delayed payments, underpayments and audit exposure can significantly impact cash flow. SamITHealth brings deep operational experience in injury-related billing, fee schedules and payer negotiations to help providers and clinics recover revenue while remaining compliant.</p>
-          <p>We begin with a rapid claim health-check that measures exposure areas: missed billable events, erroneous modifiers, incorrect fee schedule application, and common denial drivers. From there we deploy a tailored program that may include intake redesign, automated repricing against up-to-date state fee schedules, focused denial workstreams and an appeals engine that bundles cases for efficient submission.</p>
-          <p>Our teams are trained on jurisdictional rules and payer idiosyncrasies. We provide transparent metrics—claims accuracy, days to adjudication, denial rate and recovered dollars—so leadership can see clear ROI. For high-volume practices we implement batch-processing engines, EDI optimizations and reconciliation dashboards that reduce administrative overhead and free clinical teams to focus on patients.</p>
-          <p style="margin-top:8px">Request a complimentary claim health-check and receive an executive summary highlighting quick wins and a 90-day remediation plan.</p>
-        </div>
-        <div style="margin-top:16px" class="card">
-          <h3>Client outcomes</h3>
-          <ul>
-            <li>Reduced days-to-adjudication and improved cash flow</li>
-            <li>Higher fee-schedule capture and fewer underpayments</li>
-            <li>Lower denial rates through targeted prevention</li>
-          </ul>
+  <div class="wrap">
+    <!-- Header -->
+    <header class="site-header" role="banner" aria-label="Main header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="SamITHealth home">
+          <div class="logo-mark" aria-hidden="true">SH</div>
+          <div class="brand-text">
+            <div class="title">SamITHealth</div>
+            <div class="tag">Workers' Compensation & Auto‑Claim RCM</div>
+          </div>
+        </a>
+
+        <nav class="primary" role="navigation" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="provider-services.html" class="active">Provider Services</a>
+          <a href="payer-solutions.html">Payer Solutions</a>
+          <a href="laboratory-services.html">Laboratory Services</a>
+          <a href="what-makes-us-unique.html">Why Us</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-ctas">
+          <button class="btn-primary" onclick="location.href='contact.html'">Request a Consultation</button>
         </div>
       </div>
-      <aside class="card" id="contact">
-        <h3 style="margin-top:0">Request a claim health-check</h3>
-        <form onsubmit="return submitForm(event)">
-          <label for="name">Full name</label>
-          <input id="name" name="name" placeholder="Your name" required>
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="you@clinic.org" required>
-          <label for="org">Organization</label>
-          <input id="org" name="org" placeholder="Organization / clinic">
-          <label for="payers">Typical payers / jurisdictions</label>
-          <input id="payers" name="payers" placeholder="e.g. State A, State B, private insurer">
-          <label for="message">Notes / sample claim</label>
-          <textarea id="message" name="message" rows="5" placeholder="Briefly describe volumes, common denials or attach a sample claim"></textarea>
-          <button class="cta" type="submit">Request health-check</button>
-        </form>
-      </aside>
-    </section>
-    <section style="margin-top:20px">
-      <h2>Success stories</h2>
-      <div class="testimonials">
-        <div class="testimonial"><strong>"Recovered underpayments worth six figures"</strong><p style="color:var(--muted)">"Their repricing and appeals work recovered material underpayments for our occupational health network." — CFO</p></div>
-        <div class="testimonial"><strong>"Reduced adjudication time"</strong><p style="color:var(--muted)">"Improved intake and claim routing cut our days-to-adjudication dramatically." — Operations Director</p></div>
+    </header>
+
+    <!-- Main -->
+    <main>
+      <section class="hero" aria-labelledby="wc-heading">
+        <div class="hero-card" id="overview">
+          <h1 id="wc-heading">Workers' Compensation & Auto‑Claim Revenue Cycle Management</h1>
+          <p class="lede">We deliver specialized intake, encounter-based claim generation, state fee‑schedule repricing, and denial remediation that reduce write-offs, accelerate cash collection, and provide defensible audit trails for injury-related billing.</p>
+
+          <div class="features" aria-hidden="false">
+            <div class="feature">
+              <h4>Structured Intake & Triage</h4>
+              <p>Collect incident details, document compensable events, and map payer/jurisdiction rules at intake to prevent downstream denials.</p>
+            </div>
+
+            <div class="feature">
+              <h4>Encounter‑based Claims</h4>
+              <p>Translate clinical encounters into auditable claims with correct modifiers, place-of-service, and jurisdictional codes to meet WC/auto payer requirements.</p>
+            </div>
+
+            <div class="feature">
+              <h4>Repricing & Fee Schedule Ops</h4>
+              <p>Automated repricing against state schedules and payor contracts, combined with exception workflows for manual review and dispute.</p>
+            </div>
+
+            <div class="feature">
+              <h4>Denial Prevention & Appeals</h4>
+              <p>Root-cause analytics identifies systemic denial drivers; targeted appeals and payer negotiation recover value and reduce repeat errors.</p>
+            </div>
+          </div>
+
+          <div class="kpi-strip" aria-hidden="false">
+            <div class="kpi"><div class="num" id="kpi-adjud-days">—</div><div class="lbl">Avg days to adjudication</div></div>
+            <div class="kpi"><div class="num" id="kpi-denial-rate">—</div><div class="lbl">Denial rate (30d)</div></div>
+            <div class="kpi"><div class="num" id="kpi-recovered">—</div><div class="lbl">Recovered / Adjusted (monthly)</div></div>
+          </div>
+
+          <div class="method-card">
+            <h4>Analytical approach (how we measure impact)</h4>
+            <p class="muted">We combine claims sampling, payer-stratified denial analysis, and repricing simulations to quantify opportunity. Our baseline measurement includes denial drivers (by payer and code), expected allowed rates using state fee schedules, and projected recovered dollars from targeted appeals. We report results using a dashboard (claims throughput, denial type, recoveries, and AR days) and prioritize remediation by ROI.</p>
+          </div>
+        </div>
+
+        <aside class="aside-card" aria-label="Talk to a specialist">
+          <img src="https://images.unsplash.com/photo-1556761175-129418cb2dfe?q=80&w=1200&auto=format&fit=crop" alt="Claims specialist working on documents" style="border-radius:8px">
+          <div style="margin-top:12px">
+            <h3 style="margin:0 0 8px">Talk to a workers' comp specialist</h3>
+            <p style="color:var(--muted);margin:0 0 12px">Share a sample claim or a brief description of your challenges and we'll return a short analysis with prioritized next steps.</p>
+
+            <form class="contact-form" onsubmit="return submitForm(event)" aria-label="Request health-check">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input id="name" name="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Work email</label>
+                <input id="email" name="email" type="email" required>
+              </div>
+              <div class="field">
+                <label for="org">Organization</label>
+                <input id="org" name="org">
+              </div>
+              <div class="field">
+                <label for="message">Notes / sample claim</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn-primary" type="submit">Request health-check</button>
+                <a class="btn-ghost" href="mailto:info@samithealth.com">Email us</a>
+              </div>
+            </form>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Analytics & outcomes -->
+      <section class="analytics" aria-label="Analytics">
+        <div>
+          <div class="charts" aria-hidden="false">
+            <div class="chart-card">
+              <h4>Claims Processed (30d)</h4>
+              <canvas id="chart-claims" aria-label="Claims processed trend" role="img"></canvas>
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Daily claims received vs processed.</div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Repricing Savings</h4>
+              <canvas id="chart-repricing" aria-label="Repricing savings" role="img"></canvas>
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Simulated monthly savings from repricing and corrections.</div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Denial Reasons (by share)</h4>
+              <canvas id="chart-denials" aria-label="Denial reasons distribution" role="img"></canvas>
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Top denial categories driving rework.</div>
+            </div>
+
+            <div class="chart-card">
+              <h4>Top Codes with Variance</h4>
+              <canvas id="chart-codes" aria-label="Top CPT variance" role="img"></canvas>
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Codes with largest allowed vs billed variance.</div>
+            </div>
+          </div>
+
+          <div class="method-card" style="margin-top:12px">
+            <h4>Typical remediation playbook</h4>
+            <ol style="margin:8px 0 0 18px;color:var(--muted)">
+              <li>Baseline measurement — claims sample & denial taxonomy.</li>
+              <li>Rapid pilot — targeted repricing & appeals for high-ROI buckets.</li>
+              <li>Operationalize — rules, automation and QA workflows.</li>
+              <li>Sustain — governance, KPIs and monthly reconciliations.</li>
+            </ol>
+          </div>
+        </div>
+
+        <aside class="right" aria-label="Outcomes & case studies">
+          <div class="aside-card">
+            <h4 style="margin:0 0 8px">Outcomes we deliver</h4>
+            <ul style="color:var(--muted);margin:0 0 0 18px">
+              <li>Reduced denials by 20–40% in first 90 days</li>
+              <li>Recovered underpayments and reduced leakage</li>
+              <li>Improved days to adjudication and cash predictability</li>
+            </ul>
+          </div>
+
+          <div class="aside-card" style="margin-top:12px">
+            <h4 style="margin:0 0 8px">Client case study (summary)</h4>
+            <p style="margin:0;color:var(--muted);font-size:14px">Pilot recovered six-figure underpayments across a 6-month window by combining repricing, appeals and targeted provider education. Denials dropped by 28% after workflow remediation.</p>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Call to action -->
+      <section style="margin-top:22px">
+        <div class="card">
+          <h3 style="margin:0 0 8px">Request a complimentary claim health‑check</h3>
+          <p style="margin:0;color:var(--muted)">We review a sample of claims, denial types and a short dataset to produce a concise executive summary with prioritized quick wins and a 90‑day remediation plan.</p>
+          <div style="margin-top:12px">
+            <a class="btn-primary" href="#contact">Request health-check</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            </a>
+            <p style="margin-top:6px">SamITHealth provides revenue-cycle, clinical and software solutions that help healthcare organizations recover revenue, reduce denials, and operate more efficiently.</p>
+          </div>
+
+          <div>
+            <h4>Explore</h4>
+            <a href="provider-services.html">Provider Services</a><br>
+            <a href="payer-solutions.html">Payer Solutions</a><br>
+            <a href="laboratory-services.html">Laboratory Services</a><br>
+            <a href="software-solutions.html">Software Solutions</a><br>
+            <a href="careers.html">Careers</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com/company/samithealth/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.5-2.5 5.1-2.5 5.5 0 6.8 3.6 6.8 8.3V22h-5v-6.7c0-1.6 0-3.8-2.4-3.8-2.4 0-2.8 1.9-2.8 3.7V22h-5V8z"/></svg>
+            </a>
+
+            <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+
+            <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3h-.1s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8 0 9.9v1.9C0 13 0 14.5.6 15.8c.5 1.1 1.2 1.6 2.3 1.7 1.7.2 7.6.5 7.6.5s4.5 0 8.4-.5c.5 0 1.4-.1 2.1-1 .6-1 1-2.6 1-4.4V9.9c0-.1 0-.1 0-.1zM9.8 13.4V7.4l5.1 3-5.1 3z"/></svg>
+            </a>
+          </nav>
+
+          <div class="footer-newsletter" aria-label="Newsletter sign up">
+            <div>Subscribe for RCM, compliance, and health-tech insights.</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+              <input aria-label="Email address" placeholder="Email address" type="email" required>
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>© 2025 SamITHealth. All rights reserved.</div>
-        <div>Powered by SamITHealth Solutions • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></div>
-      </div>
-    </div>
-  </footer>
+
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
+    </footer>
+
+    <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
+  </div>
+
   <script>
+    // Demo KPIs
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('kpi-adjud-days').textContent = '7';
+      document.getElementById('kpi-denial-rate').textContent = '12%';
+      document.getElementById('kpi-recovered').textContent = '₹ 84,000';
+    });
+
+    // Charts (demo data)
+    (function(){
+      // claims trend (30 days)
+      const days = Array.from({length:30}).map((_,i)=>{
+        const d = new Date();
+        d.setDate(d.getDate()- (29-i));
+        return d.toISOString().slice(0,10);
+      });
+      const claimsReceived = days.map(()=>Math.round(40 + Math.random()*40));
+      const claimsProcessed = claimsReceived.map((v,i)=>Math.round(v * (0.7 + Math.random()*0.3)));
+
+      const ctxC = document.getElementById('chart-claims').getContext('2d');
+      new Chart(ctxC, {
+        type: 'line',
+        data: {
+          labels: days,
+          datasets: [
+            { label: 'Received', data: claimsReceived, borderColor: 'rgba(6,86,255,0.9)', backgroundColor:'rgba(6,86,255,0.06)', tension:0.25, pointRadius:0 },
+            { label: 'Processed', data: claimsProcessed, borderColor: 'rgba(16,185,129,0.9)', backgroundColor:'rgba(16,185,129,0.06)', tension:0.25, pointRadius:0 }
+          ]
+        },
+        options: { plugins:{legend:{position:'bottom'}}, scales:{y:{beginAtZero:true}} }
+      });
+
+      // repricing savings (monthly last 6 months)
+      const months = Array.from({length:6}).map((_,i)=>{
+        const m = new Date(); m.setMonth(m.getMonth() - (5-i));
+        return m.toLocaleString('default',{month:'short',year:'2-digit'});
+      });
+      const savings = months.map(()=>Math.round(50000 + Math.random()*150000));
+      const ctxR = document.getElementById('chart-repricing').getContext('2d');
+      new Chart(ctxR, {
+        type: 'bar',
+        data: { labels: months, datasets: [{ label: 'Savings (₹)', data: savings, backgroundColor:'rgba(0,102,255,0.8)'}] },
+        options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+      });
+
+      // denial reasons donut
+      const denialLabels = ['Incorrect CPT/Modifiers','Missing Auth','Bundling','Eligibility','Other'];
+      const denialData = denialLabels.map(()=>Math.round(10 + Math.random()*40));
+      const ctxD = document.getElementById('chart-denials').getContext('2d');
+      new Chart(ctxD, {
+        type: 'doughnut',
+        data: { labels: denialLabels, datasets: [{ data: denialData, backgroundColor: ['#ef4444','#f97316','#f59e0b','#6366f1','#10b981'] }] },
+        options: { plugins:{legend:{position:'bottom'}} }
+      });
+
+      // top codes bar
+      const topCodes = ['99213','99214','93000','70450','80050'];
+      const codeVariance = topCodes.map(()=>Math.round(500 + Math.random()*4500));
+      const ctxK = document.getElementById('chart-codes').getContext('2d');
+      new Chart(ctxK, {
+        type: 'bar',
+        data: { labels: topCodes, datasets: [{ label: 'Avg variance (₹)', data: codeVariance, backgroundColor: 'rgba(99,102,241,0.85)'}] },
+        options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+      });
+    })();
+
+    // Normalize social SVGs to inherit currentColor
+    (function normalizeSocialSVGs(){
+      try{
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          svg.querySelectorAll('[fill]').forEach(n=>{ try{ if(n.getAttribute('fill') && n.getAttribute('fill')!=='none') n.setAttribute('fill','currentColor'); }catch(e){} });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      }catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // Form demo UX
     function submitForm(e){
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent='Sending...';btn.disabled=true;
-      setTimeout(()=>{btn.textContent='Request health-check';btn.disabled=false;alert('Thanks — we received your request. A specialist will follow up shortly.');e.target.reset();},900);
+      if(btn){ btn.textContent='Sending...'; btn.disabled=true; }
+      setTimeout(()=> {
+        if(btn){ btn.textContent='Request health-check'; btn.disabled=false; }
+        alert('Thanks — we received your request. A specialist will follow up shortly.');
+        e.target.reset();
+      }, 900);
       return false;
     }
+
+    // Keyboard shortcut 'h' to go home
+    document.addEventListener('keydown', function(e){
+      if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html';
+    });
   </script>
 </body>
 </html>

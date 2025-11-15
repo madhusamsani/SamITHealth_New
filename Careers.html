@@ -5,244 +5,478 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Careers — SamITHealth</title>
   <meta name="description" content="Careers at SamITHealth — join our team of clinicians, coders, engineers and operations experts.">
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Corporate design tokens */
     :root{
-      --accent:#0b6efd;
-      --accent-2:#0047b3;
-      --muted:#6b7280;
-      --bg:#f6f9fc;
-      --card:#ffffff;
-      font-family:Inter, system-ui, -apple-system,'Segoe UI',Roboto,Arial;
+      --bg:#f6f8fb;
+      --surface:#ffffff;
+      --muted:#556573;
+      --brand:#07203b;
+      --accent:#0066ff;
+      --accent-2:#0047d1;
+      --max:1160px;
+      --radius:10px;
+      --shadow:0 10px 30px rgba(6,18,45,0.06);
+      --gap:20px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220;line-height:1.45}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    /* Header */
-    .topbar{background:linear-gradient(90deg,#ffffff,#f8fbff);box-shadow:0 8px 28px rgba(12,25,48,0.06);border-radius:14px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+
+    .wrap{max-width:var(--max);margin:32px auto;padding:0 20px}
+
+    /* Header (consistent with site header) */
+    header.site-header{
+      background:var(--surface);
+      border-bottom:1px solid rgba(2,10,30,0.04);
+      position:sticky;
+      top:0;
+      z-index:90;
+    }
+    .header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 20px;
+      gap:12px;
+    }
     .brand{display:flex;align-items:center;gap:14px}
-    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 8px 24px rgba(6,100,255,0.12)}
-    .brand-text{line-height:1}
-    .brand-text .title{font-weight:800;font-size:18px}
-    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:4px}
-    .nav{display:flex;gap:14px;align-items:center}
-    .nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:#243244;text-decoration:none}
-    .nav a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+    .logo-mark{
+      width:52px;height:52px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;
+      box-shadow:0 4px 14px rgba(4,20,60,0.08);
+    }
+    .brand-text .title{font-weight:700;font-size:18px;color:var(--brand);line-height:1}
+    .brand-text .tag{font-size:12px;color:var(--muted);margin-top:3px}
+
+    nav.primary{display:flex;gap:12px;align-items:center}
+    nav.primary a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;background:transparent}
+    nav.primary a.active{background:rgba(0,102,255,0.06);color:var(--accent-2)}
+
     .header-ctas{display:flex;gap:12px;align-items:center}
-    .phone{font-weight:700;color:#0b2545}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-    /* Rest of page styles */
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:center;margin-top:22px}
-    .hero-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:28px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
-    h1{font-size:28px;margin:0 0 8px}
-    .sub{color:var(--muted);font-size:15px;margin:0 0 14px}
-    .values{margin-top:10px;padding:14px;background:#f3f8ff;border-radius:10px;border:1px solid #e6f0ff}
-    .cta{display:inline-block;background:var(--accent);color:#fff;padding:10px 16px;border-radius:9px;border:none;font-weight:700;text-decoration:none}
+    .phone{font-weight:700;color:var(--brand)}
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;padding:10px 14px;border-radius:8px;border:0;font-weight:700;cursor:pointer;
+      box-shadow:0 6px 18px rgba(11,102,255,0.12);
+    }
+    .cta-outline{padding:8px 12px;border-radius:8px;border:1px solid rgba(9,20,40,0.06);color:var(--muted);background:transparent}
+
+    /* Page hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:22px}
+    .hero-card{
+      background:var(--surface);padding:28px;border-radius:10px;box-shadow:var(--shadow);
+    }
+    .hero-card h1{font-size:30px;margin:0 0 8px;color:var(--brand)}
+    .lead{color:var(--muted);font-size:15px;margin:0 0 14px;max-width:70ch}
+
+    .values{margin-top:12px;padding:14px;background:#f3f8ff;border-radius:8px;border:1px solid #e6f0ff}
+    .values h4{margin:0 0 6px;font-size:15px;color:var(--brand)}
+    .values p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Jobs list */
     .jobs{margin-top:22px;display:grid;gap:18px}
-    .job{background:var(--card);padding:18px;border-radius:10px;border:1px solid #eef6ff;display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start}
-    .job h3{margin:0 0 6px}
+    .job{
+      background:var(--surface);
+      border:1px solid rgba(2,10,30,0.03);
+      padding:18px;border-radius:10px;display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start;
+      box-shadow:0 6px 18px rgba(6,18,45,0.03);
+    }
+    .job h3{margin:0 0 6px;font-size:18px;color:var(--brand)}
     .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-    .job .right{background:#fafcff;padding:12px;border-radius:8px;border:1px solid #eef7ff}
-    .job .apply{display:block;margin-top:10px;text-align:center}
-    .long-desc{margin-top:18px;background:linear-gradient(180deg,#fff,#fcfeff);padding:18px;border-radius:10px;border:1px solid #eaf3ff}
+    .job .right{background:#fafcff;padding:12px;border-radius:8px;border:1px solid #eef7ff;text-align:center}
+    .job .apply{display:inline-block;margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none}
+
+    .long-desc{margin-top:12px;background:linear-gradient(180deg,#fff,#fcfeff);padding:14px;border-radius:8px;border:1px solid #eef3ff;color:var(--muted)}
     .tags{font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* Apply forms & two-column section */
     .two-col{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
-    .card{background:var(--card);padding:16px;border-radius:10px;border:1px solid #eef6ff}
-    footer{margin-top:32px;padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
-    form input,form textarea,form select{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    label{font-weight:600;font-size:13px;color:#243044;display:block;margin-bottom:6px}
-    @media (max-width:980px){.hero{grid-template-columns:1fr}.job{grid-template-columns:1fr}.two-col{grid-template-columns:1fr}}
+    .card{background:var(--surface);padding:18px;border-radius:10px;border:1px solid rgba(2,10,30,0.03)}
+    label{display:block;font-weight:600;font-size:13px;color:var(--brand);margin-bottom:6px}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px;margin-bottom:8px;background:#fff}
+
+    /* Footer (consistent corporate layout) */
+    footer.site-footer{background:var(--brand);color:#e6eefc;padding:48px 20px 36px;margin-top:36px;border-radius:10px}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start}
+    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+    .footer-logo{height:56px;margin-bottom:10px;display:block;border-radius:6px}
+    .footer-content h4{color:#e6eefc;font-size:15px;margin-bottom:8px}
+    .footer-content p, .footer-content a{color:rgba(230,238,252,0.95);font-size:15px;line-height:1.6;margin:6px 0}
+    .socials{display:flex;gap:12px;align-items:center}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:8px;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,0.12);transition:transform .18s ease}
+    .socials a svg{width:18px;height:18px;fill:currentColor;display:block}
+    .socials a.linkedin{background:#0A66C2}
+    .socials a.twitter{background:#1DA1F2}
+    .socials a.youtube{background:#FF0000}
+    .footer-newsletter{max-width:320px;text-align:right;color:rgba(230,238,252,0.9)}
+    .footer-newsletter input{padding:10px;border-radius:8px;border:0;min-width:0;margin-right:8px}
+
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);margin-top:24px;padding-top:18px;font-size:14px;color:rgba(230,238,252,0.75);text-align:center}
+
+    /* Floating home button */
+    .home-fab{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 12px 36px rgba(4,24,64,0.12)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .job{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <div style="padding:22px;background:transparent;">
-    <div class="container" style="padding:0">
-      <header class="topbar" role="banner" aria-label="Site header">
-        <div class="brand" aria-hidden="false">
-          <div class="logo-mark">SH</div>
+  <div class="wrap">
+    <!-- Header: SH icon + SamITHealth, aligned site-wide -->
+    <header class="site-header" role="banner" aria-label="Main header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="Go to SamITHealth home page">
+          <div class="logo-mark" aria-hidden="true">SH</div>
           <div class="brand-text">
             <div class="title">SamITHealth</div>
-            <div class="tag">Clinical + RCM Solutions</div>
+            <div class="tag">Clinical & RCM Solutions</div>
           </div>
-        </div>
+        </a>
 
-        <nav class="nav" role="navigation" aria-label="Primary">
+        <nav class="primary" role="navigation" aria-label="Main navigation">
           <a href="index.html">Home</a>
           <a href="provider-services.html">Provider Services</a>
           <a href="payer-solutions.html">Payer Solutions</a>
           <a href="laboratory-services.html">Laboratory Services</a>
           <a href="what-makes-us-unique.html">Why Us</a>
-          <a href="contact.html" class="active">Contact</a>
+          <a href="contact.html">Contact</a>
+          <a href="Careers.html" class="active">Careers</a>
         </nav>
 
         <div class="header-ctas" aria-hidden="false">
-          <div class="phone"></div>
+          <div class="phone"><a href="tel:+14703396027" style="color:inherit;text-decoration:none">+1 (470) 339-6027</a></div>
           <button class="btn-primary" onclick="location.href='contact.html'">Get in touch</button>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="careersHeading">
+        <div class="hero-card">
+          <h1 id="careersHeading">Careers</h1>
+          <p class="lead">Join SamITHealth and contribute to high-impact projects across revenue cycle, clinical documentation, and health IT. We hire for skill, collaboration, and a commitment to quality.</p>
+
+          <div class="values" role="region" aria-label="Why SamITHealth">
+            <h4>Why SamITHealth?</h4>
+            <p>We partner with health systems, payers and labs to deliver measurable clinical and financial outcomes. Employees receive structured onboarding, ongoing professional development, and opportunities to work with industry-leading technology and processes.</p>
+          </div>
+
+          <div class="long-desc" aria-hidden="false">
+            <h4>How we hire</h4>
+            <p>Our recruitment focuses on demonstrated expertise, problem-solving, and cultural alignment. Interviews involve practical exercises and stakeholder conversations to ensure the right fit for both candidate and team. We offer competitive compensation, flexible work arrangements where appropriate, and benefits that vary by role and location.</p>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="Open roles summary">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Team collaboration" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
+          <div style="padding-top:12px">
+            <h4 style="margin:0">Open roles</h4>
+            <p class="meta" style="margin:6px 0 0">Experienced coders, clinicians, data analysts, and implementation consultants. Remote and hybrid roles available by function and client requirements.</p>
+            <a class="btn-primary" href="#jobs" style="display:inline-block;margin-top:12px">View open roles</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="jobs" class="jobs" aria-labelledby="openRolesHeading">
+        <h2 id="openRolesHeading" style="font-size:18px;margin:0 0 8px;color:var(--brand);">Open Positions</h2>
+
+        <!-- Job 1 -->
+        <div class="job" id="job-inpatient-coder">
+          <div>
+            <h3>Inpatient Coder — Inpatient Coding</h3>
+            <p class="meta">
+              <strong>Location:</strong> Cumming, GA &nbsp;|&nbsp; <strong>Duration:</strong> 6+ months &nbsp;|&nbsp;
+              <strong>Date Posted:</strong>
+              <!-- original date stored in data-original (ISO YYYY-MM-DD) so the script can compare -->
+              <span class="date-posted" data-original="2025-10-10">2025-10-10</span>
+            </p>
+
+            <p>We seek experienced inpatient coders who demonstrate accuracy, clinical understanding, and collaborative communication with provider teams to improve coding capture and reimbursement.</p>
+
+            <div class="long-desc" style="margin-top:10px">
+              <h4>Responsibilities</h4>
+              <ul>
+                <li>Assign MS-DRG and ICD-10-PCS codes for inpatient encounters according to official coding guidelines.</li>
+                <li>Review 20–25 charts daily for complex cases with &gt;=98% accuracy expectations.</li>
+                <li>Provide documentation queries and collaborate with clinicians for clarification where required.</li>
+                <li>Participate in internal audits and quality-improvement initiatives.</li>
+              </ul>
+              <p><strong>Travel:</strong> Occasional on-site presence at client locations as required.</p>
+              <p class="tags"><strong>Tags:</strong> EPIC, 3M, Cerner, CAC, Encoder Pro</p>
+            </div>
+          </div>
+
+          <div class="right" aria-hidden="false">
+            <p style="font-weight:700;margin:0">Location</p>
+            <p class="meta" style="margin:6px 0 0">Cumming, GA</p>
+            <p style="font-weight:700;margin:12px 0 0">Duration</p>
+            <p class="meta" style="margin:6px 0 0">6+ months</p>
+            <a class="apply" href="#apply-inpatient">Apply Now</a>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="job" id="job-hcc-coder">
+          <div>
+            <h3>HCC Risk Adjustment Coder</h3>
+            <p class="meta">
+              <strong>Location:</strong> Cumming, GA &nbsp;|&nbsp; <strong>Duration:</strong> 6+ months &nbsp;|&nbsp;
+              <strong>Date Posted:</strong>
+              <span class="date-posted" data-original="2025-09-23">2025-09-23</span>
+            </p>
+
+            <p>Experienced HCC coders who understand CMS risk-adjustment rules and can accurately capture chronic conditions and RAF-driving documentation.</p>
+
+            <div class="long-desc" style="margin-top:10px">
+              <h4>Responsibilities</h4>
+              <ul>
+                <li>Perform retrospective and concurrent HCC reviews to validate diagnoses for risk adjustment.</li>
+                <li>Support provider education and documentation-improvement efforts.</li>
+                <li>Maintain awareness of CMS guidance and payer-specific requirements.</li>
+              </ul>
+              <p><strong>Qualifications:</strong> Relevant coding certification and experience with risk-adjustment tooling preferred.</p>
+              <p class="tags"><strong>Tags:</strong> HCC, ICD-10-CM, Cotiviti, Apixio</p>
+            </div>
+          </div>
+
+          <div class="right">
+            <p style="font-weight:700;margin:0">Location</p>
+            <p class="meta" style="margin:6px 0 0">Cumming, GA</p>
+            <p style="font-weight:700;margin:12px 0 0">Duration</p>
+            <p class="meta" style="margin:6px 0 0">6+ months</p>
+            <a class="apply" href="#apply-hcc">Apply Now</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="two-col" aria-labelledby="applyHeading">
+        <div class="card">
+          <h3 id="apply-inpatient">Apply — Inpatient Coder</h3>
+          <p class="lead">Complete the form below and our recruiting team will review your submission within 3–5 business days.</p>
+          <form onsubmit="return submitApply(event,'Inpatient Coder')">
+            <label for="iname">Full name</label><input id="iname" name="name" required>
+            <label for="iemail">Work email</label><input id="iemail" name="email" type="email" required>
+            <label for="iorg">Organization (optional)</label><input id="iorg" name="org">
+            <label for="iresume">Resume / sample (link or paste)</label><textarea id="iresume" name="resume" rows="5"></textarea>
+            <button class="btn-primary" type="submit">Submit Application</button>
+          </form>
+        </div>
+
+        <aside class="card">
+          <h3 id="apply-hcc">Apply — HCC Risk Adjustment Coder</h3>
+          <p class="lead">Submit your application for the HCC role. We review candidates weekly.</p>
+          <form onsubmit="return submitApply(event,'HCC Risk Adjustment Coder')">
+            <label for="hname">Full name</label><input id="hname" name="name" required>
+            <label for="hemail">Work email</label><input id="hemail" name="email" type="email" required>
+            <label for="horg">Organization (optional)</label><input id="horg" name="org">
+            <label for="hresume">Resume / sample (link or paste)</label><textarea id="hresume" name="resume" rows="5"></textarea>
+            <button class="btn-primary" type="submit">Submit Application</button>
+          </form>
+        </aside>
+      </section>
+
+      <section style="margin-top:18px" class="card" aria-labelledby="benefitsHeading">
+        <h3 id="benefitsHeading">Equal Opportunity & Benefits</h3>
+        <p>SamITHealth is an equal opportunity employer. We offer competitive pay, career development, and a collaborative culture. Benefits and eligibility vary by role and location.</p>
+      </section>
+    </main>
+
+    <!-- Footer: corporate, consistent with other pages -->
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <div>
+            <a href="index.html" aria-label="SamITHealth home (logo)">
+              <img class="footer-logo" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600&auto=format&fit=crop" alt="SamITHealth Logo">
+            </a>
+            <p>SamITHealth provides healthcare IT, revenue-cycle management and clinical documentation services that drive measurable clinical and financial outcomes.</p>
+          </div>
+
+          <div>
+            <h4>Explore</h4>
+            <a href="provider-services.html">Provider Services</a><br>
+            <a href="payer-solutions.html">Payer Solutions</a><br>
+            <a href="laboratory-services.html">Laboratory Services</a><br>
+            <a href="consultancy.html">Consultancy</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+          <nav class="socials" aria-label="Social media">
+            <a class="linkedin" href="https://www.linkedin.com/company/samithealth/about/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — SamITHealth" title="LinkedIn — SamITHealth">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v14H0V8zm7.5 0h4.7v1.9h.1c.7-1.2 2.4-2.4 4.9-2.4 5.2 0 6.2 3.4 6.2 7.8V22h-5v-6.4c0-1.5 0-3.4-2.1-3.4-2.1 0-2.4 1.6-2.4 3.3V22h-5V8z"/></svg>
+            </a>
+
+            <a class="twitter" href="https://x.com/SamITHealth" target="_blank" rel="noopener noreferrer" aria-label="Twitter — SamITHealth" title="Twitter — SamITHealth">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.3 3.9A12.14 12.14 0 0 1 3.16 4.6a4.28 4.28 0 0 0 1.32 5.72 4.2 4.2 0 0 1-1.94-.54v.05c0 2.04 1.45 3.75 3.38 4.13a4.3 4.3 0 0 1-1.93.07c.54 1.67 2.11 2.88 3.97 2.92A8.59 8.59 0 0 1 2 19.54a12.11 12.11 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.7 8.7 0 0 0 22.46 6z"/></svg>
+            </a>
+
+            <a class="youtube" href="https://www.youtube.com/@SamITHealth1/posts" target="_blank" rel="noopener noreferrer" aria-label="YouTube — SamITHealth" title="YouTube — SamITHealth">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.3 12 2.3 12 2.3s-4.8 0-8.5.5c-.4 0-1.3.1-2.1 1C.8 4.5.6 6.2.6 6.2S.4 8 .4 9.8v2.4C.4 13.7.6 15.5.6 15.5s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.2.5 7.2.5s4.8 0 8.5-.5c.4 0 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.8.2-3.6v-2.4c0-1.8-.2-3.6-.2-3.6zM9.6 15.5V8.5l6.5 3.5-6.5 3.5z"/></svg>
+            </a>
+          </nav>
+
+          <div class="footer-newsletter" aria-label="Newsletter sign up">
+            <div>Subscribe for RCM, compliance, and health-tech insights.</div>
+            <form style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end" action="#" onsubmit="event.preventDefault();alert('Thanks — subscription demo (disabled).');">
+              <input aria-label="Email address" placeholder="Email address" type="email" required>
+              <button class="btn-primary" type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">© 2025 SamITHealth. All rights reserved.</div>
+    </footer>
+
+    <!-- Floating home CTA -->
+    <a class="home-fab" href="index.html" aria-label="Back to home">SH</a>
   </div>
 
-  <main class="container">
-    <section class="hero" aria-labelledby="careersHeading">
-      <div class="hero-card">
-        <h1 id="careersHeading">Careers</h1>
-        <p class="sub">Our values are part of everything built here — including careers. Join a team that blends clinical excellence, technical rigor, and operational execution.</p>
-
-        <div class="values">
-          <h4>Why SamITHealth?</h4>
-          <p class="sub" style="margin:0">We work with leading health systems, payers and labs to deliver measurable clinical and financial outcomes. At SamITHealth you'll find professional development, mentorship, and meaningful projects that impact patient care and organizational performance.</p>
-        </div>
-
-        <div class="long-desc" style="margin-top:12px">
-          <h4>How we hire</h4>
-          <p>We value curiosity, accountability and collaboration. Our hiring process focuses on relevant experience, practical problem-solving, and cultural fit. We offer competitive compensation, W2 positions, and opportunities to work on client-facing projects across the U.S.</p>
-        </div>
-      </div>
-
-      <aside class="card">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Team collaboration" style="width:100%;height:200px;object-fit:cover;border-radius:8px">
-        <div style="padding-top:10px">
-          <h4 style="margin:0">Open roles</h4>
-          <p class="meta" style="margin:6px 0 0">We're hiring experienced coders, analysts and implementation staff. Remote / hybrid opportunities available depending on role.</p>
-          <a class="cta" href="#jobs" style="display:inline-block;margin-top:10px">View open roles</a>
-        </div>
-      </aside>
-    </section>
-
-    <section id="jobs" class="jobs">
-      <!-- Job 1 -->
-      <div class="job" id="job-inpatient-coder">
-        <div>
-          <h3>Inpatient Coder — Inpatient Coding</h3>
-          <p class="meta"><strong>Location:</strong> Cumming, GA &nbsp;|&nbsp; <strong>Duration:</strong> 6+ months &nbsp;|&nbsp; <strong>Date Posted:</strong> 10/10/2025 &nbsp;|&nbsp; <strong>Position:</strong> W2</p>
-
-          <p>With supporting text below as a natural lead-in to additional content. We seek experienced inpatient coders who can deliver accuracy and partner with clinical teams to improve documentation and revenue capture.</p>
-
-          <div class="long-desc" style="margin-top:10px">
-            <h4>Job Responsibilities</h4>
-            <ul>
-              <li>Conduct comprehensive CPC and specialty-specific medical coding training, covering AAPC certification preparation and practical applications.</li>
-              <li>Assign accurate MS-DRG codes for inpatient hospital encounters based on ICD-10-CM and PCS coding guidelines.</li>
-              <li>Review 20–25 charts per day for complex surgical and medical cases, maintaining 98%+ coding accuracy.</li>
-              <li>Collaborate with providers for clarifications and documentation improvement to optimize DRG capture.</li>
-              <li>Conduct internal audits to ensure compliance with hospital coding policies and CMS guidelines.</li>
-              <li>Able to prioritize, multi-task and stay focused despite frequent interruptions.</li>
-              <li>Utilize correct coding conventions and follow established policies and guidelines to determine accurate code selection based upon documentation in the medical record.</li>
-            </ul>
-            <p><strong>Travel:</strong> Travel involved to client location(s) within US as needed.</p>
-            <p class="tags"><strong>Job Tags:</strong> EPIC, 3M, CERNER, CAC, HPF, ENCODER PRO, CITRIX; Analysis Tools: Pareto Analysis, Control Charts; Software: Microsoft Office Suite; OS: Windows, macOS</p>
-          </div>
-        </div>
-
-        <div class="right">
-          <p style="font-weight:700;margin:0">Location</p>
-          <p class="meta" style="margin:6px 0 0">Cumming, GA</p>
-          <p style="font-weight:700;margin:12px 0 0">Duration</p>
-          <p class="meta" style="margin:6px 0 0">6+ months</p>
-          <a class="cta apply" href="#apply-inpatient">Apply Now</a>
-        </div>
-      </div>
-
-      <!-- Job 2 -->
-      <div class="job" id="job-hcc-coder">
-        <div>
-          <h3>HCC Risk Adjustment Coder</h3>
-          <p class="meta"><strong>Location:</strong> Cumming, GA &nbsp;|&nbsp; <strong>Duration:</strong> 6+ months &nbsp;|&nbsp; <strong>Date Posted:</strong> 09/23/2025 &nbsp;|&nbsp; <strong>Position:</strong> W2</p>
-
-          <p>With supporting text below as a natural lead-in to additional content. We are seeking experienced HCC coders with deep knowledge of risk adjustment and RAF optimization to support Medicare Advantage clients.</p>
-
-          <div class="long-desc" style="margin-top:10px">
-            <h4>Job Responsibilities</h4>
-            <ul>
-              <li>6+ years of progressive experience in medical transcription and coding, with a focus on HCC risk adjustment coding for Medicare Advantage and commercial payers.</li>
-              <li>Skilled in HCC coding, ICD-10-CM, CPT, and Super bills across multiple specialties.</li>
-              <li>Proficient in reviewing patient charts, capturing chronic conditions, and validating provider documentation to ensure accurate RAF scores.</li>
-              <li>Experienced in prospective, concurrent, and retrospective coding reviews, supporting compliance with CMS risk adjustment guidelines.</li>
-              <li>Proven ability to reduce claim denials, improve documentation quality, and maintain strict adherence to HIPAA regulations and payer requirements.</li>
-              <li>Skilled in conducting coding audits, applying NCCI edits, and providing feedback to providers to enhance documentation practices.</li>
-              <li>Collaborated with physicians, auditors, and healthcare staff to enhance clinical documentation integrity and streamline coding workflows.</li>
-              <li>Transcribed, coded, and documented medical records with accuracy, building strong knowledge of medical terminology, anatomy, and clinical documentation.</li>
-              <li>Validated coding accuracy and compliance under senior coder supervision, contributing to quality assurance and audit readiness.</li>
-            </ul>
-
-            <h4>Roles & Responsibilities</h4>
-            <ul>
-              <li>Performed retrospective, concurrent, and prospective HCC reviews, ensuring accurate capture of chronic conditions in alignment with CMS risk adjustment guidelines.</li>
-              <li>Analyzed provider documentation and patient medical records to validate HCC diagnoses, improve RAF scores, and minimize missed coding opportunities.</li>
-              <li>Applied ICD-10-CM and CPT coding standards to outpatient and inpatient records, supporting accurate reimbursement and compliance.</li>
-              <li>Conducted coding audits and quality reviews to identify discrepancies, correct errors, and maintain high coding accuracy levels.</li>
-              <li>Educated providers and clinical staff on documentation improvement, clarifying HCC requirements to strengthen coding accuracy and optimize risk adjustment.</li>
-              <li>Monitored CMS/HCC coding updates and payer-specific guidelines to ensure regulatory compliance and proper code assignment.</li>
-              <li>Reduced claim denials by ensuring accurate coding, documentation completeness, and compliance with HIPAA and CMS regulations.</li>
-            </ul>
-
-            <h4>Qualification</h4>
-            <p>This position requires a candidate with a minimum of Bachelor’s degree in a related field.</p>
-            <p><strong>Travel:</strong> Travel involved to client location(s) within US as needed.</p>
-            <p class="tags"><strong>Job Tags:</strong> HCC, ICD-10-CM, Cotiviti, Apixio, Innovation Risk Adjustment tools; OS: Windows XP/7/8/10/11, macOS</p>
-          </div>
-        </div>
-
-        <div class="right">
-          <p style="font-weight:700;margin:0">Location</p>
-          <p class="meta" style="margin:6px 0 0">Cumming, GA</p>
-          <p style="font-weight:700;margin:12px 0 0">Duration</p>
-          <p class="meta" style="margin:6px 0 0">6+ months</p>
-          <a class="cta apply" href="#apply-hcc">Apply Now</a>
-        </div>
-      </div>
-    </section>
-
-    <section style="margin-top:20px" class="two-col">
-      <div class="card">
-        <h3 id="apply-inpatient">Apply — Inpatient Coder</h3>
-        <p class="sub">Fill in your details and upload a resume. Our recruiting team will follow up within 3–5 business days.</p>
-        <form onsubmit="return submitApply(event,'Inpatient Coder')">
-          <label for="iname">Full name</label><input id="iname" name="name" required>
-          <label for="iemail">Work email</label><input id="iemail" name="email" type="email" required>
-          <label for="iorg">Organization (optional)</label><input id="iorg" name="org">
-          <label for="iresume">Resume / sample (paste link or text)</label><textarea id="iresume" name="resume" rows="5"></textarea>
-          <button class="cta" type="submit">Submit Application</button>
-        </form>
-      </div>
-
-      <aside class="card">
-        <h3 id="apply-hcc">Apply — HCC Risk Adjustment Coder</h3>
-        <p class="sub">Submit your application for the HCC role. Our team reviews candidates weekly.</p>
-        <form onsubmit="return submitApply(event,'HCC Risk Adjustment Coder')">
-          <label for="hname">Full name</label><input id="hname" name="name" required>
-          <label for="hemail">Work email</label><input id="hemail" name="email" type="email" required>
-          <label for="horg">Organization (optional)</label><input id="horg" name="org">
-          <label for="hresume">Resume / sample (paste link or text)</label><textarea id="hresume" name="resume" rows="5"></textarea>
-          <button class="cta" type="submit">Submit Application</button>
-        </form>
-      </aside>
-    </section>
-
-    <section style="margin-top:18px" class="card">
-      <h3>Equal Opportunity & Benefits</h3>
-      <p>SamITHealth is an equal opportunity employer. We offer competitive pay, professional development, and a collaborative culture. Benefits vary by role and location.</p>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
-        <div style="color:var(--muted)">© 2025 SamITHealth. All rights reserved.</div>
-      </div>
-    </div>
-  </footer>
-
   <script>
+    /*
+      Date-Posted auto-update script (business-day aware)
+      Behavior:
+        - Each job's "Date Posted" is stored in the DOM in a <span class="date-posted" data-original="YYYY-MM-DD">.
+        - On page load the script:
+            1) Computes today's business date (if today is Saturday -> Friday; if Sunday -> Friday).
+            2) For each .date-posted:
+                - If the data-original is missing or parse fails, set displayed date to today's business date.
+                - Otherwise compute business-days difference between original date and today.
+                - If the original date is older than 2 business days, replace it with today's business date (so posted date is <= 2 business days old).
+                - Otherwise show the original date formatted as YYYY-MM-DD (or as locale string).
+        - This ensures "Date Posted" values on the page are always current within the last two business days.
+    */
+
+    (function(){
+      // helper: is a date a business day (Mon-Fri)
+      function isBusinessDay(d){
+        const day = d.getDay();
+        return day !== 0 && day !== 6;
+      }
+
+      // helper: Return a new Date representing the previous business day (including same day if business)
+      function toBusinessDate(d){
+        const res = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        const day = res.getDay();
+        if(day === 6){ // Saturday -> Friday (-1)
+          res.setDate(res.getDate() - 1);
+        } else if(day === 0){ // Sunday -> Friday (-2)
+          res.setDate(res.getDate() - 2);
+        }
+        return res;
+      }
+
+      // helper: count business days between two dates (dateA..dateB, inclusive start/exclusive end)
+      function businessDaysBetween(start, end){
+        // normalize to dates
+        let s = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+        let e = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+        if(s > e) return 0;
+        let count = 0;
+        while(s < e){
+          if(isBusinessDay(s)) count++;
+          s.setDate(s.getDate() + 1);
+        }
+        return count;
+      }
+
+      // format date YYYY-MM-DD (consistent display)
+      function formatISO(d){
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        const dd = String(d.getDate()).padStart(2,'0');
+        return `${yyyy}-${mm}-${dd}`;
+      }
+
+      const today = new Date();
+      const todayBusiness = toBusinessDate(today); // adjust if weekend
+      const dateSpans = document.querySelectorAll('.date-posted');
+
+      dateSpans.forEach(span=>{
+        const orig = span.getAttribute('data-original') || span.textContent || '';
+        let origDate = null;
+        // try parse ISO (YYYY-MM-DD) or locale
+        if(/^\d{4}-\d{2}-\d{2}$/.test(orig.trim())){
+          const parts = orig.trim().split('-').map(Number);
+          origDate = new Date(parts[0], parts[1]-1, parts[2]);
+        } else {
+          const parsed = Date.parse(orig);
+          if(!isNaN(parsed)) origDate = new Date(parsed);
+        }
+
+        // if no valid original date, set to today's business date
+        if(!origDate){
+          span.textContent = formatISO(todayBusiness);
+          span.setAttribute('data-original', formatISO(todayBusiness));
+          return;
+        }
+
+        // compute business days from origDate to todayBusiness
+        const diffBusiness = businessDaysBetween(toBusinessDate(origDate), todayBusiness);
+
+        if(diffBusiness > 2){
+          // older than 2 business days -> update to today's business date
+          span.textContent = formatISO(todayBusiness);
+          span.setAttribute('data-original', formatISO(todayBusiness));
+        } else {
+          // recent -> keep original (display normalized format)
+          span.textContent = formatISO(origDate);
+        }
+      });
+    })();
+
+    // Application submission simulation
     function submitApply(e, role){
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
+      const prev = btn.textContent;
       btn.textContent='Submitting...'; btn.disabled=true;
-      setTimeout(()=>{alert('Application for ' + role + ' received. Our recruiting team will follow up.'); btn.textContent='Submit Application'; btn.disabled=false; e.target.reset();},800);
+      setTimeout(()=>{ alert('Application for ' + role + ' received. Our recruiting team will follow up.'); btn.textContent=prev; btn.disabled=false; e.target.reset(); },800);
       return false;
     }
+
+    // Ensure social SVGs inherit currentColor for proper visualization on colored tiles
+    (function normalizeSocialSVGs(){
+      try {
+        document.querySelectorAll('.socials a svg').forEach(svg=>{
+          svg.querySelectorAll('[fill]').forEach(node=>{
+            try{ if(node.getAttribute('fill') && node.getAttribute('fill') !== 'none') node.setAttribute('fill','currentColor'); }catch(e){}
+          });
+          svg.querySelectorAll('path').forEach(p=>{ if(!p.getAttribute('fill')) p.setAttribute('fill','currentColor'); });
+        });
+      } catch(e){ console.warn('SVG normalization failed', e); }
+    })();
+
+    // quick shortcut to go home
+    document.addEventListener('keydown', function(e){
+      if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey) window.location.href='index.html';
+    });
   </script>
 </body>
 </html>
